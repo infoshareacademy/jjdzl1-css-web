@@ -1,0 +1,32 @@
+{
+    "title": "CarSharingSystem",
+    "name": "css-web",
+    "version": "4.2.1",
+    "description": "Rezerwacja samochodów",
+    "keywords": [
+        "css",
+        "sass",
+        "html",
+        "responsive",
+        "theme",
+        "template"
+    ],
+    "homepage": "https://github.com/infoshareacademy/jjdzl1-css-web",
+    "bugs": {
+        "url": "https://github.com/infoshareacademy/jjdzl1-css-web/issues",
+    },
+    "license": "MIT",
+    "author": "CSS Group",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/infoshareacademy/jjdzl1-css-web"
+    },
+    "dependencies": {
+        "bootstrap": "4.2.1",
+        "jquery": "3.3.1"
+    },
+    "devDependencies": {
+        "browser-sync": "2.24.5",
+        "gulp": "^3.9.1"
+    }
+}
