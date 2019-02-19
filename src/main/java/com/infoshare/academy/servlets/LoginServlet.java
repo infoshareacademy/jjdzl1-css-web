@@ -21,6 +21,7 @@ public class LoginServlet extends HttpServlet {
 
         if(username.isEmpty() || password.isEmpty() )
         {
+
             out.println("Username or Password incorrect");
             RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
             rs.include(request, response);
@@ -28,7 +29,7 @@ public class LoginServlet extends HttpServlet {
         }
         else
         {
-            RequestDispatcher req = request.getRequestDispatcher("Welcome.jsp");
+            RequestDispatcher req = request.getRequestDispatcher("welcome.jsp");
             req.forward(request, response);
         }
     }

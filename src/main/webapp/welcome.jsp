@@ -19,27 +19,10 @@
 
 </head>
 <body>
-
-
-<form action="/jjdzl1-css/LoginServlet" method="post">
-    </p>
-  style="with: 50%">
-    <br>
-    <br>
-    <br>
-    <br>
-        <tr>
-            <td>UserName</td>
-            <td><input type="text" name="username" /></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="password" /></td>
-        </tr>
-    </table>
-    <input type="submit" value="Login" /></form>
-
-
+<br>
+Welcome
+<br>
+<br>
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
