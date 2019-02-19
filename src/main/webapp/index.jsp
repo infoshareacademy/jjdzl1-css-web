@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Logowanie </a>
+                    <a class="nav-link" href="login.jsp">Logowanie </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Rezerwacja</a>
