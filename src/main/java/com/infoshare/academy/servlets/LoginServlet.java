@@ -1,5 +1,8 @@
 package com.infoshare.academy.servlets;
 
+import com.infoshare.academy.dao.UsersRepositoryDaoBean;
+import com.infoshare.academy.domain.User;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,23 +17,37 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
+        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        UsersRepositoryDaoBean usersRepositoryDaoBean = new UsersRepositoryDaoBean();
 
-        if(username.isEmpty() || password.isEmpty() )
-        {
+        if (username.isEmpty() || password.isEmpty()) {
+            out.println("Username or Password are empty! Please fill all data.");
+            RequestDispatcher req = request.getRequestDispatcher("/login.jsp");
+            req.include(request, response);
 
-            out.println("Username or Password incorrect");
-            RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
-            rs.include(request, response);
+        } else if (usersRepositoryDaoBean.getUserByLogin(username) == null) {
 
-        }
-        else
-        {
-            RequestDispatcher req = request.getRequestDispatcher("welcome.jsp");
+            out.println("No such user! Please check login again.");
+            RequestDispatcher req = request.getRequestDispatcher("/login.jsp");
             req.forward(request, response);
+
+        } else if (usersRepositoryDaoBean.getUserByLogin(username) != null) {
+
+            User user = new User(username, password, "", "");
+
+            if (usersRepositoryDaoBean.getUsersPassword(user) == password && usersRepositoryDaoBean.getUsersLogin(user) == username) {
+                RequestDispatcher req = request.getRequestDispatcher("/welcome.jsp");
+                req.forward(request, response);
+            } else {
+                out.println("Data are incorrect! Please try again.");
+                RequestDispatcher req = request.getRequestDispatcher("/login.jsp");
+                req.forward(request, response);
+            }
+
         }
     }
 }

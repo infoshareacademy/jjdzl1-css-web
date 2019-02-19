@@ -3,12 +3,13 @@ package com.infoshare.academy.repository;
 import com.infoshare.academy.domain.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UsersRepository {
 
-    private static ArrayList<User> usersRepositoryList = new ArrayList<>();
+    private static List<User> usersRepositoryList = new ArrayList<>();
 
-    private static ArrayList<User> fillUsersRepositoryWithDefalutUsers() {
+    private static List<User> fillUsersRepositoryWithDefalutUsers() {
 
         User user1 = new User("admin", "admin", "Jaś", "Fasola");
         User user2 = new User("root", "root", "Krzyś", "Kowalski");
@@ -19,7 +20,7 @@ public class UsersRepository {
         return usersRepositoryList;
     }
 
-    public static ArrayList<User> getUsersList() {
+    public static List<User> getUsersList() {
         return usersRepositoryList = fillUsersRepositoryWithDefalutUsers();
     }
 }

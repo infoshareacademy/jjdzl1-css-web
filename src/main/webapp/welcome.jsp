@@ -1,3 +1,5 @@
+<%@ page import="com.infoshare.academy.domain.User" %>
+<%@ page import="com.infoshare.academy.servlets.LoginServlet" %>
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -20,7 +22,7 @@
 </head>
 <body>
 <br>
-Welcome
+Welcome <%= %>
 <br>
 <br>
 <!-- Footer -->
