@@ -23,31 +23,26 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         UsersRepositoryDaoBean usersRepositoryDaoBean = new UsersRepositoryDaoBean();
-
+        User user = usersRepositoryDaoBean.getUserByLogin(username);
         if (username.isEmpty() || password.isEmpty()) {
             out.println("Username or Password are empty! Please fill all data.");
-            RequestDispatcher req = request.getRequestDispatcher("/login.jsp");
+            RequestDispatcher req = request.getRequestDispatcher("login.jsp");
             req.include(request, response);
 
         } else if (usersRepositoryDaoBean.getUserByLogin(username) == null) {
 
             out.println("No such user! Please check login again.");
-            RequestDispatcher req = request.getRequestDispatcher("/login.jsp");
+            RequestDispatcher req = request.getRequestDispatcher("login.jsp");
             req.forward(request, response);
 
-        } else if (usersRepositoryDaoBean.getUserByLogin(username) != null) {
-
-            User user = new User(username, password, "", "");
-
-            if (usersRepositoryDaoBean.getUsersPassword(user) == password && usersRepositoryDaoBean.getUsersLogin(user) == username) {
-                RequestDispatcher req = request.getRequestDispatcher("/welcome.jsp");
+        } else if (usersRepositoryDaoBean.getUserByLogin(username) == null && usersRepositoryDaoBean.getUsersPassword(user).equals(password) && usersRepositoryDaoBean.getUsersLogin(user).equals(username)) {
+                RequestDispatcher req = request.getRequestDispatcher("welcome.jsp");
                 req.forward(request, response);
-            } else {
-                out.println("Data are incorrect! Please try again.");
-                RequestDispatcher req = request.getRequestDispatcher("/login.jsp");
-                req.forward(request, response);
-            }
-
+        }
+        else {
+            out.println("Data are incorrect! Please try again.");
+            RequestDispatcher req = request.getRequestDispatcher("login.jsp");
+            req.forward(request, response);
         }
     }
 }

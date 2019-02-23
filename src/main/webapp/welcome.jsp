@@ -22,7 +22,7 @@
 </head>
 <body>
 <br>
-Welcome <%= %>
+Welcome
 <br>
 <br>
 <!-- Footer -->

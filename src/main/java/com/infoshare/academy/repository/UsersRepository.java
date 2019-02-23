@@ -7,10 +7,10 @@ import java.util.List;
 
 public class UsersRepository {
 
-    private static List<User> usersRepositoryList = new ArrayList<>();
+
 
     private static List<User> fillUsersRepositoryWithDefalutUsers() {
-
+        List<User> usersRepositoryList = new ArrayList<>();
         User user1 = new User("admin", "admin", "Jaś", "Fasola");
         User user2 = new User("root", "root", "Krzyś", "Kowalski");
         User user3 = new User("spejson", "legia", "Adrian", "Puchacki");
@@ -21,6 +21,6 @@ public class UsersRepository {
     }
 
     public static List<User> getUsersList() {
-        return usersRepositoryList = fillUsersRepositoryWithDefalutUsers();
+        return fillUsersRepositoryWithDefalutUsers();
     }
 }

@@ -11,7 +11,9 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
 
     @Override
     public User getUserByLogin(String login) {
+        System.out.println("asdasdasd" + login);
         List<User> UsersList = UsersRepository.getUsersList();
+        System.out.println(UsersList);
         for (User user : UsersList) {
             if (user.getLogin().equals(login)) {
                 return user;
