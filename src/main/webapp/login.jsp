@@ -32,7 +32,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Start
+                    <a class="nav-link" href="index.jsp">Start
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
@@ -57,11 +57,12 @@
 <!-- Page Content -->
 <div class="container">
 
-    ${error}
-    ${emptyData}
+
     <div class="row my-4">
         <div class="col-lg-12">
 
+            ${error}
+            ${emptyData}
             <form class="form-signin" action="LoginServlet" method="post">
                 <h1 class="h3 mb-3 font-weight-normal">Logowanie</h1>
                 <label for="inputLogin" class="sr-only">Login</label>
