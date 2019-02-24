@@ -6,8 +6,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Rezerwacja samochodów">
-    <meta name="keywords" content="samochód, rezerwacja">
+    <meta name="description" content="Rezerwacja samochodï¿½w">
+    <meta name="keywords" content="samochï¿½d, rezerwacja">
     <meta name="author" content="CSS Group">
     <meta http-equiv="X-Ua-Compatible" content="IE=edge">
 
@@ -27,6 +27,9 @@
     <br>
     <br>
     <br>
+
+    ${error}
+    ${emptyData}
 <form action="LoginServlet" method="post">
     <table style="with: 50%">
 
