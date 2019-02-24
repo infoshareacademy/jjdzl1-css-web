@@ -23,9 +23,7 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "Login or password incorrect! Please try again.";
+
 
         User tempUser = createUserBasedOnFormLogin(username);
 
@@ -33,7 +31,7 @@ public class LoginServlet extends HttpServlet {
             RequestDispatcher req = request.getRequestDispatcher("welcome.jsp");
             req.forward(request, response);
         } else {
-            request.setAttribute("error", html1 + errorData + html2);
+            request.setAttribute("error", errorMessage());
             RequestDispatcher req = request.getRequestDispatcher("login.jsp");
             req.forward(request, response);
         }
@@ -41,5 +39,12 @@ public class LoginServlet extends HttpServlet {
 
     public User createUserBasedOnFormLogin(String username) {
         return usersRepositoryDaoBean.getUserByLogin(username);
+    }
+
+    public static String errorMessage() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Login or password incorrect! Please try again.";
+        return html1 + errorData + html2;
     }
 }

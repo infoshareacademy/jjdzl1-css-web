@@ -60,10 +60,6 @@
 <!-- Page Content -->
 <div class="container">
 <br>
-    <br>
-    <br>
-    <br>
-
 <% UsersRepositoryDaoBean usersRepositoryDaoBean = new UsersRepositoryDaoBean();
     User user = usersRepositoryDaoBean.getUserByLogin(request.getParameter("username"));
     String firstname = user.getFirstName();
