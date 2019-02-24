@@ -69,9 +69,13 @@
                 <input type="text" name="username" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
                 <label for="inputPassword" class="sr-only">Hasło</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required>
+                <br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
             </form>
-
+                <br>
+                <div class="alert alert-primary" role="alert">
+                    You don't have account?  <a href="registration.jsp" class="alert-link"> Sign up</a>
+                </div>
         </div>
     </div>
 
