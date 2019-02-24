@@ -14,33 +14,37 @@ import java.io.PrintWriter;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
+
+    private UsersRepositoryDaoBean usersRepositoryDaoBean = new UsersRepositoryDaoBean();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
 
         response.setContentType("text/html");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        UsersRepositoryDaoBean usersRepositoryDaoBean = new UsersRepositoryDaoBean();
-        User user = usersRepositoryDaoBean.getUserByLogin(username);
+        User tempUser = createUserBasedOnFormLogin(username);
 
-        if (username.isEmpty() || password.isEmpty()) {
-            request.setAttribute("emptyData", "Username or Password are empty! Please fill all data");
-            RequestDispatcher req = request.getRequestDispatcher("login.jsp");
-            req.include(request, response);
-
-        } else if (usersRepositoryDaoBean.getUserByLogin(username) != null
-                && usersRepositoryDaoBean.getUsersPassword(user).equals(password)
-                && usersRepositoryDaoBean.getUsersLogin(user).equals(username)) {
-
-            RequestDispatcher req = request.getRequestDispatcher("welcome.jsp");
-            req.forward(request, response);
-
-        } else {
+        if (tempUser == null) {
             request.setAttribute("error", "Data are incorrect! Please try again.");
             RequestDispatcher req = request.getRequestDispatcher("login.jsp");
             req.forward(request, response);
         }
+
+        String userPassword = findUserPasswordBasedOnFormLogin(tempUser);
+
+        if (userPassword.equals(password)) {
+            RequestDispatcher req = request.getRequestDispatcher("welcome.jsp");
+            req.forward(request, response);
+        }
+    }
+
+    public User createUserBasedOnFormLogin(String username) {
+        return usersRepositoryDaoBean.getUserByLogin(username);
+    }
+
+    public String findUserPasswordBasedOnFormLogin(User user) {
+        return usersRepositoryDaoBean.getUsersPassword(user);
     }
 }
