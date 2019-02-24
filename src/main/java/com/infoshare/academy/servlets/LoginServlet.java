@@ -29,25 +29,17 @@ public class LoginServlet extends HttpServlet {
 
         User tempUser = createUserBasedOnFormLogin(username);
 
-        if (tempUser == null) {
+        if (tempUser != null && tempUser.getPassword().equals(password)) {
+            RequestDispatcher req = request.getRequestDispatcher("welcome.jsp");
+            req.forward(request, response);
+        } else {
             request.setAttribute("error", html1 + errorData + html2);
             RequestDispatcher req = request.getRequestDispatcher("login.jsp");
-            req.forward(request, response);
-        }
-
-        String userPassword = findUserPasswordBasedOnFormLogin(tempUser);
-
-        if (userPassword.equals(password)) {
-            RequestDispatcher req = request.getRequestDispatcher("welcome.jsp");
             req.forward(request, response);
         }
     }
 
     public User createUserBasedOnFormLogin(String username) {
         return usersRepositoryDaoBean.getUserByLogin(username);
-    }
-
-    public String findUserPasswordBasedOnFormLogin(User user) {
-        return usersRepositoryDaoBean.getUsersPassword(user);
     }
 }
