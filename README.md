@@ -9,3 +9,6 @@ Opcja rezerwacji auta zapewni wybór modelu wed³ug w³asnych potrzeb - samochód mi
 * opcja potwierdzenia rezerwacji,
 * opcja anulowania rezerwacji,
 * opcja kalkulacji kosztów wypo¿yczenia.
+
+### Strona g³ówna
+![frontpage](images/frontpage.png)
