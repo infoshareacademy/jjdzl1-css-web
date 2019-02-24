@@ -17,7 +17,7 @@
 
     <!-- Styles - Bootstrap core and custom -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/css/main.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 
 </head>

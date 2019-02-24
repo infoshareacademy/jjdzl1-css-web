@@ -6,16 +6,16 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Rezerwacja samochod�w">
-    <meta name="keywords" content="samoch�d, rezerwacja">
+    <meta name="description" content="Rezerwacja samochodów">
+    <meta name="keywords" content="samochód, rezerwacja">
     <meta name="author" content="CSS Group">
     <meta http-equiv="X-Ua-Compatible" content="IE=edge">
 
-    <title>CarSharingSystem</title>
+    <title>Logowanie - CarSharingSystem</title>
 
     <!-- Styles - Bootstrap core and custom -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/css/main.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 
 </head>
@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">Logowanie </a>
+                    <a class="nav-link" href="login.jsp">Logowanie</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Rezerwacja</a>
@@ -56,28 +56,28 @@
 
 <!-- Page Content -->
 <div class="container">
-    <br>
-    <br>
-    <br>
 
     ${error}
     ${emptyData}
-<form action="LoginServlet" method="post">
-    <table style="with: 50%">
+    <div class="row my-4">
+        <div class="col-lg-12">
 
-        <tr>
-            <td>Username</td>
-            <td><input type="text" name="username" /></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="password" /></td>
-        </tr>
-    </table>
-    <input type="submit" value="Login" /></form>
-<br>
-<br>
-<br>
+            <form class="form-signin" action="LoginServlet" method="post">
+                <h1 class="h3 mb-3 font-weight-normal">Logowanie</h1>
+                <label for="inputLogin" class="sr-only">Login</label>
+                <input type="text" name="username" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
+                <label for="inputPassword" class="sr-only">Hasło</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
+            </form>
+
+        </div>
+    </div>
+
+
+</div>
+<!-- /.container -->
+
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
