@@ -1,5 +1,6 @@
 <%@ page import="com.infoshare.academy.domain.User" %>
 <%@ page import="com.infoshare.academy.servlets.LoginServlet" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pl">
 
