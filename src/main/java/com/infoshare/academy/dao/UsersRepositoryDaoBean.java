@@ -3,11 +3,13 @@ package com.infoshare.academy.dao;
 import com.infoshare.academy.domain.User;
 import org.hibernate.Session;
 
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 import java.util.List;
 
 import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 
+@Stateless
 public class UsersRepositoryDaoBean implements UsersRepositoryDao {
 
     @Override

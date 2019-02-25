@@ -1,9 +1,9 @@
 package com.infoshare.academy.servlets;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
-import com.infoshare.academy.dao.UsersRepositoryDaoBean;
 import com.infoshare.academy.domain.User;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +15,8 @@ import java.io.IOException;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-    private UsersRepositoryDao usersRepositoryDaoBean = new UsersRepositoryDaoBean();
+    @EJB
+    private UsersRepositoryDao usersDao;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +39,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     public User createUserBasedOnFormLogin(String username) {
-        return usersRepositoryDaoBean.getUserByLogin(username);
+        return usersDao.getUserByLogin(username);
     }
 
     public static String errorMessage() {
