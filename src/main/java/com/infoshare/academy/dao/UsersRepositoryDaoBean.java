@@ -3,6 +3,7 @@ package com.infoshare.academy.dao;
 import com.infoshare.academy.domain.User;
 import org.hibernate.Session;
 
+import javax.persistence.Query;
 import java.util.List;
 
 import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
@@ -30,7 +31,10 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public User getUserByLogin(String login) {
         Session session = getSession();
-        User user = session.get(User.class, login);
+        String select = "SELECT u from User u WHERE login=:login";
+        Query query = session.createQuery(select);
+        query.setParameter("login",login);
+        User user = (User) query.getSingleResult();
         session.getTransaction().commit();
         session.close();
         return user;
