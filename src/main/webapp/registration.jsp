@@ -57,13 +57,21 @@
 
 <!-- Page Content -->
 <div class="container">
-
+<!--` `login`, `password`, `email`, `phone_number`, `first_name`, `last_name`, `birth_date`, `street_address`, `postal_code`, `city` -->
     <form class="form-signup" action="RegistrationServlet" method="post">
         <h1 class="h3 mb-3 font-weight-normal">Registration</h1>
         <label for="inputFirstName" class="sr-only">First Name</label>
         <input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="First Name" required autofocus>
+
         <label for="inputLastName" class="sr-only">Last Name</label>
-        <input type="text" name="lastName " id="inputLastName" class="form-control" placeholder="Last Name" required>
+        <input type="text" name="lastName" id="inputLastName" class="form-control" placeholder="Last Name" required>
+
+        <label for="inputLogin" class="sr-only">Login</label>
+        <input type="text" name="login" id="inputLogin" class="form-control" placeholder="Login" required>
+
+        <label for="inputEmail" class="sr-only">Last Name</label>
+        <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email" required>
+
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up!</button>
     </form>
