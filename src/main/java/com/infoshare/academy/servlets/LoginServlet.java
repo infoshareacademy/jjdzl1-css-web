@@ -1,5 +1,6 @@
 package com.infoshare.academy.servlets;
 
+import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.dao.UsersRepositoryDaoBean;
 import com.infoshare.academy.domain.User;
 
@@ -10,12 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-    private UsersRepositoryDaoBean usersRepositoryDaoBean = new UsersRepositoryDaoBean();
+    private UsersRepositoryDao usersRepositoryDaoBean = new UsersRepositoryDaoBean();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

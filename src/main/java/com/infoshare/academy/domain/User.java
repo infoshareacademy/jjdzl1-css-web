@@ -1,17 +1,72 @@
 package com.infoshare.academy.domain;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "users")
 public class User {
 
-   private String login;
-   private String password;
-   private String firstName;
-   private String lastName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private Integer id;
+    @Column(name = "user_type")
+    private Integer userType;
+    @Column(name = "login")
+    private String login;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "phone_number")
+    private Long phoneNumber;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
+    @Column(name = "street_address")
+    private String streetAddress;
+    @Column(name = "postal_code")
+    private String postalCode;
+    @Column(name = "city")
+    private String city;
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<Reservation> reservations;
 
-    public User(String login, String password, String firstName, String lastName) {
+    public User() {
+    }
+
+    public User(String login, String password, String email) {
         this.login = login;
         this.password = password;
+        this.email = email;
+    }
+
+    public User(Integer userType, String login, String password, String email, Long phoneNumber, String firstName, String lastName, LocalDate birthDate, String streetAddress, String postalCode, String city) {
+        this.userType = userType;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.streetAddress = streetAddress;
+        this.postalCode = postalCode;
+        this.city = city;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Integer getUserType() {
+        return userType;
     }
 
     public String getLogin() {
@@ -22,12 +77,49 @@ public class User {
         return password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public Long getPhoneNumber() {
+        return phoneNumber;
+    }
+
     public String getFirstName() {
         return firstName;
     }
 
     public String getLastName() {
         return lastName;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
+    }
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public String getCity() {
+        return city;
     }
 
     public void setLogin(String login) {
@@ -38,6 +130,14 @@ public class User {
         this.password = password;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(Long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -46,13 +146,57 @@ public class User {
         this.lastName = lastName;
     }
 
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    public void addReservation(Reservation reservation){
+        if (reservations == null) {
+            reservations = new ArrayList<>();
+        }
+        reservations.add(reservation);
+        reservation.setUser(this);
+    }
+
+    public boolean userAuth() {
+        if (getLogin().equals(login) && getPassword().equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "login='" + login + '\'' +
-                ", password='" + password + '\'' +
+                "id=" + id +
+                ", userType=" + userType +
+                ", login='" + login + '\'' +
+                ", password=***" +
+                ", email='" + email + '\'' +
+                ", phoneNumber=" + phoneNumber +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", birthDate=" + birthDate +
+                ", streetAddress='" + streetAddress + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
                 '}';
     }
 }
