@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 24 Lut 2019, 23:10
+-- Czas generowania: 26 Lut 2019, 13:23
 -- Wersja serwera: 10.1.36-MariaDB
 -- Wersja PHP: 7.2.11
 
@@ -68,7 +68,8 @@ INSERT INTO `cars` (`car_id`, `car_type`, `make`, `model`, `year`, `mileage`, `e
 (16, 2, 'Mercedes', 'Sprinter', 2016, 60000, 190, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
 (17, 2, 'Mercedes', 'Sprinter', 2018, 35000, 180, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
 (18, 2, 'Mercedes', 'Vito', 2013, 130000, 130, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
-(19, 2, 'Iveco', 'Daily', 2015, 235000, 280, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0);
+(19, 2, 'Iveco', 'Daily', 2015, 235000, 280, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
+(20, 1, 'gdas', 'gds', 1990, 5351, 100, 'PETROLANDGAS', 'AUTOMATIC', 'SEDAN', 'RED', 6, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -148,7 +149,9 @@ ALTER TABLE `cars`
 -- Indeksy dla tabeli `reservations`
 --
 ALTER TABLE `reservations`
-  ADD PRIMARY KEY (`reservation_id`);
+  ADD PRIMARY KEY (`reservation_id`),
+  ADD KEY `fk_users` (`user_id`),
+  ADD KEY `fk_cars` (`car_id`);
 
 --
 -- Indeksy dla tabeli `users`
@@ -164,13 +167,24 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `reservations`
+--
+ALTER TABLE `reservations`
+  ADD CONSTRAINT `fk_cars` FOREIGN KEY (`car_id`) REFERENCES `cars` (`car_id`),
+  ADD CONSTRAINT `fk_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
