@@ -4,6 +4,7 @@ import com.infoshare.academy.domain.User;
 import org.hibernate.Session;
 
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -18,28 +19,37 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         session.save(user);
         session.getTransaction().commit();
         session.close();
-
     }
 
     @Override
     public User getUserById(int id) {
-        Session session = getSession();
-        User user = session.get(User.class, id);
-        session.getTransaction().commit();
-        session.close();
-        return user;
+        User user = null;
+        try {
+            Session session = getSession();
+            User user = session.get(User.class, id);
+            session.getTransaction().commit();
+            session.close();
+            return user;
+        } catch (NoResultException e) {
+        }
+        return null;
     }
 
     @Override
     public User getUserByLogin(String login) {
-        Session session = getSession();
-        String select = "SELECT u from User u WHERE login=:login";
-        Query query = session.createQuery(select);
-        query.setParameter("login",login);
-        User user = (User) query.getSingleResult();
-        session.getTransaction().commit();
-        session.close();
-        return user;
+        User user = null;
+        try {
+            Session session = getSession();
+            String select = "SELECT u from User u WHERE login=:login";
+            Query query = session.createQuery(select);
+            query.setParameter("login", login);
+            user = (User) query.getSingleResult();
+            session.getTransaction().commit();
+            session.close();
+            return user;
+        } catch (NoResultException e) {
+        }
+        return null;
     }
 
     @Override
@@ -75,7 +85,7 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     }
 
     private Session getSession() {
-        Session session = getSessionFactory().getCurrentSession();
+        Session session = getSessionFactory().openSession();
         session.beginTransaction();
         return session;
     }
