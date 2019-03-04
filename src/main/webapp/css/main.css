@@ -4,16 +4,13 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-small-business/blob/master/LICENSE)
  */
 
-body {
-	padding-top: 54px;
+body, wrapper {
+    min-height:100vh;
     font-family: 'Open Sans', sans-serif;
-    font-size: 17px;
 }
 
-@media (min-width: 992px) {
-  body {
-    padding-top: 56px;
-  }
+main {
+  flex:1;
 }
 
 h1
