@@ -23,7 +23,6 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
 
     @Override
     public User getUserById(int id) {
-        User user = null;
         try {
             Session session = getSession();
             User user = session.get(User.class, id);

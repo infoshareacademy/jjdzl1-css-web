@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/LoginServlet")
@@ -25,11 +26,12 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-
         User tempUser = createUserBasedOnFormLogin(username);
 
         if (tempUser != null && tempUser.getPassword().equals(password)) {
             RequestDispatcher req = request.getRequestDispatcher("welcome.jsp");
+            HttpSession session = request.getSession();
+            session.setAttribute("username", username);
             req.forward(request, response);
         } else {
             request.setAttribute("error", errorMessage());

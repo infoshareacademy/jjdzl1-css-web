@@ -1,6 +1,5 @@
-<%@ page import="com.infoshare.academy.domain.User" %>
-<%@ page import="com.infoshare.academy.dao.UsersRepositoryDaoBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -59,15 +58,7 @@
 
 <!-- Page Content -->
 <div class="container">
-<br>
-<% UsersRepositoryDaoBean usersRepositoryDaoBean = new UsersRepositoryDaoBean();
-    User user = usersRepositoryDaoBean.getUserByLogin(request.getParameter("username"));
-    String firstname = user.getFirstName();
-    String lastname = user.getLastName();
-%>
-Welcome <%= " " + firstname + " " + lastname %>
-<br>
-<br>
+    <h1>Welcome <c:out value="${sessionScope.username}"/></h1>
 </div>
 <!-- Footer -->
 <footer class="py-5 bg-dark">
