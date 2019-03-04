@@ -12,7 +12,14 @@
   <wrapper class="d-flex flex-column">
 
     <!-- Navigation -->
-    <jsp:include page="include/nav.jsp"></jsp:include>
+      <c:choose>
+          <c:when test="${sessionScope.username != null}">
+              <jsp:include page="include/unav.jsp"></jsp:include>
+          </c:when>
+          <c:otherwise>
+              <jsp:include page="include/nav.jsp"></jsp:include>
+          </c:otherwise>
+      </c:choose>
 
     <!-- Page Content -->
     <main class="container-fluid py-3 flex-fill">

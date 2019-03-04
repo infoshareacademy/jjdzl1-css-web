@@ -5,7 +5,7 @@
 
     <!-- Head -->
     <jsp:include page="include/head.jsp">
-        <jsp:param name="title" value="Log in"></jsp:param>
+        <jsp:param name="title" value="Logging out"></jsp:param>
     </jsp:include>
 
   <body>
@@ -25,7 +25,7 @@
     <main class="container-fluid py-3 flex-fill">
       <div class="container">
 
-      <jsp:include page="include/login.jsp"></jsp:include>
+      <jsp:include page="include/logout.jsp"></jsp:include>
 
       </div>
       <!-- /.container -->
