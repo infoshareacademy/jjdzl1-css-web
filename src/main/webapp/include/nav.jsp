@@ -25,7 +25,7 @@
                         <a class="nav-link" href="#">Charges</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="contact.jsp">Contact</a>
                       </li>
                     </ul>
                   </div>

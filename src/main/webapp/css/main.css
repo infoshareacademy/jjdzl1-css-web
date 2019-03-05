@@ -20,3 +20,8 @@ h1
 	color: #34699a;
 	margin: 20px;
 }
+
+.jumbotron {
+	background-image: url(../img/jumbotron.png);
+	background-size: cover;
+}
