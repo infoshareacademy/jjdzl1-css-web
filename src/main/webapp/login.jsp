@@ -13,8 +13,11 @@
 
     <!-- Navigation -->
       <c:choose>
-          <c:when test="${sessionScope.username != null}">
+          <c:when test="${sessionScope.username != null && sessionScope.usertype == 0}">
               <jsp:include page="include/unav.jsp"></jsp:include>
+          </c:when>
+          <c:when test="${sessionScope.username != null && sessionScope.usertype == 1}">
+              <jsp:include page="include/anav.jsp"></jsp:include>
           </c:when>
           <c:otherwise>
               <jsp:include page="include/nav.jsp"></jsp:include>

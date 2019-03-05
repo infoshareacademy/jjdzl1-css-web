@@ -27,11 +27,13 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         User tempUser = createUserBasedOnFormLogin(username);
+        Integer usertype = tempUser.getUserType();
 
         if (tempUser != null && tempUser.getPassword().equals(password)) {
             RequestDispatcher req = request.getRequestDispatcher("welcome.jsp");
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
+            session.setAttribute("usertype", usertype);
             req.forward(request, response);
         } else {
             request.setAttribute("error", errorMessage());

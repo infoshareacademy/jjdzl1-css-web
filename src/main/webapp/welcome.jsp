@@ -13,8 +13,11 @@
 
     <!-- Navigation -->
       <c:choose>
-          <c:when test="${sessionScope.username != null}">
+          <c:when test="${sessionScope.username != null && sessionScope.usertype == 0}">
               <jsp:include page="include/unav.jsp"></jsp:include>
+          </c:when>
+          <c:when test="${sessionScope.username != null && sessionScope.usertype == 1}">
+              <jsp:include page="include/anav.jsp"></jsp:include>
           </c:when>
           <c:otherwise>
               <jsp:include page="include/nav.jsp"></jsp:include>
@@ -25,7 +28,14 @@
     <main class="container-fluid py-3 flex-fill">
       <div class="container">
 
-      <jsp:include page="include/welcome.jsp"></jsp:include>
+          <c:choose>
+              <c:when test="${sessionScope.username != null}">
+                  <jsp:include page="include/welcome.jsp"></jsp:include>
+              </c:when>
+              <c:otherwise>
+                  <jsp:include page="include/index.jsp"></jsp:include>
+              </c:otherwise>
+          </c:choose>
 
       </div>
       <!-- /.container -->
