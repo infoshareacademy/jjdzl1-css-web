@@ -24,7 +24,7 @@ public class ListCar extends HttpServlet {
 
         resp.setContentType("text/html;charset=UTF-8");
 
-        List<Car> carList =dao.list();
+        List<Car> carList = dao.list();
 
         req.setAttribute("carList", carList);
         req.getRequestDispatcher("/admin/listCar.jsp").forward(req, resp);
