@@ -21,13 +21,23 @@
 
             <jsp:include page="/include/placeholder.jsp"></jsp:include>
 
-            <a href="addCar.jsp"><input type="button" value="Add car"></a>
 
-            <a href="updateCarMileage.jsp"><input type="button" value="Update car mileage"></a>
-
-            <a href="deleteCar.jsp"><input type="button" value="Delete Car"></a>
-
-            <a href="listCar.jsp"><input type="button" value="List Car"></a>
+            <form method="get" action="deleteCar">
+                <h2>Usuwanie samochodu</h2>
+                Podaj id samochodu<input type="text" name="id">
+                <input type="submit" value="POBIERZ"><br/>
+                Samochodu o id : <%=request.getAttribute("id")%><br/>
+                Marka:<%=request.getAttribute("make")%><br/>
+                Model:<%=request.getAttribute("model")%><br/>
+                Rok:<%=request.getAttribute("year")%><br/>
+            </form>
+            <form method="post" action="deleteCar">
+                <br/>
+                <br/>
+                Podaj id samochodu:<input type="text" name="id">
+                <input type="submit" value="SKASUJ">
+                <a href="/admin/admin.jsp"></a>
+            </form>
 
         </div>
 
@@ -45,3 +55,4 @@
 </body>
 
 </html>
+

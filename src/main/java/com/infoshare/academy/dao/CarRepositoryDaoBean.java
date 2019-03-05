@@ -1,10 +1,6 @@
 package com.infoshare.academy.dao;
 
 import com.infoshare.academy.domain.Car;
-import com.infoshare.academy.enums.BodyTypeEnum;
-import com.infoshare.academy.enums.ColorEnum;
-import com.infoshare.academy.enums.FuelSourceEnum;
-import com.infoshare.academy.enums.TransmissionEnum;
 import org.hibernate.Filter;
 import org.hibernate.Session;
 
@@ -24,8 +20,8 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     }
 
     @Override
-    public Car addCar(Car car){
-        Session session=getSession();
+    public Car addCar(Car car) {
+        Session session = getSession();
         session.save(car);
         session.getTransaction().commit();
         session.close();
@@ -33,16 +29,17 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     }
 
     @Override
-    public Stream<Car> list() {
+    public List<Car> list() {
         Session session = getSession();
-        List<Car> carList = session.createQuery("Select c FROM Car c").getResultList();
+        List<Car> carList = session.createQuery("Select c FROM Car c")
+                .getResultList();
         session.getTransaction().commit();
         session.close();
-        return (Stream<Car>) carList;
+        return carList;
     }
 
     @Override
-    public Car getCar(long id) {
+    public Car getCar(Integer id) {
         Session session = getSession();
         Car getCarById = session.get(Car.class, id);
         session.getTransaction().commit();
@@ -51,29 +48,18 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     }
 
     @Override
-    public Car updateCar(long id, Integer carType, String make, String model, Integer year, Integer mileage, FuelSourceEnum
-            fuelSourceEnum, Integer enginePower, ColorEnum colorEnum, BodyTypeEnum bodyTypeEnum, TransmissionEnum transmissionEnum) {
+    public Car updateCarMileage(Integer id, Integer mileage) {
         Session session = getSession();
-        Car carToUpdate = session.get(Car.class, id);
-        if (carToUpdate != null) {
-            carToUpdate.setCarType(carType);
-            carToUpdate.setMake(make);
-            carToUpdate.setModel(model);
-            carToUpdate.setYear(year);
-            carToUpdate.setMileage(mileage);
-            carToUpdate.setFuelSource(fuelSourceEnum);
-            carToUpdate.setEnginePower(enginePower);
-            carToUpdate.setColor(colorEnum);
-            carToUpdate.setBodyType(bodyTypeEnum);
-            carToUpdate.setTransmission(transmissionEnum);
-            session.getTransaction().commit();
-            session.close();
-        }
-        return carToUpdate;
+        Car updateCar = session.get(Car.class, id);
+        updateCar.setMileage(mileage);
+        session.getTransaction().commit();
+        session.close();
+        return updateCar;
     }
 
+
     @Override
-    public void deleteCar(long id) {
+    public void deleteCar(Integer id) {
         Session session = getSession();
         Car carToDelete = session.get(Car.class, id);
         session.delete(carToDelete);

@@ -21,14 +21,23 @@
 
             <jsp:include page="/include/placeholder.jsp"></jsp:include>
 
-            <a href="addCar.jsp"><input type="button" value="Add car"></a>
 
-            <a href="updateCarMileage.jsp"><input type="button" value="Update car mileage"></a>
+            <form method="get" action="updateCar">
+                <h2>Aktualizacja danych samochodu</h2>
+                Podaj id samochodu<input type="text" name="id">
+                <input type="submit" value="POBIERZ"><br/><%=request.getAttribute("error")%><br/>
+                Przebieg samochodu o id : <%=request.getAttribute("id")%>
+                wynosi:  <%=request.getAttribute("mileage")%> km
+            </form>
+            <form method="post" action="updateCar">
+                <br/>
+                <br/>
+                Podaj id samochodu:<input type="text" name="id">
+                Podaj aktualny przebieg samochodu:<input type="text" name="mileage">
 
-            <a href="deleteCar.jsp"><input type="button" value="Delete Car"></a>
-
-            <a href="listCar.jsp"><input type="button" value="List Car"></a>
-
+                <input type="submit" value="ZAPISZ">
+                <a href="/admin/admin.jsp"></a>
+            </form>
         </div>
 
 
