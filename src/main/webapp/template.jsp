@@ -28,12 +28,12 @@
     <main class="container-fluid py-3 flex-fill">
       <div class="container">
 
-      <jsp:include page="include/index.jsp"></jsp:include>
+      <jsp:include page="include/placeholder.jsp"></jsp:include>
 
       </div>
       <!-- /.container -->
     </main>
-
+    
     <!-- Footer -->
     <jsp:include page="include/footer.jsp"></jsp:include>
 

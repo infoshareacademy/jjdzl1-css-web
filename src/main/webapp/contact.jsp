@@ -5,7 +5,7 @@
 
     <!-- Head -->
     <jsp:include page="include/head.jsp">
-        <jsp:param name="title" value="Index"></jsp:param>
+        <jsp:param name="title" value="Contact"></jsp:param>
     </jsp:include>
 
   <body>
@@ -28,12 +28,12 @@
     <main class="container-fluid py-3 flex-fill">
       <div class="container">
 
-      <jsp:include page="include/index.jsp"></jsp:include>
+      <jsp:include page="include/contact.jsp"></jsp:include>
 
       </div>
       <!-- /.container -->
     </main>
-
+    
     <!-- Footer -->
     <jsp:include page="include/footer.jsp"></jsp:include>
 

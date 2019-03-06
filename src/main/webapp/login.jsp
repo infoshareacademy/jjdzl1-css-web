@@ -1,95 +1,47 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pl">
 
-<head>
+    <!-- Head -->
+    <jsp:include page="include/head.jsp">
+        <jsp:param name="title" value="Log in"></jsp:param>
+    </jsp:include>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Rezerwacja samochodów">
-    <meta name="keywords" content="samochód, rezerwacja">
-    <meta name="author" content="CSS Group">
-    <meta http-equiv="X-Ua-Compatible" content="IE=edge">
+  <body>
+  <wrapper class="d-flex flex-column">
 
-    <title>Logowanie - CarSharingSystem</title>
+    <!-- Navigation -->
+      <c:choose>
+          <c:when test="${sessionScope.username != null && sessionScope.usertype == 0}">
+              <jsp:include page="include/unav.jsp"></jsp:include>
+          </c:when>
+          <c:when test="${sessionScope.username != null && sessionScope.usertype == 1}">
+              <jsp:include page="include/anav.jsp"></jsp:include>
+          </c:when>
+          <c:otherwise>
+              <jsp:include page="include/nav.jsp"></jsp:include>
+          </c:otherwise>
+      </c:choose>
 
-    <!-- Styles - Bootstrap core and custom -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+    <!-- Page Content -->
+    <main class="container-fluid py-3 flex-fill">
+      <div class="container">
 
-</head>
-<body>
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="index.jsp"><img src="img/css-logo.png" width="35" height="35" class="d-inline-block mr-1" alt=""> CarSharingSystem</a>
+      <jsp:include page="include/login.jsp"></jsp:include>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+      </div>
+      <!-- /.container -->
+    </main>
+    
+    <!-- Footer -->
+    <jsp:include page="include/footer.jsp"></jsp:include>
 
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.jsp">Start
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">Logowanie</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Rezerwacja</a>
-                </li>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Opłaty</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Kontakt</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Page Content -->
-<div class="container">
+  </wrapper>
+  </body>
 
-
-    <div class="row my-4">
-        <div class="col-lg-12">
-
-            ${error}
-            ${emptyData}
-            <form class="form-signin" action="LoginServlet" method="post">
-                <h1 class="h3 mb-3 font-weight-normal">Logowanie</h1>
-                <label for="inputLogin" class="sr-only">Login</label>
-                <input type="text" name="username" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
-                <label for="inputPassword" class="sr-only">Hasło</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
-            </form>
-
-        </div>
-    </div>
-
-
-</div>
-<!-- /.container -->
-
-<!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white"><img src="img/css-logo.png" width="35" height="35" class="d-inline-block mr-1" alt=""> Copyright &copy; 2018-2019 by CSS Group</p>
-    </div>
-    <!-- /.container -->
-</footer>
-
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</body>
 </html>
