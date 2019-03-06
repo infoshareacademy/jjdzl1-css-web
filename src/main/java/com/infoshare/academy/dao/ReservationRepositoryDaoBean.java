@@ -45,12 +45,13 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     public List<Reservation> getReservationListByUserId(Integer id) {
         Session session = getSession();
         List<Reservation> reservationListByUserId = session.createQuery
-                ("select r from Reservation r where user='"+id+"'")
+                ("select r from Reservation r where user='" + id + "'")
                 .getResultList();
         session.getTransaction().commit();
         session.close();
         return reservationListByUserId;
     }
+
 
     @Override
     public Reservation updateReservation(Integer id, Car car, LocalDate startDate, LocalDate endDate) {
@@ -65,8 +66,8 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
 
     @Override
     public void deleteReservation(Integer id) {
-        Session session= getSession();
-        Reservation reservationToDelete=session.get(Reservation.class, id);
+        Session session = getSession();
+        Reservation reservationToDelete = session.get(Reservation.class, id);
         session.delete(reservationToDelete);
         session.getTransaction().commit();
         session.close();

@@ -21,7 +21,7 @@ public class DeleteCar extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String id = req.getParameter("id");
-        resp.setContentType("text/html;charset=UtF-8");
+        resp.setContentType("text/html;charset=UTF-8");
 
         Car car = dao.getCar(Integer.valueOf(id));
 
