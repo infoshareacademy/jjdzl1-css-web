@@ -10,7 +10,7 @@
 
         <br/>
         <h2>Update car mileage in database</h2>
-            <form method="post" action="updateCar"></form>
+            <form method="post" action="updateCar">
                 Choose id: <input type="text" name="id"><br/>
                 Input actual mileage: <input type="text" name="mileage">
                 <button class="btn btn-success" type="submit">Update</button>

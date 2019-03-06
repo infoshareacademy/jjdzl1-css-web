@@ -12,7 +12,7 @@
 
         <br/>
         <h2>Delete car from database</h2>
-            <form method="post" action="deleteCar"></form>
+            <form method="post" action="deleteCar">
             Choose id: <input type="text" name="id">
             <button class="btn btn-danger" type="submit">Delete</button>
             </form>

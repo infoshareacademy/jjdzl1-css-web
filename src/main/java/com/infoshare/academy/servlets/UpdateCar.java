@@ -51,7 +51,7 @@ public class UpdateCar extends HttpServlet {
         String id = req.getParameter("id");
         String mileage = req.getParameter("mileage");
 
-        dao.updateCarMileage(new Integer(id).intValue(), new Integer(mileage).intValue());
+        dao.updateCarMileage(Integer.parseInt(id), Integer.parseInt(mileage));
 
         req.getRequestDispatcher("/admin/admin.jsp").forward(req, resp);
 
