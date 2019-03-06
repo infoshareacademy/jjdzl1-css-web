@@ -1,3 +1,4 @@
+/*
 package com.infoshare.academy.repository;
 
 import com.infoshare.academy.domain.User;
@@ -24,3 +25,4 @@ public class UsersRepository {
         return fillUsersRepositoryWithDefalutUsers();
     }
 }
+*/

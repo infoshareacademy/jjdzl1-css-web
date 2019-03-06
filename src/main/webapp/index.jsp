@@ -1,143 +1,47 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pl">
 
-<head>
+    <!-- Head -->
+    <jsp:include page="include/head.jsp">
+        <jsp:param name="title" value="Index"></jsp:param>
+    </jsp:include>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Rezerwacja samochodów">
-    <meta name="keywords" content="samochód, rezerwacja">
-    <meta name="author" content="CSS Group">
-    <meta http-equiv="X-Ua-Compatible" content="IE=edge">
+  <body>
+  <wrapper class="d-flex flex-column">
 
-    <title>CarSharingSystem</title>
+    <!-- Navigation -->
+      <c:choose>
+          <c:when test="${sessionScope.username != null && sessionScope.usertype == 0}">
+              <jsp:include page="include/unav.jsp"></jsp:include>
+          </c:when>
+          <c:when test="${sessionScope.username != null && sessionScope.usertype == 1}">
+              <jsp:include page="include/anav.jsp"></jsp:include>
+          </c:when>
+          <c:otherwise>
+              <jsp:include page="include/nav.jsp"></jsp:include>
+          </c:otherwise>
+      </c:choose>
 
-    <!-- Styles - Bootstrap core and custom -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+    <!-- Page Content -->
+    <main class="container-fluid py-3 flex-fill">
+      <div class="container">
 
-</head>
+      <jsp:include page="include/index.jsp"></jsp:include>
 
-<body>
+      </div>
+      <!-- /.container -->
+    </main>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="index.jsp"><img src="img/css-logo.png" width="35" height="35" class="d-inline-block mr-1" alt=""> CarSharingSystem</a>
+    <!-- Footer -->
+    <jsp:include page="include/footer.jsp"></jsp:include>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Start
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">Logowanie </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Rezerwacja</a>
-                </li>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Opłaty</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Kontakt</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+  </wrapper>
+  </body>
 
-<!-- Page Content -->
-<div class="container">
-
-    <!-- Heading Row -->
-    <div class="row my-4">
-        <div class="col-lg-6">
-            <img class="img-fluid rounded" src="img/car-city.jpg" alt="">
-        </div>
-        <!-- /.col-lg-8 -->
-        <div class="col-lg-6">
-            <h1>CarSharingSystem</h1>
-            <p>CSS to aplikacja umożliwiająca wynajęcie samochodu w jednym z 15 największych miast w Polsce. Opcja rezerwacji auta zapewni wybór modelu według własnych preferencji - samochód miejski, rodzinny, sportowy, dostawczy.</p>
-            <a class="btn btn-primary btn-lg" href="#">Wypróbuj!</a>
-        </div>
-        <!-- /.col-md-4 -->
-    </div>
-    <!-- /.row -->
-
-    <!-- Long Bar for Action -->
-    <div class="card text-white bg-info my-4 text-center">
-        <div class="card-body">
-            <p class="text-white m-0">Informacja: nie wszystkie funkcjonalności są uruchomione, przepraszamy za utrudnienia!</p>
-        </div>
-    </div>
-
-    <!-- Content Row -->
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Aktualności</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Więcej</a>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-4 -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Samochody</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Więcej</a>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-4 -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Społeczność</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Więcej</a>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-4 -->
-
-    </div>
-    <!-- /.row -->
-
-</div>
-<!-- /.container -->
-
-<!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white"><img src="img/css-logo.png" width="35" height="35" class="d-inline-block mr-1" alt=""> Copyright &copy; 2018-2019 by CSS Group</p>
-    </div>
-    <!-- /.container -->
-</footer>
-
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</>
+</html>

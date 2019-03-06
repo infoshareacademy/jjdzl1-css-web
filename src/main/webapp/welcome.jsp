@@ -1,87 +1,54 @@
-<%@ page import="com.infoshare.academy.domain.User" %>
-<%@ page import="com.infoshare.academy.dao.UsersRepositoryDaoBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pl">
 
-<head>
+    <!-- Head -->
+    <jsp:include page="include/head.jsp">
+        <jsp:param name="title" value="Start"></jsp:param>
+    </jsp:include>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Rezerwacja samochodów">
-    <meta name="keywords" content="samochód, rezerwacja">
-    <meta name="author" content="CSS Group">
-    <meta http-equiv="X-Ua-Compatible" content="IE=edge">
+  <body>
+  <wrapper class="d-flex flex-column">
 
-    <title>CarSharingSystem</title>
+    <!-- Navigation -->
+      <c:choose>
+          <c:when test="${sessionScope.username != null && sessionScope.usertype == 0}">
+              <jsp:include page="include/unav.jsp"></jsp:include>
+          </c:when>
+          <c:when test="${sessionScope.username != null && sessionScope.usertype == 1}">
+              <jsp:include page="include/anav.jsp"></jsp:include>
+          </c:when>
+          <c:otherwise>
+              <jsp:include page="include/nav.jsp"></jsp:include>
+          </c:otherwise>
+      </c:choose>
 
-    <!-- Styles - Bootstrap core and custom -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+      <!-- Page Content -->
+    <main class="container-fluid py-3 flex-fill">
+      <div class="container">
 
-</head>
-<body>
+          <c:choose>
+              <c:when test="${sessionScope.username != null}">
+                  <jsp:include page="include/welcome.jsp"></jsp:include>
+              </c:when>
+              <c:otherwise>
+                  <jsp:include page="include/index.jsp"></jsp:include>
+              </c:otherwise>
+          </c:choose>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="index.jsp"><img src="img/css-logo.png" width="35" height="35" class="d-inline-block mr-1" alt=""> CarSharingSystem</a>
+      </div>
+      <!-- /.container -->
+    </main>
+    
+    <!-- Footer -->
+    <jsp:include page="include/footer.jsp"></jsp:include>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.jsp">Start
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">Logowanie </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Rezerwacja</a>
-                </li>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Opłaty</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Kontakt</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+  </wrapper>
+  </body>
 
-<!-- Page Content -->
-<div class="container">
-<br>
-<% UsersRepositoryDaoBean usersRepositoryDaoBean = new UsersRepositoryDaoBean();
-    User user = usersRepositoryDaoBean.getUserByLogin(request.getParameter("username"));
-    String firstname = user.getFirstName();
-    String lastname = user.getLastName();
-%>
-Welcome <%= " " + firstname + " " + lastname %>
-<br>
-<br>
-</div>
-<!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white"><img src="img/css-logo.png" width="35" height="35"
-                                                   class="d-inline-block mr-1" alt=""> Copyright &copy; 2018-2019 by CSS
-            Group</p>
-    </div>
-    <!-- /.container -->
-</footer>
-
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</body>
 </html>

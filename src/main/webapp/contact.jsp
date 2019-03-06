@@ -5,7 +5,7 @@
 
     <!-- Head -->
     <jsp:include page="include/head.jsp">
-        <jsp:param name="title" value="Log in"></jsp:param>
+        <jsp:param name="title" value="Contact"></jsp:param>
     </jsp:include>
 
   <body>
@@ -28,14 +28,7 @@
     <main class="container-fluid py-3 flex-fill">
       <div class="container">
 
-      <c:choose>
-          <c:when test="${sessionScope.username != null}">
-              <jsp:include page="include/logged.jsp"></jsp:include>
-          </c:when>
-          <c:otherwise>
-              <jsp:include page="include/login.jsp"></jsp:include>
-          </c:otherwise>
-      </c:choose>
+      <jsp:include page="include/contact.jsp"></jsp:include>
 
       </div>
       <!-- /.container -->
