@@ -39,7 +39,7 @@ public class DeleteCar extends HttpServlet {
 
         String id = req.getParameter("id");
 
-        dao.deleteCar(new Integer(id).intValue());
+        dao.deleteCar(Integer.parseInt(id));
 
         req.getRequestDispatcher("/admin/admin.jsp").forward(req,resp);
     }

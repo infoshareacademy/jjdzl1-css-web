@@ -1,12 +1,26 @@
 package com.infoshare.academy.dao;
 
+import com.infoshare.academy.domain.Car;
 import com.infoshare.academy.domain.Reservation;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Filter;
+import java.util.stream.Stream;
 
 public interface ReservationRepositoryDao {
-    List<Reservation> getReservationList();
-    List<Reservation> getReservationByUserId(int user);
-    List<Reservation> getReservationByCarId(int car);
+
+    Reservation addReservation(Reservation reservation);
+
+    List<Reservation> list();
+
+    List<Reservation> getReservationListByUserId(Integer id);
+
+    Reservation updateReservation(Integer id, Car car, LocalDate startDate, LocalDate endDate);
+
+    void deleteReservation(Integer id);
+
+    Stream<Reservation> searchReservation(Filter filter);
+
 }
 
