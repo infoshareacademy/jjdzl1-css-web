@@ -25,14 +25,28 @@ public class GetReservationByUserId extends HttpServlet {
 
         String id = req.getParameter("id");
 
-        PrintWriter writer = resp.getWriter();
+        if (id.isEmpty()) {
+            req.setAttribute("error", errorMessage());
+        }
 
-        resp.setContentType("text/html;charset=UTF-8");
+        List<Reservation> reservationListByUserId = dao.getReservationListByUserId(Integer.parseInt(id));
 
-        List<Reservation> reservationListByUserId =dao.getReservationListByUserId(Integer.parseInt(id));
+        if (reservationListByUserId.isEmpty()) {
+            req.setAttribute("error", errorMessage());
+        } else
+            req.setAttribute("reservationListByUserId", reservationListByUserId);
 
-        req.setAttribute("reservationListByUserId", reservationListByUserId);
 
-        req.getRequestDispatcher("/admin/getReservationListByUserId.jsp").forward(req,resp);
+        req.getRequestDispatcher("/admin/getReservationListByUserId.jsp").
+
+                forward(req, resp);
+
+    }
+
+    public static String errorMessage() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = " User have no reservation.";
+        return html1 + errorData + html2;
     }
 }

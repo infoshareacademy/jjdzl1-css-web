@@ -23,24 +23,20 @@ public class UpdateCar extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String id = req.getParameter("id");
-        PrintWriter writer = resp.getWriter();
-        resp.setContentType("text/html;charset=UTF-8");
+        String mileage = req.getParameter("mileage");
 
-        if (id == null || id.isEmpty()) {
-            req.setAttribute("error", HttpServletResponse.SC_BAD_REQUEST);
-            req.getRequestDispatcher("/admin/updateCarMileage.jsp").forward(req, resp);
+        if (id.isEmpty()) {
+            req.setAttribute("error", errorMessage());
             return;
         }
         Car car = dao.getCar(Integer.valueOf(id));
 
-        if (car == null) {
-            req.setAttribute("error", HttpServletResponse.SC_NOT_FOUND);
-            req.getRequestDispatcher("/admin/updateCarMileage.jsp").forward(req, resp);
-            return;
+        if (car != null) {
+            req.setAttribute("id", car.getId());
+            req.setAttribute("mileage", car.getMileage());
+        } else {
+            req.setAttribute("error", errorMessage());
         }
-
-        req.setAttribute("id", car.getId());
-        req.setAttribute("mileage", car.getMileage());
         req.getRequestDispatcher("/admin/updateCarMileage.jsp").forward(req, resp);
 
     }
@@ -50,11 +46,31 @@ public class UpdateCar extends HttpServlet {
 
         String id = req.getParameter("id");
         String mileage = req.getParameter("mileage");
+        if (id.isEmpty()) {
+            req.setAttribute("error", errorMessage());
+        }
+        if (mileage.isEmpty()) {
+            req.setAttribute("error", errorMessage());
+        }
 
-        dao.updateCarMileage(Integer.parseInt(id), Integer.parseInt(mileage));
+        Car car = dao.getCar(Integer.parseInt(id));
 
-        req.getRequestDispatcher("/admin/admin.jsp").forward(req, resp);
+        if (car != null) {
+
+            dao.updateCarMileage(Integer.parseInt(id), Integer.parseInt(mileage));
+        } else {
+            req.setAttribute("error", errorMessage());
+        }
+        req.getRequestDispatcher("/admin/updateCarMileage.jsp").forward(req, resp);
 
     }
+
+    public static String errorMessage() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = " Id car incorrect! Please try again.";
+        return html1 + errorData + html2;
+    }
+
 
 }

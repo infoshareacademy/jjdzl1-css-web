@@ -56,9 +56,6 @@
                 <a class="nav-link" href="addReservation.jsp"><span data-feather="plus"></span>Add reservation</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=""><span data-feather="upload"></span>// Update reservation //</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="deleteReservation.jsp"><span data-feather="delete"></span>Delete reservation</a>
             </li>
         </ul>
