@@ -4,7 +4,7 @@
 
     <form method="get" action="getReservationListByUserId">
         <h2>Reservation list for User</h2>
-        Choose user id:<input type="text" name="id">
+        Choose user id:<input type="number" name="id" min="0">
         <button class="btn btn-primary" type="submit">Load list</button>
         <br/><br/>
 

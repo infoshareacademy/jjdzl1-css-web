@@ -4,7 +4,7 @@
 
     <form method="get" action="deleteReservation">
         <h2>Reservations list for User</h2>
-        Choose user id:<input type="text" name="id">
+        Choose user id:<input type="number" name="id" min="0">
         <button class="btn btn-primary" type="submit">Load list</button>
         <br/><br/>
 
@@ -37,7 +37,7 @@
         </table>
     </form>
     <form method="post" action="deleteReservation">
-        Choose reservation id:<input type="text" name="id">
+        Choose reservation id:<input type="number" name="id" min="0">
         <button class="btn btn-primary" type="submit">Delete</button>
     </form>
 </div>
