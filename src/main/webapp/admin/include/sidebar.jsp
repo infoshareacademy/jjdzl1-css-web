@@ -33,7 +33,7 @@
                 <a class="nav-link" href="addCar.jsp"><span data-feather="plus"></span>Add car</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="updateCarMileage.jsp"><span data-feather="upload"></span>Update car</a>
+                <a class="nav-link" href="updateCarMileage.jsp"><span data-feather="upload"></span>Update car mileage</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="deleteCar.jsp"><span data-feather="delete"></span>Delete car</a>
@@ -53,7 +53,7 @@
                 <a class="nav-link" href="listReservation.jsp"><span data-feather="list"></span>All reservations </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=""><span data-feather="plus"></span> // Add reservation //</a>
+                <a class="nav-link" href="addReservation.jsp"><span data-feather="plus"></span>Add reservation</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href=""><span data-feather="upload"></span>// Update reservation //</a>

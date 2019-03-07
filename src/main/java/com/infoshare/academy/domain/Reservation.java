@@ -15,11 +15,11 @@ public class Reservation {
     private Integer reservation_id;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name="user_id", insertable=false, updatable=false, nullable=false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false, nullable = false)
     private User user;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "car_id",insertable=false, updatable=false, nullable=false)
+    @JoinColumn(name = "car_id", insertable = false, updatable = false, nullable = false)
     private Car car;
     @Column(name = "start_date")
     private LocalDate startDate;
@@ -27,6 +27,13 @@ public class Reservation {
     private LocalDate endDate;
 
     public Reservation() {
+    }
+
+    public Reservation(User user, Car car, LocalDate startDate, LocalDate endDate) {
+        this.user = user;
+        this.car = car;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public Reservation(LocalDate startDate, LocalDate endDate) {

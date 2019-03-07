@@ -61,7 +61,7 @@ public class User {
         this.city = city;
     }
 
-    public Integer getId() {
+    public Integer getId(String userId) {
         return id;
     }
 
