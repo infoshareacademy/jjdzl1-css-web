@@ -26,6 +26,10 @@
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>com.infoshare.academy.servlets.LogoutServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ProfileServlet</servlet-name>
+    <servlet-class>com.infoshare.academy.servlets.ProfileServlet</servlet-class>
+  </servlet>
 <!--  <servlet>
     <servlet-name>WelcomeServlet</servlet-name>
     <servlet-class>com.infoshare.academy.servlets.WelcomeServlet</servlet-class>
@@ -50,6 +54,10 @@
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProfileServlet</servlet-name>
+    <url-pattern>/profile</url-pattern>
   </servlet-mapping>
 <!--  <servlet-mapping>
     <servlet-name>WelcomeServlet</servlet-name>
