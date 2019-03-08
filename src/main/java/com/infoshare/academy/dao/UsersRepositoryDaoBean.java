@@ -69,16 +69,26 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     public void deleteUserById(int id) {
         Session session = getSession();
         User user = session.get(User.class, id);
-        session.delete(user);
-        session.getTransaction().commit();
-        session.close();
+        sessionDeleteUser(session, user);
     }
 
     @Override
     public void deleteUserByLogin(String login) {
         Session session = getSession();
         User user = session.get(User.class, login);
-        session.delete(user);
+        sessionDeleteUser(session, user);
+    }
+
+    @Override
+    public void updateUserAddress(Integer id, String postalCode, String city, String streetAddress) {
+        Session session = getSession();
+        String update = "UPDATE User u SET u.postalCode=:postalCode, u.city=:city, u.streetAddress=:streetAddress WHERE u.id=:id";
+        Query query = session.createQuery(update);
+        query.setParameter("id", id);
+        query.setParameter("postalCode", postalCode);
+        query.setParameter("city", city);
+        query.setParameter("streetAddress", streetAddress);
+        query.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
@@ -87,5 +97,11 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
         return session;
+    }
+
+    private void sessionDeleteUser(Session session, User user) {
+        session.delete(user);
+        session.getTransaction().commit();
+        session.close();
     }
 }

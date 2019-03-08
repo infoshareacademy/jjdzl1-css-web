@@ -5,7 +5,7 @@
 
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="/profile"><span data-feather="user"></span>Your profile<span class="sr-only">(current)</span></a>
+                <a class="nav-link active" href="profile"><span data-feather="user"></span>Your profile<span class="sr-only">(current)</span></a>
             </li>
         </ul>
 
@@ -15,7 +15,7 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link" href="#"><span data-feather="lock"></span>Change password</a>
-                <a class="nav-link" href="#"><span data-feather="map"></span>Edit address</a>
+                <a class="nav-link" href="editaddress"><span data-feather="map"></span>Edit address</a>
             </li>
         </ul>
 

@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/profile")
-public class ProfileServlet extends HttpServlet {
+@WebServlet("/editaddress")
+public class ProfileAddressUpdateServlet extends HttpServlet {
 
     @EJB
     private UsersRepositoryDao usersDao;
@@ -29,13 +29,33 @@ public class ProfileServlet extends HttpServlet {
         if (session != null) {
             String getUser = (String) session.getAttribute("username");
             User currentUser = getUser(getUser);
-            request.setAttribute("currentUser",currentUser);
-            request.getRequestDispatcher("profile.jsp").forward(request, response);
+            request.setAttribute("currentUser", currentUser);
+            request.getRequestDispatcher("editaddress.jsp").forward(request, response);
         } else {
             request.setAttribute("error", errorMessage());
             RequestDispatcher req = request.getRequestDispatcher("login.jsp");
             req.forward(request, response);
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html; charset=UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        HttpSession session = req.getSession(true);
+        String getUser = (String) session.getAttribute("username");
+        User currentUser = getUser(getUser);
+        Integer id = currentUser.getId();
+
+        String postalCode = req.getParameter("postalCode");
+        String city = req.getParameter("city");
+        String streetAddress = req.getParameter("streetAddress");
+
+        usersDao.updateUserAddress(id, postalCode, city, streetAddress);
+
+        resp.setHeader("Refresh", "1");
+        req.getRequestDispatcher("/editaddress.jsp").forward(req, resp);
     }
 
     public User getUser(String username) {
