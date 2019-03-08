@@ -14,7 +14,7 @@
         </h6>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="#"><span data-feather="lock"></span>Change password</a>
+                <a class="nav-link" href="changepassword"><span data-feather="lock"></span>Change password</a>
                 <a class="nav-link" href="editaddress"><span data-feather="map"></span>Edit address</a>
             </li>
         </ul>

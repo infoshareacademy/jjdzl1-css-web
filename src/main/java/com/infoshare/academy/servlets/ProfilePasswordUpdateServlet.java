@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/editaddress")
-public class ProfileAddressUpdateServlet extends HttpServlet {
+@WebServlet("/changepassword")
+public class ProfilePasswordUpdateServlet extends HttpServlet {
 
     @EJB
     private UsersRepositoryDao usersDao;
@@ -30,7 +30,7 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
             String getUser = (String) session.getAttribute("username");
             User currentUser = getUser(getUser);
             request.setAttribute("currentUser", currentUser);
-            request.getRequestDispatcher("editaddress.jsp").forward(request, response);
+            request.getRequestDispatcher("changepassword.jsp").forward(request, response);
         } else {
             request.setAttribute("error", errorMessage());
             RequestDispatcher req = request.getRequestDispatcher("login.jsp");
@@ -41,21 +41,27 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-        req.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession(false);
         String getUser = (String) session.getAttribute("username");
         User currentUser = getUser(getUser);
         Integer id = currentUser.getId();
 
-        String postalCode = req.getParameter("postalCode");
-        String city = req.getParameter("city");
-        String streetAddress = req.getParameter("streetAddress");
+        String password1 = req.getParameter("password1");
+        String password2 = req.getParameter("password2");
 
-        usersDao.updateUserAddress(id, postalCode, city, streetAddress);
+        if(password1.equals(password2)){
+            String password = password1;
+            usersDao.updateUserPassword(id, password);
+            resp.sendRedirect("LogoutServlet");
+            req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
+        }
 
-        resp.setHeader("Refresh", "1");
-        req.getRequestDispatcher("editaddress.jsp").forward(req, resp);
+        else {
+            req.setAttribute("error", errorMessage2());
+            RequestDispatcher reqDisp = req.getRequestDispatcher("changepassword.jsp");
+            reqDisp.forward(req, resp);
+        }
+
     }
 
     public User getUser(String username) {
@@ -66,6 +72,13 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
         String errorData = "Anonymous users can't access profile!";
+        return html1 + errorData + html2;
+    }
+
+    public static String errorMessage2() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Given passwords don't match, try again!";
         return html1 + errorData + html2;
     }
 }

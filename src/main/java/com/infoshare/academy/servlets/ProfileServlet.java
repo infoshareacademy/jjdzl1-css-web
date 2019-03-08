@@ -24,7 +24,7 @@ public class ProfileServlet extends HttpServlet {
 
         response.setContentType("text/html");
 
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(false);
 
         if (session != null) {
             String getUser = (String) session.getAttribute("username");
