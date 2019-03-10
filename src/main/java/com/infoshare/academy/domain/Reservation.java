@@ -14,12 +14,12 @@ public class Reservation {
     @Column(name = "reservation_id")//, updatable = false)
     private Integer reservation_id;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "user_id", insertable = false, updatable = false, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "car_id", insertable = false, updatable = false, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "car_id")
     private Car car;
     @Column(name = "start_date")
     private LocalDate startDate;

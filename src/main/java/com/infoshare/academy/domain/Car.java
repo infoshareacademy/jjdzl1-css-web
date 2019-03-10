@@ -58,8 +58,7 @@ public class Car {
     private Integer cargoSpace;
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "car", cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "car")
     private List<Reservation> reservations;
 
     public Car() {

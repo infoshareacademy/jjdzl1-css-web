@@ -35,7 +35,7 @@ public class User {
     private String postalCode;
     @Column(name = "city")
     private String city;
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
 
     public User() {
@@ -166,7 +166,7 @@ public class User {
         this.reservations = reservations;
     }
 
-    public void addReservation(Reservation reservation){
+    public void addReservation(Reservation reservation) {
         if (reservations == null) {
             reservations = new ArrayList<>();
         }

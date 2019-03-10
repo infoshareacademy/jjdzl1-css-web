@@ -22,7 +22,9 @@ public class AddReservation extends HttpServlet {
 
     @EJB
     ReservationRepositoryDao dao;
+    @EJB
     CarsRepositoryDao daoCar;
+    @EJB
     UsersRepositoryDao daoUser;
 
     @Override
@@ -38,6 +40,6 @@ public class AddReservation extends HttpServlet {
         Reservation reservation = new Reservation(user,car,LocalDate.parse(startDate),LocalDate.parse(endDate));
 
         dao.addReservation(reservation);
-        req.getRequestDispatcher("admin/admin.jsp").forward(req, resp);
+        req.getRequestDispatcher("addReservation.jsp").forward(req, resp);
     }
 }
