@@ -1,13 +1,20 @@
 package com.infoshare.academy.dao;
 
+import com.infoshare.academy.domain.Car;
 import com.infoshare.academy.domain.Reservation;
 import org.hibernate.Session;
 
+import javax.ejb.Stateless;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Filter;
+import java.util.stream.Stream;
 
 import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 
+@Stateless
 public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
+
 
     private Session getSession() {
         Session session = getSessionFactory().getCurrentSession();
@@ -16,29 +23,61 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     }
 
     @Override
-    public List<Reservation> getReservationList() {
+    public Reservation addReservation(Reservation reservation) {
         Session session = getSession();
-        List<Reservation> reservationList = session.createQuery("SELECT r FROM Reservation r").getResultList();
+        session.save(reservation);
+        session.getTransaction().commit();
+        session.close();
+        return reservation;
+    }
+
+    @Override
+    public List<Reservation> list() {
+        Session session = getSession();
+        List<Reservation> reservationList = session.createQuery
+                ("select r from Reservation r")
+                .getResultList();
         session.getTransaction().commit();
         session.close();
         return reservationList;
     }
 
-    @Override
-    public List<Reservation> getReservationByUserId(int user) {
+    public List<Reservation> getReservationListByUserId(Integer id) {
         Session session = getSession();
-        List<Reservation> reservationListByUserId = session.createQuery("SELECT r FROM Reservation r WHERE r.user='" + user + "'", Reservation.class).getResultList();
+        List<Reservation> reservationListByUserId = session.createQuery
+                ("select r from Reservation r where user='" + id + "'")
+                .getResultList();
         session.getTransaction().commit();
         session.close();
         return reservationListByUserId;
     }
 
+
     @Override
-    public List<Reservation> getReservationByCarId(int car) {
+    public Reservation updateReservation(Integer id, Car car, LocalDate startDate, LocalDate endDate) {
         Session session = getSession();
-        List<Reservation> reservationListByCarId = session.createQuery("SELECT r FROM Reservation r WHERE r.car='" + car + "'", Reservation.class).getResultList();
+        Reservation updateReservation = session.get(Reservation.class, id);
+        updateReservation.setCar(car);
+        updateReservation.setStartDate(startDate);
+        updateReservation.setEndDate(endDate);
+        session.close();
+        return updateReservation;
+    }
+
+    @Override
+    public void deleteReservation(Integer id) {
+        Session session = getSession();
+        Reservation reservationToDelete = session.get(Reservation.class, id);
+        session.delete(reservationToDelete);
         session.getTransaction().commit();
         session.close();
-        return reservationListByCarId;
+
+    }
+
+    @Override
+    public Stream<Reservation> searchReservation(Filter filter) {
+        return null;
     }
 }
+
+
