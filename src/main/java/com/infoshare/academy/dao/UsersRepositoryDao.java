@@ -19,4 +19,8 @@ public interface UsersRepositoryDao {
     void deleteUserById(int id);
 
     void deleteUserByLogin(String login);
+
+    void updateUserAddress(Integer id, String postalCode, String city, String streetAddress);
+
+    void updateUserPassword(Integer id, String password);
 }
