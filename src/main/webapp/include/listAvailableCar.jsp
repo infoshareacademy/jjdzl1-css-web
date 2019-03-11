@@ -3,9 +3,9 @@
 <div align="center">
 
     <form method="get" action="listAvailableCar">
-        <h2>List available car</h2>
-        Choose startDate:<input type="date" name="startDate" required>
-        Choose eddDate:<input type="date" name="endDate" required>
+        <h2>List available cars</h2>
+        Choose starting date: <input type="date" name="startDate" required>
+        Choose ending date: <input type="date" name="endDate" required>
         <button class="btn btn-primary" type="submit">Load list</button>
         ${error}
         <br/><br/>
@@ -13,19 +13,19 @@
         <table class="table table-striped">
             <tr>
                 <th>Car id</th>
-                <th>Car make</th>
-                <th>Car model</th>
-
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Fuel source</th>
             </tr>
 
             <c:forEach var="reservation" items="${reservationListAvailableCar}">
                 <tr>
-
                     <td>${reservation.car.id}</td>
                     <td>${reservation.car.make}</td>
                     <td>${reservation.car.model}</td>
-
-
+                    <td>${reservation.car.year}</td>
+                    <td>${reservation.car.fuelSource}</td>
                 </tr>
             </c:forEach>
         </table>
