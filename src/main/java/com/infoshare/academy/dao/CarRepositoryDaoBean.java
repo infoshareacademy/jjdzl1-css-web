@@ -5,6 +5,7 @@ import org.hibernate.Filter;
 import org.hibernate.Session;
 
 import javax.ejb.Stateless;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Stream;
 

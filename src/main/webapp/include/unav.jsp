@@ -19,6 +19,9 @@
                         <a class="nav-link" href="profile">Profile</a>
                       </li>
                       <li class="nav-item">
+                        <a class="nav-link" href="listAvailableCar.jsp">List Available Car</a>
+                      </li>
+                      <li class="nav-item">
                         <a class="nav-link" href="#">Reservations</a>
                       </li>
                       <li class="nav-item">

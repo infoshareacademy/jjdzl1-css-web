@@ -6,7 +6,7 @@
 
         <!--1) Settings for Docker on localhost with port forwarding-->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:9001/css</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:9001/css?serverTimezone=Europe/Warsaw</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
 
