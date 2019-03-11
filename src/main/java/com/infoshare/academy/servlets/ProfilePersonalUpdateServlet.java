@@ -13,9 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
 
-@WebServlet("/editaddress")
-public class ProfileAddressUpdateServlet extends HttpServlet {
+@WebServlet("/editinfo")
+public class ProfilePersonalUpdateServlet extends HttpServlet {
 
     @EJB
     private UsersRepositoryDao usersDao;
@@ -31,7 +32,7 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
             String getUser = (String) session.getAttribute("username");
             User currentUser = getUser(getUser);
             request.setAttribute("currentUser", currentUser);
-            request.getRequestDispatcher("editaddress.jsp").forward(request, response);
+            request.getRequestDispatcher("editinfo.jsp").forward(request, response);
         } else {
             request.setAttribute("error", errorMessage());
             RequestDispatcher req = request.getRequestDispatcher("login.jsp");
@@ -47,14 +48,15 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
         User currentUser = getUser(getUser);
         Integer id = currentUser.getId();
 
-        String postalCode = req.getParameter("postalCode");
-        String city = req.getParameter("city");
-        String streetAddress = req.getParameter("streetAddress");
+        String firstName = req.getParameter("firstName");
+        String lastName = req.getParameter("lastName");
+        String phoneNumber = req.getParameter("phoneNumber");
+        String birthDate = req.getParameter("birthDate");
 
-        usersDao.updateUserAddress(id, postalCode, city, streetAddress);
+        usersDao.updateUserInfo(id, firstName, lastName, Long.parseLong(phoneNumber), LocalDate.parse(birthDate));
 
         resp.setHeader("Refresh", "1");
-        req.getRequestDispatcher("editaddress.jsp").forward(req, resp);
+        req.getRequestDispatcher("editinfo.jsp").forward(req, resp);
     }
 
     private void setEncoding(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {

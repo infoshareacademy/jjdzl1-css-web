@@ -18,7 +18,7 @@
 
         <!--3) Settings for Xampp-->
 <!--        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/css?serverTimezone=UTC</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/css?serverTimezone=Europe/Warsaw</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>-->
 

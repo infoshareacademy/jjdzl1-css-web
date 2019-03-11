@@ -8,11 +8,11 @@ ${error}
     <form method="post" action="changepassword">
         <div class="form-group px-3">
             <label for="password1">New password</label>
-            <input type="password" class="form-control" name="password1" id="password1">
+            <input type="password" class="form-control" name="password1" id="password1" required>
         </div>
         <div class="form-group px-3">
             <label for="password2">Input new password again</label>
-            <input type="password" class="form-control" name="password2" id="password2">
+            <input type="password" class="form-control" name="password2" id="password2" required>
         </div>
         <button type="submit" class="btn btn-primary">Change password</button>
     </form>

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
@@ -97,6 +98,20 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         Query query = session.createQuery(update);
         query.setParameter("id", id);
         query.setParameter("password", password);
+        query.executeUpdate();
+        commitTransaction(session);
+    }
+
+    @Override
+    public void updateUserInfo(Integer id, String firstName, String lastName, Long phoneNumber, LocalDate birthDate) {
+        Session session = getSession();
+        String update = "UPDATE User u SET u.firstName=:firstName, u.lastName=:lastName, u.phoneNumber=:phoneNumber, u.birthDate=:birthDate WHERE u.id=:id";
+        Query query = session.createQuery(update);
+        query.setParameter("id", id);
+        query.setParameter("firstName", firstName);
+        query.setParameter("lastName", lastName);
+        query.setParameter("phoneNumber", phoneNumber);
+        query.setParameter("birthDate", birthDate);
         query.executeUpdate();
         commitTransaction(session);
     }
