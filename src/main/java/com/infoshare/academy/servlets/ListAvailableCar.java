@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @WebServlet("/listAvailableCar")
 public class ListAvailableCar extends HttpServlet {
@@ -29,15 +30,18 @@ public class ListAvailableCar extends HttpServlet {
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
 
-        List<Reservation> reservationListAvailableCar = daoReservation
+        List<Reservation> list = daoReservation
                 .getReservationListAvailableCar(LocalDate.parse(startDate), LocalDate.parse(endDate));
 
-/*        Set<Reservation> reservationListAvailableCar = new LinkedHashSet<>(list);
-        HashSet<Reservation> reservationListAvailableCar=new HashSet<>();
-        list.removeIf(e->!reservationListAvailableCar.add(e.));
-        List<Car> reservationListAvailableCar=new ArrayList<Car>(new HashSet<Reservation>(list.get(1)));*/
 
-        req.setAttribute("reservationListAvailableCar", reservationListAvailableCar);
+        TreeSet<Reservation> reservationListAvailableCar =
+                list.stream()
+                .collect(Collectors.toCollection(
+                        ()->new TreeSet<Reservation>((p1,p2)->p1.getCar().getId()
+                        .compareTo(p2.getCar().getId()))
+                ));
+
+                req.setAttribute("reservationListAvailableCar", reservationListAvailableCar);
 
         req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
     }
