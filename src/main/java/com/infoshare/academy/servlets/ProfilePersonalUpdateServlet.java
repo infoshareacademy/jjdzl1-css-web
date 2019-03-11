@@ -27,9 +27,9 @@ public class ProfilePersonalUpdateServlet extends HttpServlet {
         response.setContentType("text/html");
 
         HttpSession session = request.getSession(false);
+        String getUser = (String) session.getAttribute("username");
 
-        if (session != null) {
-            String getUser = (String) session.getAttribute("username");
+        if (getUser != null) {
             User currentUser = getUser(getUser);
             request.setAttribute("currentUser", currentUser);
             request.getRequestDispatcher("editinfo.jsp").forward(request, response);
