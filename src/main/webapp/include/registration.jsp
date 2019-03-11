@@ -4,7 +4,7 @@
 <div class="col-md-8 order-md-1">
     <h4 class="mb-3">Register new account</h4>
 
-    <form class="needs-validation" action="RegistrationServlet" method="post" novalidate>
+    <form class="needs-validation" action="RegistrationServlet" method="post">
 
         <div class="form-group">
             <label for="inputlogin">Login</label>
