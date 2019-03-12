@@ -2,11 +2,13 @@ package com.infoshare.academy.dao;
 
 import com.infoshare.academy.domain.User;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public interface UsersRepositoryDao {
 
-    void addUser(User user);
+    User addUser(User user);
 
     User getUserById(int id);
 
@@ -23,4 +25,6 @@ public interface UsersRepositoryDao {
     void updateUserAddress(Integer id, String postalCode, String city, String streetAddress);
 
     void updateUserPassword(Integer id, String password);
+
+    LocalDate convertDateOfBirthFromFormulaToClassPole (String dataOfBirth);
 }

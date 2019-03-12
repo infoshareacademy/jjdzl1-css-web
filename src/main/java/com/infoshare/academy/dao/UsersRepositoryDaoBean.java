@@ -6,6 +6,9 @@ import org.hibernate.Session;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
@@ -14,10 +17,12 @@ import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 public class UsersRepositoryDaoBean implements UsersRepositoryDao {
 
     @Override
-    public void addUser(User user) {
+    public User addUser(User user) {
         Session session = getSession();
         session.save(user);
-        commitTransaction(session);
+        session.getTransaction().commit();
+        session.close();
+        return user;
     }
 
     @Override
@@ -99,6 +104,13 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         query.setParameter("password", password);
         query.executeUpdate();
         commitTransaction(session);
+    }
+
+    @Override
+    public LocalDate convertDateOfBirthFromFormulaToClassPole(String dataOfBirth) {
+        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateOfBirthYYYYMMDD = LocalDate.parse(dataOfBirth,FORMATTER);
+        return dateOfBirthYYYYMMDD;
     }
 
     private Session getSession() {
