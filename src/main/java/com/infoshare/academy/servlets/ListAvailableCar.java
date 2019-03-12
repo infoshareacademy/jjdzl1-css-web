@@ -2,7 +2,10 @@ package com.infoshare.academy.servlets;
 
 import com.infoshare.academy.dao.CarsRepositoryDao;
 import com.infoshare.academy.dao.ReservationRepositoryDao;
+import com.infoshare.academy.dao.UsersRepositoryDao;
+import com.infoshare.academy.domain.Car;
 import com.infoshare.academy.domain.Reservation;
+import com.infoshare.academy.domain.User;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -20,6 +23,8 @@ public class ListAvailableCar extends HttpServlet {
 
     @EJB
     CarsRepositoryDao daoCar;
+    @EJB
+    UsersRepositoryDao daoUser;
 
     @EJB
     ReservationRepositoryDao daoReservation;
@@ -40,9 +45,12 @@ public class ListAvailableCar extends HttpServlet {
                         ()->new TreeSet<Reservation>((p1,p2)->p1.getCar().getId()
                         .compareTo(p2.getCar().getId()))
                 ));
+        req.setAttribute("startDate",startDate);
+        req.setAttribute("endDate",endDate);
 
                 req.setAttribute("reservationListAvailableCar", reservationListAvailableCar);
 
         req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
     }
+
 }
