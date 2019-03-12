@@ -27,4 +27,8 @@ public interface UsersRepositoryDao {
     void updateUserPassword(Integer id, String password);
 
     LocalDate convertDateOfBirthFromFormulaToClassPole (String dateOfBirth);
+
+    public Boolean isPasswordCorrect(String password);
+
+
 }

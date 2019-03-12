@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
+
+import static com.infoshare.academy.servlets.LoginServlet.errorMessage;
+
 @WebServlet("/RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {
     @EJB
@@ -35,10 +38,24 @@ public class RegistrationServlet extends HttpServlet {
         String streetAddress = request.getParameter("streetAddress");
         String postalCode = request.getParameter("postalCode");
 
-        User user = new User (0,login,password,email,Long.parseLong(phoneNumber),firstName,
-                lastName, usersRepositoryDao.convertDateOfBirthFromFormulaToClassPole(birthOfDate),streetAddress,postalCode,city);
+        if (!usersRepositoryDao.isPasswordCorrect(password)) {
+            request.setAttribute("error", errorMessage());
+            RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
+            req.forward(request, response);
+        }
+
+        User user = new User(0, login, password, email, Long.parseLong(phoneNumber), firstName,
+                lastName, usersRepositoryDao.convertDateOfBirthFromFormulaToClassPole(birthOfDate),
+                streetAddress, postalCode, city);
 
         usersRepositoryDao.addUser(user);
 
+    }
+
+    public static String errorMessage() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Password incorrect! Please try again.";
+        return html1 + errorData + html2;
     }
 }

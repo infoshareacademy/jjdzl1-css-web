@@ -4,6 +4,8 @@
 <div class="col-md-8 order-md-1">
     <h4 class="mb-3">Register new account</h4>
 
+
+    ${error}
     <form class="needs-validation" action="RegistrationServlet" method="post">
 
         <div class="form-group">
