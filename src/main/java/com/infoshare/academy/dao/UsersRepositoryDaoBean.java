@@ -107,10 +107,9 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     }
 
     @Override
-    public LocalDate convertDateOfBirthFromFormulaToClassPole(String dataOfBirth) {
+    public LocalDate convertDateOfBirthFromFormulaToClassPole(String dateOfBirth) {
         DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dateOfBirthYYYYMMDD = LocalDate.parse(dataOfBirth,FORMATTER);
-        return dateOfBirthYYYYMMDD;
+        return LocalDate.parse(dateOfBirth,FORMATTER);
     }
 
     private Session getSession() {
