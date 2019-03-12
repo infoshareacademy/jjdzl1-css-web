@@ -7,7 +7,7 @@
 
     ${error}
     ${tooYoungError}
-    <form class="needs-validation" action="RegistrationServlet" method="post">
+    <form class="needs-validation" action="register" method="post">
 
         <div class="form-group">
             <label for="inputlogin">Login</label>
