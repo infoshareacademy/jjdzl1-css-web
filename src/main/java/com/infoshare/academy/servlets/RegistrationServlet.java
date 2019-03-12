@@ -39,23 +39,42 @@ public class RegistrationServlet extends HttpServlet {
         String postalCode = request.getParameter("postalCode");
 
         if (!usersRepositoryDao.isPasswordCorrect(password)) {
-            request.setAttribute("error", errorMessage());
+            request.setAttribute("error", passwordIncorrectMessage());
             RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
             req.forward(request, response);
         }
+        if (usersRepositoryDao.isAdult(birthOfDate)) {
+            request.setAttribute("tooYoungError", tooYoungMessage());
+            RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
+            req.forward(request, response);
+        }
+
+
+        System.out.println(birthOfDate);
+        usersRepositoryDao.isAdult(birthOfDate);
+
 
         User user = new User(0, login, password, email, Long.parseLong(phoneNumber), firstName,
                 lastName, usersRepositoryDao.convertDateOfBirthFromFormulaToClassPole(birthOfDate),
                 streetAddress, postalCode, city);
 
-        usersRepositoryDao.addUser(user);
+
+        System.out.println(user);
+        //usersRepositoryDao.addUser(user);
 
     }
 
-    public static String errorMessage() {
+    public static String passwordIncorrectMessage() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
         String errorData = "Password incorrect! Please try again.";
+        return html1 + errorData + html2;
+    }
+
+    public static String tooYoungMessage() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "You are too young to register account!";
         return html1 + errorData + html2;
     }
 }

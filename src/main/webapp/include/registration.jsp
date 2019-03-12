@@ -6,6 +6,7 @@
 
 
     ${error}
+    ${tooYoungError}
     <form class="needs-validation" action="RegistrationServlet" method="post">
 
         <div class="form-group">

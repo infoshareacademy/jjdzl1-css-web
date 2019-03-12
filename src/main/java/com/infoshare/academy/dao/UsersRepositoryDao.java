@@ -30,5 +30,7 @@ public interface UsersRepositoryDao {
 
     public Boolean isPasswordCorrect(String password);
 
+    public Boolean isAdult(String dateOfBirth);
+
 
 }

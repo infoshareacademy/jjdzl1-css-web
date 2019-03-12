@@ -6,8 +6,14 @@ import org.hibernate.Session;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -127,6 +133,17 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         $                 # end-of-string
         */
     }
+    public Boolean isAdult(String dateOfBirth){
+        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateOfBirthLocalDate = LocalDate.parse(dateOfBirth,FORMATTER);
+        Integer year = dateOfBirthLocalDate.getYear();
+        Month month = dateOfBirthLocalDate.getMonth();
+        Integer day = dateOfBirthLocalDate.getDayOfMonth();
+        LocalDate date = LocalDate.of(year,month,day);
+        LocalDate date1 = date.plusYears(18);
+        return date1.isAfter(LocalDate.now());
+    }
+
 
     private Session getSession() {
         Session session = getSessionFactory().openSession();
