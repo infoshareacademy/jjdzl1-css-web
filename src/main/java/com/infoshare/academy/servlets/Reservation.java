@@ -55,9 +55,7 @@ public class Reservation extends HttpServlet {
 
         req.getRequestDispatcher("/reservation.jsp").forward(req, resp);
     }
-    public User getUser(String username) {
-        return daoUser.getUserByLogin(username);
-    }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -78,6 +76,10 @@ public class Reservation extends HttpServlet {
 
         daoReservation.addReservation(reservation);
         req.getRequestDispatcher("/reservation.jsp").forward(req, resp);
+    }
+
+    public User getUser(String username) {
+        return daoUser.getUserByLogin(username);
     }
 
 }
