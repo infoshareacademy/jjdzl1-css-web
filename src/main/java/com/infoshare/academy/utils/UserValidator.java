@@ -1,10 +1,20 @@
 package com.infoshare.academy.utils;
 
+import com.infoshare.academy.dao.UsersRepositoryDao;
+import com.infoshare.academy.dao.UsersRepositoryDaoBean;
+import com.infoshare.academy.domain.User;
+
+import javax.ejb.EJB;
+import javax.validation.constraints.Null;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 
+
 public class UserValidator {
+
+    @EJB
+    private UsersRepositoryDao usersRepositoryDao;
 
     public Boolean isPasswordCorrect(String password) {
         String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
@@ -30,5 +40,16 @@ public class UserValidator {
         LocalDate date = LocalDate.of(year, month, day);
         LocalDate date1 = date.plusYears(18);
         return date1.isAfter(LocalDate.now());
+    }
+
+    public Boolean doesExist(String login) {
+        User user;
+        try {
+            user = usersRepositoryDao.getUserByLogin(login);
+        }catch (NullPointerException e){
+            System.out.println(e);
+            return true;
+        }
+        return user == null;
     }
 }

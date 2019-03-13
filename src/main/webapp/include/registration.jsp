@@ -4,8 +4,8 @@
 <div class="col-md-8 order-md-1">
     <h4 class="mb-3">Register new account</h4>
 
-
     ${error}
+    ${passwordError}
     ${tooYoungError}
     <form class="needs-validation" action="register" method="post">
 
@@ -51,7 +51,7 @@
 
         <div class="mb-3">
             <label for="birthOfDate">Birth date <span class="text-muted">(Optional)</span></label>
-            <input type="date" name="birthOfDate" class="form-control" id="birthOfDate">
+            <input type="date" name="birthOfDate" class="form-control" id="birthOfDate" required>
         </div>
 
         <div class="row">

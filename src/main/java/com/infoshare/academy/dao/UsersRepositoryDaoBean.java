@@ -46,7 +46,7 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
 
     @Override
     public User getUserByLogin(String login) {
-        User user = null;
+        User user;
         try {
             Session session = getSession();
             String select = "SELECT u from User u WHERE login=:login";

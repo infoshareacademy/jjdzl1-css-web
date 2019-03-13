@@ -20,6 +20,7 @@ public class RegistrationServlet extends HttpServlet {
     @EJB
     UsersRepositoryDao usersRepositoryDao;
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("registration.jsp").forward(req, resp);
@@ -44,39 +45,58 @@ public class RegistrationServlet extends HttpServlet {
 
         Boolean isPasswordCorrect = new UserValidator().isPasswordCorrect(password);
         Boolean isAdult = new UserValidator().isAdult(birthOfDate);
+        UserValidator userValidator = new UserValidator();
 
-        if (!isPasswordCorrect) {
-            request.setAttribute("error", passwordIncorrectMessage());
+        if(!isPasswordCorrect && isAdult) {
+            request.setAttribute("error", passwordIncorrectAndTooYoungMessage());
             RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
             req.forward(request, response);
         }
-        if (isAdult) {
+        else if (!isPasswordCorrect) {
+            request.setAttribute("passwordError", passwordIncorrectMessage());
+            RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
+            req.forward(request, response);
+        }
+        else if (isAdult) {
             request.setAttribute("tooYoungError", tooYoungMessage());
             RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
             req.forward(request, response);
         } else {
-
             User user = new User(0, login, password, email, Long.parseLong(phoneNumber), firstName,
                     lastName, LocalDate.parse(birthOfDate),
                     streetAddress, postalCode, city);
+            System.out.println(user);
 
-            usersRepositoryDao.addUser(user);
+            if(userValidator.doesExist(login)){
+                System.out.println("Error");
+            }
 
+            //usersRepositoryDao.addUser(user);
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
-    public static String passwordIncorrectMessage() {
+    private static String passwordIncorrectMessage() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
         String errorData = "Password too weak! Use at least 8 characters (one digit, letter and special character)";
         return html1 + errorData + html2;
     }
 
-    public static String tooYoungMessage() {
+    private static String tooYoungMessage() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
         String errorData = "You are too young to register account!";
         return html1 + errorData + html2;
+    }
+
+    private static String passwordIncorrectAndTooYoungMessage() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorDataTooYoung = "You are too young to register account!";
+        String html3 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html4 = "</div>";
+        String errorDataIncorrectPassword = "Password too weak! Use at least 8 characters (one digit, letter and special character)";
+        return html1 + errorDataTooYoung + html2 + html3 + errorDataIncorrectPassword + html4;
     }
 }
