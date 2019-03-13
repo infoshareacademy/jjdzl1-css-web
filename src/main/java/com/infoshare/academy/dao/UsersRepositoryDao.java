@@ -14,6 +14,8 @@ public interface UsersRepositoryDao {
 
     User getUserByLogin(String login);
 
+    User getUserByEmail(String email);
+
     List getUsersList();
 
     void updateUser();

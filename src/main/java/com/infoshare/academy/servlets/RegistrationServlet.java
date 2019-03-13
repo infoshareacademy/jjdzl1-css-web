@@ -45,34 +45,44 @@ public class RegistrationServlet extends HttpServlet {
 
         Boolean isPasswordCorrect = new UserValidator().isPasswordCorrect(password);
         Boolean isAdult = new UserValidator().isAdult(birthOfDate);
-        UserValidator userValidator = new UserValidator();
 
-        if(!isPasswordCorrect && isAdult) {
+        if (!isPasswordCorrect && isAdult) {
             request.setAttribute("error", passwordIncorrectAndTooYoungMessage());
             RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
             req.forward(request, response);
-        }
-        else if (!isPasswordCorrect) {
+        } else if (!isPasswordCorrect) {
             request.setAttribute("passwordError", passwordIncorrectMessage());
             RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
             req.forward(request, response);
-        }
-        else if (isAdult) {
+        } else if (isAdult) {
             request.setAttribute("tooYoungError", tooYoungMessage());
             RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
             req.forward(request, response);
         } else {
+
             User user = new User(0, login, password, email, Long.parseLong(phoneNumber), firstName,
                     lastName, LocalDate.parse(birthOfDate),
                     streetAddress, postalCode, city);
-            System.out.println(user);
 
-            if(userValidator.doesExist(login)){
-                System.out.println("Error");
+            User tempUserByLogin = usersRepositoryDao.getUserByLogin(login);
+            User tempUserByEmail = usersRepositoryDao.getUserByEmail(email);
+
+            if (tempUserByEmail != null && tempUserByLogin != null) {
+                request.setAttribute("loginAndEmailIsUnavailableError", loginAndEmailIsUnavailable());
+                RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
+                req.forward(request, response);
+            } else if (tempUserByEmail != null) {
+                request.setAttribute("unavailableEmailError", unavailableEmail());
+                RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
+                req.forward(request, response);
+            } else if (tempUserByLogin != null) {
+                request.setAttribute("unavailableLoginError", unavailableLogin());
+                RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
+                req.forward(request, response);
+            } else {
+                usersRepositoryDao.addUser(user);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
-
-            //usersRepositoryDao.addUser(user);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
@@ -97,6 +107,30 @@ public class RegistrationServlet extends HttpServlet {
         String html3 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html4 = "</div>";
         String errorDataIncorrectPassword = "Password too weak! Use at least 8 characters (one digit, letter and special character)";
+        return html1 + errorDataTooYoung + html2 + html3 + errorDataIncorrectPassword + html4;
+    }
+
+    private static String unavailableLogin() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "This login is unavailable! Please, try another one.";
+        return html1 + errorData + html2;
+    }
+
+    private static String unavailableEmail() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "This email is unavailable! Please, try another one.";
+        return html1 + errorData + html2;
+    }
+
+    private static String loginAndEmailIsUnavailable() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorDataTooYoung = "This login is unavailable! Please, try another one.";
+        String html3 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html4 = "</div>";
+        String errorDataIncorrectPassword = "This email is unavailable! Please, try another one.";
         return html1 + errorDataTooYoung + html2 + html3 + errorDataIncorrectPassword + html4;
     }
 }

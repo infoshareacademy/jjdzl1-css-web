@@ -59,6 +59,21 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         }
         return null;
     }
+    @Override
+    public User getUserByEmail(String email) {
+        User user;
+        try {
+            Session session = getSession();
+            String select = "SELECT u from User u WHERE email=:email";
+            Query query = session.createQuery(select);
+            query.setParameter("email", email);
+            user = (User) query.getSingleResult();
+            commitTransaction(session);
+            return user;
+        } catch (NoResultException e) {
+        }
+        return null;
+    }
 
     @Override
     public List<User> getUsersList() {

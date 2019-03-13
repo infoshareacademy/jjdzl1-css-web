@@ -7,6 +7,9 @@
     ${error}
     ${passwordError}
     ${tooYoungError}
+    ${unavailableLoginError}
+    ${unavailableEmailError}
+    ${loginAndEmailIsUnavailableError}
     <form class="needs-validation" action="register" method="post">
 
         <div class="form-group">
