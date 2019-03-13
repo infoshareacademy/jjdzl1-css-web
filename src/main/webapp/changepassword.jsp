@@ -5,7 +5,7 @@
 
     <!-- Head -->
     <jsp:include page="include/head.jsp">
-        <jsp:param name="title" value="Start"></jsp:param>
+        <jsp:param name="title" value="Change password"></jsp:param>
     </jsp:include>
 
   <body>

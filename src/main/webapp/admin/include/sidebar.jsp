@@ -15,7 +15,7 @@
         </h6>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="#"><span data-feather="users"></span>Users list</a>
+                <a class="nav-link" href="userslist"><span data-feather="users"></span>Users list</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"><span data-feather="user-x"></span>Delete user</a>
