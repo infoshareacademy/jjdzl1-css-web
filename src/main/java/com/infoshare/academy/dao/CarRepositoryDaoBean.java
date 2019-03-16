@@ -5,7 +5,6 @@ import org.hibernate.Filter;
 import org.hibernate.Session;
 
 import javax.ejb.Stateless;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -24,8 +23,7 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     public Car addCar(Car car) {
         Session session = getSession();
         session.save(car);
-        session.getTransaction().commit();
-        session.close();
+        commitTransaction(session);
         return car;
     }
 
@@ -34,8 +32,7 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
         Session session = getSession();
         List<Car> carList = session.createQuery("Select c FROM Car c")
                 .getResultList();
-        session.getTransaction().commit();
-        session.close();
+        commitTransaction(session);
         return carList;
     }
 
@@ -43,8 +40,7 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     public Car getCar(Integer id) {
         Session session = getSession();
         Car getCarById = session.get(Car.class, id);
-        session.getTransaction().commit();
-        session.close();
+        commitTransaction(session);
         return getCarById;
     }
 
@@ -53,23 +49,25 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
         Session session = getSession();
         Car updateCar = session.get(Car.class, id);
         updateCar.setMileage(mileage);
-        session.getTransaction().commit();
-        session.close();
+        commitTransaction(session);
         return updateCar;
     }
-
 
     @Override
     public void deleteCar(Integer id) {
         Session session = getSession();
         Car carToDelete = session.get(Car.class, id);
         session.delete(carToDelete);
-        session.getTransaction().commit();
-        session.close();
+        commitTransaction(session);
     }
 
     @Override
     public Stream<Car> searchCar(Filter filter) {
         return null;
+    }
+
+    private void commitTransaction(Session session) {
+        session.getTransaction().commit();
+        session.close();
     }
 }

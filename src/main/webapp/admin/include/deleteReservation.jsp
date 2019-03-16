@@ -4,13 +4,13 @@
 
     <form method="get" action="deleteReservation">
         <h2>Reservations list for User</h2>
-        Choose user id:<input type="number" name="id" min="0" required>
+        Choose user id: <input type="number" name="id" min="1" required>
         <button class="btn btn-primary" type="submit">Load list</button>
         <br/><br/>
 ${error}
         <table class="table table-striped">
             <tr>
-                <th>Id reservation</th>
+                <th>Reservation id</th>
                 <th>User id</th>
                 <th>User login</th>
                 <th>Car id</th>
@@ -18,7 +18,6 @@ ${error}
                 <th>Car model</th>
                 <th>Start date</th>
                 <th>End date</th>
-
             </tr>
 
             <c:forEach var="reservation" items="${reservationByUserId}">
@@ -31,13 +30,13 @@ ${error}
                     <td>${reservation.car.model}</td>
                     <td>${reservation.startDate}</td>
                     <td>${reservation.endDate}</td>
-
                 </tr>
             </c:forEach>
         </table>
     </form>
+
     <form method="post" action="deleteReservation">
-        Choose reservation id:<input type="number" name="id" min="0" required>
+        Choose reservation id: <input type="number" name="id" min="1" required>
         <button class="btn btn-primary" type="submit">Delete</button>
     </form>
 </div>

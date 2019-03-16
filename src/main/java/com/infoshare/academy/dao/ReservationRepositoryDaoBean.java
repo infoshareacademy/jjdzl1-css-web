@@ -6,8 +6,6 @@ import org.hibernate.Session;
 
 import javax.ejb.Stateless;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Filter;
 import java.util.stream.Stream;
@@ -17,19 +15,11 @@ import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 @Stateless
 public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
 
-
-    private Session getSession() {
-        Session session = getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        return session;
-    }
-
     @Override
     public Reservation addReservation(Reservation reservation) {
         Session session = getSession();
         session.save(reservation);
-        session.getTransaction().commit();
-        session.close();
+        commitTransaction(session);
         return reservation;
     }
 
@@ -39,8 +29,7 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
         List<Reservation> reservationList = session.createQuery
                 ("select r from Reservation r")
                 .getResultList();
-        session.getTransaction().commit();
-        session.close();
+        commitTransaction(session);
         return reservationList;
     }
 
@@ -49,11 +38,9 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
         List<Reservation> reservationListByUserId = session.createQuery
                 ("select r from Reservation r where user='" + id + "'")
                 .getResultList();
-        session.getTransaction().commit();
-        session.close();
+        commitTransaction(session);
         return reservationListByUserId;
     }
-
 
     @Override
     public Reservation updateReservation(Integer id, Car car, LocalDate startDate, LocalDate endDate) {
@@ -71,29 +58,34 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
         Session session = getSession();
         Reservation reservationToDelete = session.get(Reservation.class, id);
         session.delete(reservationToDelete);
-        session.getTransaction().commit();
-        session.close();
-
+        commitTransaction(session);
     }
 
     @Override
     public List<Reservation> getReservationListAvailableCar(LocalDate startDate, LocalDate endDate) {
-        Session session =getSession();
+        Session session = getSession();
         List<Reservation> reservationListAvailableCar = session.createQuery("select r from Reservation r " +
                 "where" +
-                " (startDate>'"+startDate+"' and startDate>'"+endDate+"')" +
-                " or (endDate<'"+startDate+"' and startDate>'"+endDate+"' ) " +
-                "or (endDate<'"+startDate+"')" ).getResultList();
-        session.getTransaction().commit();
-        session.close();
+                " (startDate>'" + startDate + "' and startDate>'" + endDate + "')" +
+                " or (endDate<'" + startDate + "' and startDate>'" + endDate + "' ) " +
+                "or (endDate<'" + startDate + "')").getResultList();
+        commitTransaction(session);
         return reservationListAvailableCar;
-
     }
 
     @Override
     public Stream<Reservation> searchReservation(Filter filter) {
         return null;
     }
+
+    private Session getSession() {
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        return session;
+    }
+
+    private void commitTransaction(Session session) {
+        session.getTransaction().commit();
+        session.close();
+    }
 }
-
-

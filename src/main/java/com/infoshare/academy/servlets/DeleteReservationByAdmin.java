@@ -4,7 +4,6 @@ import com.infoshare.academy.dao.ReservationRepositoryDao;
 import com.infoshare.academy.domain.Reservation;
 
 import javax.ejb.EJB;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,19 +22,19 @@ public class DeleteReservationByAdmin extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String id = req.getParameter("id");
-        if (id.isEmpty()) {
-            req.setAttribute("error", errorMessage());
-        }
 
-        List<Reservation> reservationByUserId = dao.getReservationListByUserId(Integer.parseInt(id));
-
-        if (reservationByUserId == null) {
+        if (id == null) {
+            req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
+        } else if (id.isEmpty()) {
             req.setAttribute("error", errorMessage());
+            req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
         } else {
-            req.setAttribute("reservationByUserId", reservationByUserId);
+            List<Reservation> reservationByUserId = dao.getReservationListByUserId(Integer.valueOf(id));
+            if (reservationByUserId != null) {
+                req.setAttribute("reservationByUserId", reservationByUserId);
+            }
+            req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
         }
-
-        req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
     }
 
     @Override
@@ -43,17 +42,18 @@ public class DeleteReservationByAdmin extends HttpServlet {
 
         String id = req.getParameter("id");
 
-        if (id.isEmpty()) {
+        if (id == null) {
+            req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
+        } else if (id.isEmpty()) {
             req.setAttribute("error", errorMessage());
-        }
-        List<Reservation> reservation = dao.getReservationListByUserId(Integer.parseInt(id));
-        if (reservation != null) {
-            dao.deleteReservation(Integer.parseInt(id));
+            req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
         } else {
-            req.setAttribute("error", errorMessage());
+            List<Reservation> reservation = dao.getReservationListByUserId(Integer.valueOf(id));
+            if (reservation != null) {
+                dao.deleteReservation(Integer.valueOf(id));
+            }
+            req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
         }
-
-        req.getRequestDispatcher("/admin/admin.jsp").forward(req, resp);
     }
 
     public static String errorMessage() {
