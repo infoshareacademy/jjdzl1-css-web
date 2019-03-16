@@ -59,7 +59,7 @@ public class DeleteReservationByAdmin extends HttpServlet {
     public static String errorMessage() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
-        String errorData = " Id user or reservation incorrect! Please try again.";
+        String errorData = "User or reservation id is incorrect! Please try again.";
         return html1 + errorData + html2;
     }
 }

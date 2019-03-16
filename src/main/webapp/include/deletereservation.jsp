@@ -6,7 +6,7 @@
         <h2>List of reservations for the current user</h2>
         <button class="btn btn-primary" type="submit">Load list</button>
         <br/><br/>
-        ${error}
+${error}
         <table class="table table-striped">
             <tr>
                 <th>Id reservation</th>
@@ -17,7 +17,6 @@
                 <th>Car model</th>
                 <th>Start date</th>
                 <th>End date</th>
-
             </tr>
 
             <c:forEach var="reservation" items="${reservationByUserId}">
@@ -30,13 +29,13 @@
                     <td>${reservation.car.model}</td>
                     <td>${reservation.startDate}</td>
                     <td>${reservation.endDate}</td>
-
                 </tr>
             </c:forEach>
         </table>
     </form>
+
     <form method="post" action="delete">
-        Choose reservation id:<input type="number" name="id" min="0" required>
+        Choose reservation id:<input type="number" name="id" min="1" required>
         <button class="btn btn-primary" type="submit">Delete</button>
     </form>
 </div>

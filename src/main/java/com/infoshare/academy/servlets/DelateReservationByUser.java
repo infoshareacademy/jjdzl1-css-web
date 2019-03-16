@@ -32,7 +32,6 @@ public class DelateReservationByUser extends HttpServlet {
         User currentUser = getUser(getUser);
         Integer id = currentUser.getId();
 
-
         List<Reservation> reservationByUserId = dao.getReservationListByUserId(id);
 
         if (reservationByUserId == null) {
@@ -40,7 +39,6 @@ public class DelateReservationByUser extends HttpServlet {
         } else {
             req.setAttribute("reservationByUserId", reservationByUserId);
         }
-
         req.getRequestDispatcher("/deletereservation.jsp").forward(req, resp);
     }
 
@@ -49,23 +47,24 @@ public class DelateReservationByUser extends HttpServlet {
 
         String id = req.getParameter("id");
 
-        if (id.isEmpty()) {
+        if (id == null) {
+            req.getRequestDispatcher("/deletereservation.jsp").forward(req, resp);
+        } else if (id.isEmpty()) {
             req.setAttribute("error", errorMessage());
-        }
-        List<Reservation> reservation = dao.getReservationListByUserId(Integer.parseInt(id));
-        if (reservation != null) {
-            dao.deleteReservation(Integer.parseInt(id));
+            req.getRequestDispatcher("/deletereservation.jsp").forward(req, resp);
         } else {
-            req.setAttribute("error", errorMessage());
+            List<Reservation> reservation = dao.getReservationListByUserId(Integer.parseInt(id));
+            if (reservation != null) {
+                dao.deleteReservation(Integer.valueOf(id));
+            }
+            req.getRequestDispatcher("/deletereservation.jsp").forward(req, resp);
         }
-
-        req.getRequestDispatcher("/deletereservation.jsp").forward(req, resp);
     }
 
     public static String errorMessage() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
-        String errorData = " Id user or reservation incorrect! Please try again.";
+        String errorData = "User or reservation id is incorrect! Please try again.";
         return html1 + errorData + html2;
     }
 
@@ -73,6 +72,3 @@ public class DelateReservationByUser extends HttpServlet {
         return daoUser.getUserByLogin(username);
     }
 }
-
-
-
