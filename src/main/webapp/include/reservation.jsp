@@ -20,13 +20,13 @@
                 <th>Fuel source</th>
             </tr>
 
-            <c:forEach var="reservation" items="${reservationListAvailableCar}">
+            <c:forEach var="reservation" items="${carLIstAvailableCar}">
                 <tr>
-                    <td>${reservation.car.id}</td>
-                    <td>${reservation.car.make}</td>
-                    <td>${reservation.car.model}</td>
-                    <td>${reservation.car.year}</td>
-                    <td>${reservation.car.fuelSource}</td>
+                    <td>${car.id}</td>
+                    <td>${car.make}</td>
+                    <td>${car.model}</td>
+                    <td>${car.year}</td>
+                    <td>${car.fuelSource}</td>
                 </tr>
             </c:forEach>
         </table>
