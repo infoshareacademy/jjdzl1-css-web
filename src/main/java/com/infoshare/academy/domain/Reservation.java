@@ -79,7 +79,7 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "ReservationServlet{" +
+        return "Reservation{" +
                 "id=" + reservation_id +
                 ", user=" + user +
                 ", car=" + car +

@@ -3,7 +3,6 @@
 <div align="center">
             <form method="get" action="listCar">
                 <h2>Car list</h2>
-                <button class="btn btn-primary" type="submit">Load list</button><br/><br/>
 
                 <table class="table table-striped">
                             <tr>
@@ -24,7 +23,17 @@
                             <c:forEach var="car" items="${carList}">
                                 <tr>
                                     <td>${car.id}</td>
-                                    <td>${car.carType}</td>
+                                    <td><c:choose>
+                                        <c:when test="${car.carType == 1}">
+                                            Passenger
+                                        </c:when>
+                                        <c:when test="${car.carType == 2}">
+                                            Truck
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${car.carType}
+                                        </c:otherwise>
+                                    </c:choose></td>
                                     <td>${car.make}</td>
                                     <td>${car.model}</td>
                                     <td>${car.year}</td>

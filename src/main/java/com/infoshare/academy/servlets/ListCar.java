@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/admin/listCar")
+@WebServlet("/admin/carlist")
 public class ListCar extends HttpServlet {
 
     @EJB
@@ -27,7 +27,6 @@ public class ListCar extends HttpServlet {
         List<Car> carList = dao.list();
 
         req.setAttribute("carList", carList);
-        req.getRequestDispatcher("/admin/listCar.jsp").forward(req, resp);
-
+        req.getRequestDispatcher("/admin/carlist.jsp").forward(req, resp);
     }
 }

@@ -19,10 +19,7 @@
                         <a class="nav-link" href="login.jsp">Log in</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Reservations</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Charges</a>
+                        <a class="nav-link" href="#">Pricing</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="contact.jsp">Contact</a>
