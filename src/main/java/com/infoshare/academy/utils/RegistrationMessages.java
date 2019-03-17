@@ -48,4 +48,11 @@ public class RegistrationMessages {
         String errorDataIncorrectPassword = "This email is unavailable! Please, try another one.";
         return html1 + errorDataTooYoung + html2 + html3 + errorDataIncorrectPassword + html4;
     }
+
+    public static String incorrectDateOfBirth() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Incorrect Date Of Birth! Please, choose it again!";
+        return html1 + errorData + html2;
+    }
 }
