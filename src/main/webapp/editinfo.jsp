@@ -5,7 +5,7 @@
 
     <!-- Head -->
     <jsp:include page="include/head.jsp">
-        <jsp:param name="title" value="Change password"></jsp:param>
+        <jsp:param name="title" value="Edit personal information"></jsp:param>
     </jsp:include>
 
   <body>
@@ -38,7 +38,7 @@
               <c:when test="${sessionScope.username != null}">
                     <main class="flex-fill col-md-10 ml-sm-auto py-3">
                         <div class="container">
-                        <jsp:include page="include/changepassword.jsp"></jsp:include>
+                        <jsp:include page="include/editinfo.jsp"></jsp:include>
                         </div>
                     <!-- /.container -->
                     </main>

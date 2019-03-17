@@ -1,7 +1,7 @@
 package com.infoshare.academy.servlets;
 
-import com.infoshare.academy.dao.CarsRepositoryDao;
-import com.infoshare.academy.domain.Car;
+import com.infoshare.academy.dao.UsersRepositoryDao;
+import com.infoshare.academy.domain.User;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/admin/deleteCar")
-public class DeleteCar extends HttpServlet {
+@WebServlet("/admin/deleteuser")
+public class DeleteUserServlet extends HttpServlet {
 
     @EJB
-    CarsRepositoryDao dao;
+    UsersRepositoryDao usersDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,16 +23,16 @@ public class DeleteCar extends HttpServlet {
         String id = req.getParameter("id");
 
         if (id == null) {
-            req.getRequestDispatcher("/admin/deleteCar.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/deleteuser.jsp").forward(req, resp);
         } else if (id.isEmpty()) {
             req.setAttribute("error", errorMessage());
-            req.getRequestDispatcher("/admin/deleteCar.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/deleteuser.jsp").forward(req, resp);
         } else {
-            Car car = dao.getCar(Integer.valueOf(id));
-            if (car != null) {
-                req.setAttribute("car", car);
+            User userById = usersDao.getUserById(Integer.valueOf(id));
+            if (userById != null) {
+                req.setAttribute("user", userById);
             }
-            req.getRequestDispatcher("/admin/deleteCar.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/deleteuser.jsp").forward(req, resp);
         }
     }
 
@@ -40,27 +40,25 @@ public class DeleteCar extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String id = req.getParameter("id");
+
         if (id == null) {
-            req.getRequestDispatcher("/admin/deleteCar.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/deleteuser.jsp").forward(req, resp);
         } else if (id.isEmpty()) {
             req.setAttribute("error", errorMessage());
-            req.getRequestDispatcher("/admin/deleteCar.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/deleteuser.jsp").forward(req, resp);
         } else {
-            Car car = dao.getCar(Integer.valueOf(id));
-            if (car != null) {
-                dao.deleteCar(Integer.valueOf(id));
-            } else {
-                req.setAttribute("error", errorMessage());
+            User userById = usersDao.getUserById(Integer.valueOf(id));
+            if (userById != null) {
+                usersDao.deleteUserById(Integer.valueOf(id));
             }
-            req.getRequestDispatcher("/admin/deleteCar.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/deleteuser.jsp").forward(req, resp);
         }
     }
 
     public static String errorMessage() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
-        String errorData = "Car id is incorrect! Please try again.";
+        String errorData = "User id incorrect! Please try again.";
         return html1 + errorData + html2;
     }
 }
-

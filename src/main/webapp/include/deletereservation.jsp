@@ -2,15 +2,14 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div align="center">
 
-    <form method="get" action="deleteReservation">
-        <h2>Reservations list</h2>
-        Choose user id: <input type="number" name="id" min="1" required>
+    <form method="get" action="delete">
+        <h2>List of reservations for the current user</h2>
         <button class="btn btn-primary" type="submit">Load list</button>
         <br/><br/>
 ${error}
         <table class="table table-striped">
             <tr>
-                <th>Reservation id</th>
+                <th>Id reservation</th>
                 <th>User id</th>
                 <th>User login</th>
                 <th>Car id</th>
@@ -35,8 +34,8 @@ ${error}
         </table>
     </form>
 
-    <form method="post" action="deleteReservation">
-        Choose reservation id: <input type="number" name="id" min="1" required>
+    <form method="post" action="delete">
+        Choose reservation id:<input type="number" name="id" min="1" required>
         <button class="btn btn-primary" type="submit">Delete</button>
     </form>
 </div>

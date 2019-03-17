@@ -3,7 +3,6 @@ package com.infoshare.academy.dao;
 import com.infoshare.academy.domain.User;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public interface UsersRepositoryDao {
@@ -18,8 +17,6 @@ public interface UsersRepositoryDao {
 
     List getUsersList();
 
-    void updateUser();
-
     void deleteUserById(int id);
 
     void deleteUserByLogin(String login);
@@ -28,4 +25,5 @@ public interface UsersRepositoryDao {
 
     void updateUserPassword(Integer id, String password);
 
+    void updateUserInfo(Integer id, String firstName, String lastName, Long phoneNumber, LocalDate birthDate);
 }

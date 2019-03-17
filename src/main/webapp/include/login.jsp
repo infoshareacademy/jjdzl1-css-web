@@ -5,7 +5,7 @@
 
       ${error}
       ${emptyData}
-      <form class="form-signin" action="LoginServlet" method="post">
+      <form class="form-signin" action="login" method="post">
           <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
           <label for="inputLogin" class="sr-only">Login</label>
           <input type="text" name="username" id="inputLogin" class="form-control" placeholder="Login" required autofocus>

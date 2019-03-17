@@ -5,18 +5,18 @@
 
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="profile"><span data-feather="user"></span>Your profile<span class="sr-only">(current)</span></a>
+                <a class="nav-link active" href="listAvailableCar.jsp"><span data-feather="list"></span>Reservations <span class="sr-only">(current)</span></a>
             </li>
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>User panel</span>
+            <span>Reservations panel</span>
         </h6>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="editinfo"><span data-feather="edit"></span>Edit personal info</a>
-                <a class="nav-link" href="editaddress"><span data-feather="map"></span>Edit address</a>
-                <a class="nav-link" href="changepassword"><span data-feather="lock"></span>Change password</a>
+                <a class="nav-link" href="listAvailableCar.jsp"><span data-feather="calendar"></span>Check availability</a>
+                <a class="nav-link" href="reservation.jsp"><span data-feather="plus-square"></span>Add reservation</a>
+                <a class="nav-link" href="deletereservation.jsp"><span data-feather="trash-2"></span>Delete reservation</a>
             </li>
         </ul>
 

@@ -19,16 +19,16 @@
                         <a class="nav-link" href="profile">Profile</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Reservations</a>
+                        <a class="nav-link" href="listAvailableCar.jsp">Reservations</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Charges</a>
+                        <a class="nav-link" href="#">Pricing</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="contact.jsp">Contact</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-warning" href="LogoutServlet">Sign out</a>
+                        <a class="nav-link text-warning" href="logout">Sign out</a>
                       </li>
                     </ul>
                   </div>

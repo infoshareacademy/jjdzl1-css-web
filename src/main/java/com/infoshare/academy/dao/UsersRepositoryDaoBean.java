@@ -6,17 +6,8 @@ import org.hibernate.Session;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.chrono.ChronoLocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
-import java.util.Date;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 
@@ -27,8 +18,7 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     public User addUser(User user) {
         Session session = getSession();
         session.save(user);
-        session.getTransaction().commit();
-        session.close();
+        commitTransaction(session);
         return user;
     }
 
@@ -59,6 +49,7 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         }
         return null;
     }
+
     @Override
     public User getUserByEmail(String email) {
         User user;
@@ -81,11 +72,6 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         List<User> usersList = session.createQuery("Select u FROM User u ").getResultList();
         commitTransaction(session);
         return usersList;
-    }
-
-    @Override
-    public void updateUser() {
-        // TODO: 2019-02-24 todo here
     }
 
     @Override
@@ -128,6 +114,20 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         commitTransaction(session);
     }
 
+    @Override
+    public void updateUserInfo(Integer id, String firstName, String lastName, Long phoneNumber, LocalDate birthDate) {
+        Session session = getSession();
+        String update = "UPDATE User u SET u.firstName=:firstName, u.lastName=:lastName, u.phoneNumber=:phoneNumber, u.birthDate=:birthDate WHERE u.id=:id";
+        Query query = session.createQuery(update);
+        query.setParameter("id", id);
+        query.setParameter("firstName", firstName);
+        query.setParameter("lastName", lastName);
+        query.setParameter("phoneNumber", phoneNumber);
+        query.setParameter("birthDate", birthDate);
+        query.executeUpdate();
+        commitTransaction(session);
+    }
+
     private Session getSession() {
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
@@ -138,5 +138,4 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         session.getTransaction().commit();
         session.close();
     }
-
 }

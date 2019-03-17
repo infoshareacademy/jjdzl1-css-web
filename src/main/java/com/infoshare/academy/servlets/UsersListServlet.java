@@ -1,8 +1,8 @@
 package com.infoshare.academy.servlets;
 
 
-import com.infoshare.academy.dao.CarsRepositoryDao;
-import com.infoshare.academy.domain.Car;
+import com.infoshare.academy.dao.UsersRepositoryDao;
+import com.infoshare.academy.domain.User;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -13,20 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/admin/carlist")
-public class ListCar extends HttpServlet {
+@WebServlet("/admin/userslist")
+public class UsersListServlet extends HttpServlet {
 
     @EJB
-    CarsRepositoryDao dao;
+    UsersRepositoryDao usersDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html;charset=UTF-8");
 
-        List<Car> carList = dao.list();
+        List<User> usersList = usersDao.getUsersList();
 
-        req.setAttribute("carList", carList);
-        req.getRequestDispatcher("/admin/carlist.jsp").forward(req, resp);
+        req.setAttribute("usersList", usersList);
+        req.getRequestDispatcher("/admin/userslist.jsp").forward(req, resp);
+
     }
 }
