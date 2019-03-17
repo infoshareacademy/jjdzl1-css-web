@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/LogoutServlet")
+@WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 
     @Override
@@ -22,7 +22,7 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.invalidate();
 
-        response.setHeader("Refresh", "3;url=index.jsp");
+        response.setHeader("Refresh", "2;url=index.jsp");
         req.forward(request, response);
     }
 }

@@ -16,7 +16,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="login.jsp">Log in</a>
+                        <a class="nav-link" href="login">Log in</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="#">Reservations</a>

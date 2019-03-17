@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @WebServlet("/editaddress")
 public class ProfileAddressUpdateServlet extends HttpServlet {
@@ -25,9 +26,9 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
         response.setContentType("text/html");
 
         HttpSession session = request.getSession(false);
+        String getUser = (String) session.getAttribute("username");
 
-        if (session != null) {
-            String getUser = (String) session.getAttribute("username");
+        if (getUser != null) {
             User currentUser = getUser(getUser);
             request.setAttribute("currentUser", currentUser);
             request.getRequestDispatcher("editaddress.jsp").forward(request, response);
@@ -40,9 +41,7 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-        req.setCharacterEncoding("UTF-8");
+        setEncoding(req, resp);
         HttpSession session = req.getSession(false);
         String getUser = (String) session.getAttribute("username");
         User currentUser = getUser(getUser);
@@ -56,6 +55,12 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
 
         resp.setHeader("Refresh", "1");
         req.getRequestDispatcher("editaddress.jsp").forward(req, resp);
+    }
+
+    private void setEncoding(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
+        resp.setContentType("text/html; charset=UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
     }
 
     public User getUser(String username) {

@@ -2,6 +2,7 @@ package com.infoshare.academy.dao;
 
 import com.infoshare.academy.domain.User;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface UsersRepositoryDao {
@@ -23,4 +24,6 @@ public interface UsersRepositoryDao {
     void updateUserAddress(Integer id, String postalCode, String city, String streetAddress);
 
     void updateUserPassword(Integer id, String password);
+
+    void updateUserInfo(Integer id, String firstName, String lastName, Long phoneNumber, LocalDate birthDate);
 }

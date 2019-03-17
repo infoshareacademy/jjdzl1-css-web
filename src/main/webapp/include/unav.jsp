@@ -28,7 +28,7 @@
                         <a class="nav-link" href="contact.jsp">Contact</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-warning" href="LogoutServlet">Sign out</a>
+                        <a class="nav-link text-warning" href="logout">Sign out</a>
                       </li>
                     </ul>
                   </div>
