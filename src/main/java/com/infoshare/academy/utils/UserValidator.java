@@ -34,8 +34,9 @@ public class UserValidator {
         Integer year = dateOfBirthLocalDate.getYear();
         Month month = dateOfBirthLocalDate.getMonth();
         Integer day = dateOfBirthLocalDate.getDayOfMonth();
-        LocalDate date = LocalDate.of(year, month, day);
-        LocalDate date1 = date.plusYears(18);
-        return date1.isAfter(LocalDate.now());
+        LocalDate tempDateOfBirth = LocalDate.of(year, month, day);
+        LocalDate tempDateOfBirthPlus18 = tempDateOfBirth.plusYears(18);
+        return tempDateOfBirthPlus18.isAfter(LocalDate.now());
     }
+
 }
