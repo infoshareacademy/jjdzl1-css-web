@@ -29,13 +29,25 @@ public class UserValidator {
     }
 
     public Boolean isAdult(String dateOfBirth) {
+        LocalDate dateOfBirthLocalDate = formatLocalDate(dateOfBirth);
+        LocalDate tempDateOfBirth = transferLocalDateToLocalDateOF(dateOfBirthLocalDate);
+        LocalDate tempDateOfBirthPlus18 = tempDateOfBirth.plusYears(18);
+        return tempDateOfBirthPlus18.isAfter(LocalDate.now());
+    }
+    public Boolean isBeforePresentDate(String dateOfBirth){
+        LocalDate dateOfBirthLocalDate = formatLocalDate(dateOfBirth);
+        return dateOfBirthLocalDate.isBefore(LocalDate.now());
+    }
+
+
+    private LocalDate formatLocalDate(String date){
         DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dateOfBirthLocalDate = LocalDate.parse(dateOfBirth, FORMATTER);
-        Integer year = dateOfBirthLocalDate.getYear();
-        Month month = dateOfBirthLocalDate.getMonth();
-        Integer day = dateOfBirthLocalDate.getDayOfMonth();
-        LocalDate date = LocalDate.of(year, month, day);
-        LocalDate date1 = date.plusYears(18);
-        return date1.isAfter(LocalDate.now());
+        return LocalDate.parse(date, FORMATTER);
+    }
+    private LocalDate transferLocalDateToLocalDateOF(LocalDate localDate){
+        int year = localDate.getYear();
+        Month month = localDate.getMonth();
+        int day = localDate.getDayOfMonth();
+        return LocalDate.of(year, month, day);
     }
 }

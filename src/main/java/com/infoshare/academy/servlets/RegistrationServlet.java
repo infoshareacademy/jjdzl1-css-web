@@ -47,8 +47,13 @@ public class RegistrationServlet extends HttpServlet {
 
         Boolean isPasswordCorrect = new UserValidator().isPasswordCorrect(password);
         Boolean isAdult = new UserValidator().isAdult(birthOfDate);
+        Boolean isBeforePresentDay = new UserValidator().isBeforePresentDate(birthOfDate);
 
-        if (!isPasswordCorrect && isAdult) {
+        if (!isBeforePresentDay) {
+            request.setAttribute("IncorrectDateOfBirth", incorrectDateOfBirth());
+            RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
+            req.forward(request, response);
+        } else if (!isPasswordCorrect && isAdult) {
             request.setAttribute("error", passwordIncorrectAndTooYoungMessage());
             RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
             req.forward(request, response);

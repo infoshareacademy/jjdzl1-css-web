@@ -10,6 +10,7 @@
     ${unavailableLoginError}
     ${unavailableEmailError}
     ${loginAndEmailIsUnavailableError}
+    ${IncorrectDateOfBirth}
     <form class="needs-validation" action="register" method="post">
 
         <div class="form-group">

@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
         Integer usertype = tempUser.getUserType();
 
         if (tempUser != null && tempUser.getPassword().equals(password)) {
-            RequestDispatcher req = request.getRequestDispatcher("welcome.jsp");
+            RequestDispatcher req = request.getRequestDispatcher("listAvailableCar.jsp");
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
             session.setAttribute("usertype", usertype);
