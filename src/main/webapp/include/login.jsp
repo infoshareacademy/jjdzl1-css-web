@@ -16,7 +16,7 @@
 
       <br>
       <div class="alert alert-primary" role="alert">
-          You don't have an account? <a href="registration.jsp" class="alert-link">Sign up here</a>
+          You don't have an account? <a href="register" class="alert-link">Sign up here</a>
       </div>
 
   </div>

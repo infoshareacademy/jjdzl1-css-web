@@ -7,15 +7,15 @@ import java.util.List;
 
 public interface UsersRepositoryDao {
 
-    void addUser(User user);
+    User addUser(User user);
 
     User getUserById(int id);
 
     User getUserByLogin(String login);
 
-    List getUsersList();
+    User getUserByEmail(String email);
 
-    void updateUser();
+    List getUsersList();
 
     void deleteUserById(int id);
 

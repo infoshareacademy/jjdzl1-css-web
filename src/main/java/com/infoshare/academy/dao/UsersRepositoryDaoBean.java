@@ -15,10 +15,11 @@ import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 public class UsersRepositoryDaoBean implements UsersRepositoryDao {
 
     @Override
-    public void addUser(User user) {
+    public User addUser(User user) {
         Session session = getSession();
         session.save(user);
         commitTransaction(session);
+        return user;
     }
 
     @Override
@@ -35,7 +36,7 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
 
     @Override
     public User getUserByLogin(String login) {
-        User user = null;
+        User user;
         try {
             Session session = getSession();
             String select = "SELECT u from User u WHERE login=:login";
@@ -50,16 +51,27 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        User user;
+        try {
+            Session session = getSession();
+            String select = "SELECT u from User u WHERE email=:email";
+            Query query = session.createQuery(select);
+            query.setParameter("email", email);
+            user = (User) query.getSingleResult();
+            commitTransaction(session);
+            return user;
+        } catch (NoResultException e) {
+        }
+        return null;
+    }
+
+    @Override
     public List<User> getUsersList() {
         Session session = getSession();
         List<User> usersList = session.createQuery("Select u FROM User u ").getResultList();
         commitTransaction(session);
         return usersList;
-    }
-
-    @Override
-    public void updateUser() {
-        // TODO: 2019-02-24 todo here
     }
 
     @Override
@@ -126,5 +138,4 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         session.getTransaction().commit();
         session.close();
     }
-
 }

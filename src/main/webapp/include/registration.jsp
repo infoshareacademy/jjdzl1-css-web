@@ -4,7 +4,13 @@
 <div class="col-md-8 order-md-1">
     <h4 class="mb-3">Register new account</h4>
 
-    <form class="needs-validation" action="RegistrationServlet" method="post" novalidate>
+    ${error}
+    ${passwordError}
+    ${tooYoungError}
+    ${unavailableLoginError}
+    ${unavailableEmailError}
+    ${loginAndEmailIsUnavailableError}
+    <form class="needs-validation" action="register" method="post">
 
         <div class="form-group">
             <label for="inputlogin">Login</label>
@@ -25,8 +31,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="inputphonenumber">Phone number</label>
-            <input type="number" name="phoneNumber" class="form-control" id="inputphonenumber" placeholder="600123999" min="0" step="1" data-bind="value:inputphonenumber" required>
+            <label for="phoneNumber">Phone number</label>
+            <input type="number" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="600123999" min="0" step="1" data-bind="value:inputphonenumber" required>
         </div>
 
         <div class="row">
@@ -47,8 +53,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="inputbirthdate">Birth date <span class="text-muted">(Optional)</span></label>
-            <input type="date" name="birthDate" class="form-control" id="inputbirthdate">
+            <label for="birthOfDate">Birth date <span class="text-muted">(Optional)</span></label>
+            <input type="date" name="birthOfDate" class="form-control" id="birthOfDate" required>
         </div>
 
         <div class="row">
@@ -65,7 +71,6 @@
                 <input type="text" name="postalCode" class="form-control" id="postalCode" placeholder="">
             </div>
         </div>
-
         <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
     </form>
 </div>
