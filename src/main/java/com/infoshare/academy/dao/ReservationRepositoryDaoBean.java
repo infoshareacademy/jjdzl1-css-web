@@ -33,6 +33,15 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
         return reservationList;
     }
 
+    @Override
+    public Reservation getReservationById(Integer id) {
+        Session session =getSession();
+        Reservation getReservation=session.get(Reservation.class,id);
+        commitTransaction(session);
+        return getReservation;
+
+    }
+
     public List<Reservation> getReservationListByUserId(Integer id) {
         Session session = getSession();
         List<Reservation> reservationListByUserId = session.createQuery

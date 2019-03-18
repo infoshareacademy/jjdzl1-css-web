@@ -15,6 +15,8 @@ public interface ReservationRepositoryDao {
 
     List<Reservation> list();
 
+    Reservation getReservationById(Integer id);
+
     List<Reservation> getReservationListByUserId(Integer id);
 
     Reservation updateReservation(Integer id, Car car, LocalDate startDate, LocalDate endDate);

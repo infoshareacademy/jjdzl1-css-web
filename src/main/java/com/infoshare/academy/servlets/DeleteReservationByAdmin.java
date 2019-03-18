@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static com.infoshare.academy.utils.ReservationMessages.noReservationToRm;
+import static com.infoshare.academy.utils.ReservationMessages.successMessageReservationRm;
+
 @WebServlet("/admin/deleteReservation")
 public class DeleteReservationByAdmin extends HttpServlet {
 
@@ -21,45 +24,41 @@ public class DeleteReservationByAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String id = req.getParameter("id");
+        String idString = req.getParameter("id");
+        Integer id = Integer.valueOf(idString);
 
-        if (id == null) {
-            req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
-        } else if (id.isEmpty()) {
-            req.setAttribute("error", errorMessage());
-            req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
+        if (idString == null || idString.isEmpty()) {
+            req.setAttribute("error", noReservationToRm());
         } else {
-            List<Reservation> reservationByUserId = dao.getReservationListByUserId(Integer.valueOf(id));
-            if (reservationByUserId != null) {
+            List<Reservation> reservationByUserId = dao.getReservationListByUserId(id);
+
+            if (reservationByUserId == null || reservationByUserId.isEmpty()) {
+                req.setAttribute("error", noReservationToRm());
+            } else {
                 req.setAttribute("reservationByUserId", reservationByUserId);
             }
-            req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
         }
+        req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String id = req.getParameter("id");
+        String idString = req.getParameter("id");
+        Integer id = Integer.valueOf(idString);
 
-        if (id == null) {
-            req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
-        } else if (id.isEmpty()) {
-            req.setAttribute("error", errorMessage());
-            req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
+        if (id == null || idString.isEmpty()) {
+            req.setAttribute("error", noReservationToRm());
         } else {
-            List<Reservation> reservation = dao.getReservationListByUserId(Integer.valueOf(id));
-            if (reservation != null) {
-                dao.deleteReservation(Integer.valueOf(id));
-            }
-            req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
-        }
-    }
+            Reservation reservation = dao.getReservationById(id);
 
-    public static String errorMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "User or reservation id is incorrect! Please try again.";
-        return html1 + errorData + html2;
+            if (reservation == null) {
+                req.setAttribute("error", noReservationToRm());
+            } else {
+                dao.deleteReservation(id);
+                req.setAttribute("success", successMessageReservationRm());
+            }
+        }
+        req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
     }
 }

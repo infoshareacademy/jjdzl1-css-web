@@ -38,5 +38,6 @@ ${error}
     <form method="post" action="deleteReservation">
         Choose reservation id: <input type="number" name="id" min="1" required>
         <button class="btn btn-primary" type="submit">Delete</button>
+        ${success}
     </form>
 </div>
