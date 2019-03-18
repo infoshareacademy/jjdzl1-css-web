@@ -4,7 +4,7 @@
             <form method="get" action="listCar">
                 <h2>List of cars</h2>
 
-                <table class="table table-striped">
+                <table class="table table-sm table-striped">
                             <tr>
                                 <th>Id</th>
                                 <th>Type</th>

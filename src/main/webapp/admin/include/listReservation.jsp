@@ -6,7 +6,7 @@
         <h2>List of reservations</h2>
         <br/><br/>
 
-        <table class="table table-striped">
+        <table class="table table-sm table-striped">
             <tr>
                 <th>Id reservation</th>
                 <th>User id</th>
