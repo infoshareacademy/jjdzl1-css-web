@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static com.infoshare.academy.utils.ReservationMessages.noReservationToRm;
-import static com.infoshare.academy.utils.ReservationMessages.successMessageReservationRm;
+import static com.infoshare.academy.utils.ReservationMessages.*;
 
 @WebServlet("/admin/deleteReservation")
 public class DeleteReservationByAdmin extends HttpServlet {
@@ -56,7 +55,7 @@ public class DeleteReservationByAdmin extends HttpServlet {
                 req.setAttribute("error", noReservationToRm());
             } else {
                 dao.deleteReservation(id);
-                req.setAttribute("success", successMessageReservationRm());
+                req.setAttribute("success", successReservationRm());
             }
         }
         req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);

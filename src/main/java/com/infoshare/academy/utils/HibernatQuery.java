@@ -27,7 +27,7 @@ public class HibernatQuery {
         session.beginTransaction();
 
         List<Car> carListAvailableCar=session.createQuery("SELECT c FROM Car c " +
-                "where id NOT IN (SELECT car FROM Reservation WHERE"  +
+                "where id IN (SELECT car FROM Reservation WHERE"  +
                 "(startDate>'"+startDate+"' and startDate>'"+endDate+"')"+
                 "or (endDate<'"+startDate+"' and startDate>'"+endDate+"')"+
                 "or (endDate<'"+startDate+"'))").getResultList();

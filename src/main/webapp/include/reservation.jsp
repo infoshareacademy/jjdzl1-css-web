@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div align="center">
@@ -20,7 +19,7 @@
                 <th>Fuel source</th>
             </tr>
 
-            <c:forEach var="reservation" items="${carLIstAvailableCar}">
+            <c:forEach var="car" items="${carListAvailableCar}">
                 <tr>
                     <td>${car.id}</td>
                     <td>${car.make}</td>
@@ -33,12 +32,17 @@
     </form>
     <div>
         <form method="post" action="reservation">
-            <h2>Add new reservation to database</h2>
-            Car id: <input class="form-control form-control-sm" type="number" name="carId" min="1"required/>
+            <h2>To add a reservation from ${startDate} to ${endDate},</h2>
+            <h2>choose the car id </h2>
+            <input class="form-control form-control-sm" type="number" name="carId" min="1" required/>
 
+            <input type="hidden" name="startDate" value="${start}"/>
+            <input type="hidden" name="endDate" value="${end}"/>
+            <br>
+            <br>
+            ${errorReservation}
+            ${success}
 
-            Start date: <input class="form-control form-control-sm" type="date" value="${startDate}" name="startDate"required/>
-            End date: <input class="form-control form-control-sm" type="date" value="${endDate}" name="endDate"  required/>
 
             <button class="btn btn-primary" type="submit">Add reservation</button>
         </form>

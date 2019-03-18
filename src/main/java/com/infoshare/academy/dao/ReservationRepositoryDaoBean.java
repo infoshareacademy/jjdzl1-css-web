@@ -74,7 +74,7 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     public List<Car> getCarListAvailableCar(LocalDate startDate, LocalDate endDate) {
         Session session=getSession();
         List<Car> carListAvailableCar=session.createQuery("SELECT c FROM Car c " +
-                "where id NOT IN (SELECT car FROM Reservation WHERE"  +
+                "where id IN (SELECT car FROM Reservation WHERE"  +
                 "(startDate>'"+startDate+"' and startDate>'"+endDate+"')"+
                 "or (endDate<'"+startDate+"' and startDate>'"+endDate+"')"+
                 "or (endDate<'"+startDate+"'))").getResultList();

@@ -9,13 +9,6 @@ public class ReservationMessages {
         return html1 + errorData + html2;
     }
 
-    public static String successMessageReservationRm() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String successDate = "Success, reservation removed from the list";
-        return html1 + successDate + html2;
-
-    }
 
     public static String errorMessage() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
@@ -38,13 +31,6 @@ public class ReservationMessages {
         return html1 + errorData + html2;
     }
 
-    public static String successReservationRm() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "Success, reservation removed from the list.";
-        return html1 + errorData + html2;
-    }
-
     public static String errorUserDoesNotHaveReser() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
@@ -64,5 +50,28 @@ public class ReservationMessages {
         String html2 = "</div>";
         String errorData = "The start date can not be passed.";
         return html1 + errorData + html2;
+    }
+
+    public static String errorIncorrectIdCar() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "You have selected an unavailable car, select an id from the list.";
+        return html1 + errorData + html2;
+    }
+
+    public static String successReservationRm() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Success, reservation removed from the list.";
+        return html1 + errorData + html2;
+    }
+
+    public static String successReservationAdd() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Success, reservation add to the list.";
+        return html1 + errorData + html2;
+
+
     }
 }
