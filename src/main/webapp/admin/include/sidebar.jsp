@@ -27,7 +27,7 @@
         </h6>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="carlist"><span data-feather="list"></span>Cars list</a>
+                <a class="nav-link" href="carlist"><span data-feather="list"></span>List of cars</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="addCar.jsp"><span data-feather="plus"></span>Add car</a>
@@ -50,7 +50,7 @@
                 </span>Reservation list for user</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="listReservation.jsp"><span data-feather="list"></span>All reservations </a>
+                <a class="nav-link" href="getListReservation"><span data-feather="list"></span>List of reservations</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="addReservation.jsp"><span data-feather="plus"></span>Add reservation</a>

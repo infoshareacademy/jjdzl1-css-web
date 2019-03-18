@@ -2,7 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div align="center">
             <form method="get" action="listCar">
-                <h2>Car list</h2>
+                <h2>List of cars</h2>
 
                 <table class="table table-sm table-striped">
                             <tr>
