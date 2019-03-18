@@ -5,7 +5,7 @@
 
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="profile"><span data-feather="user"></span>Your profile<span class="sr-only">(current)</span></a>
+                <a class="nav-link active" href="profile"><span data-feather="user"></span><c:out value="${sessionScope.username}"/><span class="sr-only">(current)</span></a>
             </li>
         </ul>
 

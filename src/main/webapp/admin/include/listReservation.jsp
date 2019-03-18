@@ -7,7 +7,7 @@
         <button class="btn btn-primary" type="submit">Load list</button>
         <br/><br/>
 
-        <table class="table table-striped">
+        <table class="table table-sm table-striped">
             <tr>
                 <th>Id reservation</th>
                 <th>User id</th>

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static com.infoshare.academy.utils.RegistrationMessages.*;
+
 @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
 
@@ -32,7 +34,7 @@ public class ProfileServlet extends HttpServlet {
             request.setAttribute("currentUser",currentUser);
             request.getRequestDispatcher("profile.jsp").forward(request, response);
         } else {
-            request.setAttribute("error", errorMessage());
+            request.setAttribute("error", anonymousUser());
             RequestDispatcher req = request.getRequestDispatcher("login.jsp");
             req.forward(request, response);
         }
@@ -40,12 +42,5 @@ public class ProfileServlet extends HttpServlet {
 
     public User getUser(String username) {
         return usersDao.getUserByLogin(username);
-    }
-
-    public static String errorMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "Anonymous users can't access profile!";
-        return html1 + errorData + html2;
     }
 }

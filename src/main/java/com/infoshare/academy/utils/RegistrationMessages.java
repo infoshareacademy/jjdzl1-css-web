@@ -1,10 +1,25 @@
 package com.infoshare.academy.utils;
 
 public class RegistrationMessages {
+
+    public static String anonymousUser() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Anonymous users can't access profile!";
+        return html1 + errorData + html2;
+    }
+
     public static String passwordIncorrectMessage() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
         String errorData = "Password too weak! Use at least 8 characters (one digit, letter and special character)";
+        return html1 + errorData + html2;
+    }
+
+    public static String passwordNotMatchMessage() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Given passwords don't match, try again!";
         return html1 + errorData + html2;
     }
 

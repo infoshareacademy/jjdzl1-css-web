@@ -12,7 +12,7 @@
         ${error}
         <br/><br/>
 
-        <table class="table table-striped">
+        <table class="table table-sm table-striped">
             <tr>
                 <th>Car id</th>
                 <th>Make</th>

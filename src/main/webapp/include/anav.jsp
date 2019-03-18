@@ -25,10 +25,10 @@
                         <a class="nav-link" href="listAvailableCar.jsp">Reservations</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Charges</a>
+                        <a class="nav-link" href="pricing.jsp">Pricing</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="contact.jsp">Pricing</a>
+                        <a class="nav-link" href="contact.jsp">Contact</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link text-warning" href="logout">Sign out</a>
