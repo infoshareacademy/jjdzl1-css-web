@@ -16,4 +16,5 @@ ${error}
 <form method="post" action="deleteCar">
     Choose id: <input type="number" name="id" min="1">
     <button class="btn btn-danger" type="submit">Delete</button>
+    ${success}
 </form>

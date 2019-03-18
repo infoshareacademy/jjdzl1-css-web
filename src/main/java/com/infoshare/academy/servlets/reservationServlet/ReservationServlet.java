@@ -1,4 +1,4 @@
-package com.infoshare.academy.servlets;
+package com.infoshare.academy.servlets.reservationServlet;
 
 import com.infoshare.academy.dao.CarsRepositoryDao;
 import com.infoshare.academy.dao.ReservationRepositoryDao;
@@ -8,6 +8,7 @@ import com.infoshare.academy.domain.Reservation;
 import com.infoshare.academy.domain.User;
 
 import javax.ejb.EJB;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +22,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+
+import static com.infoshare.academy.utils.ReservationMessages.*;
 
 @WebServlet("/reservation")
 public class ReservationServlet extends HttpServlet {
@@ -39,20 +42,31 @@ public class ReservationServlet extends HttpServlet {
 
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
-
+        LocalDate now = LocalDate.now();
         LocalDate start = LocalDate.parse(startDate);
         LocalDate end = LocalDate.parse(endDate);
+        boolean isAfter = start.isAfter(end);
+        boolean isPast = now.isAfter(start);
 
-        List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start, end);
+        if (isPast) {
+            req.setAttribute("error", errorStartGreaterNow());
+        } else if (isAfter) {
+            req.setAttribute("error", errorEndGreaterThanStart());
+        } else {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start, end);
 
-        req.setAttribute("startDate", start.format(formatter));
-        req.setAttribute("endDate", end.format(formatter));
-        req.setAttribute("carListAvailableCar", carListAvailableCar);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+            req.setAttribute("startDate", start.format(formatter));
+            req.setAttribute("start", start);
+            req.setAttribute("endDate", end.format(formatter));
+            req.setAttribute("end", end);
+            req.setAttribute("carListAvailableCar", carListAvailableCar);
+        }
         req.getRequestDispatcher("/reservation.jsp").forward(req, resp);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -63,19 +77,36 @@ public class ReservationServlet extends HttpServlet {
         Integer id = currentUser.getId();
 
         String carId = req.getParameter("carId");
+        Integer idThisCar = Integer.valueOf(carId);
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
 
-        Car car = daoCar.getCar(Integer.parseInt(carId));
+
+        Car car = daoCar.getCar(idThisCar);
         User user = daoUser.getUserById(id);
 
-        Reservation reservation = new Reservation(user, car, LocalDate.parse(startDate), LocalDate.parse(endDate));
+        List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start, end);
+        for (Car cars : carListAvailableCar) {
+            Integer idCar = cars.getId();
+            if (idCar == idThisCar) {
 
-        daoReservation.addReservation(reservation);
+                Reservation reservation = new Reservation(user, car, start, end);
+                daoReservation.addReservation(reservation);
+                req.setAttribute("success",successReservationAdd());
+                req.getRequestDispatcher("/reservation.jsp").forward(req, resp);
+            }
+        }
+
+        req.setAttribute("errorReservation", errorIncorrectIdCar());
         req.getRequestDispatcher("/reservation.jsp").forward(req, resp);
+
     }
 
     public User getUser(String username) {
         return daoUser.getUserByLogin(username);
     }
+
 }
+
