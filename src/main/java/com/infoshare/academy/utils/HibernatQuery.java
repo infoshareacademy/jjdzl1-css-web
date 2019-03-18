@@ -16,7 +16,7 @@ import java.util.List;
 public class HibernatQuery {
 
 
-    public static List<Reservation> listAvailableCar(LocalDate startDate,LocalDate endDate) {
+    public static List<Car> listAvailableCar(LocalDate startDate,LocalDate endDate) {
         Configuration conf = new Configuration();
         conf.configure("hibernate.cfg.xml");
         conf.addAnnotatedClass(User.class);
@@ -25,15 +25,18 @@ public class HibernatQuery {
         SessionFactory sessionFactory = conf.buildSessionFactory();
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        List<Reservation> listAvailableCar = session.createQuery("select r from Reservation r " +
-                "where" +
-                " (startDate>'"+startDate+"' and startDate>'"+endDate+"')" +
-                " or (endDate<'"+startDate+"' and startDate>'"+endDate+"' ) " +
-                "or (endDate<'"+startDate+"')" ).getResultList();
+
+        List<Car> carListAvailableCar=session.createQuery("SELECT c FROM Car c " +
+                "where id NOT IN (SELECT car FROM Reservation WHERE"  +
+                "(startDate>'"+startDate+"' and startDate>'"+endDate+"')"+
+                "or (endDate<'"+startDate+"' and startDate>'"+endDate+"')"+
+                "or (endDate<'"+startDate+"'))").getResultList();
 
         session.getTransaction().commit();
         session.close();
 
-        return listAvailableCar;
+        System.out.println(carListAvailableCar);
+
+        return carListAvailableCar;
     }
 }

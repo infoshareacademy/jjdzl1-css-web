@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -35,20 +36,17 @@ public class ListAvailableCar extends HttpServlet {
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
 
-        List<Reservation> list = daoReservation
-                .getReservationListAvailableCar(LocalDate.parse(startDate), LocalDate.parse(endDate));
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
 
+        List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start, end);
 
-        TreeSet<Reservation> reservationListAvailableCar =
-                list.stream()
-                .collect(Collectors.toCollection(
-                        ()->new TreeSet<Reservation>((p1,p2)->p1.getCar().getId()
-                        .compareTo(p2.getCar().getId()))
-                ));
-        req.setAttribute("startDate",startDate);
-        req.setAttribute("endDate",endDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-                req.setAttribute("reservationListAvailableCar", reservationListAvailableCar);
+        req.setAttribute("startDate",start.format(formatter));
+        req.setAttribute("endDate", end.format(formatter));
+
+        req.setAttribute("carListAvailableCar", carListAvailableCar);
 
         req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
     }

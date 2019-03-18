@@ -21,7 +21,7 @@ public interface ReservationRepositoryDao {
 
     void deleteReservation(Integer id);
 
-    List<Reservation> getReservationListAvailableCar(LocalDate startDate, LocalDate endDate);
+    List<Car> getCarListAvailableCar(LocalDate startDate,LocalDate endDate);
 
     Stream<Reservation> searchReservation(Filter filter);
 
