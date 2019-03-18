@@ -51,4 +51,18 @@ public class ReservationMessages {
         String errorData = "User does't have such a reservation.";
         return html1 + errorData + html2;
     }
+
+    public static String errorEndGreaterThanStart() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "The ending date must be greater than or equal to the starting date.";
+        return html1 + errorData + html2;
+    }
+
+    public static String errorStartGreaterNow() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "The start date can not be passed.";
+        return html1 + errorData + html2;
+    }
 }
