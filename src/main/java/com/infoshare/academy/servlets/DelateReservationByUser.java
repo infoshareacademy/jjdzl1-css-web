@@ -27,10 +27,7 @@ public class DelateReservationByUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
-        String getUser = (String) session.getAttribute("username");
-        User currentUser = getUser(getUser);
-        Integer id = currentUser.getId();
+        Integer id = getCurrentUserId(req);
 
         List<Reservation> reservationByUserId = dao.getReservationListByUserId(id);
 
@@ -40,6 +37,13 @@ public class DelateReservationByUser extends HttpServlet {
             req.setAttribute("reservationByUserId", reservationByUserId);
         }
         req.getRequestDispatcher("/deletereservation.jsp").forward(req, resp);
+    }
+
+    public Integer getCurrentUserId(HttpServletRequest req) {
+        HttpSession session = req.getSession(false);
+        String getUser = (String) session.getAttribute("username");
+        User currentUser = getCurrentUserId(getUser);
+        return currentUser.getId();
     }
 
     @Override
@@ -68,7 +72,7 @@ public class DelateReservationByUser extends HttpServlet {
         return html1 + errorData + html2;
     }
 
-    public User getUser(String username) {
+    public User getCurrentUserId(String username) {
         return daoUser.getUserByLogin(username);
     }
 }
