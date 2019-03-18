@@ -4,7 +4,7 @@
             <form method="get" action="userslist">
                 <h2>Users list</h2>
 
-                <table class="table table-striped">
+                <table class="table table-sm table-striped">
                             <tr>
                                 <th>Id</th>
                                 <th>User type</th>

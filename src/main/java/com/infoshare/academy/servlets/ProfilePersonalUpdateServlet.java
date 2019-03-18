@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 
+import static com.infoshare.academy.utils.RegistrationMessages.*;
+
 @WebServlet("/editinfo")
 public class ProfilePersonalUpdateServlet extends HttpServlet {
 
@@ -34,7 +36,7 @@ public class ProfilePersonalUpdateServlet extends HttpServlet {
             request.setAttribute("currentUser", currentUser);
             request.getRequestDispatcher("editinfo.jsp").forward(request, response);
         } else {
-            request.setAttribute("error", errorMessage());
+            request.setAttribute("error", anonymousUser());
             RequestDispatcher req = request.getRequestDispatcher("login.jsp");
             req.forward(request, response);
         }
@@ -67,12 +69,5 @@ public class ProfilePersonalUpdateServlet extends HttpServlet {
 
     public User getUser(String username) {
         return usersDao.getUserByLogin(username);
-    }
-
-    public static String errorMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "Anonymous users can't access profile!";
-        return html1 + errorData + html2;
     }
 }

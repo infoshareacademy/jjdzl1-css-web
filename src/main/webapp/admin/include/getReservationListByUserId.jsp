@@ -9,7 +9,7 @@
         ${error}
         <br/><br/>
 
-        <table class="table table-striped">
+        <table class="table table-sm table-striped">
             <tr>
                 <th>Id reservation</th>
                 <th>User id</th>
@@ -32,7 +32,6 @@
                     <td>${reservation.car.model}</td>
                     <td>${reservation.startDate}</td>
                     <td>${reservation.endDate}</td>
-
                 </tr>
             </c:forEach>
         </table>

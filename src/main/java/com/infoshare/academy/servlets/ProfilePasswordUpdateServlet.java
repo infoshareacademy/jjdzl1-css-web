@@ -2,6 +2,7 @@ package com.infoshare.academy.servlets;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
+import com.infoshare.academy.utils.UserValidator;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
+import static com.infoshare.academy.utils.RegistrationMessages.*;
 
 @WebServlet("/changepassword")
 public class ProfilePasswordUpdateServlet extends HttpServlet {
@@ -32,7 +35,7 @@ public class ProfilePasswordUpdateServlet extends HttpServlet {
             request.setAttribute("currentUser", currentUser);
             request.getRequestDispatcher("changepassword.jsp").forward(request, response);
         } else {
-            request.setAttribute("error", errorMessage());
+            request.setAttribute("error", anonymousUser());
             RequestDispatcher req = request.getRequestDispatcher("login.jsp");
             req.forward(request, response);
         }
@@ -49,36 +52,26 @@ public class ProfilePasswordUpdateServlet extends HttpServlet {
         String password1 = req.getParameter("password1");
         String password2 = req.getParameter("password2");
 
-        if(password1.equals(password2)){
+        Boolean isPasswordCorrect = new UserValidator().isPasswordCorrect(password1);
+
+        if (password1.equals(password2) && isPasswordCorrect) {
             String password = password1;
             usersDao.updateUserPassword(id, password);
-            resp.sendRedirect("LogoutServlet");
+            resp.sendRedirect("logout");
             req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
-        }
-
-        else {
-            req.setAttribute("error", errorMessage2());
+        } else {
+            if (!isPasswordCorrect) {
+                req.setAttribute("error", passwordIncorrectMessage());
+            }
+            if (!password1.equals(password2)) {
+                req.setAttribute("error", passwordNotMatchMessage());
+            }
             RequestDispatcher reqDisp = req.getRequestDispatcher("changepassword.jsp");
             reqDisp.forward(req, resp);
         }
-
     }
 
     public User getUser(String username) {
         return usersDao.getUserByLogin(username);
-    }
-
-    public static String errorMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "Anonymous users can't access profile!";
-        return html1 + errorData + html2;
-    }
-
-    public static String errorMessage2() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "Given passwords don't match, try again!";
-        return html1 + errorData + html2;
     }
 }
