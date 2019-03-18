@@ -3,8 +3,7 @@
 <div align="center">
 
     <form method="get" action="getListReservation">
-        <h2>All reservations</h2>
-        <button class="btn btn-primary" type="submit">Load list</button>
+        <h2>List of reservations</h2>
         <br/><br/>
 
         <table class="table table-striped">
