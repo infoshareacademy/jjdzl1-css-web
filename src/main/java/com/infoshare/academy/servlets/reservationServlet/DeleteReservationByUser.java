@@ -18,7 +18,7 @@ import java.util.List;
 import static com.infoshare.academy.utils.ReservationMessages.*;
 
 @WebServlet("/delete")
-public class DelateReservationByUser extends HttpServlet {
+public class DeleteReservationByUser extends HttpServlet {
 
     @EJB
     ReservationRepositoryDao dao;
