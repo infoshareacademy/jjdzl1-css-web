@@ -3,7 +3,7 @@
 <div align="center">
 
     <form method="get" action="getReservationListByUserId">
-        <h2>Reservation list for User</h2>
+        <h2>List of reservations for the user</h2>
         Choose user id:<input type="number" name="id" min="0" required>
         <button class="btn btn-primary" type="submit">Load list</button>
         ${error}

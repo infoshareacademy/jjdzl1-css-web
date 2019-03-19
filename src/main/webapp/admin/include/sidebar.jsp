@@ -47,7 +47,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="getReservationListByUserId.jsp"><span data-feather="list">
 
-                </span>Reservation list for user</a>
+                </span>List of reservations for the user</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="getListReservation"><span data-feather="list"></span>List of reservations</a>
