@@ -5,6 +5,8 @@
     <form method="get" action="getListReservation">
         <h2>List of reservations</h2>
         <br/><br/>
+        ${error}
+        <br/>
 
         <table class="table table-sm table-striped">
             <tr>
