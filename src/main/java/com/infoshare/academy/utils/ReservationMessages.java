@@ -16,7 +16,7 @@ public class ReservationMessages {
         return html1 + errorData + html2;
     }
 
-    public static String noReservationToRm() {
+    public static String errorNoReservationToRm() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
         String errorData = "No reservation to delete !!! Please try again.";
@@ -74,18 +74,39 @@ public class ReservationMessages {
     }
 
     public static String successReservationRm() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html1 = "<div class=\"alert alert-success\" role=\"alert\">";
         String html2 = "</div>";
         String errorData = "Success, reservation removed from the list.";
         return html1 + errorData + html2;
     }
 
     public static String successReservationAdd() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html1 = "<div class=\"alert alert-success\" role=\"alert\">";
         String html2 = "</div>";
         String errorData = "Success, reservation add to the list.";
         return html1 + errorData + html2;
 
 
+    }
+
+    public static String errorUserDoesntExist() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = " The user doesn't exist.";
+        return html1 + errorData + html2;
+    }
+
+    public static String errorCarDoesntExist() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = " The car doesn't exist.";
+        return html1 + errorData + html2;
+    }
+
+    public static String errorIncorrectDate() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "The entered date is incorrect ! Please try again.";
+        return html1 + errorData + html2;
     }
 }

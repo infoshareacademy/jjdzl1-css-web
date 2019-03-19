@@ -26,13 +26,13 @@ public class DeleteReservationByAdmin extends HttpServlet {
         String idString = req.getParameter("id");
 
         if (idString == null || idString.isEmpty()) {
-            req.setAttribute("error", noReservationToRm());
+            req.setAttribute("error", errorNoReservationToRm());
         } else {
             Integer id = Integer.valueOf(idString);
             List<Reservation> reservationByUserId = dao.getReservationListByUserId(id);
 
             if (reservationByUserId == null || reservationByUserId.isEmpty()) {
-                req.setAttribute("error", noReservationToRm());
+                req.setAttribute("error", errorNoReservationToRm());
             } else {
                 req.setAttribute("reservationByUserId", reservationByUserId);
             }
@@ -46,13 +46,13 @@ public class DeleteReservationByAdmin extends HttpServlet {
         String idString = req.getParameter("id");
 
         if (idString == null || idString.isEmpty()) {
-            req.setAttribute("error", noReservationToRm());
+            req.setAttribute("error", errorNoReservationToRm());
         } else {
             Integer id = Integer.valueOf(idString);
             Reservation reservation = dao.getReservationById(id);
 
             if (reservation == null) {
-                req.setAttribute("error", noReservationToRm());
+                req.setAttribute("error", errorNoReservationToRm());
             } else {
                 dao.deleteReservation(id);
                 req.setAttribute("success", successReservationRm());
