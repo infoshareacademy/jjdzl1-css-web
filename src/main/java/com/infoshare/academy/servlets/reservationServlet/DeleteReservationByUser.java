@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/delete")
-public class DelateReservationByUser extends HttpServlet {
+public class DeleteReservationByUser extends HttpServlet {
 
     @EJB
     ReservationRepositoryDao dao;
