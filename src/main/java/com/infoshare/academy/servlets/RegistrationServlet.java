@@ -50,21 +50,13 @@ public class RegistrationServlet extends HttpServlet {
         Boolean isBeforePresentDay = new UserValidator().isBeforePresentDate(birthOfDate);
 
         if (!isBeforePresentDay) {
-            request.setAttribute("IncorrectDateOfBirth", incorrectDateOfBirth());
-            RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
-            req.forward(request, response);
+            RequestResponse(request, response, "IncorrectDateOfBirth", incorrectDateOfBirth());
         } else if (!isPasswordCorrect && isAdult) {
-            request.setAttribute("error", passwordIncorrectAndTooYoungMessage());
-            RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
-            req.forward(request, response);
+            RequestResponse(request, response, "error", passwordIncorrectAndTooYoungMessage());
         } else if (!isPasswordCorrect) {
-            request.setAttribute("passwordError", passwordIncorrectMessage());
-            RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
-            req.forward(request, response);
+            RequestResponse(request, response, "passwordError", passwordIncorrectMessage());
         } else if (isAdult) {
-            request.setAttribute("tooYoungError", tooYoungMessage());
-            RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
-            req.forward(request, response);
+            RequestResponse(request, response, "tooYoungError", tooYoungMessage());
         } else {
 
             User user = new User(0, login, password, email, Long.parseLong(phoneNumber), firstName,
@@ -75,17 +67,11 @@ public class RegistrationServlet extends HttpServlet {
             User tempUserByEmail = usersRepositoryDao.getUserByEmail(email);
 
             if (tempUserByEmail != null && tempUserByLogin != null) {
-                request.setAttribute("loginAndEmailIsUnavailableError", loginAndEmailIsUnavailable());
-                RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
-                req.forward(request, response);
+                RequestResponse(request, response, "loginAndEmailIsUnavailableError", loginAndEmailIsUnavailable());
             } else if (tempUserByEmail != null) {
-                request.setAttribute("unavailableEmailError", unavailableEmail());
-                RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
-                req.forward(request, response);
+                RequestResponse(request, response, "unavailableEmailError", unavailableEmail());
             } else if (tempUserByLogin != null) {
-                request.setAttribute("unavailableLoginError", unavailableLogin());
-                RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
-                req.forward(request, response);
+                RequestResponse(request, response, "unavailableLoginError", unavailableLogin());
             } else {
                 usersRepositoryDao.addUser(user);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -93,4 +79,9 @@ public class RegistrationServlet extends HttpServlet {
         }
     }
 
+    private void RequestResponse(HttpServletRequest request, HttpServletResponse response, String errorMessage, String jspError) throws ServletException, IOException {
+        request.setAttribute(errorMessage, jspError);
+        RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
+        req.forward(request, response);
+    }
 }
