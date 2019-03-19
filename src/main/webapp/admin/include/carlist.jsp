@@ -3,6 +3,9 @@
 <div align="center">
             <form method="get" action="listCar">
                 <h2>List of cars</h2>
+                <br/>
+                ${error}
+                <br/>
 
                 <table class="table table-sm table-striped">
                             <tr>

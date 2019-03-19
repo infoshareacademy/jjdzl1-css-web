@@ -1,4 +1,4 @@
-package com.infoshare.academy.servlets;
+package com.infoshare.academy.servlets.reservationServlet;
 
 import com.infoshare.academy.dao.ReservationRepositoryDao;
 import com.infoshare.academy.domain.Reservation;
@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
+
+import static com.infoshare.academy.utils.ReservationMessages.errorEmptyListReservation;
 
 @WebServlet("/admin/getListReservation")
 public class ListReservation extends HttpServlet {
@@ -22,16 +23,16 @@ public class ListReservation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        PrintWriter writer = resp.getWriter();
-
-        resp.setContentType("text/html;charset=UTF-8");
-
         List<Reservation> reservationList = dao.list();
 
+        if (reservationList == null || reservationList.isEmpty()) {
+            req.setAttribute("error", errorEmptyListReservation());
 
-        req.setAttribute("reservationList", reservationList);
-
+        } else {
+            req.setAttribute("reservationList", reservationList);
+        }
         req.getRequestDispatcher("/admin/listReservation.jsp").forward(req, resp);
     }
+
 }
 

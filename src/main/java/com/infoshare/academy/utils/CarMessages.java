@@ -2,6 +2,13 @@ package com.infoshare.academy.utils;
 
 public class CarMessages {
 
+    public static String errorEmptyList() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "List of cars is empty!";
+        return html1 + errorData + html2;
+    }
+
     public static String errorMessage() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";

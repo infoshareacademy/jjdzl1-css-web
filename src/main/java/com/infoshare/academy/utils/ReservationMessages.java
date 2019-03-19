@@ -2,7 +2,14 @@ package com.infoshare.academy.utils;
 
 public class ReservationMessages {
 
-    public static String errorUserHevNoReservation() {
+    public static String errorEmptyListReservation() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = " List of reservations is empty.";
+        return html1 + errorData + html2;
+    }
+
+    public static String errorUserHaveNoReservation() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
         String errorData = " User have no reservation.";
