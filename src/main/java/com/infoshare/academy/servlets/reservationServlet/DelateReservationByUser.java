@@ -48,7 +48,6 @@ public class DelateReservationByUser extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String idString = req.getParameter("id");
-        Integer id = Integer.valueOf(idString);
 
 
         HttpSession session = req.getSession(false);
@@ -58,24 +57,26 @@ public class DelateReservationByUser extends HttpServlet {
 
         if (idString == null || idString.isEmpty()) {
             req.setAttribute("error", errorMessage());
-        }
-        Reservation reservation = dao.getReservationById(id);
-        if (reservation == null) {
-            req.setAttribute("error", errorUserDoesNotHaveReser());
         } else {
-            Integer idUserInReservation = reservation.getUser().getId();
-            if (reservation != null && idUser == idUserInReservation) {
-                dao.deleteReservation(id);
-                req.setAttribute("success", successReservationRm());
+            Integer id = Integer.valueOf(idString);
+
+            Reservation reservation = dao.getReservationById(id);
+
+            if (reservation == null) {
+                req.setAttribute("error", errorUserDoesNotHaveReser());
             } else {
-                req.setAttribute("error", errorIncorectIdReservation());
+                Integer idUserInReservation = reservation.getUser().getId();
+                if (reservation != null && idUser == idUserInReservation) {
+                    dao.deleteReservation(id);
+                    req.setAttribute("success", successReservationRm());
+                } else {
+                    req.setAttribute("error", errorIncorectIdReservation());
+                }
             }
         }
         req.getRequestDispatcher("/deletereservation.jsp").forward(req, resp);
 
     }
-
-
     public User getUser(String username) {
         return daoUser.getUserByLogin(username);
     }

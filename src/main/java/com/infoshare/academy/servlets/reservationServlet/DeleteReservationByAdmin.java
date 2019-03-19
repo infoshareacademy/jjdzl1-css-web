@@ -24,11 +24,11 @@ public class DeleteReservationByAdmin extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String idString = req.getParameter("id");
-        Integer id = Integer.valueOf(idString);
 
         if (idString == null || idString.isEmpty()) {
             req.setAttribute("error", noReservationToRm());
         } else {
+            Integer id = Integer.valueOf(idString);
             List<Reservation> reservationByUserId = dao.getReservationListByUserId(id);
 
             if (reservationByUserId == null || reservationByUserId.isEmpty()) {
@@ -44,11 +44,11 @@ public class DeleteReservationByAdmin extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String idString = req.getParameter("id");
-        Integer id = Integer.valueOf(idString);
 
-        if (id == null || idString.isEmpty()) {
+        if (idString == null || idString.isEmpty()) {
             req.setAttribute("error", noReservationToRm());
         } else {
+            Integer id = Integer.valueOf(idString);
             Reservation reservation = dao.getReservationById(id);
 
             if (reservation == null) {
