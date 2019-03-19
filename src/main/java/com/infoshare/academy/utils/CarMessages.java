@@ -23,4 +23,32 @@ public class CarMessages {
         return html1 + successDate + html2;
 
     }
+
+    public static String errorCarIdIncorrect() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = " Id car incorrect! Please try again.";
+        return html1 + errorData + html2;
+    }
+
+    public static String errorCarMileageIncorrect() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = " Car mileage incorrect! Please try again.";
+        return html1 + errorData + html2;
+    }
+
+    public static String errorUpdateHasFailed() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "The update has failed, please try again.";
+        return html1 + errorData + html2;
+    }
+
+    public static String successUpdateDone() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Success, update done!.";
+        return html1 + errorData + html2;
+    }
 }

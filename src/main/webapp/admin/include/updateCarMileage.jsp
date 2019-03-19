@@ -11,6 +11,7 @@
         </form>
     </div>
 </div>
+<br/>
 ${error}
 <div>
     <br/>
@@ -18,8 +19,11 @@ ${error}
     <div>
         <form method="post" action="updateCar">
             Choose id: <input type="number" name="id" min="0" required><br/>
-            Input actual mileage: <input type="number" name="mileage" min="0" required>
+            Input actual mileage: <input type="number" name="mileage" min="0"requiredgii>
             <button class="btn btn-success" type="submit">Update</button>
+            <br/>
+            <br/>
+            ${success}
         </form>
     </div>
 </div>
