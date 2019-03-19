@@ -79,8 +79,8 @@ public class RegistrationServlet extends HttpServlet {
         }
     }
 
-    private void RequestResponse(HttpServletRequest request, HttpServletResponse response, String loginAndEmailIsUnavailableError, String s) throws ServletException, IOException {
-        request.setAttribute(loginAndEmailIsUnavailableError, s);
+    private void RequestResponse(HttpServletRequest request, HttpServletResponse response, String errorMessage, String jspError) throws ServletException, IOException {
+        request.setAttribute(errorMessage, jspError);
         RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
         req.forward(request, response);
     }
