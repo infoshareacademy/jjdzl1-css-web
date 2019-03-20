@@ -25,6 +25,8 @@ public interface ReservationRepositoryDao {
 
     List<Car> getCarListAvailableCar(LocalDate startDate,LocalDate endDate);
 
+    List<Car> getCarListAvailableCarLimit(LocalDate startDate,LocalDate endDate,int i);
+
     Stream<Reservation> searchReservation(Filter filter);
 
 }

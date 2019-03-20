@@ -5,25 +5,25 @@
 <div align="center">
 
     <form method="get" action="listAvailableCar">
-        <h2>List of cars available from ${startDate} to ${endDate} </h2>
+        <h3>List of cars available from ${startDate} to ${endDate} </h3>
         Choose starting date: <input type="date" name="startDate" required>
         Choose ending date: <input type="date" name="endDate" required>
         <button class="btn btn-primary" type="submit">Load list</button>
         ${error}
         <br/><br/>
-
+        <input type = "hidden" name = "currentPage" value = "1">
 
         <table class="table table-striped">
             <tr>
                 <th style="text-align: center; vertical-align: middle;">Photo</th>
-                <th style="text-align: center; vertical-align: middle;">Photo</th>Car id</th>
-                <th style="text-align: center; vertical-align: middle;">Photo</th>Make</th>
-                <th style="text-align: center; vertical-align: middle;">Photo</th>Model</th>
-                <th style="text-align: center; vertical-align: middle;">Photo</th>Year</th>
-                <th style="text-align: center; vertical-align: middle;">Photo</th>Fuel source</th>
+                <th style="text-align: center; vertical-align: middle;">Car id</th>
+                <th style="text-align: center; vertical-align: middle;">Make</th>
+                <th style="text-align: center; vertical-align: middle;">Model</th>
+                <th style="text-align: center; vertical-align: middle;">Year</th>
+                <th style="text-align: center; vertical-align: middle;">Fuel source</th>
             </tr>
 
-            <c:forEach var="car" items="${carListAvailableCar}">
+            <c:forEach var="car" items="${carListAvailableCarLimit}">
                 <tr>
                     <td><c:choose>
                         <c:when test="${car.id==1}"><img src="img/1.jpeg" height=150 width=225 ></c:when>
@@ -55,6 +55,37 @@
                 </tr>
             </c:forEach>
         </table>
+
+        <nav>
+            <ul class="pagination">
+                <c:if test="${currentPage != 1}">
+                    <li class="page-item"><a class="page-link"
+                                             href="listAvailableCar?startDate=${start}&endDate=${end}&currentPage=${currentPage-1}">Previous</a>
+                    </li>
+                </c:if>
+
+                <c:forEach begin="1" end="${noOfPages}" var="i">
+                    <c:choose>
+                        <c:when test="${currentPage eq i}">
+                            <li class="page-item active"><a class="page-link">
+                                    ${i} <span class="sr-only">(current)</span></a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link"
+                                                     href="listAvailableCar?startDate=${start}&endDate=${end}&currentPage=${i}">${i}</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+                <c:if test="${currentPage lt noOfPages}">
+                    <li class="page-item"><a class="page-link"
+                                             href="listAvailableCar?startDate=${start}&endDate=${end}&currentPage=${currentPage+1}">Next</a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
     </form>
 </div>
 
