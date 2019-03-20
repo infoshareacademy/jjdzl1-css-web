@@ -46,6 +46,7 @@ public class RegistrationServlet extends HttpServlet {
         String postalCode = request.getParameter("postalCode");
 
         Boolean isPasswordCorrect = new UserValidator().isPasswordCorrect(password);
+        Boolean isEmailCorrect = new UserValidator().isEmailCorrect(email);
         Boolean isAdult = new UserValidator().isAdult(birthOfDate);
         Boolean isBeforePresentDay = new UserValidator().isBeforePresentDate(birthOfDate);
 
@@ -55,6 +56,8 @@ public class RegistrationServlet extends HttpServlet {
             RequestResponse(request, response, "error", passwordIncorrectAndTooYoungMessage());
         } else if (!isPasswordCorrect) {
             RequestResponse(request, response, "passwordError", passwordIncorrectMessage());
+        } else if (!isEmailCorrect) {
+            RequestResponse(request, response, "emailError", incorrectEmail());
         } else if (isAdult) {
             RequestResponse(request, response, "tooYoungError", tooYoungMessage());
         } else {
