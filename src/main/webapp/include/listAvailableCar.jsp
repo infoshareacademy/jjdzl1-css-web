@@ -15,12 +15,12 @@
 
         <table class="table table-striped">
             <tr>
-                <th>Photo</th>
-                <th>Car id</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Year</th>
-                <th>Fuel source</th>
+                <th style="text-align: center; vertical-align: middle;">Photo</th>
+                <th style="text-align: center; vertical-align: middle;">Photo</th>Car id</th>
+                <th style="text-align: center; vertical-align: middle;">Photo</th>Make</th>
+                <th style="text-align: center; vertical-align: middle;">Photo</th>Model</th>
+                <th style="text-align: center; vertical-align: middle;">Photo</th>Year</th>
+                <th style="text-align: center; vertical-align: middle;">Photo</th>Fuel source</th>
             </tr>
 
             <c:forEach var="car" items="${carListAvailableCar}">
