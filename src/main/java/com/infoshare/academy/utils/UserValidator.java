@@ -3,6 +3,8 @@ package com.infoshare.academy.utils;
 import com.infoshare.academy.dao.UsersRepositoryDao;
 
 import javax.ejb.EJB;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -28,23 +30,34 @@ public class UserValidator {
         */
     }
 
+    public Boolean isEmailCorrect(String email) {
+        try {
+            InternetAddress emailAddress = new InternetAddress(email);
+            emailAddress.validate();
+            return true;
+        } catch (AddressException ex) {
+            return false;
+        }
+    }
+
     public Boolean isAdult(String dateOfBirth) {
         LocalDate dateOfBirthLocalDate = formatLocalDate(dateOfBirth);
         LocalDate tempDateOfBirth = transferLocalDateToLocalDateOF(dateOfBirthLocalDate);
         LocalDate tempDateOfBirthPlus18 = tempDateOfBirth.plusYears(18);
         return tempDateOfBirthPlus18.isAfter(LocalDate.now());
     }
-    public Boolean isBeforePresentDate(String dateOfBirth){
+
+    public Boolean isBeforePresentDate(String dateOfBirth) {
         LocalDate dateOfBirthLocalDate = formatLocalDate(dateOfBirth);
         return dateOfBirthLocalDate.isBefore(LocalDate.now());
     }
 
-
-    private LocalDate formatLocalDate(String date){
+    private LocalDate formatLocalDate(String date) {
         DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(date, FORMATTER);
     }
-    private LocalDate transferLocalDateToLocalDateOF(LocalDate localDate){
+
+    private LocalDate transferLocalDateToLocalDateOF(LocalDate localDate) {
         int year = localDate.getYear();
         Month month = localDate.getMonth();
         int day = localDate.getDayOfMonth();
