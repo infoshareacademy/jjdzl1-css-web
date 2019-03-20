@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 26 Lut 2019, 13:23
+-- Czas generowania: 20 Mar 2019, 21:20
 -- Wersja serwera: 10.1.36-MariaDB
 -- Wersja PHP: 7.2.11
 
@@ -68,8 +68,7 @@ INSERT INTO `cars` (`car_id`, `car_type`, `make`, `model`, `year`, `mileage`, `e
 (16, 2, 'Mercedes', 'Sprinter', 2016, 60000, 190, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
 (17, 2, 'Mercedes', 'Sprinter', 2018, 35000, 180, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
 (18, 2, 'Mercedes', 'Vito', 2013, 130000, 130, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
-(19, 2, 'Iveco', 'Daily', 2015, 235000, 280, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
-(20, 1, 'gdas', 'gds', 1990, 5351, 100, 'PETROLANDGAS', 'AUTOMATIC', 'SEDAN', 'RED', 6, NULL, NULL);
+(19, 2, 'Iveco', 'Daily', 2015, 235000, 280, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -78,7 +77,7 @@ INSERT INTO `cars` (`car_id`, `car_type`, `make`, `model`, `year`, `mileage`, `e
 --
 
 CREATE TABLE `reservations` (
-  `reservation_id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `reservation_id` int(12) NOT NULL,
   `car_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `start_date` date DEFAULT NULL,
@@ -130,10 +129,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_type`, `login`, `password`, `email`, `phone_number`, `first_name`, `last_name`, `birth_date`, `street_address`, `postal_code`, `city`) VALUES
-(1, 1, 'admin', '12345', 'admin@example.com', '601001001', 'Admin', 'Aplikacji', '1990-05-01', 'Chopina 10', '20-140', 'Lublin'),
-(2, 0, 'marek', 'maro123', 'marek@example.com', '691029123', 'Marek', 'Kowalski', '1985-10-11', 'Koncertowa 4', '20-155', 'Lublin'),
-(3, 0, 'Ewa', 'eww11.', 'ewa@example.com', '691029123', 'Ewa', 'Konieczna', '2004-07-23', 'Nadbystrzycka 48A', '20-123', 'Lublin'),
-(4, 0, 'darek', '0000', 'darek_giza@op.pl', '772123124', 'Darek', 'Giza', '1981-01-15', 'Al. Królewska 41', '20-121', 'Lublin');
+(1, 1, 'admin', '$31$16$S2AdQ1Iotlgr3ozsDMR-3OY0Fyql8_uermIXQsG-eRM', 'admin@example.com', '601001003', 'Admin', 'Adminowski', '1990-05-18', 'Chopina 5', '20-150', 'Lublin'),
+(2, 0, 'marek', '$31$16$uSIi1BcynFCxhSLZgNHmONddmL0FfTy0sZsGcTOnR4Q', 'marek@example.com', '691029123', 'Marek', 'Kowalski', '1985-10-11', 'Koncertowa 4', '20-155', 'Lublin'),
+(3, 0, 'Ewa', '$31$16$PCyovEJEPnqCNvyHRyOzoKt-4Tma0pPJyQbl7JkjKt8', 'ewa@example.com', '691029123', 'Ewa', 'Konieczna', '2004-07-23', 'Nadbystrzycka 48A', '20-123', 'Lublin'),
+(4, 0, 'darek', '$31$16$esmoxUes48YBzDF6YMmwonlz4T-ICNFGjFqHyweoWWY', 'darek_giza@op.pl', '772123124', 'Darek', 'Giza', '1981-01-15', 'Al. Królewska 41', '20-121', 'Lublin'),
+(5, 0, 'lulek', '$31$16$D24IUZGD8y2oF6eR85YflS_HSmgT7A5r4xMRdQL0Ppg', 'lulek@gmail.com', '578510123', 'Marcin', 'Turlaj', '1995-03-05', 'Północna 11', '20-150', 'LU');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -167,13 +167,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT dla tabeli `reservations`
+--
+ALTER TABLE `reservations`
+  MODIFY `reservation_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Ograniczenia dla zrzutów tabel
