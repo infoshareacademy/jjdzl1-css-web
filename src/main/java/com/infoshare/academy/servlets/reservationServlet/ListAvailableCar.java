@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import static com.infoshare.academy.utils.CarMessages.errorMessage;
 import static com.infoshare.academy.utils.ReservationMessages.errorEndGreaterThanStart;
 import static com.infoshare.academy.utils.ReservationMessages.errorStartGreaterNow;
 
@@ -28,26 +29,31 @@ public class ListAvailableCar extends HttpServlet {
 
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
-        LocalDate now = LocalDate.now();
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
-        boolean isAfter = start.isAfter(end);
-        boolean isPast = now.isAfter(start);
 
-        if (isPast) {
-            req.setAttribute("error", errorStartGreaterNow());
-        } else if (isAfter) {
-            req.setAttribute("error", errorEndGreaterThanStart());
+        if (startDate == null || startDate.isEmpty() || endDate == null || endDate.isEmpty()) {
+            req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
         } else {
+            LocalDate now = LocalDate.now();
+            LocalDate start = LocalDate.parse(startDate);
+            LocalDate end = LocalDate.parse(endDate);
+            boolean isAfter = start.isAfter(end);
+            boolean isPast = now.isAfter(start);
 
-            List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start, end);
+            if (isPast) {
+                req.setAttribute("error", errorStartGreaterNow());
+            } else if (isAfter) {
+                req.setAttribute("error", errorEndGreaterThanStart());
+            } else {
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start, end);
 
-            req.setAttribute("startDate", start.format(formatter));
-            req.setAttribute("endDate", end.format(formatter));
-            req.setAttribute("carListAvailableCar", carListAvailableCar);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+                req.setAttribute("startDate", start.format(formatter));
+                req.setAttribute("endDate", end.format(formatter));
+                req.setAttribute("carListAvailableCar", carListAvailableCar);
+            }
+            req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
         }
-        req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
     }
 }
