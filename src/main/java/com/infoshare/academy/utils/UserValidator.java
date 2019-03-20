@@ -31,13 +31,14 @@ public class UserValidator {
     }
 
     public Boolean isEmailCorrect(String email) {
+        boolean result = true;
         try {
             InternetAddress emailAddress = new InternetAddress(email);
             emailAddress.validate();
-            return true;
         } catch (AddressException ex) {
-            return false;
+            result = false;
         }
+        return result;
     }
 
     public Boolean isAdult(String dateOfBirth) {
