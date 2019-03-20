@@ -136,6 +136,24 @@ INSERT INTO `users` (`user_id`, `user_type`, `login`, `password`, `email`, `phon
 (4, 0, 'darek', '0000', 'darek_giza@op.pl', '772123124', 'Darek', 'Giza', '1981-01-15', 'Al. Królewska 41', '20-121', 'Lublin');
 
 --
+-- Struktura tabeli `users_authorization`
+--
+
+CREATE TABLE `users_authorization` (
+                       `id_authorization` int(11) NOT NULL,
+                       `user_id` int(11) NOT NULL,
+                       `authorization_number` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+                       `is_account_active` boolean default false
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Zrzut danych tabeli `users`
+--
+
+INSERT INTO `users_authorization` (`id_authorization`, `user_id`, `authorization_number`, `is_account_active`) VALUES
+(1,1,null, default);
+
+--
 -- Indeksy dla zrzutów tabel
 --
 
@@ -160,6 +178,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indeksy dla tabeli `users_authorization`
+--
+ALTER TABLE `users_authorization`
+  ADD PRIMARY KEY (`id_authorization`),
+  ADD KEY `fk_users` (`user_id`);
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -176,6 +200,11 @@ ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT dla tabeli `users`
+--
+ALTER TABLE `users_authorization`
+  MODIFY `id_authorization` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+--
 -- Ograniczenia dla zrzutów tabel
 --
 
@@ -184,6 +213,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `reservations`
   ADD CONSTRAINT `fk_cars` FOREIGN KEY (`car_id`) REFERENCES `cars` (`car_id`),
+  ADD CONSTRAINT `fk_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+COMMIT;
+
+--
+-- Ograniczenia dla tabeli `users_authorization`
+--
+ALTER TABLE `users_authorization`
   ADD CONSTRAINT `fk_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 COMMIT;
 

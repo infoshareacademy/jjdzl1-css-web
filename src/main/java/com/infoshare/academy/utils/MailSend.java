@@ -11,9 +11,9 @@ import java.util.Properties;
 
 public class MailSend {
 
-    Properties emailProperties;
-    Session mailSession;
-    MimeMessage emailMessage;
+    private Properties emailProperties;
+    private Session mailSession;
+    private MimeMessage emailMessage;
 
     public static void main(String args[]) throws AddressException,
             MessagingException {
@@ -25,7 +25,7 @@ public class MailSend {
         javaEmail.sendEmail();
     }
 
-    public void setMailServerProperties() {
+    private void setMailServerProperties() {
 
         String emailPort = "587";//gmail's smtp port
 
@@ -36,17 +36,17 @@ public class MailSend {
 
     }
 
-    public void createEmailMessage() throws AddressException,
+    private void createEmailMessage() throws AddressException,
             MessagingException {
         String[] toEmails = {"CarSharingSystem.help@gmail.com"};
-        String emailSubject = "Java Email";
-        String emailBody = "This is an email sent by JavaMail api.";
+        String emailSubject = "Registration process";
+        String emailBody = "This is a registration process";
 
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
 
-        for (int i = 0; i < toEmails.length; i++) {
-            emailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmails[i]));
+        for (String toEmail : toEmails) {
+            emailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
         }
 
         emailMessage.setSubject(emailSubject);
@@ -55,7 +55,7 @@ public class MailSend {
 
     }
 
-    public void sendEmail() throws AddressException, MessagingException {
+    private void sendEmail() throws AddressException, MessagingException {
 
         String emailHost = "smtp.gmail.com";
         String fromUser = "CarSharingSystem.help";//just the id alone without @gmail.com
