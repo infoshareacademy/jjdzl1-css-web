@@ -3,6 +3,7 @@ package com.infoshare.academy.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users_authorization")
@@ -11,26 +12,16 @@ public class UserAuthorization extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "authorization_number")
-    private Long AuthorizationNumber;
+    private String AuthorizationNumber;
     @Column(name = "is_account_active")
     private Boolean isAccountActive;
 
-    public UserAuthorization(Integer userType, String login, String password, String email,
-                             Long phoneNumber, String firstName, String lastName,
-                             LocalDate birthDate, String streetAddress, String postalCode,
-                             String city, Long authorizationNumber, Boolean isAccountActive) {
-        super(userType, login, password, email, phoneNumber, firstName, lastName, birthDate,
-                streetAddress, postalCode, city);
+    public UserAuthorization(String authorizationNumber, Boolean isAccountActive) {
         AuthorizationNumber = authorizationNumber;
         this.isAccountActive = isAccountActive;
     }
 
-    public UserAuthorization(Long authorizationNumber, Boolean isAccountActive) {
-        AuthorizationNumber = authorizationNumber;
-        this.isAccountActive = isAccountActive;
-    }
-
-    public Long getAuthorizationNumber() {
+    public String getAuthorizationNumber() {
         return AuthorizationNumber;
     }
 
@@ -38,8 +29,8 @@ public class UserAuthorization extends User {
         return isAccountActive;
     }
 
-    public void setAuthorizationNumber(Long authorizationNumber) {
-        AuthorizationNumber = authorizationNumber;
+    public void setAuthorizationNumber(UUID authorizationNumber) {
+        AuthorizationNumber = authorizationNumber.toString();
     }
 
     public void setAuthorize(Boolean authorize) {
