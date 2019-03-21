@@ -3,7 +3,7 @@
 <div align="center">
 
     <form method="get" action="reservation">
-        <h2>List of cars available from ${startDate} to ${endDate}</h2>
+        <h3>List of cars available from ${startDate} to ${endDate}</h3>
         Choose starting date: <input type="date" name="startDate" required>
         Choose ending date: <input type="date" name="endDate" required>
         <button class="btn btn-primary" type="submit">Load list</button>
@@ -36,8 +36,8 @@
     </form>
     <div>
         <form method="post" action="reservation">
-            <h2>To add a reservation from ${startDate} to ${endDate},</h2>
-            <h2>choose the car id </h2>
+            <h3>To add a reservation from ${startDate} to ${endDate},</h3>
+            <h3>choose the car id </h3>
             <input class="form-control form-control-sm" type="number" name="carId" min="1" required/>
 
             <input type="hidden" name="startDate" value="${start}"/>

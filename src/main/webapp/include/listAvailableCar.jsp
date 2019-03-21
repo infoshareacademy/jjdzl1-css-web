@@ -5,13 +5,13 @@
 <div align="center">
 
     <form method="get" action="listAvailableCar">
-        <h2>List of cars available from ${startDate} to ${endDate} </h2>
+        <h3>List of cars available from ${startDate} to ${endDate} </h3>
         Choose starting date: <input type="date" name="startDate" required>
         Choose ending date: <input type="date" name="endDate" required>
         <button class="btn btn-primary" type="submit">Load list</button>
         ${error}
         <br/><br/>
-
+        <input type = "hidden" name = "currentPage" value = "1">
 
         <table class="table table-striped">
             <tr>
@@ -23,7 +23,7 @@
                 <th style="text-align: center; vertical-align: middle;">Fuel source</th>
             </tr>
 
-            <c:forEach var="car" items="${carListAvailableCar}">
+            <c:forEach var="car" items="${carListAvailableCarLimit}">
                 <tr>
                     <td style="text-align: center; vertical-align: middle;"><img src="${car.photoLink}" height=150 width=225 ></td>
                     <td style="text-align: center; vertical-align: middle;">${car.id}</td>
@@ -35,5 +35,6 @@
             </c:forEach>
         </table>
     </form>
+
 </div>
 

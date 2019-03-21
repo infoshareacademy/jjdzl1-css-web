@@ -53,6 +53,8 @@
         </c:otherwise>
     </c:choose>
 
+    <jsp:include page="pagination.jsp"></jsp:include>
+
     <!-- Footer -->
     <jsp:include page="include/footer.jsp"></jsp:include>
 
