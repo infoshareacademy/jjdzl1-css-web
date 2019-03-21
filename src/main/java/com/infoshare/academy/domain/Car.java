@@ -51,6 +51,9 @@ public class Car {
     @Column(name = "seats")
     private Integer seats;
 
+    @Column(name = "photo_link")
+    private String photoLink;
+
     //CarTruck
     @Column(name = "capacity")
     private Integer capacity;
@@ -192,6 +195,10 @@ public class Car {
         this.cargoSpace = cargoSpace;
     }
 
+    public String getPhotoLink() { return photoLink;}
+
+    public void setPhotoLink(String photoLink) { this.photoLink = photoLink; }
+
     public List<Reservation> getReservations() {
         return reservations;
     }
@@ -209,7 +216,6 @@ public class Car {
     }
 
     @Override
-
     public String toString() {
         return "Car{" +
                 "id=" + id +
