@@ -2,11 +2,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div align="center">
 
-    <form method="get" action="delete">
+    <form method="get" action="listReservationCurrentUser">
         <h2>List of reservations for the current user</h2>
-        <button class="btn btn-primary" type="submit">Load list</button>
         <br/><br/>
-${error}
+        ${error}
         <table class="table table-sm table-striped">
             <tr>
                 <th style="text-align: center; vertical-align: middle;">Photo</th>
@@ -34,11 +33,5 @@ ${error}
                 </tr>
             </c:forEach>
         </table>
-    </form>
-
-    <form method="post" action="delete">
-        Choose reservation id:<input type="number" name="id" min="1" required>
-        <button class="btn btn-primary" type="submit">Delete</button>
-        ${success}
     </form>
 </div>

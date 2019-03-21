@@ -3,6 +3,7 @@ package com.infoshare.academy.dao;
 import com.infoshare.academy.domain.Car;
 import com.infoshare.academy.domain.Reservation;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import javax.ejb.Stateless;
 import java.time.LocalDate;
@@ -77,9 +78,26 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
                 "where id IN (SELECT car FROM Reservation WHERE"  +
                 "(startDate>'"+startDate+"' and startDate>'"+endDate+"')"+
                 "or (endDate<'"+startDate+"' and startDate>'"+endDate+"')"+
-                "or (endDate<'"+startDate+"'))").getResultList();
+                "or (endDate<'"+startDate+"'))ORDER BY c.id ASC").getResultList();
         commitTransaction(session);
         return carListAvailableCar;
+    }
+
+    @Override
+    public List<Car> getCarListAvailableCarLimit(LocalDate startDate, LocalDate endDate,int i) {
+        Session session=getSession();
+        String query="SELECT  c FROM Car c  where id  IN " +
+                "(SELECT car FROM Reservation WHERE (startDate>'"+startDate+"' and startDate>'"+endDate+"')" +
+                " or (endDate<'"+startDate+"' and startDate>'"+endDate+"')" +
+                " or (endDate<'"+startDate+"'))" +
+                "ORDER BY c.id ASC";
+        Query carList=session.createQuery(query);
+        int pageSize=3;
+        carList.setFirstResult(pageSize*(i-1));
+        carList.setMaxResults(pageSize);
+        List<Car> carListAvailableCarLimit=carList.getResultList();
+        commitTransaction(session);
+        return carListAvailableCarLimit;
     }
 
     @Override

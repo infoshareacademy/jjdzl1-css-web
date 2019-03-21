@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Czas generowania: 26 Lut 2019, 13:23
--- Wersja serwera: 10.1.36-MariaDB
--- Wersja PHP: 7.2.11
+-- Host: kamil-mysql
+-- Czas generowania: 21 Mar 2019, 08:44
+-- Wersja serwera: 8.0.13
+-- Wersja PHP: 7.2.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,15 +31,15 @@ SET time_zone = "+00:00";
 CREATE TABLE `cars` (
   `car_id` int(11) NOT NULL,
   `car_type` int(4) NOT NULL,
-  `make` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `model` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `make` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `model` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `year` int(4) NOT NULL,
   `mileage` int(10) NOT NULL,
   `engine_power` float DEFAULT NULL,
-  `fuel_source` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `transmission` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `body_type` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `color` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fuel_source` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `transmission` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `body_type` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `color` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `seats` int(2) DEFAULT NULL,
   `capacity` int(15) DEFAULT NULL,
   `cargo_space` int(15) DEFAULT NULL
@@ -68,8 +68,7 @@ INSERT INTO `cars` (`car_id`, `car_type`, `make`, `model`, `year`, `mileage`, `e
 (16, 2, 'Mercedes', 'Sprinter', 2016, 60000, 190, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
 (17, 2, 'Mercedes', 'Sprinter', 2018, 35000, 180, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
 (18, 2, 'Mercedes', 'Vito', 2013, 130000, 130, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
-(19, 2, 'Iveco', 'Daily', 2015, 235000, 280, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
-(20, 1, 'gdas', 'gds', 1990, 5351, 100, 'PETROLANDGAS', 'AUTOMATIC', 'SEDAN', 'RED', 6, NULL, NULL);
+(19, 2, 'Iveco', 'Daily', 2015, 235000, 280, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -78,7 +77,7 @@ INSERT INTO `cars` (`car_id`, `car_type`, `make`, `model`, `year`, `mileage`, `e
 --
 
 CREATE TABLE `reservations` (
-  `reservation_id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `reservation_id` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `car_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `start_date` date DEFAULT NULL,
@@ -113,16 +112,16 @@ INSERT INTO `reservations` (`reservation_id`, `car_id`, `user_id`, `start_date`,
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `user_type` int(1) NOT NULL,
-  `login` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `phone_number` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `first_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `login` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `phone_number` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `birth_date` date DEFAULT NULL,
-  `street_address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `postal_code` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `city` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
+  `street_address` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `postal_code` varchar(6) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `city` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -133,25 +132,30 @@ INSERT INTO `users` (`user_id`, `user_type`, `login`, `password`, `email`, `phon
 (1, 1, 'admin', '12345', 'admin@example.com', '601001001', 'Admin', 'Aplikacji', '1990-05-01', 'Chopina 10', '20-140', 'Lublin'),
 (2, 0, 'marek', 'maro123', 'marek@example.com', '691029123', 'Marek', 'Kowalski', '1985-10-11', 'Koncertowa 4', '20-155', 'Lublin'),
 (3, 0, 'Ewa', 'eww11.', 'ewa@example.com', '691029123', 'Ewa', 'Konieczna', '2004-07-23', 'Nadbystrzycka 48A', '20-123', 'Lublin'),
-(4, 0, 'darek', '0000', 'darek_giza@op.pl', '772123124', 'Darek', 'Giza', '1981-01-15', 'Al. Królewska 41', '20-121', 'Lublin');
+(4, 0, 'darek', '0000', 'darek_giza@op.pl', '772123124', 'Darek', 'Giza', '1981-01-15', 'Al. Królewska 41', '20-121', 'Lublin'),
+(6, 0, 'asd', 'asd', 'asd@asd.pl', '123123123', 'asd', 'asd', '2019-03-14', 'asd', 'asd', 'asd'),
+(7, 0, 'asdasd', 'Robak123!.', 'asdasd@asdasd.pl', '123123123', 'asd', 'asd', '1997-03-10', 'asd', 'asd', 'asd'),
+(8, 0, 'qweqweqwe', 'Rowerek1@', 'asdasd@pqweoqwe.pl', '123123123', 'asdasd', 'asdasd', '1995-01-31', '', '', '');
+
+-- --------------------------------------------------------
 
 --
--- Struktura tabeli `users_authorization`
+-- Struktura tabeli dla tabeli `users_authorization`
 --
 
 CREATE TABLE `users_authorization` (
-                       `id_authorization` int(11) NOT NULL,
-                       `user_id` int(11) NOT NULL,
-                       `authorization_number` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-                       `is_account_active` boolean default false
+  `id_authorization` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `authorization_number` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_account_active` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `users`
+-- Zrzut danych tabeli `users_authorization`
 --
 
 INSERT INTO `users_authorization` (`id_authorization`, `user_id`, `authorization_number`, `is_account_active`) VALUES
-(1,1,null, default);
+(1, 1, NULL, 0);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -167,9 +171,7 @@ ALTER TABLE `cars`
 -- Indeksy dla tabeli `reservations`
 --
 ALTER TABLE `reservations`
-  ADD PRIMARY KEY (`reservation_id`),
-  ADD KEY `fk_users` (`user_id`),
-  ADD KEY `fk_cars` (`car_id`);
+  ADD PRIMARY KEY (`reservation_id`);
 
 --
 -- Indeksy dla tabeli `users`
@@ -183,6 +185,7 @@ ALTER TABLE `users`
 ALTER TABLE `users_authorization`
   ADD PRIMARY KEY (`id_authorization`),
   ADD KEY `fk_users` (`user_id`);
+
 --
 -- AUTO_INCREMENT for dumped tables
 --
@@ -191,30 +194,23 @@ ALTER TABLE `users_authorization`
 -- AUTO_INCREMENT dla tabeli `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT dla tabeli `users`
+-- AUTO_INCREMENT dla tabeli `users_authorization`
 --
 ALTER TABLE `users_authorization`
-  MODIFY `id_authorization` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id_authorization` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- Ograniczenia dla zrzutów tabel
 --
-
---
--- Ograniczenia dla tabeli `reservations`
---
-ALTER TABLE `reservations`
-  ADD CONSTRAINT `fk_cars` FOREIGN KEY (`car_id`) REFERENCES `cars` (`car_id`),
-  ADD CONSTRAINT `fk_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
-COMMIT;
 
 --
 -- Ograniczenia dla tabeli `users_authorization`

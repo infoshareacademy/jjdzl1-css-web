@@ -9,6 +9,9 @@
     Make: ${car.make}<br/>
     Model: ${car.model}<br/>
     Year: ${car.year}<br/>
+    <br/>
+    <img src="../${car.photoLink}" height=150 width=225>
+
 </form>
 ${error}
 <br/>

@@ -1,4 +1,4 @@
-package com.infoshare.academy.servlets;
+package com.infoshare.academy.servlets.carServlet;
 
 
 import com.infoshare.academy.dao.CarsRepositoryDao;
@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static com.infoshare.academy.utils.CarMessages.errorEmptyList;
+
 @WebServlet("/admin/carlist")
 public class ListCar extends HttpServlet {
 
@@ -22,11 +24,16 @@ public class ListCar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.setContentType("text/html;charset=UTF-8");
-
         List<Car> carList = dao.list();
 
-        req.setAttribute("carList", carList);
+        if (carList == null || carList.isEmpty()) {
+            req.setAttribute("error", errorEmptyList());
+        } else {
+            req.setAttribute("carList", carList);
+        }
         req.getRequestDispatcher("/admin/carlist.jsp").forward(req, resp);
     }
+
+
 }
+

@@ -1,14 +1,13 @@
 # CSS - CarSharingSystem 
 
-[PL description]
-CSS to aplikacja umo¿liwiaj¹ca wynajêcie samochodu w najwiêkszych miastach w Polsce.
-Opcja rezerwacji auta zapewni wybór modelu wed³ug w³asnych potrzeb - samochód miejski, rodzinny, sportowy, terenowy, dostawczy.
-## G³ówne funkcje aplikacji
-* rejestracja u¿ytkownika,
-* zmiana danych u¿ytkownika,
-* opcja potwierdzenia rezerwacji,
-* opcja anulowania rezerwacji,
-* opcja kalkulacji kosztów wypo¿yczenia.
+CSS is an application that allows you to rent a car in one of the largest cities in Poland. The car reservation option will ensure the choice of the model according to your preferences - city car, family car, sports car or delivery vehicle.
 
-### Strona g³ówna
+## Main features
+* new user registration,
+* editing user personal information
+* option to make chosen car reservation,
+* option to cancel reservation,
+* admin features like listing users, cars and reservations, adding new car to database etc.
+
+### Home page
 ![frontpage](images/frontpage.png)
