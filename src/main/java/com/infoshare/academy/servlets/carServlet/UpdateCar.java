@@ -33,6 +33,7 @@ public class UpdateCar extends HttpServlet {
             if (car != null) {
                 req.setAttribute("id", car.getId());
                 req.setAttribute("mileage", car.getMileage());
+                req.setAttribute("photoLink",car.getPhotoLink());
             } else {
                 req.setAttribute("error", errorCarIdIncorrect());
             }
