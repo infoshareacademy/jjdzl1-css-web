@@ -5,7 +5,7 @@
 <div align="center">
 
     <form method="get" action="listAvailableCar">
-        <h3>List of cars available from ${startDate} to ${endDate} </h3>
+        <h2>Check available cars</h2>
         Choose starting date: <input type="date" name="startDate" required>
         Choose ending date: <input type="date" name="endDate" required>
         <button class="btn btn-primary" type="submit">Load list</button>
