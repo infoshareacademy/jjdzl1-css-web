@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.UUID;
 
 import static com.infoshare.academy.utils.RegistrationMessages.*;
 
@@ -59,9 +60,11 @@ public class RegistrationServlet extends HttpServlet {
             RequestResponse(request, response, "tooYoungError", tooYoungMessage());
         } else {
 
+            String uuid=String.valueOf(UUID.randomUUID());
+
             User user = new User(0, login, password, email, Long.parseLong(phoneNumber), firstName,
                     lastName, LocalDate.parse(birthOfDate),
-                    streetAddress, postalCode, city);
+                    streetAddress, postalCode, city,uuid,Boolean.FALSE);
 
             User tempUserByLogin = usersRepositoryDao.getUserByLogin(login);
             User tempUserByEmail = usersRepositoryDao.getUserByEmail(email);

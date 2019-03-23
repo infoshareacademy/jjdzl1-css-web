@@ -35,8 +35,14 @@ public class User {
     private String postalCode;
     @Column(name = "city")
     private String city;
+    @Column(name = "authorization_number")
+    private String AuthorizationNumber;
+    @Column(name = "is_account_active")
+    private Boolean isAccountActive;
+
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
+
 
     public User() {
     }
@@ -47,7 +53,8 @@ public class User {
         this.email = email;
     }
 
-    public User(Integer userType, String login, String password, String email, Long phoneNumber, String firstName, String lastName, LocalDate birthDate, String streetAddress, String postalCode, String city) {
+    public User(Integer userType, String login, String password, String email, Long phoneNumber, String firstName,
+                String lastName, LocalDate birthDate, String streetAddress, String postalCode, String city) {
         this.userType = userType;
         this.login = login;
         this.password = password;
@@ -59,6 +66,24 @@ public class User {
         this.streetAddress = streetAddress;
         this.postalCode = postalCode;
         this.city = city;
+    }
+
+    public User(Integer userType, String login, String password, String email, Long phoneNumber, String firstName,
+                String lastName, LocalDate birthDate, String streetAddress, String postalCode, String city,
+                String authorizationNumber, Boolean isAccountActive) {
+        this.userType = userType;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.streetAddress = streetAddress;
+        this.postalCode = postalCode;
+        this.city = city;
+        AuthorizationNumber = authorizationNumber;
+        this.isAccountActive = isAccountActive;
     }
 
     public Integer getId() {

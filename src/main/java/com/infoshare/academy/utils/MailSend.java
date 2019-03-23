@@ -1,9 +1,10 @@
 package com.infoshare.academy.utils;
 
-import com.infoshare.academy.dao.UserAuthorizationDaoBean;
-import com.infoshare.academy.domain.UserAuthorization;
+//import com.infoshare.academy.dao.UserAuthorizationDaoBean;
+//import com.infoshare.academy.domain.UserAuthorization;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -16,8 +17,8 @@ import java.util.UUID;
 
 public class MailSend {
 
-    @EJB
-    private UserAuthorizationDaoBean bean;
+//   @EJB
+//    private UserAuthorizationDaoBean bean;
 
     private Properties emailProperties;
     private Session mailSession;
@@ -47,11 +48,11 @@ public class MailSend {
     private void createEmailMessage() throws AddressException,
             MessagingException {
         //UUID uuid= UUID.randomUUID();
-        UUID uuid= bean.setAuthorizationNumberWithUUID();
-        UserAuthorization userAuthorization= new UserAuthorization(uuid.toString(),false);
+//        UUID uuid= bean.setAuthorizationNumberWithUUID();
+//        UserAuthorization userAuthorization= new UserAuthorization(uuid.toString(),false);
         String[] toEmails = {"CarSharingSystem.help@gmail.com"};
         String emailSubject = "Registration process";
-        String emailBody =userAuthorization.toString();// uuid.toString();
+//        String emailBody =userAuthorization.toString();// uuid.toString();
 
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
@@ -61,8 +62,8 @@ public class MailSend {
         }
 
         emailMessage.setSubject(emailSubject);
-        emailMessage.setContent(emailBody, "text/html");//for a html email
-        //emailMessage.setText(emailBody);// for a text email
+//        emailMessage.setContent(emailBody, "text/html");//for a html email
+//        emailMessage.setText(emailBody);// for a text email
 
     }
 
