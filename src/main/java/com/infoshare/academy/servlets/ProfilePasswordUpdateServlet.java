@@ -2,6 +2,8 @@ package com.infoshare.academy.servlets;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
+import com.infoshare.academy.utils.PasswordHashAlgorithm;
+import com.infoshare.academy.utils.UserPasswordUtils;
 import com.infoshare.academy.utils.UserValidator;
 
 import javax.ejb.EJB;
@@ -56,7 +58,8 @@ public class ProfilePasswordUpdateServlet extends HttpServlet {
 
         if (password1.equals(password2) && isPasswordCorrect) {
             String password = password1;
-            usersDao.updateUserPassword(id, password);
+            String hashedPassword = UserPasswordUtils.hash(password, PasswordHashAlgorithm.PBKDF2);
+            usersDao.updateUserPassword(id, hashedPassword);
             resp.sendRedirect("logout");
             req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
         } else {

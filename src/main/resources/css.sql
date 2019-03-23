@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: asgard-mysql
--- Czas generowania: 23 Mar 2019, 16:17
--- Wersja serwera: 8.0.14
--- Wersja PHP: 7.2.14
+-- Host: 127.0.0.1
+-- Czas generowania: 20 Mar 2019, 21:20
+-- Wersja serwera: 10.1.36-MariaDB
+-- Wersja PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -78,7 +78,7 @@ INSERT INTO `cars` (`car_id`, `car_type`, `make`, `model`, `year`, `mileage`, `e
 --
 
 CREATE TABLE `reservations` (
-  `reservation_id` int(100) NOT NULL,
+  `reservation_id` int(12) NOT NULL,
   `car_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `start_date` date DEFAULT NULL,
@@ -90,25 +90,19 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`reservation_id`, `car_id`, `user_id`, `start_date`, `end_date`) VALUES
-(1, 1, 1, '2017-10-10', '2017-10-15'),
-(2, 2, 1, '2020-01-01', '2020-01-02'),
-(3, 3, 1, '2018-10-10', '2018-10-20'),
-(4, 4, 4, '2018-10-10', '2018-10-11'),
-(5, 5, 1, '2018-10-10', '2018-10-30'),
-(6, 6, 1, '2018-10-10', '2018-10-15'),
-(7, 7, 1, '2018-10-10', '2018-10-15'),
-(8, 8, 1, '2018-10-10', '2018-10-20'),
-(9, 9, 3, '2018-12-01', '2018-12-01'),
-(10, 10, 1, '2019-02-04', '2019-02-09'),
-(11, 11, 1, '2019-01-20', '2019-03-10'),
-(12, 12, 1, '2019-10-10', '2019-12-30'),
-(13, 13, 2, '2018-10-10', '2018-11-01'),
-(16, 14, 1, '2019-02-28', '2019-03-01'),
-(17, 15, 1, '2019-02-28', '2019-03-30'),
-(23, 17, 1, '2019-02-28', '2019-03-02'),
-(36, 1, 4, '2019-03-01', '2019-03-02'),
-(58, 3, 3, '2019-03-30', '2019-03-31'),
-(61, 11, 4, '2019-03-23', '2019-03-24');
+('1', 3, 1, '2018-10-10', '2018-10-15'),
+('10', 16, 1, '2019-02-04', '2019-02-09'),
+('11', 6, 1, '2019-01-20', '2019-03-10'),
+('12', 7, 1, '2019-10-10', '2019-12-30'),
+('13', 4, 2, '2018-10-10', '2018-11-01'),
+('2', 9, 1, '2018-10-10', '2018-10-30'),
+('3', 1, 1, '2018-10-10', '2018-10-20'),
+('4', 11, 2, '2019-04-05', '2019-04-06'),
+('5', 4, 1, '2018-10-10', '2018-10-30'),
+('6', 5, 1, '2018-10-10', '2018-10-15'),
+('7', 1, 1, '2018-10-10', '2018-10-15'),
+('8', 8, 1, '2018-10-10', '2018-10-20'),
+('9', 12, 2, '2018-12-01', '2018-12-01');
 
 -- --------------------------------------------------------
 
@@ -117,18 +111,18 @@ INSERT INTO `reservations` (`reservation_id`, `car_id`, `user_id`, `start_date`,
 --
 
 CREATE TABLE `users` (
-  `user_id` int(100) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `user_type` int(1) NOT NULL,
-  `login` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `phone_number` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `first_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `login` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `phone_number` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `birth_date` date DEFAULT NULL,
-  `street_address` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `postal_code` varchar(6) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `city` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
+  `street_address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `postal_code` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `city` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -136,11 +130,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_type`, `login`, `password`, `email`, `phone_number`, `first_name`, `last_name`, `birth_date`, `street_address`, `postal_code`, `city`) VALUES
-(1, 1, 'admin', '12345', 'admin@example.com', '601001001', 'Admin', 'Aplikacji', '1990-05-01', 'Chopina 10', '20-140', 'Lublin'),
-(2, 0, 'marek', 'maro123', 'marek@example.com', '691029123', 'Marek', 'Kowalski', '1985-10-11', 'Koncertowa 4', '20-155', 'Lublin'),
-(3, 0, 'Ewa', 'eww11.', 'ewa@example.com', '691029123', 'Ewa', 'Konieczna', '2004-07-23', 'Nadbystrzycka 48A', '20-123', 'Lublin'),
-(4, 0, 'darek', '0000', 'darek_giza@op.pl', '513083053', 'Dariusz', 'Giza', '1982-03-26', 'Al.Królewska 11', '24-100', 'Puławy'),
-(5, 0, 'dario', '3333', '', '', '', '', NULL, NULL, NULL, NULL);
+(1, 1, 'admin', '$31$16$S2AdQ1Iotlgr3ozsDMR-3OY0Fyql8_uermIXQsG-eRM', 'admin@example.com', '601001003', 'Admin', 'Adminowski', '1990-05-18', 'Chopina 5', '20-150', 'Lublin'),
+(2, 0, 'marek', '$31$16$uSIi1BcynFCxhSLZgNHmONddmL0FfTy0sZsGcTOnR4Q', 'marek@example.com', '691029123', 'Marek', 'Kowalski', '1985-10-11', 'Koncertowa 4', '20-155', 'Lublin'),
+(3, 0, 'Ewa', '$31$16$PCyovEJEPnqCNvyHRyOzoKt-4Tma0pPJyQbl7JkjKt8', 'ewa@example.com', '691029123', 'Ewa', 'Konieczna', '2004-07-23', 'Nadbystrzycka 48A', '20-123', 'Lublin'),
+(4, 0, 'darek', '$31$16$esmoxUes48YBzDF6YMmwonlz4T-ICNFGjFqHyweoWWY', 'darek_giza@op.pl', '772123124', 'Darek', 'Giza', '1981-01-15', 'Al. Królewska 41', '20-121', 'Lublin'),
+(5, 0, 'lulek', '$31$16$D24IUZGD8y2oF6eR85YflS_HSmgT7A5r4xMRdQL0Ppg', 'lulek@gmail.com', '578510123', 'Marcin', 'Turlaj', '1995-03-05', 'Północna 11', '20-150', 'LU');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -156,7 +150,9 @@ ALTER TABLE `cars`
 -- Indeksy dla tabeli `reservations`
 --
 ALTER TABLE `reservations`
-  ADD PRIMARY KEY (`reservation_id`);
+  ADD PRIMARY KEY (`reservation_id`),
+  ADD KEY `fk_users` (`user_id`),
+  ADD KEY `fk_cars` (`car_id`);
 
 --
 -- Indeksy dla tabeli `users`
@@ -172,19 +168,30 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `car_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT dla tabeli `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `reservation_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `reservation_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `reservations`
+--
+ALTER TABLE `reservations`
+  ADD CONSTRAINT `fk_cars` FOREIGN KEY (`car_id`) REFERENCES `cars` (`car_id`),
+  ADD CONSTRAINT `fk_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

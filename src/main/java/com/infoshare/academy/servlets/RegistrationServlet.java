@@ -2,6 +2,8 @@ package com.infoshare.academy.servlets;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
+import com.infoshare.academy.utils.PasswordHashAlgorithm;
+import com.infoshare.academy.utils.UserPasswordUtils;
 import com.infoshare.academy.utils.UserValidator;
 
 import javax.ejb.EJB;
@@ -59,7 +61,9 @@ public class RegistrationServlet extends HttpServlet {
             RequestResponse(request, response, "tooYoungError", tooYoungMessage());
         } else {
 
-            User user = new User(0, login, password, email, Long.parseLong(phoneNumber), firstName,
+            String hashedPassword = UserPasswordUtils.hash(password, PasswordHashAlgorithm.PBKDF2);
+
+            User user = new User(0, login, hashedPassword, email, Long.parseLong(phoneNumber), firstName,
                     lastName, LocalDate.parse(birthOfDate),
                     streetAddress, postalCode, city);
 
