@@ -6,12 +6,13 @@ import com.infoshare.academy.enums.FuelSourceEnum;
 import com.infoshare.academy.enums.TransmissionEnum;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "cars")
-public class Car {
+public class Car implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
