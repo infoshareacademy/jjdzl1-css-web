@@ -19,17 +19,7 @@
 
               <c:forEach var="car" items="${carExampleList}">
                   <tr>
-                      <td><c:choose>
-                          <c:when test="${car.id==1}"><img src="img/1.jpeg" height="150" width="225" ></c:when>
-                          <c:when test="${car.id==2}"><img src="img/2.jpeg" height="150" width="225" ></c:when>
-                          <c:when test="${car.id==3}"><img src="img/3.jpeg" height="150" width="225" ></c:when>
-                          <c:when test="${car.id==4}"><img src="img/4.jpeg" height="150" width="225" ></c:when>
-                          <c:when test="${car.id==5}"><img src="img/5.jpeg" height="150" width="225" ></c:when>
-                          <c:when test="${car.id==6}"><img src="img/6.jpeg" height="150" width="225" ></c:when>
-                          <c:when test="${car.id==7}"><img src="img/7.jpeg" height="150" width="225" ></c:when>
-                          <c:when test="${car.id==8}"><img src="img/8.jpeg" height="150" width="225" ></c:when>
-                      </c:choose>
-                      </td>
+                      <td style="text-align: center; vertical-align: middle;"><img src="${car.photoLink}" height=150 width=225 ></td>
                       <td style="text-align: center; vertical-align: middle;">${car.make}</td>
                       <td style="text-align: center; vertical-align: middle;">${car.model}</td>
                       <td style="text-align: center; vertical-align: middle;">${car.year}</td>

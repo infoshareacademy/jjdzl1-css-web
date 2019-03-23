@@ -29,46 +29,47 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cars` (
-  `car_id` int(11) NOT NULL,
+  `car_id` int(100) NOT NULL,
   `car_type` int(4) NOT NULL,
-  `make` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `model` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `make` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `model` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `year` int(4) NOT NULL,
   `mileage` int(10) NOT NULL,
   `engine_power` float DEFAULT NULL,
-  `fuel_source` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `transmission` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `body_type` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `color` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fuel_source` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `transmission` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `body_type` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `color` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `seats` int(2) DEFAULT NULL,
   `capacity` int(15) DEFAULT NULL,
-  `cargo_space` int(15) DEFAULT NULL
+  `cargo_space` int(15) DEFAULT NULL,
+  `photo_link` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Zrzut danych tabeli `cars`
 --
 
-INSERT INTO `cars` (`car_id`, `car_type`, `make`, `model`, `year`, `mileage`, `engine_power`, `fuel_source`, `transmission`, `body_type`, `color`, `seats`, `capacity`, `cargo_space`) VALUES
-(1, 1, 'BMW', 'M5', 2015, 65000, 350, 'PETROL', 'MANUAL', 'SEDAN', 'WHITE', 5, NULL, NULL),
-(2, 1, 'Audi', 'R8', 2015, 35000, 435, 'PETROL', 'AUTOMATIC', 'COUPE', 'RED', 5, NULL, NULL),
-(3, 1, 'BMW', 'E90', 2011, 65000, 220, 'DIESEL', 'MANUAL', 'SEDAN', 'WHITE', 5, NULL, NULL),
-(4, 1, 'Audi', 'Q5', 2017, 60000, 240, 'DIESEL', 'AUTOMATIC', 'COUPE', 'SILVER', 5, NULL, NULL),
-(5, 1, 'BMW', 'M3', 2015, 120000, 435, 'DIESEL', 'MANUAL', 'COUPE', 'BLACK', 4, NULL, NULL),
-(6, 1, 'BMW', 'X3', 2016, 15000, 200, 'DIESEL', 'AUTOMATIC', 'SUV', 'SILVER', 7, NULL, NULL),
-(7, 1, 'Opel', 'Astra', 2018, 15000, 75, 'PETROLANDGAS', 'MANUAL', 'SEDAN', 'RED', 5, NULL, NULL),
-(8, 1, 'Opel', 'Meriva', 2014, 35000, 130, 'DIESEL', 'AUTOMATIC', 'SEDAN', 'BEIGE', 7, NULL, NULL),
-(9, 1, 'Opel', 'Insignia', 2019, 5000, 180, 'DIESEL', 'AUTOMATIC', 'COUPE', 'BLACK', 5, NULL, NULL),
-(10, 1, 'Toyota', 'C-HR', 2017, 25000, 170, 'DIESEL', 'AUTOMATIC', 'SUV', 'WHITE', 7, NULL, NULL),
-(11, 1, 'Mercedes', 'ML350', 2016, 115000, 280, 'PETROL', 'AUTOMATIC', 'SUV', 'BLACK', 7, NULL, NULL),
-(12, 1, 'Jeep', 'Cherokee', 2018, 15000, 180, 'DIESEL', 'AUTOMATIC', 'SUV', 'RED', 7, NULL, NULL),
-(13, 1, 'Mitsubishi', 'L200', 2013, 76000, 235, 'DIESEL', 'AUTOMATIC', 'SUV', 'BLACK', 7, NULL, NULL),
-(14, 1, 'Mercedes', 'GLK', 2009, 160000, 265, 'DIESEL', 'AUTOMATIC', 'SUV', 'BLACK', 7, NULL, NULL),
-(15, 1, 'Porsche', 'Cayenne', 2016, 35000, 280, 'PETROL', 'AUTOMATIC', 'SUV', 'BLACK', 5, NULL, NULL),
-(16, 2, 'Mercedes', 'Sprinter', 2016, 60000, 190, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
-(17, 2, 'Mercedes', 'Sprinter', 2018, 35000, 180, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
-(18, 2, 'Mercedes', 'Vito', 2013, 130000, 130, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0),
-(19, 2, 'Iveco', 'Daily', 2015, 235000, 280, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0);
+INSERT INTO `cars` (`car_id`, `car_type`, `make`, `model`, `year`, `mileage`, `engine_power`, `fuel_source`, `transmission`, `body_type`, `color`, `seats`, `capacity`, `cargo_space`, `photo_link`) VALUES
+(1, 1, 'BMW', 'M5', 2015, 65000, 350, 'PETROL', 'MANUAL', 'SEDAN', 'WHITE', 5, NULL, NULL, 'img/1.jpeg'),
+(2, 1, 'Audi', 'R8', 2015, 35000, 435, 'PETROL', 'AUTOMATIC', 'COUPE', 'RED', 5, NULL, NULL, 'img/2.jpeg'),
+(3, 1, 'BMW', 'E90', 2011, 65000, 220, 'DIESEL', 'MANUAL', 'SEDAN', 'WHITE', 5, NULL, NULL, 'img/3.jpeg'),
+(4, 1, 'Audi', 'Q5', 2017, 60000, 240, 'DIESEL', 'AUTOMATIC', 'COUPE', 'SILVER', 5, NULL, NULL, 'img/4.jpeg'),
+(5, 1, 'BMW', 'M3', 2015, 120000, 435, 'DIESEL', 'MANUAL', 'COUPE', 'BLACK', 4, NULL, NULL, 'img/5.jpeg'),
+(6, 1, 'BMW', 'X3', 2016, 15000, 200, 'DIESEL', 'AUTOMATIC', 'SUV', 'SILVER', 7, NULL, NULL, 'img/6.jpeg'),
+(7, 1, 'Opel', 'Astra', 2018, 15000, 75, 'PETROLANDGAS', 'MANUAL', 'SEDAN', 'RED', 5, NULL, NULL, 'img/7.jpeg'),
+(8, 1, 'Opel', 'Meriva', 2014, 35000, 130, 'DIESEL', 'AUTOMATIC', 'SEDAN', 'BEIGE', 7, NULL, NULL, 'img/8.jpeg'),
+(9, 1, 'Opel', 'Insignia', 2019, 5000, 180, 'DIESEL', 'AUTOMATIC', 'COUPE', 'BLACK', 5, NULL, NULL, 'img/9.jpeg'),
+(10, 1, 'Toyota', 'C-HR', 2017, 25000, 170, 'DIESEL', 'AUTOMATIC', 'SUV', 'WHITE', 7, NULL, NULL, 'img/10.jpeg'),
+(11, 1, 'Mercedes', 'ML350', 2016, 115000, 280, 'PETROL', 'AUTOMATIC', 'SUV', 'BLACK', 7, NULL, NULL, 'img/11.jpeg'),
+(12, 1, 'Jeep', 'Cherokee', 2018, 15000, 180, 'DIESEL', 'AUTOMATIC', 'SUV', 'RED', 7, NULL, NULL, 'img/12.jpeg'),
+(13, 1, 'Mitsubishi', 'L200', 2013, 76000, 235, 'DIESEL', 'AUTOMATIC', 'SUV', 'BLACK', 7, NULL, NULL, 'img/13.jpeg'),
+(14, 1, 'Mercedes', 'GLK', 2009, 160000, 265, 'DIESEL', 'AUTOMATIC', 'SUV', 'BLACK', 7, NULL, NULL, 'img/14.jpeg'),
+(15, 1, 'Porsche', 'Cayenne', 2016, 35000, 280, 'PETROL', 'AUTOMATIC', 'SUV', 'BLACK', 5, NULL, NULL, 'img/15.jpeg'),
+(16, 2, 'Mercedes', 'Sprinter', 2016, 60000, 190, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0, 'img/16.jpeg'),
+(17, 2, 'Mercedes', 'Sprinter', 2018, 35000, 180, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0, 'img/17.jpeg'),
+(18, 2, 'Mercedes', 'Vito', 2013, 130000, 130, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0, 'img/18.jpeg'),
+(19, 2, 'Iveco', 'Daily', 2015, 245000, 280, 'DIESEL', 'MANUAL', 'WAGON', 'WHITE', 3, 0, 0, 'img/19.jpeg');
 
 -- --------------------------------------------------------
 

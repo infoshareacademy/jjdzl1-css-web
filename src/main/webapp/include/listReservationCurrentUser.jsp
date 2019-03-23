@@ -21,27 +21,7 @@
 
             <c:forEach var="reservation" items="${reservationByUserId}">
                 <tr>
-                    <td><c:choose>
-                        <c:when test="${reservation.car.id==1}"><img src="img/1.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==2}"><img src="img/2.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==3}"><img src="img/3.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==4}"><img src="img/4.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==5}"><img src="img/5.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==6}"><img src="img/6.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==7}"><img src="img/7.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==8}"><img src="img/8.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==9}"><img src="img/9.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==10}"><img src="img/10.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==11}"><img src="img/11.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==12}"><img src="img/12.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==13}"><img src="img/13.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==14}"><img src="img/14.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==15}"><img src="img/15.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==16}"><img src="img/16.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==17}"><img src="img/17.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==18}"><img src="img/18.jpeg" height=150 width=225 ></c:when>
-                        <c:when test="${reservation.car.id==19}"><img src="img/19.jpeg" height=150 width=225 ></c:when>
-                        </c:choose>
+                    <td style="text-align: center; vertical-align: middle;"><img src="${reservation.car.photoLink}" height=150 width=225 ></td>
                     <td style="text-align: center; vertical-align: middle;">${reservation.reservation_id}</td>
                     <td style="text-align: center; vertical-align: middle;">${reservation.user.id}</td>
                     <td style="text-align: center; vertical-align: middle;">${reservation.user.login}</td>

@@ -8,6 +8,7 @@
             <br/>
             Car id:${id}<br/>
             Mileage:${mileage} km<br/>
+            <img src="../${photoLink}" height=150 width=225>
         </form>
     </div>
 </div>

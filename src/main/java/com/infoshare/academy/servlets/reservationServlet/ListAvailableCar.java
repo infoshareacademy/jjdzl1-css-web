@@ -14,7 +14,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import static com.infoshare.academy.utils.CarMessages.errorMessage;
 import static com.infoshare.academy.utils.ReservationMessages.errorEndGreaterThanStart;
 import static com.infoshare.academy.utils.ReservationMessages.errorStartGreaterNow;
 
@@ -45,13 +44,36 @@ public class ListAvailableCar extends HttpServlet {
                 req.setAttribute("error", errorEndGreaterThanStart());
             } else {
 
+
+                int currentPage = Integer.valueOf(req.getParameter("currentPage"));
+
+
+                List<Car> carListAvailableCarLimit = daoReservation.getCarListAvailableCarLimit(start, end, currentPage);
+
+                // carListAvailableCarLimit zwraca mi 3 linijki i wylicza mi tylko 2 podstrony
+
                 List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start, end);
+
+                // carListAvailableCar zwraca mi wszystkie jakie są dostępne np 15 i na podstawie tego
+                // mogę wyliczyć ilość podstron
+
+                int rows = carListAvailableCar.size();
+
+                int nOfPages = rows / 3;
+                if (rows % 3 > 0) {
+                    nOfPages++;
+                }
+
+                req.setAttribute("noOfPages", nOfPages);
+                req.setAttribute("currentPage", currentPage);
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+                req.setAttribute("start", start);
+                req.setAttribute("end", end);
                 req.setAttribute("startDate", start.format(formatter));
                 req.setAttribute("endDate", end.format(formatter));
-                req.setAttribute("carListAvailableCar", carListAvailableCar);
+                req.setAttribute("carListAvailableCarLimit", carListAvailableCarLimit);
             }
             req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
         }
