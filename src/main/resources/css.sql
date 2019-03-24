@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Czas generowania: 20 Mar 2019, 21:20
--- Wersja serwera: 10.1.36-MariaDB
--- Wersja PHP: 7.2.11
+-- Host: asgard-mysql
+-- Czas generowania: 24 Mar 2019, 14:15
+-- Wersja serwera: 8.0.14
+-- Wersja PHP: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cars` (
-  `car_id` int(100) NOT NULL,
+  `car_id` int(11) NOT NULL,
   `car_type` int(4) NOT NULL,
   `make` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `model` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -90,19 +90,27 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`reservation_id`, `car_id`, `user_id`, `start_date`, `end_date`) VALUES
-('1', 3, 1, '2018-10-10', '2018-10-15'),
-('10', 16, 1, '2019-02-04', '2019-02-09'),
-('11', 6, 1, '2019-01-20', '2019-03-10'),
-('12', 7, 1, '2019-10-10', '2019-12-30'),
-('13', 4, 2, '2018-10-10', '2018-11-01'),
-('2', 9, 1, '2018-10-10', '2018-10-30'),
-('3', 1, 1, '2018-10-10', '2018-10-20'),
-('4', 11, 2, '2019-04-05', '2019-04-06'),
-('5', 4, 1, '2018-10-10', '2018-10-30'),
-('6', 5, 1, '2018-10-10', '2018-10-15'),
-('7', 1, 1, '2018-10-10', '2018-10-15'),
-('8', 8, 1, '2018-10-10', '2018-10-20'),
-('9', 12, 2, '2018-12-01', '2018-12-01');
+(1, 3, 1, '2018-10-10', '2018-10-15'),
+(2, 9, 1, '2018-10-10', '2018-10-30'),
+(3, 1, 1, '2018-10-10', '2018-10-20'),
+(4, 11, 2, '2019-04-05', '2019-04-06'),
+(5, 4, 1, '2018-10-10', '2018-10-30'),
+(6, 5, 1, '2018-10-10', '2018-10-15'),
+(7, 2, 1, '2018-10-10', '2018-10-15'),
+(8, 8, 1, '2018-10-10', '2018-10-20'),
+(9, 12, 2, '2018-12-01', '2018-12-01'),
+(10, 17, 1, '2019-02-04', '2019-02-09'),
+(11, 6, 1, '2019-01-20', '2019-03-10'),
+(12, 7, 1, '2019-10-10', '2019-12-30'),
+(13, 4, 2, '2018-10-10', '2018-11-01'),
+(15, 10, 4, '2019-03-24', '2019-03-25'),
+(16, 16, 4, '2019-03-31', '2019-03-31'),
+(17, 6, 4, '2019-03-30', '2019-03-31'),
+(18, 13, 3, '2018-10-10', '2018-10-15'),
+(19, 14, 3, '2018-10-10', '0201-10-11'),
+(20, 15, 2, '2018-10-10', '2018-10-30'),
+(21, 18, 2, '2018-11-01', '2018-12-01'),
+(22, 19, 2, '2018-12-01', '2018-12-02');
 
 -- --------------------------------------------------------
 
@@ -113,16 +121,16 @@ INSERT INTO `reservations` (`reservation_id`, `car_id`, `user_id`, `start_date`,
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `user_type` int(1) NOT NULL,
-  `login` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `phone_number` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `first_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `login` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `phone_number` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `birth_date` date DEFAULT NULL,
-  `street_address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `postal_code` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `city` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
+  `street_address` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `postal_code` varchar(6) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `city` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -174,7 +182,7 @@ ALTER TABLE `cars`
 -- AUTO_INCREMENT dla tabeli `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `reservation_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `reservation_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
