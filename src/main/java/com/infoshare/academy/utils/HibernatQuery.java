@@ -30,8 +30,7 @@ public class HibernatQuery {
                 "where id IN (SELECT car FROM Reservation WHERE"  +
                 "(startDate>'"+startDate+"' and startDate>'"+endDate+"')"+
                 "or (endDate<'"+startDate+"' and startDate>'"+endDate+"')"+
-                "or (endDate<'"+startDate+"'))").getResultList();
-
+                "or (endDate<'"+startDate+"')) or id IN (SELECT c from Car c)").getResultList();
         session.getTransaction().commit();
         session.close();
 

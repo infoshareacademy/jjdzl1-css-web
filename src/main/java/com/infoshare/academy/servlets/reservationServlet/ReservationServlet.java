@@ -8,7 +8,6 @@ import com.infoshare.academy.domain.Reservation;
 import com.infoshare.academy.domain.User;
 
 import javax.ejb.EJB;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,10 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 import java.util.List;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import static com.infoshare.academy.utils.ReservationMessages.*;
 
@@ -61,9 +57,9 @@ public class ReservationServlet extends HttpServlet {
                 int currentPage = Integer.valueOf(req.getParameter("currentPage"));
 
                 List<Car> carListAvailableCarLimit = daoReservation.getCarListAvailableCarLimit(start, end, currentPage);
-                List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start, end);
 
-                int rows = carListAvailableCar.size();
+                int rows=daoReservation.getCountCarListAvailableCar(start,end);
+
 
                 int nOfPages = rows / 3;
                 if (rows % 3 > 0) {

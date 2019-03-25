@@ -16,6 +16,15 @@ import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 @Stateless
 public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
 
+    public LocalDate startDate;
+    public LocalDate endDate;
+
+    private String availableCar="SELECT  c FROM Car c  where id  IN " +
+            "(SELECT car FROM Reservation WHERE (startDate>'"+startDate+"' and startDate>'"+endDate+"')" +
+            " or (endDate<'"+startDate+"' and startDate>'"+endDate+"')" +
+            " or (endDate<'"+startDate+"'))or id IN (SELECT c from Car c)" +
+            "ORDER BY c.id ASC";
+
     @Override
     public Reservation addReservation(Reservation reservation) {
         Session session = getSession();
@@ -74,24 +83,24 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     @Override
     public List<Car> getCarListAvailableCar(LocalDate startDate, LocalDate endDate) {
         Session session=getSession();
-        List<Car> carListAvailableCar=session.createQuery("SELECT c FROM Car c " +
-                "where id IN (SELECT car FROM Reservation WHERE"  +
-                "(startDate>'"+startDate+"' and startDate>'"+endDate+"')"+
-                "or (endDate<'"+startDate+"' and startDate>'"+endDate+"')"+
-                "or (endDate<'"+startDate+"'))ORDER BY c.id ASC").getResultList();
+        List<Car> carListAvailableCar=session.createQuery(availableCar).getResultList();
         commitTransaction(session);
         return carListAvailableCar;
     }
 
     @Override
+    public Integer getCountCarListAvailableCar(LocalDate startDate, LocalDate endDate) {
+        Session session =getSession();
+        List<Car> carList=session.createQuery(availableCar).getResultList();
+        int carCount=carList.size();
+        commitTransaction(session);
+        return carCount;
+    }
+
+    @Override
     public List<Car> getCarListAvailableCarLimit(LocalDate startDate, LocalDate endDate,int i) {
         Session session=getSession();
-        String query="SELECT  c FROM Car c  where id  IN " +
-                "(SELECT car FROM Reservation WHERE (startDate>'"+startDate+"' and startDate>'"+endDate+"')" +
-                " or (endDate<'"+startDate+"' and startDate>'"+endDate+"')" +
-                " or (endDate<'"+startDate+"'))" +
-                "ORDER BY c.id ASC";
-        Query carList=session.createQuery(query);
+        Query carList=session.createQuery(availableCar);
         int pageSize=3;
         carList.setFirstResult(pageSize*(i-1));
         carList.setMaxResults(pageSize);
