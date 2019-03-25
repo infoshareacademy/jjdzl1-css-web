@@ -50,14 +50,7 @@ public class ListAvailableCar extends HttpServlet {
 
                 List<Car> carListAvailableCarLimit = daoReservation.getCarListAvailableCarLimit(start, end, currentPage);
 
-                // carListAvailableCarLimit zwraca mi 3 linijki i wylicza mi tylko 2 podstrony
-
-                List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start, end);
-
-                // carListAvailableCar zwraca mi wszystkie jakie są dostępne np 15 i na podstawie tego
-                // mogę wyliczyć ilość podstron
-
-                int rows = carListAvailableCar.size();
+                int rows=daoReservation.getCountCarListAvailableCar(start,end);
 
                 int nOfPages = rows / 3;
                 if (rows % 3 > 0) {
