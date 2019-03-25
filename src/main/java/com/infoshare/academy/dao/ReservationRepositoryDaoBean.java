@@ -78,7 +78,7 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
                 "where id IN (SELECT car FROM Reservation WHERE"  +
                 "(startDate>'"+startDate+"' and startDate>'"+endDate+"')"+
                 "or (endDate<'"+startDate+"' and startDate>'"+endDate+"')"+
-                "or (endDate<'"+startDate+"'))ORDER BY c.id ASC").getResultList();
+                "or (endDate<'"+startDate+"'))or id IN (SELECT c from Car c) ORDER BY c.id ASC").getResultList();
         commitTransaction(session);
         return carListAvailableCar;
     }
@@ -89,7 +89,7 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
         String query="SELECT  c FROM Car c  where id  IN " +
                 "(SELECT car FROM Reservation WHERE (startDate>'"+startDate+"' and startDate>'"+endDate+"')" +
                 " or (endDate<'"+startDate+"' and startDate>'"+endDate+"')" +
-                " or (endDate<'"+startDate+"'))" +
+                " or (endDate<'"+startDate+"'))or id IN (SELECT c from Car c)" +
                 "ORDER BY c.id ASC";
         Query carList=session.createQuery(query);
         int pageSize=3;
