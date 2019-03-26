@@ -2,6 +2,8 @@ package com.infoshare.academy.servlets;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
+import com.infoshare.academy.utils.PasswordHashAlgorithm;
+import com.infoshare.academy.utils.UserPasswordUtils;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -33,8 +35,9 @@ public class LoginServlet extends HttpServlet {
 
         User tempUser = createUserBasedOnFormLogin(username);
         Integer usertype = tempUser.getUserType();
+        boolean checkPassword = UserPasswordUtils.check(password, tempUser.getPassword(), PasswordHashAlgorithm.PBKDF2);
 
-        if (tempUser != null && tempUser.getPassword().equals(password)) {
+        if (tempUser != null && checkPassword) {
             RequestDispatcher req = request.getRequestDispatcher("listAvailableCar.jsp");
             HttpSession session = request.getSession();
             session.setAttribute("username", username);

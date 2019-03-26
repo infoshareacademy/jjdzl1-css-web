@@ -28,26 +28,54 @@ public class ListAvailableCar extends HttpServlet {
 
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
-        LocalDate now = LocalDate.now();
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
-        boolean isAfter = start.isAfter(end);
-        boolean isPast = now.isAfter(start);
 
-        if (isPast) {
-            req.setAttribute("error", errorStartGreaterNow());
-        } else if (isAfter) {
-            req.setAttribute("error", errorEndGreaterThanStart());
+        if (startDate == null || startDate.isEmpty() || endDate == null || endDate.isEmpty()) {
+            req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
         } else {
+            LocalDate now = LocalDate.now();
+            LocalDate start = LocalDate.parse(startDate);
+            LocalDate end = LocalDate.parse(endDate);
+            boolean isAfter = start.isAfter(end);
+            boolean isPast = now.isAfter(start);
 
-            List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start, end);
+            if (isPast) {
+                req.setAttribute("error", errorStartGreaterNow());
+            } else if (isAfter) {
+                req.setAttribute("error", errorEndGreaterThanStart());
+            } else {
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-            req.setAttribute("startDate", start.format(formatter));
-            req.setAttribute("endDate", end.format(formatter));
-            req.setAttribute("carListAvailableCar", carListAvailableCar);
+                int currentPage = Integer.valueOf(req.getParameter("currentPage"));
+
+
+                List<Car> carListAvailableCarLimit = daoReservation.getCarListAvailableCarLimit(start, end, currentPage);
+
+                // carListAvailableCarLimit zwraca mi 3 linijki i wylicza mi tylko 2 podstrony
+
+                List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start, end);
+
+                // carListAvailableCar zwraca mi wszystkie jakie są dostępne np 15 i na podstawie tego
+                // mogę wyliczyć ilość podstron
+
+                int rows = carListAvailableCar.size();
+
+                int nOfPages = rows / 3;
+                if (rows % 3 > 0) {
+                    nOfPages++;
+                }
+
+                req.setAttribute("noOfPages", nOfPages);
+                req.setAttribute("currentPage", currentPage);
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+                req.setAttribute("start", start);
+                req.setAttribute("end", end);
+                req.setAttribute("startDate", start.format(formatter));
+                req.setAttribute("endDate", end.format(formatter));
+                req.setAttribute("carListAvailableCarLimit", carListAvailableCarLimit);
+            }
+            req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
         }
-        req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
     }
 }

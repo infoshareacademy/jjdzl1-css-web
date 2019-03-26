@@ -8,54 +8,47 @@
     <!-- /.col-lg-8 -->
     <div class="col-lg-6">
         <h1>CarSharingSystem</h1>
-        <p>CSS to aplikacja umożliwiająca wynajęcie samochodu w jednym z 15 największych miast w Polsce. Opcja rezerwacji auta zapewni wybór modelu według własnych preferencji - samochód miejski, rodzinny, sportowy, dostawczy.</p>
-        <a class="btn btn-primary btn-lg" href="#">Wypróbuj!</a>
+        <p>CSS is an application that allows you to rent a car in one of the largest cities in Poland. The car reservation option will ensure the choice of the model according to your preferences - city car, family car, sports car or delivery vehicle.</p>
+        <a class="btn btn-primary btn-lg" href="carlist">Try it out!</a>
     </div>
     <!-- /.col-md-4 -->
 </div>
 <!-- /.row -->
 
-<!-- Long Bar for Action -->
-<div class="card text-white bg-info my-4 text-center">
-    <div class="card-body">
-        <p class="text-white m-0">Informacja: nie wszystkie funkcjonalności są uruchomione, przepraszamy za utrudnienia!</p>
-    </div>
-</div>
-
 <!-- Content Row -->
 <div class="row">
     <div class="col-md-4 mb-4">
-        <div class="card h-100">
+        <div class="card bg-light h-100">
             <div class="card-body">
-                <h2 class="card-title">Aktualności</h2>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                <h2 class="card-title">Reservations</h2>
+                <p class="card-text">Choose the car that suits your needs. Don't wait, just check available time and start using one of our vehicles!</p>
             </div>
             <div class="card-footer">
-                <a href="#" class="btn btn-primary">Więcej</a>
+                <a href="listAvailableCar.jsp" class="btn btn-primary">Begin now</a>
             </div>
         </div>
     </div>
     <!-- /.col-md-4 -->
     <div class="col-md-4 mb-4">
-        <div class="card h-100">
+        <div class="card bg-light h-100">
             <div class="card-body">
-                <h2 class="card-title">Samochody</h2>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
+                <h2 class="card-title">Pricing</h2>
+                <p class="card-text">Every vehicle class has it's own price level per day. If you make reservation for longer period you will get discounts and even can ask our staff for individual offers.  </p>
             </div>
             <div class="card-footer">
-                <a href="#" class="btn btn-primary">Więcej</a>
+                <a href="pricing.jsp" class="btn btn-primary">Learn more</a>
             </div>
         </div>
     </div>
     <!-- /.col-md-4 -->
     <div class="col-md-4 mb-4">
-        <div class="card h-100">
+        <div class="card bg-light h-100">
             <div class="card-body">
-                <h2 class="card-title">Społeczność</h2>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                <h2 class="card-title">Contact</h2>
+                <p class="card-text">If you have any questions, want to talk about our service, insurance or special offers please contact one of our team member.</p>
             </div>
             <div class="card-footer">
-                <a href="#" class="btn btn-primary">Więcej</a>
+                <a href="contact.jsp" class="btn btn-primary">More</a>
             </div>
         </div>
     </div>

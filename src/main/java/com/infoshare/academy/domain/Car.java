@@ -6,12 +6,13 @@ import com.infoshare.academy.enums.FuelSourceEnum;
 import com.infoshare.academy.enums.TransmissionEnum;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "cars")
-public class Car {
+public class Car implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +51,9 @@ public class Car {
 
     @Column(name = "seats")
     private Integer seats;
+
+    @Column(name = "photo_link")
+    private String photoLink;
 
     //CarTruck
     @Column(name = "capacity")
@@ -192,6 +196,10 @@ public class Car {
         this.cargoSpace = cargoSpace;
     }
 
+    public String getPhotoLink() { return photoLink;}
+
+    public void setPhotoLink(String photoLink) { this.photoLink = photoLink; }
+
     public List<Reservation> getReservations() {
         return reservations;
     }
@@ -209,7 +217,6 @@ public class Car {
     }
 
     @Override
-
     public String toString() {
         return "Car{" +
                 "id=" + id +

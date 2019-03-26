@@ -5,32 +5,36 @@
 <div align="center">
 
     <form method="get" action="listAvailableCar">
-        <h2>List of cars available from ${startDate} to ${endDate} </h2>
+        <h2>Check available cars</h2>
         Choose starting date: <input type="date" name="startDate" required>
         Choose ending date: <input type="date" name="endDate" required>
         <button class="btn btn-primary" type="submit">Load list</button>
         ${error}
         <br/><br/>
+        <input type = "hidden" name = "currentPage" value = "1">
 
-        <table class="table table-sm table-striped">
+        <table class="table table-striped">
             <tr>
-                <th>Car id</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Year</th>
-                <th>Fuel source</th>
+                <th style="text-align: center; vertical-align: middle;">Photo</th>
+                <th style="text-align: center; vertical-align: middle;">Car id</th>
+                <th style="text-align: center; vertical-align: middle;">Make</th>
+                <th style="text-align: center; vertical-align: middle;">Model</th>
+                <th style="text-align: center; vertical-align: middle;">Year</th>
+                <th style="text-align: center; vertical-align: middle;">Fuel source</th>
             </tr>
 
-            <c:forEach var="car" items="${carListAvailableCar}">
+            <c:forEach var="car" items="${carListAvailableCarLimit}">
                 <tr>
-                    <td>${car.id}</td>
-                    <td>${car.make}</td>
-                    <td>${car.model}</td>
-                    <td>${car.year}</td>
-                    <td>${car.fuelSource}</td>
+                    <td style="text-align: center; vertical-align: middle;"><img src="${car.photoLink}" height=150 width=225 ></td>
+                    <td style="text-align: center; vertical-align: middle;">${car.id}</td>
+                    <td style="text-align: center; vertical-align: middle;">${car.make}</td>
+                    <td style="text-align: center; vertical-align: middle;">${car.model}</td>
+                    <td style="text-align: center; vertical-align: middle;">${car.year}</td>
+                    <td style="text-align: center; vertical-align: middle;">${car.fuelSource}</td>
                 </tr>
             </c:forEach>
         </table>
     </form>
+
 </div>
 
