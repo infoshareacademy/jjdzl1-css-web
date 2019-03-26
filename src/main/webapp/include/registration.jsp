@@ -6,6 +6,7 @@
 
     ${error}
     ${passwordError}
+    ${emailError}
     ${tooYoungError}
     ${unavailableLoginError}
     ${unavailableEmailError}
@@ -54,7 +55,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="birthOfDate">Birth date <span class="text-muted">(Optional)</span></label>
+            <label for="birthOfDate">Birth date</label>
             <input type="date" name="birthOfDate" class="form-control" id="birthOfDate" required>
         </div>
 

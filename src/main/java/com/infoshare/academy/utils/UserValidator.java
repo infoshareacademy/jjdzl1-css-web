@@ -3,8 +3,6 @@ package com.infoshare.academy.utils;
 import com.infoshare.academy.dao.UsersRepositoryDao;
 
 import javax.ejb.EJB;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -16,8 +14,8 @@ public class UserValidator {
     private UsersRepositoryDao usersRepositoryDao;
 
     public Boolean isPasswordCorrect(String password) {
-        String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.])(?=\\S+$).{8,}$";
-        return password.matches(pattern);
+        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.])(?=\\S+$).{8,}$";
+        return password.matches(passwordPattern);
 
         /*^                 # start-of-string
         (?=.*[0-9])       # a digit must occur at least once
@@ -30,15 +28,9 @@ public class UserValidator {
         */
     }
 
-    public Boolean isEmailCorrect(String email) {
-        boolean result = true;
-        try {
-            InternetAddress emailAddress = new InternetAddress(email);
-            emailAddress.validate();
-        } catch (AddressException ex) {
-            result = false;
-        }
-        return result;
+    public boolean isEmailCorrect(String email) {
+        String emailPattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        return email.matches(emailPattern);
     }
 
     public Boolean isAdult(String dateOfBirth) {
