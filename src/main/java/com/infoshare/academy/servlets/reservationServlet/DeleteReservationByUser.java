@@ -41,7 +41,7 @@ public class DeleteReservationByUser extends HttpServlet {
         } else {
             req.setAttribute("reservationByUserId", reservationByUserId);
         }
-        req.getRequestDispatcher("/deletereservation.jsp").forward(req, resp);
+        req.getRequestDispatcher("/deletereservationbyuser.jsp").forward(req, resp);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class DeleteReservationByUser extends HttpServlet {
                 }
             }
         }
-        req.getRequestDispatcher("/deletereservation.jsp").forward(req, resp);
+        req.getRequestDispatcher("/deletereservationbyuser.jsp").forward(req, resp);
 
     }
 
