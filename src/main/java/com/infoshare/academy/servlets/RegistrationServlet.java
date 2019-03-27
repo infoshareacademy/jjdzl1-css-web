@@ -37,6 +37,7 @@ public class RegistrationServlet extends HttpServlet {
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+        String password2 = request.getParameter("password2");
         String email = request.getParameter("email");
         String phoneNumber = request.getParameter("phoneNumber");
         String firstName = request.getParameter("firstName");
@@ -47,6 +48,7 @@ public class RegistrationServlet extends HttpServlet {
         String postalCode = request.getParameter("postalCode");
 
         Boolean isPasswordCorrect = new UserValidator().isPasswordCorrect(password);
+        Boolean isPasswordMatch = password.equals(password2);
         Boolean isEmailCorrect = new UserValidator().isEmailCorrect(email);
         Boolean isAdult = new UserValidator().isAdult(birthOfDate);
         Boolean isBeforePresentDay = new UserValidator().isBeforePresentDate(birthOfDate);
@@ -57,6 +59,8 @@ public class RegistrationServlet extends HttpServlet {
             RequestResponse(request, response, "error", passwordIncorrectAndTooYoungMessage());
         } else if (!isPasswordCorrect) {
             RequestResponse(request, response, "passwordError", passwordIncorrectMessage());
+        } else if (!isPasswordMatch) {
+            RequestResponse(request, response, "passwordNotMatchError", passwordNotMatchMessage());
         } else if (!isEmailCorrect) {
             RequestResponse(request, response, "emailError", incorrectEmail());
         } else if (isAdult) {
@@ -82,7 +86,7 @@ public class RegistrationServlet extends HttpServlet {
                 setUUIDAndActivationStatusForNewUser(user);
                 usersRepositoryDao.addUser(user);
                 try {
-                    usersRepositoryDao.sendEmailToNewUser(user.getLogin(),user.getEmail(),user.getAuthorizationNumber());
+                    usersRepositoryDao.sendEmailToNewUser(user.getLogin(), user.getEmail(), user.getAuthorizationNumber());
                 } catch (MessagingException e) {
                     e.printStackTrace();
                 }
@@ -97,7 +101,7 @@ public class RegistrationServlet extends HttpServlet {
         req.forward(request, response);
     }
 
-    private void setUUIDAndActivationStatusForNewUser(User user){
+    private void setUUIDAndActivationStatusForNewUser(User user) {
         UUIDGeneratorForNewUser generator = new UUIDGeneratorForNewUser();
         user.setAuthorizationNumber(generator.getGeneratedNewUUIDForNewUser());
         user.setAccountActive(false);

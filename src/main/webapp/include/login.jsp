@@ -8,8 +8,8 @@
         <form class="form-signin" action="login" method="post">
             <h1 class="h3 mb-3 font-weight-normal">Please log in here</h1>
             <div class="form-group">
-                <label for="inputLogin" class="sr-only">Username</label>
-                <input type="text" name="username" id="inputLogin" class="form-control" placeholder="Username" required autofocus>
+                <label for="inputLogin" class="sr-only">Login</label>
+                <input type="text" name="username" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
             </div>
             <div class="form-group">
                 <label for="inputPassword" class="sr-only">Password</label>

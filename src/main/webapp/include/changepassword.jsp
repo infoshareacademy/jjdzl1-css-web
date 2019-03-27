@@ -16,7 +16,7 @@
             <input type="password" class="form-control" name="password1" id="password1" required>
         </div>
         <div class="form-group px-3">
-            <label for="password2">Input new password again</label>
+            <label for="password2">Repeat new password</label>
             <input type="password" class="form-control" name="password2" id="password2" required>
         </div>
         <div class="form-group px-3">
