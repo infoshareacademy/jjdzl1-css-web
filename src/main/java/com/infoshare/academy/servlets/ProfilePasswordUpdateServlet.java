@@ -51,26 +51,29 @@ public class ProfilePasswordUpdateServlet extends HttpServlet {
         User currentUser = getUser(getUser);
         Integer id = currentUser.getId();
 
+
+        String password = req.getParameter("password");
         String password1 = req.getParameter("password1");
         String password2 = req.getParameter("password2");
 
+        boolean checkPassword = UserPasswordUtils.check(password, currentUser.getPassword(), PasswordHashAlgorithm.PBKDF2);
         Boolean isPasswordCorrect = new UserValidator().isPasswordCorrect(password1);
 
-        if (password1.equals(password2) && isPasswordCorrect) {
-            String password = password1;
-            String hashedPassword = UserPasswordUtils.hash(password, PasswordHashAlgorithm.PBKDF2);
+        if (checkPassword && password1.equals(password2) && isPasswordCorrect) {
+            String newPassword = password1;
+            String hashedPassword = UserPasswordUtils.hash(newPassword, PasswordHashAlgorithm.PBKDF2);
             usersDao.updateUserPassword(id, hashedPassword);
             resp.sendRedirect("logout");
             req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
-        } else {
-            if (!isPasswordCorrect) {
-                req.setAttribute("error", passwordIncorrectMessage());
-            }
-            if (!password1.equals(password2)) {
-                req.setAttribute("error", passwordNotMatchMessage());
-            }
-            RequestDispatcher reqDisp = req.getRequestDispatcher("changepassword.jsp");
-            reqDisp.forward(req, resp);
+        } else if (!checkPassword) {
+            req.setAttribute("error", currentPasswordIncorrect());
+            req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
+        } else if (!isPasswordCorrect) {
+            req.setAttribute("error", passwordIncorrectMessage());
+            req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
+        } else if (!password1.equals(password2)) {
+            req.setAttribute("error", passwordNotMatchMessage());
+            req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
         }
     }
 

@@ -23,6 +23,13 @@ public class RegistrationMessages {
         return html1 + errorData + html2;
     }
 
+    public static String currentPasswordIncorrect() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Current password is incorrect, please try again";
+        return html1 + errorData + html2;
+    }
+
     public static String tooYoungMessage() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
@@ -36,7 +43,7 @@ public class RegistrationMessages {
         String errorDataTooYoung = "You are too young to register account!";
         String html3 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html4 = "</div>";
-        String errorDataIncorrectPassword = "Password too weak! Use at least 8 characters (one digit, letter and special character)";
+        String errorDataIncorrectPassword = "Password too weak! Use at least 8 characters (one digit, big letter and special character)";
         return html1 + errorDataTooYoung + html2 + html3 + errorDataIncorrectPassword + html4;
     }
 
