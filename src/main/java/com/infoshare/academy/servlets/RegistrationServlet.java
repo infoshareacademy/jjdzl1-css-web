@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.UUID;
 
 import static com.infoshare.academy.utils.RegistrationMessages.*;
 
@@ -80,9 +79,7 @@ public class RegistrationServlet extends HttpServlet {
             } else if (tempUserByLogin != null) {
                 RequestResponse(request, response, "unavailableLoginError", unavailableLogin());
             } else {
-                UUIDGeneratorForNewUser generator = new UUIDGeneratorForNewUser();
-                user.setAuthorizationNumber(generator.getGeneratedNewUUIDForNewUser());
-                user.setAccountActive(false);
+                setUUIDAndActivationStatusForNewUser(user);
                 usersRepositoryDao.addUser(user);
                 try {
                     usersRepositoryDao.sendEmailToNewUser(user.getLogin(),user.getEmail(),user.getAuthorizationNumber());
@@ -98,5 +95,11 @@ public class RegistrationServlet extends HttpServlet {
         request.setAttribute(errorMessage, jspError);
         RequestDispatcher req = request.getRequestDispatcher("registration.jsp");
         req.forward(request, response);
+    }
+
+    private void setUUIDAndActivationStatusForNewUser(User user){
+        UUIDGeneratorForNewUser generator = new UUIDGeneratorForNewUser();
+        user.setAuthorizationNumber(generator.getGeneratedNewUUIDForNewUser());
+        user.setAccountActive(false);
     }
 }

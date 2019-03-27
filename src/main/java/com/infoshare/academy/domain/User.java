@@ -219,7 +219,7 @@ public class User implements Serializable {
     }
 
     public void setAccountActive(Boolean accountActive) {
-        isAccountActive = accountActive;
+        this.isAccountActive = accountActive;
     }
 
     @Override

@@ -131,10 +131,22 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     }
 
     @Override
-    public void sendEmailToNewUser(String login, String email,String UUID) throws MessagingException {
+    public void sendEmailToNewUser(String login, String email, String UUID) throws MessagingException {
         MailSend mail = new MailSend();
         mail.sentEmail(login,email,UUID);
     }
+
+    @Override
+    public void updateIsUserAccountActive(Integer id, Boolean isAccountActive) {
+        Session session = getSession();
+        String update = "UPDATE User u SET u.isAccountActive=:isAccountActive WHERE u.id=:id";
+        Query query = session.createQuery(update);
+        query.setParameter("id", id);
+        query.setParameter("isAccountActive", isAccountActive);
+        query.executeUpdate();
+        commitTransaction(session);
+    }
+
 
     private Session getSession() {
         Session session = getSessionFactory().openSession();

@@ -15,18 +15,6 @@ public class MailSend {
     private Session mailSession;
     private MimeMessage emailMessage;
 
-    public static void main(String args[]) throws AddressException,
-            MessagingException {
-
-        MailSend javaEmail = new MailSend();
-
-        javaEmail.setMailServerProperties();
-        javaEmail.createEmailMessage("Lolek"
-                , "carsharingsystem.help@gmail.com"
-                , "123123123123");
-        javaEmail.sentEmail();
-    }
-
     public void sentEmail(String login, String mailAddress, String UUID) throws AddressException,
             MessagingException {
 
@@ -52,7 +40,7 @@ public class MailSend {
         String[] toEmails = {destinationAdress};
         String emailSubject = "Registration process in CAR SHARING SYSTEM";
         String emailBody = "Hello " + Login + "\n Click this link to activate your account in " +
-                "CAR SHARING SYSTEM: \n" + "localhost:8080/jjdzl1-css/authorisationServlet?login=" + Login + "&UUID=" + UUID;
+                "CAR SHARING SYSTEM: \n" + "localhost:8080/jjdzl1-css/activationAccount?login=" + Login + "&UUID=" + UUID;
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
 
