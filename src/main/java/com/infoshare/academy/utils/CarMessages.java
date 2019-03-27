@@ -15,6 +15,12 @@ public class CarMessages {
         String errorData = "Car id is incorrect! Please try again.";
         return html1 + errorData + html2;
     }
+    public static String errorNoSearchResults(){
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "No search results! Please try again.";
+        return html1 + errorData + html2;
+    }
 
     public static String successMessageCarRm() {
         String html1 = "<div class=\"alert alert-success\" role=\"alert\">";

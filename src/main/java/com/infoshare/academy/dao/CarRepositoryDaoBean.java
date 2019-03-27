@@ -62,8 +62,12 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     }
 
     @Override
-    public Stream<Car> searchCar(Filter filter) {
-        return null;
+    public List<Car> search(String make,String model,String fuel) {
+        Session session= getSession();
+        List<Car> carsList=session.createQuery("select c from Car c where c.make LIKE '%"+make+"%' and c.model LIKE '%"+model+"%' and c.fuelSource LIKE '%"+fuel+"%'  ")
+                .getResultList();
+        commitTransaction(session);
+        return carsList;
     }
 
     private void commitTransaction(Session session) {
