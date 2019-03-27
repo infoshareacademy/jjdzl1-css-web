@@ -38,11 +38,17 @@ public class LoginServlet extends HttpServlet {
         boolean checkPassword = UserPasswordUtils.check(password, tempUser.getPassword(), PasswordHashAlgorithm.PBKDF2);
 
         if (tempUser != null && checkPassword) {
-            RequestDispatcher req = request.getRequestDispatcher("listAvailableCar.jsp");
-            HttpSession session = request.getSession();
-            session.setAttribute("username", username);
-            session.setAttribute("usertype", usertype);
-            req.forward(request, response);
+            if(tempUser.getAccountActive()) {
+                RequestDispatcher req = request.getRequestDispatcher("listAvailableCar.jsp");
+                HttpSession session = request.getSession();
+                session.setAttribute("username", username);
+                session.setAttribute("usertype", usertype);
+                req.forward(request, response);
+            }else{
+                request.setAttribute("activationError", activationErrorMessage());
+                RequestDispatcher req = request.getRequestDispatcher("login.jsp");
+                req.forward(request, response);
+            }
         } else {
             request.setAttribute("error", errorMessage());
             RequestDispatcher req = request.getRequestDispatcher("login.jsp");
@@ -50,14 +56,21 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    public User createUserBasedOnFormLogin(String username) {
+    private User createUserBasedOnFormLogin(String username) {
         return usersDao.getUserByLogin(username);
     }
 
-    public static String errorMessage() {
+    private static String errorMessage() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
         String errorData = "Login or password incorrect! Please try again.";
+        return html1 + errorData + html2;
+    }
+
+    private static String activationErrorMessage() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Your Account in not active!. Check your email box and active your account!";
         return html1 + errorData + html2;
     }
 }

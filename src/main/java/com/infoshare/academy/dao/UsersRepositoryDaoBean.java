@@ -1,9 +1,11 @@
 package com.infoshare.academy.dao;
 
 import com.infoshare.academy.domain.User;
+import com.infoshare.academy.utils.MailSend;
 import org.hibernate.Session;
 
 import javax.ejb.Stateless;
+import javax.mail.MessagingException;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.time.LocalDate;
@@ -127,6 +129,24 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         query.executeUpdate();
         commitTransaction(session);
     }
+
+    @Override
+    public void sendEmailToNewUser(String login, String email, String UUID) throws MessagingException {
+        MailSend mail = new MailSend();
+        mail.sentEmail(login,email,UUID);
+    }
+
+    @Override
+    public void updateIsUserAccountActive(Integer id, Boolean isAccountActive) {
+        Session session = getSession();
+        String update = "UPDATE User u SET u.isAccountActive=:isAccountActive WHERE u.id=:id";
+        Query query = session.createQuery(update);
+        query.setParameter("id", id);
+        query.setParameter("isAccountActive", isAccountActive);
+        query.executeUpdate();
+        commitTransaction(session);
+    }
+
 
     private Session getSession() {
         Session session = getSessionFactory().openSession();

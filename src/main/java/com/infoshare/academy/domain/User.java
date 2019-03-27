@@ -36,8 +36,14 @@ public class User implements Serializable {
     private String postalCode;
     @Column(name = "city")
     private String city;
+    @Column(name = "authorization_number")
+    private String authorizationNumber;
+    @Column(name = "is_account_active")
+    private Boolean isAccountActive;
+
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
+
 
     public User() {
     }
@@ -48,7 +54,8 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public User(Integer userType, String login, String password, String email, Long phoneNumber, String firstName, String lastName, LocalDate birthDate, String streetAddress, String postalCode, String city) {
+    public User(Integer userType, String login, String password, String email, Long phoneNumber, String firstName,
+                String lastName, LocalDate birthDate, String streetAddress, String postalCode, String city) {
         this.userType = userType;
         this.login = login;
         this.password = password;
@@ -60,6 +67,24 @@ public class User implements Serializable {
         this.streetAddress = streetAddress;
         this.postalCode = postalCode;
         this.city = city;
+    }
+
+    public User(Integer userType, String login, String password, String email, Long phoneNumber, String firstName,
+                String lastName, LocalDate birthDate, String streetAddress, String postalCode, String city,
+                String authorizationNumber, Boolean isAccountActive) {
+        this.userType = userType;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.streetAddress = streetAddress;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.authorizationNumber = authorizationNumber;
+        this.isAccountActive = isAccountActive;
     }
 
     public Integer getId() {
@@ -98,13 +123,8 @@ public class User implements Serializable {
         return birthDate;
     }
 
-
     public List<Reservation> getReservations() {
         return reservations;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public void setUserType(Integer userType) {
@@ -123,6 +143,17 @@ public class User implements Serializable {
         return city;
     }
 
+    public String getAuthorizationNumber() {
+        return authorizationNumber;
+    }
+
+    public Boolean getAccountActive() {
+        return isAccountActive;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public void setLogin(String login) {
         this.login = login;
     }
@@ -181,6 +212,14 @@ public class User implements Serializable {
         } else {
             return false;
         }
+    }
+
+    public void setAuthorizationNumber(String authorizationNumber) {
+        this.authorizationNumber = authorizationNumber;
+    }
+
+    public void setAccountActive(Boolean accountActive) {
+        this.isAccountActive = accountActive;
     }
 
     @Override
