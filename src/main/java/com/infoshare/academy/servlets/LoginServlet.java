@@ -34,17 +34,17 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         User tempUser = createUserBasedOnFormLogin(username);
-        Integer usertype = tempUser.getUserType();
-        boolean checkPassword = UserPasswordUtils.check(password, tempUser.getPassword(), PasswordHashAlgorithm.PBKDF2);
+        Integer usertype = getUserType(tempUser);
+        boolean checkPassword = checkPassword(tempUser,password);
 
         if (tempUser != null && checkPassword) {
-            if(tempUser.getAccountActive()) {
+            if (tempUser.getAccountActive()) {
                 RequestDispatcher req = request.getRequestDispatcher("listAvailableCar.jsp");
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
                 session.setAttribute("usertype", usertype);
                 req.forward(request, response);
-            }else{
+            } else {
                 request.setAttribute("activationError", activationErrorMessage());
                 RequestDispatcher req = request.getRequestDispatcher("login.jsp");
                 req.forward(request, response);
@@ -72,5 +72,25 @@ public class LoginServlet extends HttpServlet {
         String html2 = "</div>";
         String errorData = "Your Account in not active!. Check your email box and active your account!";
         return html1 + errorData + html2;
+    }
+
+    private Integer getUserType(User tempUser) {
+        Integer usertype = null;
+        try {
+            usertype = tempUser.getUserType();
+        } catch (NullPointerException e) {
+            System.out.println("Null Pointer Exception: " + e);
+        }
+        return usertype;
+    }
+
+    private boolean checkPassword(User tempUser, String password) {
+        boolean checkPassword = false;
+        try {
+            checkPassword = UserPasswordUtils.check(password, tempUser.getPassword(), PasswordHashAlgorithm.PBKDF2);
+        } catch (NullPointerException e) {
+            System.out.println("Null Pointer Exception: " + e);
+        }
+        return checkPassword;
     }
 }
