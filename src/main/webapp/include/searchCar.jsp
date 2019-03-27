@@ -8,14 +8,14 @@
         <h4>Search car</h4>
         <div class="form-row">
             <div class="form-group col-md-4">
-                MAKE:<input type="text" name="make" class="form-control">
+                <input type="text" name="make" class="form-control" placeholder="--MAKE--">
             </div>
             <div class="form-group col-md-4">
-                MODEL:<input type="text" name="model" class="form-control">
+                <input type="text" name="model" class="form-control" placeholder="--MODEL--">
             </div>
             <div class="form-group col-md-4">
-                FUEL:<select id="inputState" class="form-control" name="fuel">
-                    <option selected value="">fuel...</option>
+                <select id="inputState" class="form-control" name="fuel">
+                    <option selected value="">--FUEL--</option>
                     <option value="PETROL">PETROL</option>
                     <option value="DIESEL">DIESEL</option>
                     <option value="ELECTRIC">ELECTRIC</option>
