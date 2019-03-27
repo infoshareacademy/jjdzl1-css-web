@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
     private static String activationErrorMessage() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
-        String errorData = "Your Account in not active!. Check your email box and active your account!";
+        String errorData = "Your Account is not active! Check your email box and activate your account!";
         return html1 + errorData + html2;
     }
 
@@ -79,7 +79,7 @@ public class LoginServlet extends HttpServlet {
         try {
             usertype = tempUser.getUserType();
         } catch (NullPointerException e) {
-            System.out.println("Null Pointer Exception: " + e);
+            System.out.println("Login error (usertype): " + e);
         }
         return usertype;
     }
@@ -89,7 +89,7 @@ public class LoginServlet extends HttpServlet {
         try {
             checkPassword = UserPasswordUtils.check(password, tempUser.getPassword(), PasswordHashAlgorithm.PBKDF2);
         } catch (NullPointerException e) {
-            System.out.println("Null Pointer Exception: " + e);
+            System.out.println("Login error (password): " + e);
         }
         return checkPassword;
     }
