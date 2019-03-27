@@ -1,9 +1,11 @@
 package com.infoshare.academy.dao;
 
 import com.infoshare.academy.domain.User;
+import com.infoshare.academy.utils.MailSend;
 import org.hibernate.Session;
 
 import javax.ejb.Stateless;
+import javax.mail.MessagingException;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.time.LocalDate;
@@ -126,6 +128,12 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         query.setParameter("birthDate", birthDate);
         query.executeUpdate();
         commitTransaction(session);
+    }
+
+    @Override
+    public void sendEmailToNewUser(String login, String email,String UUID) throws MessagingException {
+        MailSend mail = new MailSend();
+        mail.sentEmail(login,email,UUID);
     }
 
     private Session getSession() {

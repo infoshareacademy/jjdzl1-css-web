@@ -1,10 +1,5 @@
 package com.infoshare.academy.utils;
 
-//import com.infoshare.academy.dao.UserAuthorizationDaoBean;
-//import com.infoshare.academy.domain.UserAuthorization;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -13,12 +8,8 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
-import java.util.UUID;
 
 public class MailSend {
-
-//   @EJB
-//    private UserAuthorizationDaoBean bean;
 
     private Properties emailProperties;
     private Session mailSession;
@@ -30,8 +21,20 @@ public class MailSend {
         MailSend javaEmail = new MailSend();
 
         javaEmail.setMailServerProperties();
-        javaEmail.createEmailMessage();
-        javaEmail.sendEmail();
+        javaEmail.createEmailMessage("Lolek"
+                , "carsharingsystem.help@gmail.com"
+                , "123123123123");
+        javaEmail.sentEmail();
+    }
+
+    public void sentEmail(String login, String mailAddress, String UUID) throws AddressException,
+            MessagingException {
+
+        MailSend javaEmail = new MailSend();
+
+        javaEmail.setMailServerProperties();
+        javaEmail.createEmailMessage(login, mailAddress, UUID);
+        javaEmail.sentEmail();
     }
 
     private void setMailServerProperties() {
@@ -45,15 +48,11 @@ public class MailSend {
 
     }
 
-    private void createEmailMessage() throws AddressException,
-            MessagingException {
-        //UUID uuid= UUID.randomUUID();
-//        UUID uuid= bean.setAuthorizationNumberWithUUID();
-//        UserAuthorization userAuthorization= new UserAuthorization(uuid.toString(),false);
-        String[] toEmails = {"CarSharingSystem.help@gmail.com"};
-        String emailSubject = "Registration process";
-//        String emailBody =userAuthorization.toString();// uuid.toString();
-
+    private void createEmailMessage(String Login, String destinationAdress, String UUID) throws AddressException, MessagingException {
+        String[] toEmails = {destinationAdress};
+        String emailSubject = "Registration process in CAR SHARING SYSTEM";
+        String emailBody = "Hello " + Login + "\n Click this link to activate your account in " +
+                "CAR SHARING SYSTEM: \n" + "localhost:8080/jjdzl1-css/authorisationServlet?login=" + Login + "&UUID=" + UUID;
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
 
@@ -62,12 +61,12 @@ public class MailSend {
         }
 
         emailMessage.setSubject(emailSubject);
-//        emailMessage.setContent(emailBody, "text/html");//for a html email
-//        emailMessage.setText(emailBody);// for a text email
+        emailMessage.setContent(emailBody, "text/html");//for a html email
+//      emailMessage.setText(emailBody);// for a text email
 
     }
 
-    private void sendEmail() throws AddressException, MessagingException {
+    private void sentEmail() throws AddressException, MessagingException {
 
         String emailHost = "smtp.gmail.com";
         String fromUser = "CarSharingSystem.help";//just the id alone without @gmail.com

@@ -2,11 +2,10 @@ package com.infoshare.academy.servlets;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
-import com.infoshare.academy.utils.PasswordHashAlgorithm;
-import com.infoshare.academy.utils.UserPasswordUtils;
-import com.infoshare.academy.utils.UserValidator;
+import com.infoshare.academy.utils.*;
 
 import javax.ejb.EJB;
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.UUID;
 
 import static com.infoshare.academy.utils.RegistrationMessages.*;
 
@@ -80,7 +80,15 @@ public class RegistrationServlet extends HttpServlet {
             } else if (tempUserByLogin != null) {
                 RequestResponse(request, response, "unavailableLoginError", unavailableLogin());
             } else {
+                UUIDGeneratorForNewUser generator = new UUIDGeneratorForNewUser();
+                user.setAuthorizationNumber(generator.getGeneratedNewUUIDForNewUser());
+                user.setAccountActive(false);
                 usersRepositoryDao.addUser(user);
+                try {
+                    usersRepositoryDao.sendEmailToNewUser(user.getLogin(),user.getEmail(),user.getAuthorizationNumber());
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         }

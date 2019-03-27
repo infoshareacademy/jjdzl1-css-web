@@ -37,7 +37,7 @@ public class User implements Serializable {
     @Column(name = "city")
     private String city;
     @Column(name = "authorization_number")
-    private String AuthorizationNumber;
+    private String authorizationNumber;
     @Column(name = "is_account_active")
     private Boolean isAccountActive;
 
@@ -83,7 +83,7 @@ public class User implements Serializable {
         this.streetAddress = streetAddress;
         this.postalCode = postalCode;
         this.city = city;
-        AuthorizationNumber = authorizationNumber;
+        this.authorizationNumber = authorizationNumber;
         this.isAccountActive = isAccountActive;
     }
 
@@ -123,13 +123,8 @@ public class User implements Serializable {
         return birthDate;
     }
 
-
     public List<Reservation> getReservations() {
         return reservations;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public void setUserType(Integer userType) {
@@ -149,13 +144,16 @@ public class User implements Serializable {
     }
 
     public String getAuthorizationNumber() {
-        return AuthorizationNumber;
+        return authorizationNumber;
     }
 
     public Boolean getAccountActive() {
         return isAccountActive;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public void setLogin(String login) {
         this.login = login;
     }
@@ -214,6 +212,14 @@ public class User implements Serializable {
         } else {
             return false;
         }
+    }
+
+    public void setAuthorizationNumber(String authorizationNumber) {
+        this.authorizationNumber = authorizationNumber;
+    }
+
+    public void setAccountActive(Boolean accountActive) {
+        isAccountActive = accountActive;
     }
 
     @Override
