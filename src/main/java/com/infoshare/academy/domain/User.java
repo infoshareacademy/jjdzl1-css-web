@@ -147,6 +147,14 @@ public class User {
         return city;
     }
 
+    public String getAuthorizationNumber() {
+        return AuthorizationNumber;
+    }
+
+    public Boolean getAccountActive() {
+        return isAccountActive;
+    }
+
     public void setLogin(String login) {
         this.login = login;
     }
