@@ -14,8 +14,8 @@ public class UserValidator {
     private UsersRepositoryDao usersRepositoryDao;
 
     public Boolean isPasswordCorrect(String password) {
-        String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.])(?=\\S+$).{8,}$";
-        return password.matches(pattern);
+        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.])(?=\\S+$).{8,}$";
+        return password.matches(passwordPattern);
 
         /*^                 # start-of-string
         (?=.*[0-9])       # a digit must occur at least once
@@ -28,23 +28,29 @@ public class UserValidator {
         */
     }
 
+    public boolean isEmailCorrect(String email) {
+        String emailPattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        return email.matches(emailPattern);
+    }
+
     public Boolean isAdult(String dateOfBirth) {
         LocalDate dateOfBirthLocalDate = formatLocalDate(dateOfBirth);
         LocalDate tempDateOfBirth = transferLocalDateToLocalDateOF(dateOfBirthLocalDate);
         LocalDate tempDateOfBirthPlus18 = tempDateOfBirth.plusYears(18);
         return tempDateOfBirthPlus18.isAfter(LocalDate.now());
     }
-    public Boolean isBeforePresentDate(String dateOfBirth){
+
+    public Boolean isBeforePresentDate(String dateOfBirth) {
         LocalDate dateOfBirthLocalDate = formatLocalDate(dateOfBirth);
         return dateOfBirthLocalDate.isBefore(LocalDate.now());
     }
 
-
-    private LocalDate formatLocalDate(String date){
+    private LocalDate formatLocalDate(String date) {
         DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(date, FORMATTER);
     }
-    private LocalDate transferLocalDateToLocalDateOF(LocalDate localDate){
+
+    private LocalDate transferLocalDateToLocalDateOF(LocalDate localDate) {
         int year = localDate.getYear();
         Month month = localDate.getMonth();
         int day = localDate.getDayOfMonth();
