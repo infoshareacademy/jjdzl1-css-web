@@ -7,7 +7,7 @@
         <table class="table table-borderless">
             <tbody>
             <tr>
-                <th>Username:</th>
+                <th>Login:</th>
                 <td>${currentUser.login}</td>
             </tr>
             <tr>
