@@ -14,6 +14,7 @@
         </h6>
         <ul class="nav flex-column">
             <li class="nav-item">
+                <a class="nav-link" href="searchCar.jsp"><span data-feather="calendar"></span>Search cars</a>
                 <a class="nav-link" href="listAvailableCar.jsp"><span data-feather="calendar"></span>Check available cars</a>
                 <a class="nav-link" href="reservation.jsp"><span data-feather="plus-square"></span>Add reservation</a>
                 <a class="nav-link" href="listReservationCurrentUser"><span data-feather="calendar"></span>List of user's reservations</a>
