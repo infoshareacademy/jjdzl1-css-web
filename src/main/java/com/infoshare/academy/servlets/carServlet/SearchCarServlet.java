@@ -27,19 +27,28 @@ public class SearchCarServlet extends HttpServlet {
         String make = req.getParameter("make");
         String model = req.getParameter("model");
         String fuel = req.getParameter("fuel");
+        Integer currentPage=Integer.valueOf(req.getParameter("currentPage"));
 
-        List<Car> carsList = dao.search(make, model, fuel);
+        int rows=dao.searchCount(make,model,fuel);
+        int noOfPage=rows/3;
+        if(rows%3>0) {
+            noOfPage++;
+        }
 
+        List<Car> carsList = dao.search(make, model, fuel,currentPage);
+
+        req.setAttribute("make",make);
+        req.setAttribute("model",model);
+        req.setAttribute("fuel",fuel);
         req.setAttribute("carsList", carsList);
+        req.setAttribute("noOfPages",noOfPage);
+        req.setAttribute("currentPage",currentPage);
 
         if (carsList.isEmpty()) {
             req.setAttribute("error", errorNoSearchResults());
         }
 
-
-
         req.getRequestDispatcher("searchCar.jsp").forward(req, resp);
-
     }
 }
 
