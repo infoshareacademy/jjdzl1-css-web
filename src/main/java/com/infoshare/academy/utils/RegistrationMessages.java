@@ -54,6 +54,13 @@ public class RegistrationMessages {
         return html1 + errorData + html2;
     }
 
+    public static String incorrectEmail() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "This email is incorrect! Please, enter correct one.";
+        return html1 + errorData + html2;
+    }
+
     public static String loginAndEmailIsUnavailable() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";

@@ -2,6 +2,8 @@ package com.infoshare.academy.servlets;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
+import com.infoshare.academy.utils.PasswordHashAlgorithm;
+import com.infoshare.academy.utils.UserPasswordUtils;
 import com.infoshare.academy.utils.UserValidator;
 
 import javax.ejb.EJB;
@@ -13,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.UUID;
 
 import static com.infoshare.academy.utils.RegistrationMessages.*;
 
@@ -47,6 +48,7 @@ public class RegistrationServlet extends HttpServlet {
         String postalCode = request.getParameter("postalCode");
 
         Boolean isPasswordCorrect = new UserValidator().isPasswordCorrect(password);
+        Boolean isEmailCorrect = new UserValidator().isEmailCorrect(email);
         Boolean isAdult = new UserValidator().isAdult(birthOfDate);
         Boolean isBeforePresentDay = new UserValidator().isBeforePresentDate(birthOfDate);
 
@@ -56,15 +58,17 @@ public class RegistrationServlet extends HttpServlet {
             RequestResponse(request, response, "error", passwordIncorrectAndTooYoungMessage());
         } else if (!isPasswordCorrect) {
             RequestResponse(request, response, "passwordError", passwordIncorrectMessage());
+        } else if (!isEmailCorrect) {
+            RequestResponse(request, response, "emailError", incorrectEmail());
         } else if (isAdult) {
             RequestResponse(request, response, "tooYoungError", tooYoungMessage());
         } else {
 
-            String uuid=String.valueOf(UUID.randomUUID());
+            String hashedPassword = UserPasswordUtils.hash(password, PasswordHashAlgorithm.PBKDF2);
 
-            User user = new User(0, login, password, email, Long.parseLong(phoneNumber), firstName,
+            User user = new User(0, login, hashedPassword, email, Long.parseLong(phoneNumber), firstName,
                     lastName, LocalDate.parse(birthOfDate),
-                    streetAddress, postalCode, city,uuid,Boolean.FALSE);
+                    streetAddress, postalCode, city);
 
             User tempUserByLogin = usersRepositoryDao.getUserByLogin(login);
             User tempUserByEmail = usersRepositoryDao.getUserByEmail(email);
