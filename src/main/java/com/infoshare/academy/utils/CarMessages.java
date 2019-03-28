@@ -57,4 +57,10 @@ public class CarMessages {
         String errorData = "Success, update done!.";
         return html1 + errorData + html2;
     }
+    public static String errorIncorectData() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Incorrect data entered, please try again.";
+        return html1 + errorData + html2;
+    }
 }

@@ -31,90 +31,104 @@
     </form>
     <br/>
     ${error}
+    ${success}
     <br/>
 </div>
-
+<form method="post" action="carPanel">
 <c:forEach var="car" items="${carsList}">
     <div class="card border-primary" align="center">
-    <h4 class="card-header" align="center">${car.make} ${car.model}</h4>
-    <div class="card-body">
-    <table class="table table-borderless" align="center">
-        <thead>
+        <h4 class="card-header" align="center">${car.make} ${car.model}</h4>
+        <div class="card-body">
+            <table class="table table-borderless" align="center">
+                <thead>
 
-        <tr>
-            <img src="../${car.photoLink}" height=100 width=150>
-            <td align="center">
-                <div class="col-8 my-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" value="${car.make}" placeholder="Make">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">Make</div>
+                <tr>
+                    <img src="../${car.photoLink}" height=100 width=150>
+                    <td align="center">
+                        <div class="col-8 my-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="make" value="${car.make}"
+                                       placeholder="Make">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Make</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <br/>
-                <div class="col-8 my-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" value="${car.model}" placeholder="Model">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">Model</div>
+                        <br/>
+                        <div class="col-8 my-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="model" value="${car.model}"
+                                       placeholder="Model">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Model</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <br/>
-                <div class="col-8 my-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" value="${car.year}" placeholder="Year">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">Year</div>
-                        </div>
+                        <br/>
+                        <div class="col-8 my-6">
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="year" value="${car.year}"
+                                       placeholder="Year">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Year</div>
+                                </div>
 
-                    </div>
-                </div>
-            </td>
-            <td align="center">
-                <div class="col-8 my-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" value="${car.mileage}" placeholder="Mileage">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">KM</div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <br/>
-                <div class="col-8 my-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" value="${car.enginePower}"
-                               placeholder="Engine Power">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">HP</div>
+                    </td>
+                    <td align="center">
+                        <div class="col-8 my-6">
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="mileage" value="${car.mileage}"
+                                       placeholder="Mileage">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">KM</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <br/>
-                <div class="col-8 my-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" value="${car.seats}" placeholder="Seats">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">Seats</div>
+                        <br/>
+                        <div class="col-8 my-6">
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="enginePower"
+                                       value="${car.enginePower}"
+                                       placeholder="Engine Power">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">HP</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <br/>
+                        <div class="col-8 my-6">
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="seats" value="${car.seats}"
+                                       placeholder="Seats">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Seats</div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </thead>
+            </table>
+            <div class="form-group px-3">
+
+                <div>
+                    <input type="hidden" name="id" value="${car.id}">
+                    <button type="submit" class="btn btn-primary">Update car</button>
+
                 </div>
-            </td>
-        </tr>
-        </thead>
-    </table>
-    <div class="form-group px-3">
-        <button type="submit" class="btn btn-primary">Update car</button>
-        <button type="submit" class="btn btn-danger">Delete car</button>
+            </div>
+        </div>
     </div>
-    <div>
-
-
+    </form>
+    <form method="post" action="deleteCar">
+        <input type="hidden" name="id" value="${car.id}">
+        <button type="submit" class="btn btn-danger" style="float: right;" >Delete car</button>
+    </form>
 </c:forEach>
-</div>
-</div>
-</div>
+
+
 <br/>
 <br/>
 <nav>

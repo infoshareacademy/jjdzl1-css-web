@@ -14,7 +14,7 @@ public interface CarsRepositoryDao {
 
     Car getCar(Integer id);
 
-    Car updateCarMileage(Integer id,Integer mileage);
+    Car updateCar(Car car);
 
     void deleteCar(Integer id);
 
