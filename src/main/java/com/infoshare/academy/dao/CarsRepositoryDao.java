@@ -20,5 +20,5 @@ public interface CarsRepositoryDao {
 
     Integer searchCount(String make,String model,String fuel);
 
-    List<Car> search(String make,String model,String fuel,int page);
+    List<Car> search(String make,String model,String fuel,int page,int pageSize);
 }

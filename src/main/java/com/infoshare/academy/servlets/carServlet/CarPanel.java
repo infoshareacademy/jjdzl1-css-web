@@ -14,8 +14,9 @@ import java.util.List;
 
 import static com.infoshare.academy.utils.CarMessages.errorNoSearchResults;
 
-@WebServlet("/searchCar")
-public class SearchCarServlet extends HttpServlet {
+@WebServlet("/admin/carPanel")
+public class CarPanel extends HttpServlet {
+
 
     @EJB
     CarsRepositoryDao dao;
@@ -27,30 +28,25 @@ public class SearchCarServlet extends HttpServlet {
         String make = req.getParameter("make");
         String model = req.getParameter("model");
         String fuel = req.getParameter("fuel");
-        Integer currentPage=Integer.valueOf(req.getParameter("currentPage"));
+        Integer currentPage = Integer.valueOf(req.getParameter("currentPage"));
 
-        int pageSize=3;
-        int rows=dao.searchCount(make,model,fuel);
-        int noOfPage=rows/pageSize;
-        if(rows%pageSize>0) {
-            noOfPage++;
-        }
+        int pageSize = 1;
+        int noOfPage= dao.searchCount(make, model, fuel);
 
+        List<Car> carsList = dao.search(make, model, fuel, currentPage, pageSize);
 
-        List<Car> carsList = dao.search(make, model, fuel,currentPage,pageSize);
-
-        req.setAttribute("make",make);
-        req.setAttribute("model",model);
-        req.setAttribute("fuel",fuel);
+        req.setAttribute("make", make);
+        req.setAttribute("model", model);
+        req.setAttribute("fuel", fuel);
         req.setAttribute("carsList", carsList);
-        req.setAttribute("noOfPages",noOfPage);
-        req.setAttribute("currentPage",currentPage);
+        req.setAttribute("noOfPages", noOfPage);
+        req.setAttribute("currentPage", currentPage);
 
         if (carsList.isEmpty()) {
             req.setAttribute("error", errorNoSearchResults());
         }
 
-        req.getRequestDispatcher("searchCar.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/carPanel.jsp").forward(req, resp);
     }
 }
 

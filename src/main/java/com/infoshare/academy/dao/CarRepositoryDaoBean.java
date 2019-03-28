@@ -74,10 +74,9 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     }
 
     @Override
-    public List<Car> search(String make,String model,String fuel,int page) {
+    public List<Car> search(String make,String model,String fuel,int page,int pageSize) {
         Session session= getSession();
         Query carList=session.createQuery("select c from Car c where c.make LIKE '%"+make+"%' and c.model LIKE '%"+model+"%' and c.fuelSource LIKE '%"+fuel+"%'");
-        int pageSize=3;
         carList.setFirstResult(pageSize*(page-1));
         carList.setMaxResults(pageSize);
         List<Car> carsList=carList.getResultList();
