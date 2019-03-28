@@ -29,38 +29,38 @@
         <button class="btn btn-primary" type="submit">Search</button>
         <input type = "hidden" name = "currentPage" value = "1">
     </form>
-        <br/>
-        ${error}
-        <br/>
+    <br/>
+    ${error}
+    <br/>
+    <c:if test="${carsList !=null}">
+    <table class="table table-striped">
 
-
-        <table class="table table-striped">
+        <tr>
+            <th style="text-align: center; vertical-align: middle;">Photo</th>
+            <th style="text-align: center; vertical-align: middle;">Make</th>
+            <th style="text-align: center; vertical-align: middle;">Model</th>
+            <th style="text-align: center; vertical-align: middle;">Year</th>
+            <th style="text-align: center; vertical-align: middle;">Fuel source</th>
+            <th style="text-align: center; vertical-align: middle;">Power</th>
+            <th style="text-align: center; vertical-align: middle;">Transmission</th>
+        </tr>
+        </c:if>
+        <c:forEach var="car" items="${carsList}">
             <tr>
-                <th style="text-align: center; vertical-align: middle;">Photo</th>
-                <th style="text-align: center; vertical-align: middle;">Make</th>
-                <th style="text-align: center; vertical-align: middle;">Model</th>
-                <th style="text-align: center; vertical-align: middle;">Year</th>
-                <th style="text-align: center; vertical-align: middle;">Fuel source</th>
-                <th style="text-align: center; vertical-align: middle;">Power</th>
-                <th style="text-align: center; vertical-align: middle;">Transmission</th>
+                <td style="text-align: center; vertical-align: middle;"><img src="${car.photoLink}" height=150 width=225></td>
+                <td style="text-align: center; vertical-align: middle;">${car.make}</td>
+                <td style="text-align: center; vertical-align: middle;">${car.model}</td>
+                <td style="text-align: center; vertical-align: middle;">${car.year}</td>
+                <td style="text-align: center; vertical-align: middle;">${car.fuelSource}</td>
+                <td style="text-align: center; vertical-align: middle;">${car.enginePower}</td>
+                <td style="text-align: center; vertical-align: middle;">${car.transmission}</td>
             </tr>
-
-            <c:forEach var="car" items="${carsList}">
-                <tr>
-                    <td style="text-align: center; vertical-align: middle;"><img src="${car.photoLink}" height=150 width=225 ></td>
-                    <td style="text-align: center; vertical-align: middle;">${car.make}</td>
-                    <td style="text-align: center; vertical-align: middle;">${car.model}</td>
-                    <td style="text-align: center; vertical-align: middle;">${car.year}</td>
-                    <td style="text-align: center; vertical-align: middle;">${car.fuelSource}</td>
-                    <td style="text-align: center; vertical-align: middle;">${car.enginePower}</td>
-                    <td style="text-align: center; vertical-align: middle;">${car.transmission}</td>
-                </tr>
-            </c:forEach>
-        </table>
+        </c:forEach>
+    </table>
 </div>
 <nav>
     <ul class="pagination">
-        <c:if test="${currentPage != 1}">
+        <c:if test="${currentPage > 1}">
             <li class="page-item"><a class="page-link"
                                      href="searchCar?make=${make}&model=${model}&fuel=${fuel}&currentPage=${currentPage-1}">Previous</a>
             </li>

@@ -11,6 +11,7 @@
             <br/><br/>
             <input type="hidden" name="currentPage" value="1">
         </form>
+        <c:if test="${carListAvailableCarLimit !=null}">
         <table class="table table-striped">
             <tr>
                 <th style="text-align: center; vertical-align: middle;">Photo</th>
@@ -22,6 +23,7 @@
                 <th style="text-align: center; vertical-align: middle;">Transmission</th>
                 <th style="text-align: center; vertical-align: middle;">Reservation ?</th>
             </tr>
+            </c:if>
 
             <c:forEach var="car" items="${carListAvailableCarLimit}">
             <tr>
@@ -53,7 +55,7 @@
             </div>
             <nav>
                 <ul class="pagination">
-                    <c:if test="${currentPage != 1}">
+                    <c:if test="${currentPage >1}">
                         <li class="page-item"><a class="page-link"
                                                  href="reservation?startDate=${start}&endDate=${end}&currentPage=${currentPage-1}">Previous</a>
                         </li>
@@ -74,12 +76,12 @@
                         </c:choose>
                     </c:forEach>
 
-                    <c:if test="${currentPage lt noOfPages}">
-                        <li class="page-item"><a class="page-link"
-                                                 href="reservation?startDate=${start}&endDate=${end}&currentPage=${currentPage+1}">Next</a>
-                        </li>
-                    </c:if>
-                </ul>
-            </nav>
+                <c:if test="${currentPage lt noOfPages}">
+                    <li class="page-item"><a class="page-link"
+                                             href="reservation?startDate=${start}&endDate=${end}&currentPage=${currentPage+1}">Next</a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
     </div>
 </div>

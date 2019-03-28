@@ -6,6 +6,7 @@
         <h2>List of reservations for the current user</h2>
         <br/><br/>
         ${error}
+        <c:if test="${reservationByUserId !=null}">
         <table class="table table-sm table-striped">
             <tr>
                 <th style="text-align: center; vertical-align: middle;">Photo</th>
@@ -17,7 +18,7 @@
                 <th style="text-align: center; vertical-align: middle;">Start date</th>
                 <th style="text-align: center; vertical-align: middle;">End date</th>
             </tr>
-
+            </c:if>
             <c:forEach var="reservation" items="${reservationByUserId}">
                 <tr>
                     <td style="text-align: center; vertical-align: middle;"><img src="${reservation.car.photoLink}" height=150 width=225 ></td>

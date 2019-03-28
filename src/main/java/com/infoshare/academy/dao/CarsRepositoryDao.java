@@ -14,11 +14,11 @@ public interface CarsRepositoryDao {
 
     Car getCar(Integer id);
 
-    Car updateCarMileage(Integer id,Integer mileage);
+    Car updateCar(Car car);
 
     void deleteCar(Integer id);
 
     Integer searchCount(String make,String model,String fuel);
 
-    List<Car> search(String make,String model,String fuel,int page);
+    List<Car> search(String make,String model,String fuel,int page,int pageSize);
 }

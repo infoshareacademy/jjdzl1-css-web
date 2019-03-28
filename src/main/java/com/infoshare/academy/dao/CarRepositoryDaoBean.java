@@ -47,12 +47,18 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     }
 
     @Override
-    public Car updateCarMileage(Integer id, Integer mileage) {
+    public Car updateCar(Car car) {
         Session session = getSession();
-        Car updateCar = session.get(Car.class, id);
-        updateCar.setMileage(mileage);
+        Car updateCar = session.get(Car.class, car.getId());
+        updateCar.setMake(car.getMake());
+        updateCar.setModel(car.getModel());
+        updateCar.setYear(car.getYear());
+        updateCar.setMileage(car.getMileage());
+        updateCar.setEnginePower(car.getEnginePower());
+        updateCar.setSeats(car.getSeats());
         commitTransaction(session);
         return updateCar;
+
     }
 
     @Override
@@ -65,22 +71,21 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
 
     @Override
     public Integer searchCount(String make, String model, String fuel) {
-        Session session=getSession();
-        List<Car> carList=session.createQuery("select c from Car c where c.make LIKE '%"+make+"%' and c.model LIKE '%"+model+"%' and c.fuelSource LIKE '%"+fuel+"%'").getResultList();
-        int carCount=carList.size();
+        Session session = getSession();
+        List<Car> carList = session.createQuery("select c from Car c where c.make LIKE '%" + make + "%' and c.model LIKE '%" + model + "%' and c.fuelSource LIKE '%" + fuel + "%'").getResultList();
+        int carCount = carList.size();
         commitTransaction(session);
         return carCount;
 
     }
 
     @Override
-    public List<Car> search(String make,String model,String fuel,int page) {
-        Session session= getSession();
-        Query carList=session.createQuery("select c from Car c where c.make LIKE '%"+make+"%' and c.model LIKE '%"+model+"%' and c.fuelSource LIKE '%"+fuel+"%'");
-        int pageSize=3;
-        carList.setFirstResult(pageSize*(page-1));
+    public List<Car> search(String make, String model, String fuel, int page, int pageSize) {
+        Session session = getSession();
+        Query carList = session.createQuery("select c from Car c where c.make LIKE '%" + make + "%' and c.model LIKE '%" + model + "%' and c.fuelSource LIKE '%" + fuel + "%'");
+        carList.setFirstResult(pageSize * (page - 1));
         carList.setMaxResults(pageSize);
-        List<Car> carsList=carList.getResultList();
+        List<Car> carsList = carList.getResultList();
         commitTransaction(session);
         return carsList;
     }
