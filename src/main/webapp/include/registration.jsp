@@ -86,7 +86,13 @@
                         <input type="text" name="postalCode" class="form-control" id="postalCode" placeholder="">
                     </div>
                 </div>
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
+                <div class="mb-3">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-outline-primary mr-3" type="button" onclick="history.back();">Previous page</button>
+                    <button class="btn btn-outline-primary" type="reset" onclick="window.localStorage.clear();">Clear form</button>
+                </div>
             </form>
         </div>
     </div>
