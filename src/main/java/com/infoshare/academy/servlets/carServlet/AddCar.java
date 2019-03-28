@@ -35,10 +35,12 @@ public class AddCar extends HttpServlet {
         String color = req.getParameter("color");
         String seats = req.getParameter("seats");
 
+        String photoLink="img/error.jpeg";
+
         Car car = new Car(Integer.parseInt(carType),make,model,Integer.parseInt(year),Integer.parseInt(mileage),
                 Integer.parseInt(enginePower), FuelSourceEnum.valueOf(fuelSource),
                 TransmissionEnum.valueOf(transmission), BodyTypeEnum.valueOf(bodyType), ColorEnum.valueOf(color),
-                Integer.parseInt(seats));
+                Integer.parseInt(seats),photoLink);
 
         dao.addCar(car);
         req.getRequestDispatcher("/admin/admin.jsp").forward(req,resp);
