@@ -11,8 +11,8 @@
         <button class="btn btn-primary" type="submit">Check</button>
         ${error}
         <br/><br/>
-        <input type = "hidden" name = "currentPage" value = "1">
-
+        <input type="hidden" name="currentPage" value="1">
+        <c:if test="${carListAvailableCarLimit !=null}">
         <table class="table table-striped">
             <tr>
                 <th style="text-align: center; vertical-align: middle;">Photo</th>
@@ -23,6 +23,7 @@
                 <th style="text-align: center; vertical-align: middle;">Power</th>
                 <th style="text-align: center; vertical-align: middle;">Transmission</th>
             </tr>
+            </c:if>
 
             <c:forEach var="car" items="${carListAvailableCarLimit}">
                 <tr>

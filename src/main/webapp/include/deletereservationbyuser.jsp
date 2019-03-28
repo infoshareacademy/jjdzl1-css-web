@@ -7,19 +7,20 @@
     </form>
     <br/>
     <table class="table table-sm table-striped">
-        <tr>
-            <th style="text-align: center; vertical-align: middle;">Photo</th>
+        <c:if test="${reservationByUserId !=null}">
+            <tr>
+                <th style="text-align: center; vertical-align: middle;">Photo</th>
 
-            <th style="text-align: center; vertical-align: middle;">Make</th>
-            <th style="text-align: center; vertical-align: middle;">Model</th>
-            <th style="text-align: center; vertical-align: middle;">Fuel source</th>
-            <th style="text-align: center; vertical-align: middle;">Power</th>
-            <th style="text-align: center; vertical-align: middle;">Transmission</th>
-            <th style="text-align: center; vertical-align: middle;">Start date</th>
-            <th style="text-align: center; vertical-align: middle;">End date</th>
-            <th style="text-align: center; vertical-align: middle;">Delete</th>
-        </tr>
-
+                <th style="text-align: center; vertical-align: middle;">Make</th>
+                <th style="text-align: center; vertical-align: middle;">Model</th>
+                <th style="text-align: center; vertical-align: middle;">Fuel source</th>
+                <th style="text-align: center; vertical-align: middle;">Power</th>
+                <th style="text-align: center; vertical-align: middle;">Transmission</th>
+                <th style="text-align: center; vertical-align: middle;">Start date</th>
+                <th style="text-align: center; vertical-align: middle;">End date</th>
+                <th style="text-align: center; vertical-align: middle;">Delete</th>
+            </tr>
+        </c:if>
         <c:forEach var="reservation" items="${reservationByUserId}">
             <tr>
                 <td style="text-align: center; vertical-align: middle;"><img src="${reservation.car.photoLink}" height=150 width=225></td>
