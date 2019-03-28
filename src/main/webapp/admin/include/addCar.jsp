@@ -1,119 +1,137 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <form method="post" action="addCar">
-        <h2>Add new car to database</h2>
-        Car type: <input class="form-control form-control-sm" type="number" name="carType" min="1" max="2" required/>
-        Car make: <input class="form-control form-control-sm" type="text" name="make"required/>
-        Car model: <input class="form-control form-control-sm" type="text" name="model"required/>
-        Year: <input class="form-control form-control-sm" type="number" name="year" min="2005" max="2020" required/>
-        Mileage: <input class="form-control form-control-sm" type="number" name="mileage"min="0" max="999999" required/>
-        Engine power: <input class="form-control form-control-sm" type="number" name="enginePower"required min="0"/>
+<div class="card border-primary">
+    <h4 class="card-header">Add new car</h4>
+    <div class="card-body">
 
-        Rodzaj paliwa:<br/>
-        <div class="btn-group btn-outline-toggle" data-toggle="buttons">
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="fuelSource" value="PETROL" id="fueloption1" autocomplete="off" > Petrol
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="fuelSource" value="PETROLANDGAS" id="fueloption2" autocomplete="off">
-                PetrolAndGas
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="fuelSource" value="DIESEL" id="fueloption3" autocomplete="off" checked> Diesel
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="fuelSource" value="CND" id="fueloption4" autocomplete="off"> CNG
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="fuelSource" value="HYBRID" id="fueloption5" autocomplete="off"> Hybdrid
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="fuelSource" value="ELECTRIC" id="fueloption6" autocomplete="off"> Electric
-            </label>
-        </div>
-        <br/>
-        Transmission:<br/>
-        <div class="btn-group btn-outline-toggle" data-toggle="buttons">
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="transmission" value="MANUAL" id="transmissionoption1" autocomplete="off" checked> Manual
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="transmission" value="AUTOMATIC" id="transmissionoption2" autocomplete="off"> Automatic
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="transmission" value="SEMIAUTO" id="transmissionoption3" autocomplete="off"> Semiauto
-            </label>
-        </div>
-        <br/>
+        <form class="needs-validation" action="addCar" method="post" id="newcar">
+            <div class="form-group">
+                <label class="col-form-label mb-2">Car type</label>
+                <div class="btn-group btn-outline-toggle" data-toggle="buttons">
+                    <label class="btn btn-outline-secondary">
+                        <input type="radio" name="carType" value="1" id="carType1" autocomplete="off" checked> Passenger
+                    </label>
+                    <label class="btn btn-outline-secondary">
+                        <input type="radio" name="carType" value="2" id="carType2" autocomplete="off"> Truck
+                    </label>
+                </div>
+            </div>
 
-        Body type:<br/>
-        <div class="btn-group btn-outline-toggle" data-toggle="buttons">
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="bodyType" value="CABRIOLET" id="bodyoption1" autocomplete="off"> Cabriolet
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="bodyType" value="COUPE" id="bodyoption2" autocomplete="off"> Coupe
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="bodyType" value="CROSSOVER" id="bodyoption3" autocomplete="off"> Crossover
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="bodyType" value="HATCHBACK" id="bodyoption4" autocomplete="off"> Hatchback
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="bodyType" value="ROADSTER" id="bodyoption5" autocomplete="off"> Roadster
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="bodyType" value="SEDAN" id="bodyoption6" autocomplete="off" checked> Sedan
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="bodyType" value="TOURING" id="bodyoption7" autocomplete="off"> Touring
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="bodyType" value="SUV" id="bodyoption8" autocomplete="off"> SUV
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="bodyType" value="MINIVAN" id="bodyoption9" autocomplete="off"> Minivan
-            </label>
-        </div>
-        <br/>
+            <div class="row">
+                <div class="col-md-6 input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Make</div>
+                    </div>
+                    <input type="text" class="form-control" name="make" id="make" placeholder="Make" required>
+                </div>
+                <div class="col-md-6 input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Model</div>
+                    </div>
+                    <input type="text" class="form-control" name="model" id="model" placeholder="Model" required>
+                </div>
+            </div>
 
-        Color:<br/>
-        <div class="btn-group btn-outline-toggle" data-toggle="buttons">
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="color" value="BEIGE" id="coloroption1" autocomplete="off"> Beige
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="color" value="BLACK" id="coloroption2" autocomplete="off" checked> Black
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="color" value="BLUE" id="coloroption3" autocomplete="off"> Blue
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="color" value="GOLD" id="coloroption4" autocomplete="off"> Gold
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="color" value="GREY" id="coloroption5" autocomplete="off"> Grey
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="color" value="RED" id="coloroption6" autocomplete="off"> Red
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="color" value="SILVER" id="coloroption7" autocomplete="off"> Silver
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="color" value="WHITE" id="coloroption8" autocomplete="off"> White
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="color" value="YELLOW" id="coloroption9" autocomplete="off"> Yellow
-            </label>
-            <label class="btn btn-outline-secondary">
-                <input type="radio" name="color" value="OTHER" id="coloroption10" autocomplete="off"> Other
-            </label>
-        </div>
-        <br/>
+            <div class="row">
+                <div class="col-md-6 input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Year</div>
+                    </div>
+                    <input type="number" class="form-control" name="year" id="year" placeholder="Year" min="1950" max="2100" required>
+                </div>
+                <div class="col-md-6 input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Mileage (km)</div>
+                    </div>
+                    <input type="number" class="form-control" name="mileage" id="mileage" placeholder="Mileage" min="0" max="999999" required>
+                </div>
+            </div>
 
-        Number of seats: <input class="form-control form-control-sm" type="number" name="seats" min="1" max="9" required/><br/>
+            <div class="row">
+                <div class="col-md-6 input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Engine power (hp)</div>
+                    </div>
+                    <input type="number" class="form-control" name="enginePower" id="enginePower" placeholder="Engine power" min="0" max="2000" required>
+                </div>
+                <div class="col-md-6 input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Seats number</div>
+                    </div>
+                    <input type="number" class="form-control" name="seats" id="seats" placeholder="Seats number" min="0" max="100" required>
+                </div>
+            </div>
 
-        <button class="btn btn-primary" type="submit">Add car</button>
-    </form>
+            <div class="row">
+                <div class="col-md-6 input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Fuel source</div>
+                    </div>
+                    <select class="form-control" id="fuelsource" name="fuelSource">
+                        <option value="PETROL">Petrol</option>
+                        <option value="PETROLANDGAS">Petrol/Gas</option>
+                        <option value="DIESEL">Diesel</option>
+                        <option value="CNG">CNG</option>
+                        <option value="HYBRID">Hybrid</option>
+                        <option value="ELECTRIC">Electric</option>
+                    </select>
+                </div>
+                <div class="col-md-6 input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Transmission</div>
+                    </div>
+                    <select class="form-control" id="transmission" name="transmission">
+                        <option value="MANUAL">Manual</option>
+                        <option value="AUTOMATIC">Automatic</option>
+                        <option value="SEMIAUTO">Semiauto</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Body type</div>
+                    </div>
+                    <select class="form-control" id="bodytype" name="bodyType">
+                        <option value="CABRIOLET">Cabriolet</option>
+                        <option value="COUPE">Coupe</option>
+                        <option value="CONVERTIBLE">Convertible</option>
+                        <option value="CROSSOVER">Crossover</option>
+                        <option value="HATCHBACK">Hatchback</option>
+                        <option value="ROADSTER">Roadster</option>
+                        <option value="SEDAN">Sedan</option>
+                        <option value="TOURING">Touring</option>
+                        <option value="SUV">SUV</option>
+                        <option value="MINIVAN">Minivan</option>
+                        <option value="WAGON">Wagon</option>
+                    </select>
+                </div>
+                <div class="col-md-6 input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Color</div>
+                    </div>
+                    <select class="form-control" id="color" name="color">
+                        <option value="BEIGE">Beige</option>
+                        <option value="BLACK">Black</option>
+                        <option value="BLUE">Blue</option>
+                        <option value="GOLD">Gold</option>
+                        <option value="GREY">Grey</option>
+                        <option value="RED">Red</option>
+                        <option value="SILVER">Silver</option>
+                        <option value="WHITE">White</option>
+                        <option value="YELLOW">Yellow</option>
+                        <option value="OTHER">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Add car</button>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-outline-primary" type="reset" onclick="window.localStorage.clear();">Clear form</button>
+            </div>
+        </form>
+
+    </div>
+</div>
