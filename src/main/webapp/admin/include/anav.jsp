@@ -22,7 +22,7 @@
                         <a class="nav-link text-dark" href="admin.jsp">Admin Page</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="../listAvailableCar.jsp">Reservations</a>
+                        <a class="nav-link" href="../listReservationCurrentUser">Reservations</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="../pricing.jsp">Pricing</a>
