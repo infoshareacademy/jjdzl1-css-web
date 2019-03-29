@@ -1,13 +1,11 @@
 package com.infoshare.academy.dao;
 
 import com.infoshare.academy.domain.Car;
-import org.hibernate.Filter;
 import org.hibernate.Session;
 
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 
@@ -30,12 +28,32 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     }
 
     @Override
-    public List<Car> list() {
+    public Integer listCount() {
         Session session = getSession();
         List<Car> carList = session.createQuery("Select c FROM Car c")
                 .getResultList();
+        int carCount = carList.size();
+        commitTransaction(session);
+        return carCount;
+    }
+
+    @Override
+    public List<Car> list(int currentPage, int pageSize) {
+        Session session = getSession();
+        Query list = session.createQuery("Select c FROM Car c");
+        list.setFirstResult(pageSize * (currentPage - 1));
+        list.setMaxResults(pageSize);
+        List<Car> carList = list.getResultList();
         commitTransaction(session);
         return carList;
+    }
+
+    @Override
+    public List<Car> listCar() {
+        Session session=getSession();
+        List<Car> listCar=session.createQuery("SELECT c FROM Car c").getResultList();
+        commitTransaction(session);
+        return listCar;
     }
 
     @Override

@@ -11,11 +11,11 @@
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>User panel</span>
+            <span>Users panel</span>
         </h6>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="userslist"><span data-feather="users"></span>User list</a>
+                <a class="nav-link" href="userslist"><span data-feather="users"></span>Users list</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="deleteuser"><span data-feather="user-x"></span>Delete user</a>
@@ -23,18 +23,19 @@
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Car panel</span>
+            <span>Cars panel</span>
         </h6>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="carlist"><span data-feather="list"></span>Car list</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="carPanel.jsp"><span data-feather="settings"></span>Edit car</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="addCar.jsp"><span data-feather="plus"></span>Add car</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="cars"><span data-feather="list"></span>List of cars</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="carPanel.jsp"><span data-feather="list"></span>Car Panel</a>
+            </li>
+
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -42,11 +43,12 @@
         </h6>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="getListReservation"><span data-feather="list"></span>Reservation list</a>
+                <a class="nav-link" href="getReservationListByUserId.jsp"><span data-feather="list">
+
+                </span>List of reservations for the user</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="getReservationListByUserId.jsp"><span data-feather="check-square">
-                </span>User reservations</a>
+                <a class="nav-link" href="getListReservation"><span data-feather="list"></span>List of reservations</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="addReservation.jsp"><span data-feather="plus"></span>Add reservation</a>
