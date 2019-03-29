@@ -4,9 +4,14 @@
     <h4 class="card-header">User reservations</h4>
     <div class="card-body" align="center">
         <form method="get" action="getReservationListByUserId">
-            <div class="form-group px-3">
-                Choose user id: <input type="number" name="id" min="0" required>
-                <button class="btn btn-primary" type="submit">Load list</button>
+            <div class="row">
+                <div class="col-md-12 input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">User id</div>
+                    </div>
+                    <input type="number" name="id" min="1" required>
+                    <button class="btn btn-primary mx-2" type="submit">Load list</button>
+                </div>
             </div>
         </form>
         ${error}
