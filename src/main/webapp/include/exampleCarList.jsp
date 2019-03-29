@@ -1,13 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="row my-4">
-    <div class="col-lg-12">
-        <h2>Our cars</h2>
+<div class="card border-primary">
+        <h4 class="card-header">Our cars</h4>
+    <div class="card-body" align="center">
 
         ${error}
         ${emptyData}
 
-        <table class="table table-striped">
+        <table class="table table-responsive table-sm table-striped">
+            <thead>
             <tr>
                 <th scope="col">Photo</th>
                 <th scope="col">Make</th>
@@ -17,6 +18,8 @@
                 <th scope="col">Engine power</th>
                 <th scope="col">Transmission</th>
             </tr>
+            </thead>
+            <tbody>
             <c:forEach var="car" items="${carExampleList}">
             <tr>
                 <td style="text-align: center; vertical-align: middle;"><img src="${car.photoLink}" height=75 width=110></td>
@@ -28,6 +31,7 @@
                 <td style="text-align: center; vertical-align: middle;">${car.transmission}</td>
             </tr>
             </c:forEach>
+            </tbody>
         </table>
         <br>
         <div class="alert alert-primary" role="alert">
