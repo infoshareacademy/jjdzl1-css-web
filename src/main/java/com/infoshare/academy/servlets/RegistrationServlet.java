@@ -89,14 +89,10 @@ public class RegistrationServlet extends HttpServlet {
         usersRepositoryDao.addUser(user);
         try {
             usersRepositoryDao.sendEmailToNewUser(user.getLogin(), user.getEmail(), user.getAuthorizationNumber());
-            request.getRequestDispatcher("listAvailableCar.jsp").forward(request, response);
+            response.sendRedirect("afterRegistration.jsp");
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-//        RequestDispatcher req =
-
-
-//        request.getRequestDispatcher("afterRegistration.jsp").forward(request, response);
     }
 
     private void RequestResponse(HttpServletRequest request, HttpServletResponse response, String errorMessage, String jspError) throws ServletException, IOException {
