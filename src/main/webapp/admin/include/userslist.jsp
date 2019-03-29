@@ -16,6 +16,7 @@
                 <th scope="col">Phone number</th>
                 <th scope="col">Birth date</th>
                 <th scope="col">Address</th>
+                <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -39,6 +40,12 @@
                     <td>${user.phoneNumber}</td>
                     <td>${user.birthDate}</td>
                     <td>${user.postalCode} ${user.city}, ${user.streetAddress}</td>
+                    <td>
+                        <form method="get" action="edituser">
+                            <input type="hidden" name="id" value="${user.id}">
+                            <button class="btn btn-primary" type="submit">Edit</button>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

@@ -124,7 +124,7 @@
     </form>
     <form method="post" action="deleteCar">
         <input type="hidden" name="id" value="${car.id}">
-        <button type="submit" class="btn btn-danger" style="float: right;" >Delete car</button>
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')" style="float: right;" >Delete car</button>
     </form>
 </c:forEach>
 

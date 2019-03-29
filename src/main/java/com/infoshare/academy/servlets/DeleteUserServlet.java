@@ -32,7 +32,7 @@ public class DeleteUserServlet extends HttpServlet {
             if (userById != null) {
                 req.setAttribute("user", userById);
             }
-            req.getRequestDispatcher("/admin/deleteuser.jsp").forward(req, resp);
+            resp.sendRedirect("userslist");
         }
     }
 
