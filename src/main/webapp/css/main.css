@@ -117,3 +117,11 @@ ul.pagination {
 	display: flex;
 	justify-content: center;
 }
+
+.table {
+	font-size:14px !important;
+}
+
+.table tbody tr:hover td, .table tbody tr:hover th {
+	background-color: #729ee5;
+}
