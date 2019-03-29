@@ -5,7 +5,7 @@
     <div class="card-body" align="center">
         ${error}
         <table class="table table-responsive table-sm table-striped">
-            <thead class="thead-light">
+            <thead>
             <tr>
                 <th scope="col">Photo</th>
                 <th scope="col">Id reservation</th>
