@@ -7,16 +7,15 @@
         ${error}
         ${emptyData}
 
-
         <table class="table table-striped">
             <tr>
-                <th style="text-align: center; vertical-align: middle;">Photo</th>
-                <th style="text-align: center; vertical-align: middle;">Make</th>
-                <th style="text-align: center; vertical-align: middle;">Model</th>
-                <th style="text-align: center; vertical-align: middle;">Year</th>
-                <th style="text-align: center; vertical-align: middle;">Fuel source</th>
-                <th style="text-align: center; vertical-align: middle;">Engine power</th>
-                <th style="text-align: center; vertical-align: middle;">Transmission</th>
+                <th scope="col">Photo</th>
+                <th scope="col">Make</th>
+                <th scope="col">Model</th>
+                <th scope="col">Year</th>
+                <th scope="col">Fuel source</th>
+                <th scope="col">Engine power</th>
+                <th scope="col">Transmission</th>
             </tr>
             <c:forEach var="car" items="${carExampleList}">
             <tr>

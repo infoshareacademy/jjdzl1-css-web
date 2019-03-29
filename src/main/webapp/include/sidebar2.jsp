@@ -17,7 +17,7 @@
                 <a class="nav-link" href="searchCar.jsp"><span data-feather="calendar"></span>Search cars</a>
                 <a class="nav-link" href="listAvailableCar.jsp"><span data-feather="calendar"></span>Check available cars</a>
                 <a class="nav-link" href="reservation.jsp"><span data-feather="plus-square"></span>Add reservation</a>
-                <a class="nav-link" href="listReservationCurrentUser"><span data-feather="calendar"></span>List of user's reservations</a>
+                <a class="nav-link" href="listReservationCurrentUser"><span data-feather="calendar"></span>Your reservations</a>
                 <a class="nav-link" href="delete"><span data-feather="trash-2"></span>Delete reservation</a>
             </li>
         </ul>
