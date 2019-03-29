@@ -7,7 +7,7 @@
         ${error}
         ${emptyData}
 
-        <c:forEach var="car" items="${carExampleList}">
+
         <table class="table table-striped">
             <tr>
                 <th style="text-align: center; vertical-align: middle;">Photo</th>
@@ -18,9 +18,9 @@
                 <th style="text-align: center; vertical-align: middle;">Engine power</th>
                 <th style="text-align: center; vertical-align: middle;">Transmission</th>
             </tr>
+            <c:forEach var="car" items="${carExampleList}">
             <tr>
-                <td style="text-align: center; vertical-align: middle;"><img src="${car.photoLink}" height=150
-                                                                             width=225></td>
+                <td style="text-align: center; vertical-align: middle;"><img src="${car.photoLink}" height=75 width=110></td>
                 <td style="text-align: center; vertical-align: middle;">${car.make}</td>
                 <td style="text-align: center; vertical-align: middle;">${car.model}</td>
                 <td style="text-align: center; vertical-align: middle;">${car.year}</td>

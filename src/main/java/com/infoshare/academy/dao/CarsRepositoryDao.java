@@ -10,7 +10,11 @@ import java.util.stream.Stream;
 public interface CarsRepositoryDao {
     Car addCar(Car car);
 
-    List<Car> list();
+    Integer listCount();
+
+    List<Car> list(int currentPage,int pageSize);
+
+    List<Car> listCar();
 
     Car getCar(Integer id);
 

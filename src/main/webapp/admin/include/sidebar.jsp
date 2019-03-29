@@ -30,7 +30,7 @@
                 <a class="nav-link" href="addCar.jsp"><span data-feather="plus"></span>Add car</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="carlist"><span data-feather="list"></span>List of cars</a>
+                <a class="nav-link" href="cars"><span data-feather="list"></span>List of cars</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="carPanel.jsp"><span data-feather="list"></span>Car Panel</a>

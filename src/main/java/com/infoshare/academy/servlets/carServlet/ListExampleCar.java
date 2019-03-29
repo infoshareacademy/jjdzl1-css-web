@@ -25,7 +25,7 @@ public class ListExampleCar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<Car> carList = dao.list();
+        List<Car> carList = dao.listCar();
 
         if (carList == null || carList.isEmpty()) {
             req.setAttribute("error", errorEmptyList());
@@ -36,7 +36,7 @@ public class ListExampleCar extends HttpServlet {
             }
             req.setAttribute("carExampleList", carExampleList);
         }
-        req.getRequestDispatcher("/carlist.jsp").forward(req, resp);
+        req.getRequestDispatcher("/exampleCarList.jsp").forward(req, resp);
     }
 
 
