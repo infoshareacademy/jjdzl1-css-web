@@ -31,7 +31,7 @@ public class Cars extends HttpServlet {
         int noOfPages = rows / pageSize;
         if (rows % pageSize > 0) {
             noOfPages++;
-        } else {
+
             String page = req.getParameter("currentPage");
             if (page == null) {
                 page = "1";
@@ -49,8 +49,6 @@ public class Cars extends HttpServlet {
                 req.setAttribute("carList", carList);
             }
         }
-
-
         req.getRequestDispatcher("/admin/cars.jsp").forward(req, resp);
     }
 }
