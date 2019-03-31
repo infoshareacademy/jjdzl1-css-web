@@ -3,7 +3,6 @@ package com.infoshare.academy.dao;
 import com.infoshare.academy.domain.User;
 
 import javax.mail.MessagingException;
-import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,6 +17,8 @@ public interface UsersRepositoryDao {
     User getUserByEmail(String email);
 
     List getUsersList();
+
+    List<User> searchUserByLoginOrEmail(String name);
 
     void deleteUserById(int id);
 
