@@ -31,23 +31,21 @@ public class Cars extends HttpServlet {
         int noOfPages = rows / pageSize;
         if (rows % pageSize > 0) {
             noOfPages++;
+        }
+        String page = req.getParameter("currentPage");
+        if (page == null) {
+            page = "1";
+        }
+        Integer currentPage = Integer.parseInt(page);
 
-            String page = req.getParameter("currentPage");
-            if (page == null) {
-                page = "1";
-            }
-            Integer currentPage = Integer.parseInt(page);
+        List<Car> carList = dao.list(currentPage, pageSize);
 
-
-            List<Car> carList = dao.list(currentPage, pageSize);
-
-            if (carList == null || carList.isEmpty()) {
-                req.setAttribute("error", errorEmptyList());
-            } else {
-                req.setAttribute("currentPage", currentPage);
-                req.setAttribute("noOfPages", noOfPages);
-                req.setAttribute("carList", carList);
-            }
+        if (carList == null || carList.isEmpty()) {
+            req.setAttribute("error", errorEmptyList());
+        } else {
+            req.setAttribute("currentPage", currentPage);
+            req.setAttribute("noOfPages", noOfPages);
+            req.setAttribute("carList", carList);
         }
         req.getRequestDispatcher("/admin/cars.jsp").forward(req, resp);
     }
