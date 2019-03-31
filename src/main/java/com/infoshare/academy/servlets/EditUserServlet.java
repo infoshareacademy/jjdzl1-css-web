@@ -31,6 +31,9 @@ public class EditUserServlet extends HttpServlet {
             req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
         } else {
             User userById = usersDao.getUserById(Integer.valueOf(id));
+            if (userById == null){
+                req.setAttribute("error", errorMessage());
+            }
             if (userById != null) {
                 req.setAttribute("user", userById);
             }
@@ -63,7 +66,7 @@ public class EditUserServlet extends HttpServlet {
             usersDao.updateUserInfo(Integer.parseInt(id), firstName, lastName, Long.parseLong(phoneNumber), LocalDate.parse(birthDate));
             usersDao.updateUserAddress(Integer.parseInt(id), postalCode, city, streetAddress);
 
-            resp.sendRedirect("userslist");
+            resp.sendRedirect("users");
         }
     }
 

@@ -1,9 +1,25 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="card border-primary">
+
+        <div class="card border-primary">
+            <h4 class="card-header">Choose user by ID</h4>
+            <div class="card-body" align="center">
+                ${error}
+                <form method="get" action="edituser">
+                    <div class="input-group">
+                        <input type="number" name="id" class="form-control" min="1" value="${user.id}" placeholder="User id">
+                        <span class="input-group-btn mx-2">
+					<button class="btn btn-primary" type="submit">Choose</button>
+                </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+<c:if test="${user.id != null}">
+<div class="card border-primary my-3">
     <h4 class="card-header">Edit user - ${user.login} (id: ${user.id})</h4>
     <div class="card-body">
-        ${error}
         <form method="post" action="edituser">
             <input type="hidden" name="id" value="${user.id}">
             <div class="row">
@@ -90,3 +106,4 @@
 
     </div>
 </div>
+</c:if>

@@ -18,7 +18,7 @@
                 <a class="nav-link" href="users"><span data-feather="users"></span>User list</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="deleteuser"><span data-feather="user-x"></span>Delete user</a>
+                <a class="nav-link" href="edituser"><span data-feather="user-check"></span>Edit user</a>
             </li>
         </ul>
 
