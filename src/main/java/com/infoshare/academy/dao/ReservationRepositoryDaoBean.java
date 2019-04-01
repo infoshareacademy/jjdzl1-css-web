@@ -19,10 +19,10 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     public LocalDate startDate;
     public LocalDate endDate;
 
-    private String availableCar="SELECT  c FROM Car c  where id  IN " +
-            "(SELECT car FROM Reservation WHERE (startDate>'"+startDate+"' and startDate>'"+endDate+"')" +
-            " or (endDate<'"+startDate+"' and startDate>'"+endDate+"')" +
-            " or (endDate<'"+startDate+"'))or id IN (SELECT c from Car c)" +
+    private String availableCar = "SELECT  c FROM Car c  where id  IN " +
+            "(SELECT car FROM Reservation WHERE (startDate>'" + startDate + "' and startDate>'" + endDate + "')" +
+            " or (endDate<'" + startDate + "' and startDate>'" + endDate + "')" +
+            " or (endDate<'" + startDate + "'))or id IN (SELECT c from Car c)" +
             "ORDER BY c.id ASC";
 
     @Override
@@ -45,20 +45,33 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
 
     @Override
     public Reservation getReservationById(Integer id) {
-        Session session =getSession();
-        Reservation getReservation=session.get(Reservation.class,id);
+        Session session = getSession();
+        Reservation getReservation = session.get(Reservation.class, id);
         commitTransaction(session);
         return getReservation;
 
     }
 
-    public List<Reservation> getReservationListByUserId(Integer id) {
+    @Override
+    public Integer reservationCount(Integer id) {
         Session session = getSession();
-        List<Reservation> reservationListByUserId = session.createQuery
-                ("select r from Reservation r where user='" + id + "'")
-                .getResultList();
+        List<Reservation> list = session.createQuery("select r from Reservation r where user='" + id + "'").getResultList();
+        int listCount = list.size();
         commitTransaction(session);
-        return reservationListByUserId;
+        return listCount;
+
+    }
+
+    @Override
+    public List<Reservation> reservationListByUserIdLimit(Integer id, int currentPage) {
+        Session session = getSession();
+        Query listReservation = session.createQuery("select r from Reservation r where user='" + id + "'");
+        int pageSize = 3;
+        listReservation.setFirstResult(pageSize * (currentPage - 1));
+        listReservation.setMaxResults(pageSize);
+        List<Reservation> reservationsLimit = listReservation.getResultList();
+        commitTransaction(session);
+        return reservationsLimit;
     }
 
     @Override
@@ -82,29 +95,29 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
 
     @Override
     public List<Car> getCarListAvailableCar(LocalDate startDate, LocalDate endDate) {
-        Session session=getSession();
-        List<Car> carListAvailableCar=session.createQuery(availableCar).getResultList();
+        Session session = getSession();
+        List<Car> carListAvailableCar = session.createQuery(availableCar).getResultList();
         commitTransaction(session);
         return carListAvailableCar;
     }
 
     @Override
     public Integer getCountCarListAvailableCar(LocalDate startDate, LocalDate endDate) {
-        Session session =getSession();
-        List<Car> carList=session.createQuery(availableCar).getResultList();
-        int carCount=carList.size();
+        Session session = getSession();
+        List<Car> carList = session.createQuery(availableCar).getResultList();
+        int carCount = carList.size();
         commitTransaction(session);
         return carCount;
     }
 
     @Override
-    public List<Car> getCarListAvailableCarLimit(LocalDate startDate, LocalDate endDate,int i) {
-        Session session=getSession();
-        Query carList=session.createQuery(availableCar);
-        int pageSize=3;
-        carList.setFirstResult(pageSize*(i-1));
+    public List<Car> getCarListAvailableCarLimit(LocalDate startDate, LocalDate endDate, int i) {
+        Session session = getSession();
+        Query carList = session.createQuery(availableCar);
+        int pageSize = 3;
+        carList.setFirstResult(pageSize * (i - 1));
         carList.setMaxResults(pageSize);
-        List<Car> carListAvailableCarLimit=carList.getResultList();
+        List<Car> carListAvailableCarLimit = carList.getResultList();
         commitTransaction(session);
         return carListAvailableCarLimit;
     }
