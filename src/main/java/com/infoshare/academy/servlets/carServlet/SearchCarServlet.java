@@ -29,13 +29,15 @@ public class SearchCarServlet extends HttpServlet {
         String fuel = req.getParameter("fuel");
         Integer currentPage=Integer.valueOf(req.getParameter("currentPage"));
 
+        int pageSize=3;
         int rows=dao.searchCount(make,model,fuel);
-        int noOfPage=rows/3;
-        if(rows%3>0) {
+        int noOfPage=rows/pageSize;
+        if(rows%pageSize>0) {
             noOfPage++;
         }
 
-        List<Car> carsList = dao.search(make, model, fuel,currentPage);
+
+        List<Car> carsList = dao.search(make, model, fuel,currentPage,pageSize);
 
         req.setAttribute("make",make);
         req.setAttribute("model",model);

@@ -21,25 +21,6 @@ public class DeleteCar extends HttpServlet {
     CarsRepositoryDao dao;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String id = req.getParameter("id");
-
-        if (id == null || id.isEmpty()) {
-            req.setAttribute("error", errorMessage());
-        } else {
-            Car car = dao.getCar(Integer.valueOf(id));
-
-            if (car == null) {
-                req.setAttribute("error", errorMessage());
-            } else {
-                req.setAttribute("car", car);
-            }
-        }
-        req.getRequestDispatcher("/admin/deleteCar.jsp").forward(req, resp);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String id = req.getParameter("id");
@@ -55,7 +36,7 @@ public class DeleteCar extends HttpServlet {
                 req.setAttribute("success", successMessageCarRm());
             }
         }
-        req.getRequestDispatcher("/admin/deleteCar.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/carPanel.jsp").forward(req, resp);
     }
 }
 

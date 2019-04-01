@@ -6,7 +6,7 @@
 
 <nav>
     <ul class="pagination">
-        <c:if test="${currentPage != 1}">
+        <c:if test="${currentPage > 1}">
             <li class="page-item"><a class="page-link"
                                      href="listAvailableCar?startDate=${start}&endDate=${end}&currentPage=${currentPage-1}">Previous</a>
             </li>

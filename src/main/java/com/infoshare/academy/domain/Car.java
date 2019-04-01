@@ -70,7 +70,7 @@ public class Car implements Serializable {
 
     public Car(Integer carType, String make, String model, Integer year, Integer mileage, Integer enginePower,
                FuelSourceEnum fuelSource, TransmissionEnum transmission, BodyTypeEnum bodyType,
-               ColorEnum color, Integer seats) {
+               ColorEnum color, Integer seats, String photoLink) {
         this.carType = carType;
         this.make = make;
         this.model = model;
@@ -82,6 +82,7 @@ public class Car implements Serializable {
         this.bodyType = bodyType;
         this.color = color;
         this.seats = seats;
+        this.photoLink = photoLink;
     }
 
     public Integer getId() {

@@ -5,7 +5,7 @@
 
     <!-- Head -->
     <jsp:include page="include/head.jsp">
-        <jsp:param name="title" value="Index"></jsp:param>
+        <jsp:param name="title" value="Error"></jsp:param>
     </jsp:include>
 
   <body>
@@ -24,34 +24,22 @@
           </c:otherwise>
       </c:choose>
 
-      <!-- Sidebar -->
-      <c:choose>
-          <c:when test="${sessionScope.username != null}">
-              <jsp:include page="include/sidebar2.jsp"></jsp:include>
-          </c:when>
-          <c:otherwise>
-          </c:otherwise>
-      </c:choose>
-
     <!-- Page Content -->
-      <c:choose>
-          <c:when test="${sessionScope.username != null}">
-              <main class="flex-fill col-md-10 ml-sm-auto py-3">
-                  <div class="container">
-                      <jsp:include page="include/listAvailableCar.jsp"></jsp:include>
-                  </div>
-                  <!-- /.container -->
-              </main>
-          </c:when>
-          <c:otherwise>
-              <main class="container-fluid py-3 flex-fill">
-                  <div class="container">
-                      <jsp:include page="include/carlist.jsp"></jsp:include>
-                  </div>
-                  <!-- /.container -->
-              </main>
-          </c:otherwise>
-      </c:choose>
+    <main class="container-fluid py-3 flex-fill">
+      <div class="container">
+
+          <div class="col-md-4 offset-4 text-center">
+          <div class="card text-white bg-danger mb-3">
+              <h3 class="card-header">Error 404</h3>
+              <div class="card-body">
+                  <h5 class="card-title">Sorry, page not found!</h5>
+              </div>
+          </div>
+          </div>
+
+      </div>
+      <!-- /.container -->
+    </main>
 
     <!-- Footer -->
     <jsp:include page="include/footer.jsp"></jsp:include>
@@ -59,6 +47,8 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>feather.replace()</script>
 
   </wrapper>
   </body>

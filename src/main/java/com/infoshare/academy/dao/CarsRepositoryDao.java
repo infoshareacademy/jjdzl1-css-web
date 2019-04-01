@@ -10,15 +10,19 @@ import java.util.stream.Stream;
 public interface CarsRepositoryDao {
     Car addCar(Car car);
 
-    List<Car> list();
+    Integer listCount();
+
+    List<Car> list(int currentPage,int pageSize);
+
+    List<Car> listCar();
 
     Car getCar(Integer id);
 
-    Car updateCarMileage(Integer id,Integer mileage);
+    Car updateCar(Car car);
 
     void deleteCar(Integer id);
 
     Integer searchCount(String make,String model,String fuel);
 
-    List<Car> search(String make,String model,String fuel,int page);
+    List<Car> search(String make,String model,String fuel,int page,int pageSize);
 }
