@@ -85,6 +85,10 @@
                         <label for="postalCode">Postal code</label>
                         <input type="text" name="postalCode" class="form-control" id="postalCode" placeholder="">
                     </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">I accept terms of use</label>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
