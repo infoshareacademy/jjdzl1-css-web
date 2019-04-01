@@ -11,13 +11,13 @@
             <input type="password" class="form-control" name="password" id="password" required>
         </div>
         <div class="form-group px-3">
-            <label for="password1">New password</label>
+            <label for="inputpassword">New password</label>
             <p class="card-text"><small class="text-muted">Password requires at least 8 characters with one digit, big letter and special character</small></p>
-            <input type="password" class="form-control" name="password1" id="password1" required>
+            <input type="password" class="form-control" name="password1" id="inputpassword" required>
         </div>
         <div class="form-group px-3">
-            <label for="password2">Repeat new password</label>
-            <input type="password" class="form-control" name="password2" id="password2" required>
+            <label for="inputpassword2">Confirm new password</label>
+            <input type="password" class="form-control" name="password2" id="inputpassword2" required>
         </div>
         <div class="form-group px-3">
         <button type="submit" class="btn btn-primary">Change password</button>

@@ -17,13 +17,11 @@ import static com.infoshare.academy.utils.CarMessages.*;
 @WebServlet("/admin/carPanel")
 public class CarPanel extends HttpServlet {
 
-
     @EJB
     CarsRepositoryDao dao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
         String make = req.getParameter("make");
         String model = req.getParameter("model");
@@ -45,7 +43,6 @@ public class CarPanel extends HttpServlet {
         if (carsList.isEmpty()) {
             req.setAttribute("error", errorNoSearchResults());
         }
-
         req.getRequestDispatcher("/admin/carPanel.jsp").forward(req, resp);
     }
 
@@ -80,6 +77,5 @@ public class CarPanel extends HttpServlet {
             }
         }
         req.getRequestDispatcher("/admin/carPanel.jsp").forward(req, resp);
-
     }
 }
