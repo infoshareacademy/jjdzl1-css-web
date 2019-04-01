@@ -1,6 +1,5 @@
 package com.infoshare.academy.servlets;
 
-
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
 
@@ -13,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/admin/userslist")
-public class UsersListServlet extends HttpServlet {
+@WebServlet("/admin/users")
+public class UserListServlet extends HttpServlet {
 
     @EJB
     UsersRepositoryDao usersDao;
@@ -24,10 +23,16 @@ public class UsersListServlet extends HttpServlet {
 
         resp.setContentType("text/html;charset=UTF-8");
 
-        List<User> usersList = usersDao.getUsersList();
+        String name = req.getParameter("name");
 
-        req.setAttribute("usersList", usersList);
-        req.getRequestDispatcher("/admin/userslist.jsp").forward(req, resp);
-
+        if (name == null) {
+            List<User> usersList = usersDao.getUsersList();
+            req.setAttribute("usersList", usersList);
+            req.getRequestDispatcher("/admin/users.jsp").forward(req, resp);
+        } else {
+            List<User> usersList = usersDao.searchUserByLoginOrEmail(name);
+            req.setAttribute("usersList", usersList);
+            req.getRequestDispatcher("/admin/users.jsp").forward(req, resp);
+        }
     }
 }

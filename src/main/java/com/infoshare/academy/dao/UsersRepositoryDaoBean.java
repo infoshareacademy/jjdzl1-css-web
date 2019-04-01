@@ -77,6 +77,15 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     }
 
     @Override
+    public List<User> searchUserByLoginOrEmail(String name) {
+        Session session = getSession();
+        org.hibernate.query.Query<User> query = session.createQuery("Select u From User u Where u.login LIKE '%" + name + "%' OR u.email LIKE '%" + name + "%'", User.class);
+        List<User> userList = query.getResultList();
+        commitTransaction(session);
+        return userList;
+    }
+
+    @Override
     public void deleteUserById(int id) {
         Session session = getSession();
         User user = session.get(User.class, id);

@@ -1,6 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="card border-primary">
+    <h4 class="card-header">Search for users</h4>
+    <div class="card-body" align="center">
+        <form method="get" action="users">
+            <div class="input-group">
+                <input type="text" name="name" class="form-control" placeholder="Login/Email">
+                <span class="input-group-btn mx-2">
+					<button class="btn btn-primary" type="submit">Search</button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card border-primary my-3">
     <h4 class="card-header">User list</h4>
     <div class="card-body" align="center">
 
@@ -16,6 +30,7 @@
                 <th scope="col">Phone number</th>
                 <th scope="col">Birth date</th>
                 <th scope="col">Address</th>
+                <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -39,6 +54,12 @@
                     <td>${user.phoneNumber}</td>
                     <td>${user.birthDate}</td>
                     <td>${user.postalCode} ${user.city}, ${user.streetAddress}</td>
+                    <td>
+                        <form method="get" action="edituser">
+                            <input type="hidden" name="id" value="${user.id}">
+                            <button class="btn btn-primary" type="submit">Edit</button>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
