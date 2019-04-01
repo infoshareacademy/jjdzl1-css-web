@@ -29,7 +29,9 @@ public class DeleteReservationByAdmin extends HttpServlet {
             req.setAttribute("error", errorNoReservationToRm());
         } else {
             Integer id = Integer.valueOf(idString);
-            List<Reservation> reservationByUserId = dao.getReservationListByUserId(id);
+            List<Reservation> reservationByUserId = dao.reservationListByUserIdLimit(id,1);
+
+            // TODO dorobić paginację w serwlecie, wyświetli tylko pierwsze 3 rezerwację
 
             if (reservationByUserId == null || reservationByUserId.isEmpty()) {
                 req.setAttribute("error", errorNoReservationToRm());

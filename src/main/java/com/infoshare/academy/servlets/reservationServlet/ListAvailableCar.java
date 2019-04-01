@@ -44,20 +44,11 @@ public class ListAvailableCar extends HttpServlet {
                 req.setAttribute("error", errorEndGreaterThanStart());
             } else {
 
-
                 int currentPage = Integer.valueOf(req.getParameter("currentPage"));
-
 
                 List<Car> carListAvailableCarLimit = daoReservation.getCarListAvailableCarLimit(start, end, currentPage);
 
-                int rows=daoReservation.getCountCarListAvailableCar(start,end);
-
-                int nOfPages = rows / 3;
-                if (rows % 3 > 0) {
-                    nOfPages++;
-                }
-
-                req.setAttribute("noOfPages", nOfPages);
+                req.setAttribute("noOfPages", noOfPages(start,end));
                 req.setAttribute("currentPage", currentPage);
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -70,5 +61,14 @@ public class ListAvailableCar extends HttpServlet {
             }
             req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
         }
+    }
+
+    public Integer noOfPages(LocalDate start, LocalDate end) {
+        int rows = daoReservation.getCountCarListAvailableCar(start, end);
+        int noOfPages = rows / 3;
+        if (rows % 3 > 0) {
+            noOfPages++;
+        }
+        return noOfPages;
     }
 }

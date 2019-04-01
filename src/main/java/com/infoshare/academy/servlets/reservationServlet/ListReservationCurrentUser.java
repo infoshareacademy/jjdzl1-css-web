@@ -33,17 +33,37 @@ public class ListReservationCurrentUser extends HttpServlet {
         User currentUser = getUser(getUser);
         Integer id = currentUser.getId();
 
-        List<Reservation> reservationByUserId = dao.getReservationListByUserId(id);
+        String page = req.getParameter("currentPage");
+
+        List<Reservation> reservationByUserId = dao.reservationListByUserIdLimit(id, currentPage(page));
 
         if (reservationByUserId == null || reservationByUserId.isEmpty()) {
             req.setAttribute("error", errorEmptyReservationList());
         } else {
             req.setAttribute("reservationByUserId", reservationByUserId);
+            req.setAttribute("noOfPages", noOfPages(id));
+            req.setAttribute("currentPage", currentPage(page));
         }
         req.getRequestDispatcher("/listReservationCurrentUser.jsp").forward(req, resp);
     }
 
     public User getUser(String username) {
         return daoUser.getUserByLogin(username);
+    }
+
+    public int currentPage(String page){
+        if (page == null) {
+            page = "1";
+        }
+        return Integer.valueOf(page);
+    }
+
+    public int noOfPages(Integer id) {
+        int rows = dao.reservationCount(id);
+        int noOfPages = rows / 3;
+        if (rows % 3 > 0) {
+            noOfPages++;
+        }
+        return noOfPages;
     }
 }
