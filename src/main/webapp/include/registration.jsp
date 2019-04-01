@@ -28,7 +28,7 @@
                                placeholder="Password" required>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="inputpassword2">Repeat assword</label>
+                        <label for="inputpassword2">Repeat password</label>
                         <input type="password" name="password2" class="form-control" id="inputpassword2"
                                placeholder="Password" required>
                     </div>

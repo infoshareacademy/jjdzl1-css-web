@@ -27,7 +27,7 @@
         </h6>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="carlist"><span data-feather="list"></span>Car list</a>
+                <a class="nav-link" href="cars"><span data-feather="list"></span>Car list</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="carPanel.jsp"><span data-feather="settings"></span>Edit car</a>

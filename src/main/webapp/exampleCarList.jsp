@@ -46,7 +46,7 @@
           <c:otherwise>
               <main class="container-fluid py-3 flex-fill">
                   <div class="container">
-                      <jsp:include page="include/carlist.jsp"></jsp:include>
+                      <jsp:include page="include/exampleCarList.jsp"></jsp:include>
                   </div>
                   <!-- /.container -->
               </main>
