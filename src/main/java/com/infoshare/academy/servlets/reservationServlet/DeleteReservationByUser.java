@@ -34,9 +34,23 @@ public class DeleteReservationByUser extends HttpServlet {
         User currentUser = getUser(getUser);
         Integer id = currentUser.getId();
 
-        List<Reservation> reservationByUserId = dao.reservationListByUserIdLimit(id,1);
+        int rows = dao.reservationCount(id);
 
-                                                    // TODO paginacja , wyświetlane będą tylko 3 wyniki
+        int noOfPages = rows / 3;
+        if (rows % 3 > 0) {
+            noOfPages++;
+        }
+        String page = req.getParameter("currentPage");
+        if (page == null) {
+            page = "1";
+        }
+        int currentPage = Integer.valueOf(page);
+        req.setAttribute("noOfPages", noOfPages);
+        req.setAttribute("currentPage", currentPage);
+
+
+        List<Reservation> reservationByUserId = dao.reservationListByUserIdLimit(id, currentPage);
+
 
         if (reservationByUserId == null || reservationByUserId.isEmpty()) {
             req.setAttribute("error", errorEmptyReservationList());
