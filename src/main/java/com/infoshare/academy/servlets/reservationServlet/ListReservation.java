@@ -23,16 +23,36 @@ public class ListReservation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<Reservation> reservationList = dao.list();
+        String page = req.getParameter("currentPage");
+        String login = req.getParameter("login");
+        String name = req.getParameter("name");
+
+        List<Reservation> reservationList = dao.listLimit(login, name, currentPage(page));
 
         if (reservationList == null || reservationList.isEmpty()) {
             req.setAttribute("error", errorEmptyListReservation());
 
         } else {
+            req.setAttribute("noOfPages", noOfPages(login, name));
+            req.setAttribute("currentPage", currentPage(page));
+            req.setAttribute("login", login);
+            req.setAttribute("name", name);
             req.setAttribute("reservationList", reservationList);
         }
         req.getRequestDispatcher("/admin/listReservation.jsp").forward(req, resp);
     }
 
+    public Integer noOfPages(String login, String name) {
+        int rows = dao.listCount(login, name);
+        int noOfPages = rows / 3;
+        if (rows % 3 > 0) {
+            noOfPages++;
+        }
+        return noOfPages;
+    }
+
+    public int currentPage(String page) {
+        return Integer.valueOf(page);
+    }
 }
 
