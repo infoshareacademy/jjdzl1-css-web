@@ -36,8 +36,10 @@ public class ReservationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        String page=req.getParameter("currentPage");
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
+
         if (startDate == null || startDate.isEmpty() || endDate == null || endDate.isEmpty()) {
             req.setAttribute("error", errorStartGreaterNow());
         } else {
@@ -54,24 +56,11 @@ public class ReservationServlet extends HttpServlet {
                 req.setAttribute("error", errorEndGreaterThanStart());
             } else {
 
-                int currentPage = Integer.valueOf(req.getParameter("currentPage"));
-
-                List<Car> carListAvailableCarLimit = daoReservation.getCarListAvailableCarLimit(start, end, currentPage);
-
-                int rows=daoReservation.getCountCarListAvailableCar(start,end);
-
-
-                int nOfPages = rows / 3;
-                if (rows % 3 > 0) {
-                    nOfPages++;
-                }
-
-                req.setAttribute("noOfPages", nOfPages);
-                req.setAttribute("currentPage", currentPage);
-
+                List<Car> carListAvailableCarLimit = daoReservation.getCarListAvailableCarLimit(start, end, currentPage(page));
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
+                req.setAttribute("noOfPages", noOfPages(start,end));
+                req.setAttribute("currentPage", currentPage(page));
                 req.setAttribute("startDate", start.format(formatter));
                 req.setAttribute("start", start);
                 req.setAttribute("endDate", end.format(formatter));
@@ -82,20 +71,16 @@ public class ReservationServlet extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(false);
-        String getUser = (String) session.getAttribute("username");
-        User currentUser = getUser(getUser);
-        Integer id = currentUser.getId();
+        String username = (String) session.getAttribute("username");
 
         String carId = req.getParameter("carId");
         if (carId == null || carId.isEmpty()) {
             req.setAttribute("error", errorCarDoesntExist());
         } else {
-
 
             Integer idThisCar = Integer.valueOf(carId);
             String startDate = req.getParameter("startDate");
@@ -103,16 +88,14 @@ public class ReservationServlet extends HttpServlet {
             LocalDate start = LocalDate.parse(startDate);
             LocalDate end = LocalDate.parse(endDate);
 
-
             Car car = daoCar.getCar(idThisCar);
-            User user = daoUser.getUserById(id);
 
             List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start, end);
             for (Car cars : carListAvailableCar) {
                 Integer idCar = cars.getId();
                 if (idCar == idThisCar) {
 
-                    Reservation reservation = new Reservation(user, car, start, end);
+                    Reservation reservation = new Reservation(getUser(username), car, start, end);
                     daoReservation.addReservation(reservation);
                     req.setAttribute("success", successReservationAdd());
                     req.getRequestDispatcher("/reservation.jsp").forward(req, resp);
@@ -128,6 +111,18 @@ public class ReservationServlet extends HttpServlet {
         return daoUser.getUserByLogin(username);
     }
 
+    public int noOfPages(LocalDate start,LocalDate end){
+        int rows=daoReservation.getCountCarListAvailableCar(start,end);
+
+        int noOfPages = rows / 3;
+        if (rows % 3 > 0) {
+            noOfPages++;
+        }
+        return noOfPages;
+    }
+    public int currentPage(String page){
+        return Integer.valueOf(page);
+    }
 }
 
 

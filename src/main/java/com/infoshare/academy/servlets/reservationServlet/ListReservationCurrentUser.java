@@ -28,30 +28,30 @@ public class ListReservationCurrentUser extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
-        String getUser = (String) session.getAttribute("username");
-        User currentUser = getUser(getUser);
-        Integer id = currentUser.getId();
 
+        HttpSession session = req.getSession(false);
+        String username = (String) session.getAttribute("username");
         String page = req.getParameter("currentPage");
 
-        List<Reservation> reservationByUserId = dao.reservationListByUserIdLimit(id, currentPage(page));
+        List<Reservation> reservationByUserId = dao.reservationListByUserIdLimit(getUserId(username), currentPage(page));
 
         if (reservationByUserId == null || reservationByUserId.isEmpty()) {
             req.setAttribute("error", errorEmptyReservationList());
         } else {
             req.setAttribute("reservationByUserId", reservationByUserId);
-            req.setAttribute("noOfPages", noOfPages(id));
+            req.setAttribute("noOfPages", noOfPages(getUserId(username)));
             req.setAttribute("currentPage", currentPage(page));
         }
         req.getRequestDispatcher("/listReservationCurrentUser.jsp").forward(req, resp);
     }
 
-    public User getUser(String username) {
-        return daoUser.getUserByLogin(username);
+    public Integer getUserId(String username) {
+        User currentUser = daoUser.getUserByLogin(username);
+        Integer id=currentUser.getId();
+        return id;
     }
 
-    public int currentPage(String page){
+    public int currentPage(String page) {
         if (page == null) {
             page = "1";
         }
