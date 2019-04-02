@@ -45,10 +45,6 @@
                 <a class="nav-link" href="listReservation.jsp"><span data-feather="list"></span>Reservation list</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="getReservationListByUserId.jsp"><span data-feather="check-square">
-                </span>User reservations</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="addReservation.jsp"><span data-feather="plus"></span>Add reservation</a>
             </li>
             <li class="nav-item">

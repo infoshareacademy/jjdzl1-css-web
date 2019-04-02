@@ -24,14 +24,12 @@
         <thead>
         <tr>
             <th scope="col">Photo</th>
-            <th scope="col">Id reservation</th>
-            <th scope="col">User id</th>
             <th scope="col">User login</th>
-            <th scope="col">Car id</th>
             <th scope="col">Car make</th>
             <th scope="col">Car model</th>
             <th scope="col">Start date</th>
             <th scope="col">End date</th>
+            <th scope="col">Action</th>
         </tr>
         </c:if>
         </thead>
@@ -40,49 +38,54 @@
             <tr>
                 <td style="vertical-align: middle;"><img src="../${reservation.car.photoLink}" height="100"
                                                          width="150"></td>
-                <td style="vertical-align: middle;">${reservation.reservation_id}</td>
-                <td style="vertical-align: middle;">${reservation.user.id}</td>
                 <td style="vertical-align: middle;">${reservation.user.login}</td>
-                <td style="vertical-align: middle;">${reservation.car.id}</td>
                 <td style="vertical-align: middle;">${reservation.car.make}</td>
                 <td style="vertical-align: middle;">${reservation.car.model}</td>
                 <td style="vertical-align: middle;">${reservation.startDate}</td>
                 <td style="vertical-align: middle;">${reservation.endDate}</td>
+                <td style="vertical-align: middle;">
+                    <form method="get" action="editReservation">
+                        <input type="hidden" name="id" value="${reservation.reservation_id}">
+                        <button class="btn btn-primary" type="submit">Details</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
 <input type="hidden" name="currentPage" value="1">
-<div align="center">
-    <nav>
-        <ul class="pagination">
-            <c:if test="${currentPage > 1}">
-                <li class="page-item"><a class="page-link"
-                                         href="getListReservation?login=${login}&name=${name}&currentPage=${currentPage-1}">Previous</a>
-                </li>
-            </c:if>
+<div>
+    <div align="center">
+        <nav>
+            <ul class="pagination">
+                <c:if test="${currentPage > 1}">
+                    <li class="page-item"><a class="page-link"
+                                             href="getListReservation?login=${login}&name=${name}&currentPage=${currentPage-1}">Previous</a>
+                    </li>
+                </c:if>
 
-            <c:forEach begin="1" end="${noOfPages}" var="i">
-                <c:choose>
-                    <c:when test="${currentPage eq i}">
-                        <li class="page-item active"><a class="page-link">
-                                ${i} <span class="sr-only">(current)</span></a>
-                        </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="page-item"><a class="page-link"
-                                                 href="getListReservation?login=${login}&name=${name}&currentPage=${i}">${i}</a>
-                        </li>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
+                <c:forEach begin="1" end="${noOfPages}" var="i">
+                    <c:choose>
+                        <c:when test="${currentPage eq i}">
+                            <li class="page-item active"><a class="page-link">
+                                    ${i} <span class="sr-only">(current)</span></a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link"
+                                                     href="getListReservation?login=${login}&name=${name}&currentPage=${i}">${i}</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
 
-            <c:if test="${currentPage lt noOfPages}">
-                <li class="page-item"><a class="page-link"
-                                         href="getListReservation?login=${login}&name=${name}&currentPage=${currentPage+1}">Next</a>
-                </li>
-            </c:if>
-        </ul>
-    </nav>
+                <c:if test="${currentPage lt noOfPages}">
+                    <li class="page-item"><a class="page-link"
+                                             href="getListReservation?login=${login}&name=${name}&currentPage=${currentPage+1}">Next</a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
+    </div>
 </div>
