@@ -29,7 +29,9 @@ public class GetReservationByUserId extends HttpServlet {
             req.setAttribute("error", errorUserHaveNoReservation());
         } else {
 
-            List<Reservation> reservationListByUserId = dao.getReservationListByUserId(Integer.parseInt(id));
+            List<Reservation> reservationListByUserId = dao.reservationListByUserIdLimit(Integer.parseInt(id),1);
+
+                                                    // TODO dorobić paginację
 
             if (reservationListByUserId == null || reservationListByUserId.isEmpty()) {
                 req.setAttribute("error", errorUserHaveNoReservation());

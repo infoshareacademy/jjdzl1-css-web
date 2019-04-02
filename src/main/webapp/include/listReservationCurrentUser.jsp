@@ -3,6 +3,7 @@
 <div class="card border-primary">
     <h4 class="card-header">Your reservations</h4>
     <div class="card-body" align="center">
+        <input type="hidden" name="currentPage" value="1">
         ${error}
         <c:if test="${reservationByUserId !=null}">
             <table class="table table-responsive table-sm table-striped">
@@ -34,5 +35,35 @@
                 </tbody>
             </table>
         </c:if>
+            <nav>
+                <ul class="pagination">
+                    <c:if test="${currentPage >1}">
+                        <li class="page-item"><a class="page-link"
+                                                 href="listReservationCurrentUser?currentPage=${currentPage-1}">Previous</a>
+                        </li>
+                    </c:if>
+
+                    <c:forEach begin="1" end="${noOfPages}" var="i">
+                        <c:choose>
+                            <c:when test="${currentPage eq i}">
+                                <li class="page-item active"><a class="page-link">
+                                        ${i} <span class="sr-only">(current)</span></a>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link"
+                                                         href="listReservationCurrentUser?currentPage=${i}">${i}</a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+
+                    <c:if test="${currentPage lt noOfPages}">
+                        <li class="page-item"><a class="page-link"
+                                                 href="listReservationCurrentUser?currentPage=${currentPage+1}">Next</a>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav>
     </div>
 </div>

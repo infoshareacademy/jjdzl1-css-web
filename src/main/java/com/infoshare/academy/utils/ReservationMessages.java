@@ -109,4 +109,10 @@ public class ReservationMessages {
         String errorData = "The entered date is incorrect ! Please try again.";
         return html1 + errorData + html2;
     }
+    public static String errorReservationDoesntExist() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = " The reservation doesn't exist.";
+        return html1 + errorData + html2;
+    }
 }

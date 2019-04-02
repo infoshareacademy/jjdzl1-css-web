@@ -30,15 +30,17 @@ public class DeleteReservationByUser extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(false);
-        String getUser = (String) session.getAttribute("username");
-        User currentUser = getUser(getUser);
-        Integer id = currentUser.getId();
+        String username = (String) session.getAttribute("username");
 
-        List<Reservation> reservationByUserId = dao.getReservationListByUserId(id);
+        String page = req.getParameter("currentPage");
+
+        List<Reservation> reservationByUserId = dao.reservationListByUserIdLimit(getUserId(username), currentPage(page));
 
         if (reservationByUserId == null || reservationByUserId.isEmpty()) {
             req.setAttribute("error", errorEmptyReservationList());
         } else {
+            req.setAttribute("noOfPages", noOfPages(getUserId(username)));
+            req.setAttribute("currentPage", currentPage(page));
             req.setAttribute("reservationByUserId", reservationByUserId);
         }
         req.getRequestDispatcher("/deletereservationbyuser.jsp").forward(req, resp);
@@ -49,11 +51,8 @@ public class DeleteReservationByUser extends HttpServlet {
 
         String idString = req.getParameter("id");
 
-
         HttpSession session = req.getSession(false);
-        String getUser = (String) session.getAttribute("username");
-        User currentUser = getUser(getUser);
-        Integer idUser = currentUser.getId();
+        String username = (String) session.getAttribute("username");
 
         if (idString == null || idString.isEmpty()) {
             req.setAttribute("error", errorMessage());
@@ -66,7 +65,7 @@ public class DeleteReservationByUser extends HttpServlet {
                 req.setAttribute("error", errorUserDoesNotHaveReser());
             } else {
                 Integer idUserInReservation = reservation.getUser().getId();
-                if (reservation != null && idUser == idUserInReservation) {
+                if (reservation != null && getUserId(username) == idUserInReservation) {
                     dao.deleteReservation(id);
                     req.setAttribute("success", successReservationRm());
                 } else {
@@ -78,7 +77,27 @@ public class DeleteReservationByUser extends HttpServlet {
 
     }
 
-    public User getUser(String username) {
-        return daoUser.getUserByLogin(username);
+    public Integer getUserId(String username) {
+        User currentUser=daoUser.getUserByLogin(username);
+        Integer id=currentUser.getId();
+        return id;
     }
+
+    public int noOfPages(Integer id){
+        int rows = dao.reservationCount(id);
+
+        int noOfPages = rows / 3;
+        if (rows % 3 > 0) {
+            noOfPages++;
+        }
+        return noOfPages;
+    }
+
+    public int currentPage(String page){
+        if (page == null) {
+            page = "1";
+        }
+        return Integer.valueOf(page);
+    }
+
 }
