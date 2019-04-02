@@ -11,10 +11,10 @@
         <property name="hibernate.connection.password">root</property>
 
         <!--2) Settings for Docker on 192.168.99.100 with port forwarding-->
-        <!--<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>-->
-        <!--<property name="hibernate.connection.url">jdbc:mysql://192.168.99.100:9001/css</property>-->
-        <!--<property name="hibernate.connection.username">root</property>-->
-        <!--<property name="hibernate.connection.password">root</property>-->
+        <!--<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://192.168.99.100:9001/css</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>-->
 
         <!--3) Settings for Xampp-->
 <!--        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
