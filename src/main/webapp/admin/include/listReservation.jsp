@@ -56,7 +56,7 @@
 </div>
 <input type="hidden" name="currentPage" value="1">
 <div>
-    <div align="center">
+    <div class="my-3" align="center">
         <nav>
             <ul class="pagination">
                 <c:if test="${currentPage > 1}">
