@@ -7,7 +7,7 @@
 %>
 <footer class="container-fluid w-100 py-2 bg-dark">
         <div class="container">
-                <p class="m-0 text-center text-white"><img src="img/css-logo.png" width="35" height="35" class="d-inline-block mr-1" alt=""> Copyright &copy; 2018-<%= thisYear %> by <b>CSS Group</b></p>
+                <p class="m-0 text-center text-white"><img src="${pageContext.request.contextPath}/img/css-logo.png" width="35" height="35" class="d-inline-block mr-1" alt=""> Copyright &copy; 2018-<%= thisYear %> by <b>CSS Group</b></p>
         </div>
         <!-- /.container -->
 </footer>
