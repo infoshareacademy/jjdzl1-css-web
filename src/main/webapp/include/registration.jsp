@@ -85,18 +85,19 @@
                         <label for="postalCode">Postal code</label>
                         <input type="text" name="postalCode" class="form-control" id="postalCode" placeholder="">
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">I accept terms of use</label>
+                </div>
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
+                        <label class="custom-control-label" for="customControlValidation1">I accept terms of use</label>
+                        <div class="invalid-feedback">Feedback text</div>
                     </div>
-                </div>
-                <div class="mb-3">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
-                </div>
-                <div class="text-center">
-                    <button class="btn btn-outline-primary mr-3" type="button" onclick="history.back();">Previous page</button>
-                    <button class="btn btn-outline-primary" type="reset" onclick="window.localStorage.clear();">Clear form</button>
-                </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-outline-primary mr-3" type="button" onclick="history.back();">Previous page</button>
+                        <button class="btn btn-outline-primary" type="reset" onclick="window.localStorage.clear();">Clear form</button>
+                    </div>
             </form>
         </div>
     </div>
