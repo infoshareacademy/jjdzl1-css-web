@@ -83,15 +83,19 @@ public class RegistrationServlet extends HttpServlet {
             } else if (tempUserByLogin != null) {
                 RequestResponse(request, response, "unavailableLoginError", unavailableLogin());
             } else {
-                setUUIDAndActivationStatusForNewUser(user);
-                usersRepositoryDao.addUser(user);
-                try {
-                    usersRepositoryDao.sendEmailToNewUser(user.getLogin(), user.getEmail(), user.getAuthorizationNumber());
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                createUser(request, response, user);
             }
+        }
+    }
+
+    private void createUser(HttpServletRequest request, HttpServletResponse response, User user) throws ServletException, IOException {
+        setUUIDAndActivationStatusForNewUser(user);
+        usersRepositoryDao.addUser(user);
+        try {
+            usersRepositoryDao.sendEmailToNewUser(user.getLogin(), user.getEmail(), user.getAuthorizationNumber());
+            response.sendRedirect("afterRegistration.jsp");
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
     }
 
