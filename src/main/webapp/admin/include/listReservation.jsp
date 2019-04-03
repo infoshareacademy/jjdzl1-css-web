@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="card border-primary">
-    <h4 class="card-header">Reservations list</h4>
+    <h4 class="card-header">Search for reservations</h4>
     <div class="card-body" align="center">
+        ${error}
         <form method="get" action="getListReservation">
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -18,8 +19,12 @@
             </div>
         </form>
     </div>
-    ${error}
-    <c:if test="${reservationList !=null}">
+</div>
+
+<c:if test="${reservationList !=null}">
+<div class="card border-primary my-3">
+    <h4 class="card-header">Reservation list</h4>
+    <div class="card-body" align="center">
     <table class="table table-responsive table-sm table-striped">
         <thead>
         <tr>
@@ -31,13 +36,11 @@
             <th scope="col">End date</th>
             <th scope="col">Action</th>
         </tr>
-        </c:if>
         </thead>
         <tbody>
         <c:forEach var="reservation" items="${reservationList}">
             <tr>
-                <td style="vertical-align: middle;"><img src="../${reservation.car.photoLink}" height="100"
-                                                         width="150"></td>
+                <td style="vertical-align: middle;"><img src="../${reservation.car.photoLink}" height="100" width="150"></td>
                 <td style="vertical-align: middle;">${reservation.user.login}</td>
                 <td style="vertical-align: middle;">${reservation.car.make}</td>
                 <td style="vertical-align: middle;">${reservation.car.model}</td>
@@ -53,15 +56,15 @@
         </c:forEach>
         </tbody>
     </table>
+    </div>
 </div>
+
 <input type="hidden" name="currentPage" value="1">
-<div>
     <div class="my-3" align="center">
         <nav>
             <ul class="pagination">
                 <c:if test="${currentPage > 1}">
-                    <li class="page-item"><a class="page-link"
-                                             href="getListReservation?login=${login}&name=${name}&currentPage=${currentPage-1}">Previous</a>
+                    <li class="page-item"><a class="page-link" href="getListReservation?login=${login}&name=${name}&currentPage=${currentPage-1}">Previous</a>
                     </li>
                 </c:if>
 
@@ -73,8 +76,7 @@
                             </li>
                         </c:when>
                         <c:otherwise>
-                            <li class="page-item"><a class="page-link"
-                                                     href="getListReservation?login=${login}&name=${name}&currentPage=${i}">${i}</a>
+                            <li class="page-item"><a class="page-link" href="getListReservation?login=${login}&name=${name}&currentPage=${i}">${i}</a>
                             </li>
                         </c:otherwise>
                     </c:choose>
@@ -88,4 +90,4 @@
             </ul>
         </nav>
     </div>
-</div>
+</c:if>
