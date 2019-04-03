@@ -1,4 +1,4 @@
-package com.infoshare.academy.servlets;
+package com.infoshare.academy.servlets.user;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
