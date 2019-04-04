@@ -32,29 +32,23 @@ public class AddReservation extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String carId = req.getParameter("carId");
         String userId = req.getParameter("userId");
-        String startDate = req.getParameter("startDate");
-        String endDate = req.getParameter("endDate");
-        LocalDate now = LocalDate.now();
+        String start = req.getParameter("startDate");
+        String end = req.getParameter("endDate");
 
         if (carId == null || carId.isEmpty()) {
             req.setAttribute("error", errorCarDoesntExist());
         } else if (userId == null || userId.isEmpty()) {
             req.setAttribute("error", errorUserDoesntExist());
-        } else if (startDate == null || startDate.isEmpty()) {
+        } else if (start == null || start.isEmpty()) {
             req.setAttribute("error", errorIncorrectDate());
-        } else if (endDate == null || endDate.isEmpty()) {
+        } else if (end == null || end.isEmpty()) {
             req.setAttribute("error", errorIncorrectDate());
         } else {
 
 
-            LocalDate start = LocalDate.parse(startDate);
-            LocalDate end = LocalDate.parse(endDate);
-            boolean isAfter = start.isAfter(end);
-            boolean isPast = now.isAfter(start);
-
-            if (isAfter) {
+            if (isAfter(start(start),end(end))) {
                 req.setAttribute("error", errorEndGreaterThanStart());
-            } else if (isPast) {
+            } else if (isPast(start(start))) {
                 req.setAttribute("error", errorStartGreaterNow());
             } else {
 
@@ -69,7 +63,7 @@ public class AddReservation extends HttpServlet {
 
                 } else {
 
-                    Reservation reservation = new Reservation(user, car, LocalDate.parse(startDate), LocalDate.parse(endDate));
+                    Reservation reservation = new Reservation(user, car, start(start), end(end));
 
                     dao.addReservation(reservation);
                     req.setAttribute("success", successReservationAdd());
@@ -77,5 +71,23 @@ public class AddReservation extends HttpServlet {
             }
         }
         req.getRequestDispatcher("addReservation.jsp").forward(req, resp);
+    }
+
+    public LocalDate now = LocalDate.now();
+
+    public LocalDate start(String start) {
+        return LocalDate.parse(start);
+    }
+
+    public LocalDate end(String end) {
+        return LocalDate.parse(end);
+    }
+
+    public boolean isAfter(LocalDate start,LocalDate end) {
+        return start.isAfter(end);
+    }
+
+    public boolean isPast(LocalDate start) {
+        return now.isAfter(start);
     }
 }

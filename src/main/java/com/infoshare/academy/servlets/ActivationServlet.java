@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+
+import static com.infoshare.academy.utils.RegistrationMessages.ActivatedMessage;
 
 @WebServlet("/activationAccount")
 public class ActivationServlet extends HttpServlet {
@@ -41,12 +42,5 @@ public class ActivationServlet extends HttpServlet {
         request.setAttribute(errorMessage, jspError);
         RequestDispatcher req = request.getRequestDispatcher("login.jsp");
         req.forward(request, response);
-    }
-
-    public static String ActivatedMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "Activated!";
-        return html1 + errorData + html2;
     }
 }

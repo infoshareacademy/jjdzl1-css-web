@@ -84,4 +84,32 @@ public class RegistrationMessages {
         String errorData = "Incorrect Date Of Birth! Please, choose it again!";
         return html1 + errorData + html2;
     }
+
+    public static String ActivatedMessage() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Activated!";
+        return html1 + errorData + html2;
+    }
+
+    public static String errorMessageLoginIncorrect() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Login or password incorrect! Please try again.";
+        return html1 + errorData + html2;
+    }
+    public static String activationErrorMessage() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Your Account is not active! Check your email box and activate your account!";
+        return html1 + errorData + html2;
+    }
+
+    public static String errorMessageLoginFirst() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Please login first!";
+        return html1 + errorData + html2;
+    }
+
 }

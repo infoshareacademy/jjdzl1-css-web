@@ -28,11 +28,10 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
         response.setContentType("text/html");
 
         HttpSession session = request.getSession(false);
-        String getUser = (String) session.getAttribute("username");
+        String userName = (String) session.getAttribute("username");
 
-        if (getUser != null) {
-            User currentUser = getUser(getUser);
-            request.setAttribute("currentUser", currentUser);
+        if (userName != null) {
+            request.setAttribute("currentUser", getUser(userName));
             request.getRequestDispatcher("editaddress.jsp").forward(request, response);
         } else {
             request.setAttribute("error", anonymousUser());
@@ -45,15 +44,14 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setEncoding(req, resp);
         HttpSession session = req.getSession(false);
-        String getUser = (String) session.getAttribute("username");
-        User currentUser = getUser(getUser);
-        Integer id = currentUser.getId();
+        String userName = (String) session.getAttribute("username");
+
 
         String postalCode = req.getParameter("postalCode");
         String city = req.getParameter("city");
         String streetAddress = req.getParameter("streetAddress");
 
-        usersDao.updateUserAddress(id, postalCode, city, streetAddress);
+        usersDao.updateUserAddress(getUser(userName).getId(), postalCode, city, streetAddress);
 
         resp.setHeader("Refresh", "1");
         req.getRequestDispatcher("editaddress.jsp").forward(req, resp);
@@ -65,7 +63,9 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
     }
 
-    public User getUser(String username) {
-        return usersDao.getUserByLogin(username);
+    public User getUser(String userName) {
+        User currentUser = usersDao.getUserByLogin(userName);
+        return currentUser;
+
     }
 }
