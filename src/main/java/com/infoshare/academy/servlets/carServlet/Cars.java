@@ -25,29 +25,40 @@ public class Cars extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-        int pageSize = 3;
-        int rows = dao.listCount();
-        int noOfPages = rows / pageSize;
-        if (rows % pageSize > 0) {
-            noOfPages++;
-        }
         String page = req.getParameter("currentPage");
-        if (page == null) {
-            page = "1";
-        }
-        Integer currentPage = Integer.parseInt(page);
 
-        List<Car> carList = dao.list(currentPage, pageSize);
+        List<Car> carList = dao.list(currentPage(page), pageSize());
 
         if (carList == null || carList.isEmpty()) {
             req.setAttribute("error", errorEmptyList());
         } else {
-            req.setAttribute("currentPage", currentPage);
-            req.setAttribute("noOfPages", noOfPages);
+            req.setAttribute("currentPage", currentPage(page));
+            req.setAttribute("noOfPages", noOfPages());
             req.setAttribute("carList", carList);
         }
         req.getRequestDispatcher("/admin/cars.jsp").forward(req, resp);
+    }
+
+    public int pageSize() {
+        int pageSize = 3;
+        return pageSize;
+    }
+
+    public Integer noOfPages() {
+        int rows = dao.listCount();
+        int noOfPages = rows / pageSize();
+        if (rows % pageSize() > 0) {
+            noOfPages++;
+        }
+        return noOfPages;
+    }
+
+    public Integer currentPage(String page) {
+        if (page == null) {
+            page = "1";
+        }
+        Integer currentPage = Integer.parseInt(page);
+        return currentPage;
     }
 }
 
