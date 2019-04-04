@@ -37,28 +37,28 @@ public class ReservationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String page = req.getParameter("currentPage");
-        String startDate = req.getParameter("startDate");
-        String endDate = req.getParameter("endDate");
+        String start = req.getParameter("startDate");
+        String end = req.getParameter("endDate");
 
-        if (startDate == null || startDate.isEmpty() || endDate == null || endDate.isEmpty()) {
+        if (start == null || start.isEmpty() || end == null || end.isEmpty()) {
             req.setAttribute("error", errorStartGreaterNow());
         } else {
 
-            if (isPast(start(startDate))) {
+            if (isPast(start(start))) {
                 req.setAttribute("error", errorStartGreaterNow());
-            } else if (isAfter(start(startDate), end(endDate))) {
+            } else if (isAfter(start(start), end(end))) {
                 req.setAttribute("error", errorEndGreaterThanStart());
             } else {
 
-                List<Car> carListAvailableCarLimit = daoReservation.getCarListAvailableCarLimit(start(startDate), end(endDate), currentPage(page));
+                List<Car> carListAvailableCarLimit = daoReservation.getCarListAvailableCarLimit(start(start), end(end), currentPage(page));
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                req.setAttribute("noOfPages", noOfPages(start(startDate), end(endDate)));
+                req.setAttribute("noOfPages", noOfPages(start(start), end(end)));
                 req.setAttribute("currentPage", currentPage(page));
-                req.setAttribute("startDate", start(startDate).format(formatter));
-                req.setAttribute("start", start(startDate));
-                req.setAttribute("endDate", end(endDate).format(formatter));
-                req.setAttribute("end", end(endDate));
+                req.setAttribute("startDate", start(start).format(formatter));
+                req.setAttribute("start", start(start));
+                req.setAttribute("endDate", end(end).format(formatter));
+                req.setAttribute("end", end(end));
                 req.setAttribute("carListAvailableCarLimit", carListAvailableCarLimit);
             }
             req.getRequestDispatcher("/reservation.jsp").forward(req, resp);
@@ -77,15 +77,15 @@ public class ReservationServlet extends HttpServlet {
             req.setAttribute("error", errorCarDoesntExist());
         } else {
 
-            String startDate = req.getParameter("startDate");
-            String endDate = req.getParameter("endDate");
+            String start = req.getParameter("startDate");
+            String end = req.getParameter("endDate");
 
-            List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start(startDate), end(endDate));
+            List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start(start), end(end));
             for (Car cars : carListAvailableCar) {
                 Integer idCar = cars.getId();
                 if (idCar == car(carId).getId()) {
 
-                    Reservation reservation = new Reservation(getUser(username), car(carId), start(startDate), end(endDate));
+                    Reservation reservation = new Reservation(getUser(username), car(carId), start(start), end(end));
                     daoReservation.addReservation(reservation);
                     req.setAttribute("success", successReservationAdd());
                     req.getRequestDispatcher("/reservation.jsp").forward(req, resp);
@@ -105,9 +105,9 @@ public class ReservationServlet extends HttpServlet {
         return daoCar.getCar(id);
     }
 
-    public LocalDate start(String startDate) { return LocalDate.parse(startDate); }
+    public LocalDate start(String start) { return LocalDate.parse(start); }
 
-    public LocalDate end(String endDate) { return LocalDate.parse(endDate); }
+    public LocalDate end(String end) { return LocalDate.parse(end); }
 
     public boolean isAfter(LocalDate start, LocalDate end) { return start.isAfter(end); }
 
