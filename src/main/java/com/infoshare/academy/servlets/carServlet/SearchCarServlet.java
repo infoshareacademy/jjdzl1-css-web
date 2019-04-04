@@ -27,30 +27,35 @@ public class SearchCarServlet extends HttpServlet {
         String make = req.getParameter("make");
         String model = req.getParameter("model");
         String fuel = req.getParameter("fuel");
-        Integer currentPage=Integer.valueOf(req.getParameter("currentPage"));
+        Integer currentPage = Integer.valueOf(req.getParameter("currentPage"));
 
-        int pageSize=3;
-        int rows=dao.searchCount(make,model,fuel);
-        int noOfPage=rows/pageSize;
-        if(rows%pageSize>0) {
-            noOfPage++;
-        }
+        List<Car> carsList = dao.search(make, model, fuel, currentPage, pageSize());
 
-
-        List<Car> carsList = dao.search(make, model, fuel,currentPage,pageSize);
-
-        req.setAttribute("make",make);
-        req.setAttribute("model",model);
-        req.setAttribute("fuel",fuel);
+        req.setAttribute("make", make);
+        req.setAttribute("model", model);
+        req.setAttribute("fuel", fuel);
         req.setAttribute("carsList", carsList);
-        req.setAttribute("noOfPages",noOfPage);
-        req.setAttribute("currentPage",currentPage);
+        req.setAttribute("noOfPages", noOfPages(make,model,fuel));
+        req.setAttribute("currentPage", currentPage);
 
         if (carsList.isEmpty()) {
             req.setAttribute("error", errorNoSearchResults());
         }
 
         req.getRequestDispatcher("searchCar.jsp").forward(req, resp);
+    }
+
+    public int pageSize() {
+        int pageSize = 3;
+        return pageSize;
+    }
+    public Integer noOfPages(String make,String model, String fuel){
+        int rows = dao.searchCount(make, model, fuel);
+        int noOfPage = rows / pageSize();
+        if (rows % pageSize() > 0) {
+            noOfPage++;
+        }
+        return noOfPage;
     }
 }
 
