@@ -6,7 +6,6 @@ import com.infoshare.academy.utils.PasswordHashAlgorithm;
 import com.infoshare.academy.utils.UserPasswordUtils;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
+import static com.infoshare.academy.utils.RegistrationMessages.*;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -27,51 +28,33 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        response.setContentType("text/html");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        resp.setContentType("text/html");
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
 
         User tempUser = createUserBasedOnFormLogin(username);
         Integer usertype = getUserType(tempUser);
-        boolean checkPassword = checkPassword(tempUser,password);
+        boolean checkPassword = checkPassword(tempUser, password);
 
         if (tempUser != null && checkPassword) {
             if (tempUser.getAccountActive()) {
-                RequestDispatcher req = request.getRequestDispatcher("listAvailableCar.jsp");
-                HttpSession session = request.getSession();
+                HttpSession session = req.getSession();
                 session.setAttribute("username", username);
                 session.setAttribute("usertype", usertype);
-                req.forward(request, response);
+                req.getRequestDispatcher("listAvailableCar.jsp").forward(req, resp);
             } else {
-                request.setAttribute("activationError", activationErrorMessage());
-                RequestDispatcher req = request.getRequestDispatcher("login.jsp");
-                req.forward(request, response);
+                req.setAttribute("activationError", activationErrorMessage());
             }
         } else {
-            request.setAttribute("error", errorMessage());
-            RequestDispatcher req = request.getRequestDispatcher("login.jsp");
-            req.forward(request, response);
+            req.setAttribute("error", errorMessageLoginIncorrect());
         }
+        req.getRequestDispatcher("login.jsp").forward(req, resp);
     }
 
     private User createUserBasedOnFormLogin(String username) {
         return usersDao.getUserByLogin(username);
-    }
-
-    private static String errorMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "Login or password incorrect! Please try again.";
-        return html1 + errorData + html2;
-    }
-
-    private static String activationErrorMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "Your Account is not active! Check your email box and activate your account!";
-        return html1 + errorData + html2;
     }
 
     private Integer getUserType(User tempUser) {

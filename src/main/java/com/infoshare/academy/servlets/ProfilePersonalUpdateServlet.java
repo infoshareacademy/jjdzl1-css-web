@@ -4,7 +4,6 @@ import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,21 +23,20 @@ public class ProfilePersonalUpdateServlet extends HttpServlet {
     private UsersRepositoryDao usersDao;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        response.setContentType("text/html");
+        resp.setContentType("text/html");
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = req.getSession(false);
         String getUser = (String) session.getAttribute("username");
 
         if (getUser != null) {
             User currentUser = getUser(getUser);
-            request.setAttribute("currentUser", currentUser);
-            request.getRequestDispatcher("editinfo.jsp").forward(request, response);
+            req.setAttribute("currentUser", currentUser);
+            req.getRequestDispatcher("editinfo.jsp").forward(req, resp);
         } else {
-            request.setAttribute("error", anonymousUser());
-            RequestDispatcher req = request.getRequestDispatcher("login.jsp");
-            req.forward(request, response);
+            req.setAttribute("error", anonymousUser());
+            req.getRequestDispatcher("login.jsp").forward(req,resp);
         }
     }
 
