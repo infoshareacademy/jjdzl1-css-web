@@ -56,7 +56,7 @@
                     <td>${user.postalCode} ${user.city}, ${user.streetAddress}</td>
                     <td>
                         <form method="get" action="edituser">
-                            <input type="hidden" name="id" value="${user.id}">
+                            <input type="hidden" name="login" value="${user.login}">
                             <button class="btn btn-primary" type="submit">Edit</button>
                         </form>
                     </td>

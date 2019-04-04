@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="card border-primary">
-    <h4 class="card-header">Delete reservation</h4>
+    <h4 class="card-header">Search for reservations</h4>
     <div class="card-body" align="center">
+        ${error}
+        ${success}
         <form method="get" action="deleteReservation">
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -17,11 +19,13 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
 
-
-        ${error}
-        ${success}
-        <c:if test="${reservations != null}">
+<c:if test="${reservations != null}">
+<div class="card border-primary my-3">
+    <h4 class="card-header">Reservation list</h4>
+    <div class="card-body" align="center">
             <table class="table table-responsive table-sm table-striped">
                 <thead>
                 <tr>
@@ -68,17 +72,15 @@
                 </c:forEach>
                 </tbody>
             </table>
-        </c:if>
     </div>
 </div>
+
 <input type="hidden" name="currentPage" value="1">
-<div>
 <div class="my-3" align="center">
         <nav>
             <ul class="pagination">
                 <c:if test="${currentPage > 1}">
-                    <li class="page-item"><a class="page-link"
-                                             href="deleteReservation?login=${login}&name=${name}&currentPage=${currentPage-1}">Previous</a>
+                    <li class="page-item"><a class="page-link" href="deleteReservation?login=${login}&name=${name}&currentPage=${currentPage-1}">Previous</a>
                     </li>
                 </c:if>
 
@@ -90,8 +92,7 @@
                             </li>
                         </c:when>
                         <c:otherwise>
-                            <li class="page-item"><a class="page-link"
-                                                     href="deleteReservation?login=${login}&name=${name}&currentPage=${i}">${i}</a>
+                            <li class="page-item"><a class="page-link" href="deleteReservation?login=${login}&name=${name}&currentPage=${i}">${i}</a>
                             </li>
                         </c:otherwise>
                     </c:choose>
@@ -106,3 +107,4 @@
         </nav>
     </div>
 </div>
+</c:if>

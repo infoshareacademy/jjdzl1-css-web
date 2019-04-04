@@ -12,7 +12,7 @@
     <div class="card bg-light mb-3" style="max-width: 18rem;">
         <div class="card-header"><span data-feather="truck"></span> Car panel</div>
         <div class="card-body text-center">
-            <a href="carlist" class="btn btn-secondary btn-lg mb-3">Car list</a>
+            <a href="cars" class="btn btn-secondary btn-lg mb-3">Car list</a>
             <a href="carPanel.jsp" class="btn btn-secondary btn-lg mb-3">Edit car</a>
             <a href="addCar.jsp" class="btn btn-secondary btn-lg mb-3">Add car</a>
         </div>

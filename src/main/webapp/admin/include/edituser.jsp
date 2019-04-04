@@ -2,14 +2,14 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
         <div class="card border-primary">
-            <h4 class="card-header">Choose user by ID</h4>
+            <h4 class="card-header">Choose user by login</h4>
             <div class="card-body" align="center">
                 ${error}
                 <form method="get" action="edituser">
                     <div class="input-group">
-                        <input type="number" name="id" class="form-control" min="1" value="${user.id}" placeholder="User id">
+                        <input type="text" name="login" class="form-control" min="1" value="${user.login}" placeholder="Login">
                         <span class="input-group-btn mx-2">
-					<button class="btn btn-primary" type="submit">Choose</button>
+					<button class="btn btn-primary" type="submit">Edit</button>
                 </span>
                     </div>
                 </form>
