@@ -14,8 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import static com.infoshare.academy.utils.ReservationMessages.errorEndGreaterThanStart;
-import static com.infoshare.academy.utils.ReservationMessages.errorStartGreaterNow;
+import static com.infoshare.academy.utils.ReservationMessages.*;
 
 @WebServlet("/listAvailableCar")
 public class ListAvailableCar extends HttpServlet {
@@ -26,41 +25,52 @@ public class ListAvailableCar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String startDate = req.getParameter("startDate");
-        String endDate = req.getParameter("endDate");
+        String start = req.getParameter("startDate");
+        String end = req.getParameter("endDate");
+        String page = req.getParameter("currentPage");
 
-        if (startDate == null || startDate.isEmpty() || endDate == null || endDate.isEmpty()) {
-            req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
+        if (start == null || start.isEmpty() || end == null || end.isEmpty()) {
+            req.setAttribute("error", errorIncorrectDate());
         } else {
-            LocalDate now = LocalDate.now();
-            LocalDate start = LocalDate.parse(startDate);
-            LocalDate end = LocalDate.parse(endDate);
-            boolean isAfter = start.isAfter(end);
-            boolean isPast = now.isAfter(start);
 
-            if (isPast) {
+            if (isPast(start(start))) {
                 req.setAttribute("error", errorStartGreaterNow());
-            } else if (isAfter) {
+            } else if (isAfter(start(start), end(end))) {
                 req.setAttribute("error", errorEndGreaterThanStart());
             } else {
 
-                int currentPage = Integer.valueOf(req.getParameter("currentPage"));
-
-                List<Car> carListAvailableCarLimit = daoReservation.getCarListAvailableCarLimit(start, end, currentPage);
-
-                req.setAttribute("noOfPages", noOfPages(start,end));
-                req.setAttribute("currentPage", currentPage);
+                List<Car> carListAvailableCarLimit = daoReservation
+                        .getCarListAvailableCarLimit(start(start), end(end), currentPage(page));
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
+                req.setAttribute("noOfPages", noOfPages(start(start), end(end)));
+                req.setAttribute("currentPage", currentPage(page));
                 req.setAttribute("start", start);
                 req.setAttribute("end", end);
-                req.setAttribute("startDate", start.format(formatter));
-                req.setAttribute("endDate", end.format(formatter));
+                req.setAttribute("startDate", start(start).format(formatter));
+                req.setAttribute("endDate", end(end).format(formatter));
                 req.setAttribute("carListAvailableCarLimit", carListAvailableCarLimit);
             }
-            req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
         }
+            req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
+    }
+
+    public LocalDate now = LocalDate.now();
+
+    public LocalDate start(String start) {
+        return LocalDate.parse(start);
+    }
+
+    public LocalDate end(String end) {
+        return LocalDate.parse(end);
+    }
+
+    public boolean isAfter(LocalDate start, LocalDate end) {
+        return start.isAfter(end);
+    }
+
+    public boolean isPast(LocalDate start) {
+        return now.isAfter(start);
     }
 
     public Integer noOfPages(LocalDate start, LocalDate end) {
@@ -70,5 +80,9 @@ public class ListAvailableCar extends HttpServlet {
             noOfPages++;
         }
         return noOfPages;
+    }
+
+    public int currentPage(String page) {
+        return Integer.valueOf(page);
     }
 }
