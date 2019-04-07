@@ -142,7 +142,7 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public void sendEmailToNewUser(String login, String email, String UUID) throws MessagingException {
         MailSend mail = new MailSend();
-        mail.sentEmail(login,email,UUID);
+        mail.sentEmailForRegistrationProcess(login, email, UUID);
     }
 
     @Override

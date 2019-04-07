@@ -15,14 +15,14 @@ public class MailSend {
     private Session mailSession;
     private MimeMessage emailMessage;
 
-    public void sentEmail(String login, String mailAddress, String UUID) throws AddressException,
+    public void sentEmailForRegistrationProcess(String login, String mailAddress, String UUID) throws AddressException,
             MessagingException {
 
         MailSend javaEmail = new MailSend();
 
         javaEmail.setMailServerProperties();
-        javaEmail.createEmailMessage(login, mailAddress, UUID);
-        javaEmail.sentEmail();
+        javaEmail.createEmailMessageForRegistrationProcess(mailAddress, CreateBodyContentForRegistrationEmail(login,UUID));
+        javaEmail.sentEmailForRegistrationProcess();
     }
 
     private void setMailServerProperties() {
@@ -36,11 +36,10 @@ public class MailSend {
 
     }
 
-    private void createEmailMessage(String Login, String destinationAdress, String UUID) throws AddressException, MessagingException {
-        String[] toEmails = {destinationAdress};
+    private void createEmailMessageForRegistrationProcess(String destinationAddres, String emailBodyContent) throws AddressException, MessagingException {
+        String[] toEmails = {destinationAddres};
         String emailSubject = "Registration process in CAR SHARING SYSTEM";
-        String emailBody = "Hello <b>" + Login + "</b> <br>\n Click this link to activate your account in " +
-                "CAR SHARING SYSTEM: \n" + "http://localhost:8080/jjdzl1-css/activationAccount?login=" + Login + "&UUID=" + UUID;
+        String emailBody = emailBodyContent;
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
 
@@ -49,12 +48,12 @@ public class MailSend {
         }
 
         emailMessage.setSubject(emailSubject);
-        emailMessage.setContent(emailBody, "text/html");//for a html email
-//      emailMessage.setText(emailBody);// for a text email
+        emailMessage.setContent(emailBody, "text/html");
+
 
     }
 
-    private void sentEmail() throws AddressException, MessagingException {
+    private void sentEmailForRegistrationProcess() throws AddressException, MessagingException {
 
         String emailHost = "smtp.gmail.com";
         String fromUser = "CarSharingSystem.help";//just the id alone without @gmail.com
@@ -66,6 +65,11 @@ public class MailSend {
         transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
         transport.close();
         System.out.println("Email sent successfully.");
+    }
+
+    private String CreateBodyContentForRegistrationEmail(String Login, String UUID){
+        return "Hello <b>" + Login + "</b> <br>\n Click this link to activate your account in " +
+                "CAR SHARING SYSTEM: \n" + "http://localhost:8080/jjdzl1-css/activationAccount?login=" + Login + "&UUID=" + UUID;
     }
 
 }
