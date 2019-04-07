@@ -11,6 +11,8 @@
 
     <modules>
         <module>css-webapp</module>
+        <module>css-logic</module>
+        <module>css-restapi</module>
     </modules>
 
     <name>jjdzl1-css-webapp</name>
