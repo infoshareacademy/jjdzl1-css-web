@@ -39,8 +39,8 @@ public class MailSend {
     private void createEmailMessage(String Login, String destinationAdress, String UUID) throws AddressException, MessagingException {
         String[] toEmails = {destinationAdress};
         String emailSubject = "Registration process in CAR SHARING SYSTEM";
-        String emailBody = "Hello " + Login + "\n Click this link to activate your account in " +
-                "CAR SHARING SYSTEM: \n" + "localhost:8080/jjdzl1-css/activationAccount?login=" + Login + "&UUID=" + UUID;
+        String emailBody = "Hello <b>" + Login + "</b> <br>\n Click this link to activate your account in " +
+                "CAR SHARING SYSTEM: \n" + "http://localhost:8080/jjdzl1-css/activationAccount?login=" + Login + "&UUID=" + UUID;
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
 
