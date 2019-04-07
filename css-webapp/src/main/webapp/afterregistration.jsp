@@ -28,7 +28,7 @@
     <main class="container-fluid py-3 flex-fill">
         <div class="container">
 
-            <jsp:include page="include/afterRegistration.jsp"></jsp:include>
+            <jsp:include page="include/afterregistration.jsp"></jsp:include>
 
         </div>
         <!-- /.container -->

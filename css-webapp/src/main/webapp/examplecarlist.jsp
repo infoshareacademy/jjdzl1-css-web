@@ -38,7 +38,7 @@
           <c:when test="${sessionScope.username != null}">
               <main class="flex-fill col-md-10 ml-sm-auto py-3">
                   <div class="container">
-                      <jsp:include page="include/listAvailableCar.jsp"></jsp:include>
+                      <jsp:include page="include/listavailablecar.jsp"></jsp:include>
                   </div>
                   <!-- /.container -->
               </main>
@@ -46,7 +46,7 @@
           <c:otherwise>
               <main class="container-fluid py-3 flex-fill">
                   <div class="container">
-                      <jsp:include page="include/exampleCarList.jsp"></jsp:include>
+                      <jsp:include page="include/examplecarlist.jsp"></jsp:include>
                   </div>
                   <!-- /.container -->
               </main>

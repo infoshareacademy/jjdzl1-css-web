@@ -52,7 +52,7 @@ public class ListAvailableCar extends HttpServlet {
                 req.setAttribute("carListAvailableCarLimit", carListAvailableCarLimit);
             }
         }
-            req.getRequestDispatcher("/listAvailableCar.jsp").forward(req, resp);
+            req.getRequestDispatcher("/listavailablecar.jsp").forward(req, resp);
     }
 
     public LocalDate now = LocalDate.now();

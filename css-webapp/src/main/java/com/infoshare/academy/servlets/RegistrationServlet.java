@@ -93,7 +93,7 @@ public class RegistrationServlet extends HttpServlet {
         usersRepositoryDao.addUser(user);
         try {
             usersRepositoryDao.sendEmailToNewUser(user.getLogin(), user.getEmail(), user.getAuthorizationNumber());
-            response.sendRedirect("afterRegistration.jsp");
+            response.sendRedirect("afterregistration.jsp");
         } catch (MessagingException e) {
             e.printStackTrace();
         }

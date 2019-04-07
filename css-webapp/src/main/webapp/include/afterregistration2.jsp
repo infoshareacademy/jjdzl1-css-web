@@ -26,7 +26,7 @@
                 <p class="card-text">Choose the car that suits your needs. Don't wait, just check available time and start using one of our vehicles!</p>
             </div>
             <div class="card-footer">
-                <a href="listAvailableCar.jsp" class="btn btn-primary">Begin now</a>
+                <a href="listavailablecar.jsp" class="btn btn-primary">Begin now</a>
             </div>
         </div>
     </div>

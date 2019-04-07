@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = req.getSession();
                 session.setAttribute("username", username);
                 session.setAttribute("usertype", usertype);
-                req.getRequestDispatcher("listAvailableCar.jsp").forward(req, resp);
+                req.getRequestDispatcher("listavailablecar.jsp").forward(req, resp);
             } else {
                 req.setAttribute("activationError", activationErrorMessage());
             }

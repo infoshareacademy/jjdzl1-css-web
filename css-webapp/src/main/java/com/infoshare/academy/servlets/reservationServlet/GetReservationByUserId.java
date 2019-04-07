@@ -39,7 +39,7 @@ public class GetReservationByUserId extends HttpServlet {
                 req.setAttribute("reservationListByUserId", reservationListByUserId);
 
         }
-        req.getRequestDispatcher("/admin/getReservationListByUserId.jsp").
+        req.getRequestDispatcher("/admin/getreservationlistbyuserid.jsp").
 
                 forward(req, resp);
 

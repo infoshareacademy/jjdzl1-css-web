@@ -30,10 +30,10 @@
                 <a class="nav-link" href="cars"><span data-feather="list"></span>Car list</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="carPanel.jsp"><span data-feather="settings"></span>Edit car</a>
+                <a class="nav-link" href="carpanel.jsp"><span data-feather="settings"></span>Edit car</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="addCar.jsp"><span data-feather="plus"></span>Add car</a>
+                <a class="nav-link" href="addcar.jsp"><span data-feather="plus"></span>Add car</a>
             </li>
         </ul>
 
@@ -42,13 +42,13 @@
         </h6>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="listReservation.jsp"><span data-feather="list"></span>Reservation list</a>
+                <a class="nav-link" href="listreservation.jsp"><span data-feather="list"></span>Reservation list</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="addReservation.jsp"><span data-feather="plus"></span>Add reservation</a>
+                <a class="nav-link" href="addreservation.jsp"><span data-feather="plus"></span>Add reservation</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="deleteReservation.jsp"><span data-feather="delete"></span>Delete reservation</a>
+                <a class="nav-link" href="deletereservation.jsp"><span data-feather="delete"></span>Delete reservation</a>
             </li>
         </ul>
 

@@ -21,7 +21,7 @@
     <main class="flex-fill col-md-10 ml-sm-auto py-3">
         <div class="container">
 
-            <jsp:include page="include/editReservation.jsp"></jsp:include>
+            <jsp:include page="include/addcar.jsp"></jsp:include>
 
         </div>
         <!-- /.container -->
@@ -33,6 +33,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/scripts/remcar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script>feather.replace()</script>
 

@@ -39,7 +39,7 @@ public class ListReservation extends HttpServlet {
             req.setAttribute("name", name);
             req.setAttribute("reservationList", reservationList);
         }
-        req.getRequestDispatcher("/admin/listReservation.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/listreservation.jsp").forward(req, resp);
     }
 
     public Integer noOfPages(String login, String name) {

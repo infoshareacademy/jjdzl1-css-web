@@ -40,7 +40,7 @@ public class DeleteReservationByAdmin extends HttpServlet {
             req.setAttribute("name", name);
             req.setAttribute("reservations", reservations);
         }
-        req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/deletereservation.jsp").forward(req, resp);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class DeleteReservationByAdmin extends HttpServlet {
                 req.setAttribute("success", successReservationRm());
             }
         }
-        req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/deletereservation.jsp").forward(req, resp);
     }
     public Integer noOfPages(String login, String name) {
         int rows = dao.listCount(login, name);
