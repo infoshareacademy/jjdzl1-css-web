@@ -39,7 +39,6 @@ public class MailSend {
     private void createEmailMessageForRegistrationProcess(String destinationAddres, String emailBodyContent) throws AddressException, MessagingException {
         String[] toEmails = {destinationAddres};
         String emailSubject = "Registration process in CAR SHARING SYSTEM";
-        String emailBody = emailBodyContent;
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
 
@@ -48,9 +47,7 @@ public class MailSend {
         }
 
         emailMessage.setSubject(emailSubject);
-        emailMessage.setContent(emailBody, "text/html");
-
-
+        emailMessage.setContent(emailBodyContent, "text/html");
     }
 
     private void sentEmailForRegistrationProcess() throws AddressException, MessagingException {
