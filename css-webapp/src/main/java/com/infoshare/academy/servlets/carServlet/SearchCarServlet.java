@@ -29,7 +29,7 @@ public class SearchCarServlet extends HttpServlet {
         String fuel = req.getParameter("fuel");
         Integer currentPage = Integer.valueOf(req.getParameter("currentPage"));
 
-        List<Car> carsList = dao.search(make, model, fuel, currentPage, pageSize());
+        List<Car> carsList = dao.searchCar(make, model, fuel, currentPage, pageSize());
 
         req.setAttribute("make", make);
         req.setAttribute("model", model);
@@ -50,7 +50,7 @@ public class SearchCarServlet extends HttpServlet {
         return pageSize;
     }
     public Integer noOfPages(String make,String model, String fuel){
-        int rows = dao.searchCount(make, model, fuel);
+        int rows = dao.searchCarCount(make, model, fuel);
         int noOfPage = rows / pageSize();
         if (rows % pageSize() > 0) {
             noOfPage++;

@@ -1,5 +1,6 @@
 package com.infoshare.academy.dao;
 
+import com.infoshare.academy.MyQuery;
 import com.infoshare.academy.domain.Car;
 import org.hibernate.Session;
 
@@ -12,12 +13,15 @@ import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 @Stateless
 public class CarRepositoryDaoBean implements CarsRepositoryDao {
 
+    MyQuery myQuery = new MyQuery();
+
 
     private Session getSession() {
         Session session = getSessionFactory().getCurrentSession();
         session.beginTransaction();
         return session;
     }
+
 
     @Override
     public Car addCar(Car car) {
@@ -30,7 +34,7 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     @Override
     public Integer listCount() {
         Session session = getSession();
-        List<Car> carList = session.createQuery("Select c FROM Car c")
+        List<Car> carList = session.createQuery(myQuery.getCar())
                 .getResultList();
         int carCount = carList.size();
         commitTransaction(session);
@@ -40,9 +44,9 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     @Override
     public List<Car> list(int currentPage, int pageSize) {
         Session session = getSession();
-        Query list = session.createQuery("Select c FROM Car c");
-        list.setFirstResult(pageSize * (currentPage - 1));
-        list.setMaxResults(pageSize);
+        Query list = session.createQuery(myQuery.getCar())
+                .setFirstResult(pageSize * (currentPage - 1))
+                .setMaxResults(pageSize);
         List<Car> carList = list.getResultList();
         commitTransaction(session);
         return carList;
@@ -50,8 +54,8 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
 
     @Override
     public List<Car> listCar() {
-        Session session=getSession();
-        List<Car> listCar=session.createQuery("SELECT c FROM Car c").getResultList();
+        Session session = getSession();
+        List<Car> listCar = session.createQuery(myQuery.getCar()).getResultList();
         commitTransaction(session);
         return listCar;
     }
@@ -88,9 +92,9 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     }
 
     @Override
-    public Integer searchCount(String make, String model, String fuel) {
+    public Integer searchCarCount(String make, String model, String fuel) {
         Session session = getSession();
-        List<Car> carList = session.createQuery("select c from Car c where c.make LIKE '%" + make + "%' and c.model LIKE '%" + model + "%' and c.fuelSource LIKE '%" + fuel + "%'").getResultList();
+        List<Car> carList = session.createQuery(myQuery.getSearchCar(make, model, fuel)).getResultList();
         int carCount = carList.size();
         commitTransaction(session);
         return carCount;
@@ -98,11 +102,11 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     }
 
     @Override
-    public List<Car> search(String make, String model, String fuel, int page, int pageSize) {
+    public List<Car> searchCar(String make, String model, String fuel, int page, int pageSize) {
         Session session = getSession();
-        Query carList = session.createQuery("select c from Car c where c.make LIKE '%" + make + "%' and c.model LIKE '%" + model + "%' and c.fuelSource LIKE '%" + fuel + "%'");
-        carList.setFirstResult(pageSize * (page - 1));
-        carList.setMaxResults(pageSize);
+        Query carList = session.createQuery(myQuery.getSearchCar(make, model, fuel))
+                .setFirstResult(pageSize * (page - 1))
+                .setMaxResults(pageSize);
         List<Car> carsList = carList.getResultList();
         commitTransaction(session);
         return carsList;
