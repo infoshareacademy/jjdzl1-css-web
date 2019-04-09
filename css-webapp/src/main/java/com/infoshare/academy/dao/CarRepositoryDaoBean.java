@@ -50,8 +50,8 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
 
     @Override
     public List<Car> listCar() {
-        Session session=getSession();
-        List<Car> listCar=session.createQuery("SELECT c FROM Car c").getResultList();
+        Session session = getSession();
+        List<Car> listCar = session.createQuery("SELECT c FROM Car c").getResultList();
         commitTransaction(session);
         return listCar;
     }
@@ -88,9 +88,9 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     }
 
     @Override
-    public Integer searchCount(String make, String model, String fuel) {
+    public Integer searchCarCount(String make, String model, String fuel) {
         Session session = getSession();
-        List<Car> carList = session.createQuery("select c from Car c where c.make LIKE '%" + make + "%' and c.model LIKE '%" + model + "%' and c.fuelSource LIKE '%" + fuel + "%'").getResultList();
+        List<Car> carList = session.createQuery("select c from Car c where c.make='" + make + "' or c.model='"+model+"' or c.fuelSource='"+fuel+"'").getResultList();
         int carCount = carList.size();
         commitTransaction(session);
         return carCount;
@@ -98,9 +98,9 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
     }
 
     @Override
-    public List<Car> search(String make, String model, String fuel, int page, int pageSize) {
+    public List<Car> searchCar(String make, String model, String fuel, int page, int pageSize) {
         Session session = getSession();
-        Query carList = session.createQuery("select c from Car c where c.make LIKE '%" + make + "%' and c.model LIKE '%" + model + "%' and c.fuelSource LIKE '%" + fuel + "%'");
+        Query carList = session.createQuery("select c from Car c where c.make='" + make + "' or c.model='"+model+"' or c.fuelSource='"+fuel+"'");
         carList.setFirstResult(pageSize * (page - 1));
         carList.setMaxResults(pageSize);
         List<Car> carsList = carList.getResultList();

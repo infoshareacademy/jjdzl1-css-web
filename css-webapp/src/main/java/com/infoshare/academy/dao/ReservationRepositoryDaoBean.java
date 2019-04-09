@@ -37,9 +37,9 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     @Override
     public Integer listCount(String login, String name) {
         Session session = getSession();
-        List<Reservation> reservationList = session.createQuery("SELECT r FROM Reservation r WHERE " +
-                "user.login LIKE '%" + login + "%' AND " +
-                "(car.make LIKE '%" + name + "%'OR car.model LIKE '%" + name + "%')").getResultList();
+        List<Reservation> reservationList = session.createQuery("SELECT r FROM Reservation r WHERE" +
+                " user.login='" + login + "'  OR  (car.make='" + name + "'OR car.model='" + name + "')")
+                .getResultList();
         int reservationCount = reservationList.size();
         commitTransaction(session);
         return reservationCount;
@@ -49,8 +49,7 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     public List<Reservation> listLimit(String login, String name, int currentPage) {
         Session session = getSession();
         Query reservationList = session.createQuery("SELECT r FROM Reservation r WHERE" +
-                " user.login LIKE '%" + login + "%' AND" +
-                " (car.make LIKE '%" + name + "%'OR car.model LIKE '%" + name + "%')");
+                " user.login='" + login + "'  OR  (car.make='" + name + "'OR car.model='" + name + "')");
         reservationList.setFirstResult(pageSize * (currentPage - 1));
         reservationList.setMaxResults(pageSize);
         List<Reservation> reservations = reservationList.getResultList();

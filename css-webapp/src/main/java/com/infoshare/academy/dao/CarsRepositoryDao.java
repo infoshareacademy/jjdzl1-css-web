@@ -1,11 +1,8 @@
 package com.infoshare.academy.dao;
 
 import com.infoshare.academy.domain.Car;
-import org.hibernate.Filter;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Stream;
 
 public interface CarsRepositoryDao {
     Car addCar(Car car);
@@ -22,7 +19,7 @@ public interface CarsRepositoryDao {
 
     void deleteCar(Integer id);
 
-    Integer searchCount(String make,String model,String fuel);
+    Integer searchCarCount(String make, String model, String fuel);
 
-    List<Car> search(String make,String model,String fuel,int page,int pageSize);
+    List<Car> searchCar(String make, String model, String fuel, int page, int pageSize);
 }
