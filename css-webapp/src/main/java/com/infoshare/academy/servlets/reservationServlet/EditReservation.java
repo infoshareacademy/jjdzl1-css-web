@@ -36,6 +36,6 @@ public class EditReservation extends HttpServlet {
                 req.setAttribute("error", errorReservationDoesntExist());
             }
         }
-        req.getRequestDispatcher("/admin/editreservation.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/editReservation.jsp").forward(req, resp);
     }
 }

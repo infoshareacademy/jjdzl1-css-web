@@ -36,7 +36,7 @@ public class DeleteCar extends HttpServlet {
                 req.setAttribute("success", successMessageCarRm());
             }
         }
-        req.getRequestDispatcher("/admin/carpanel.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/carPanel.jsp").forward(req, resp);
     }
 }
 

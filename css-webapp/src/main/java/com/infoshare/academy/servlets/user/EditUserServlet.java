@@ -25,10 +25,10 @@ public class EditUserServlet extends HttpServlet {
         String login = req.getParameter("login");
 
         if (login == null) {
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         } else if (login.isEmpty()) {
             req.setAttribute("error", errorLoginMessage());
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         } else {
             User userByLogin = usersDao.getUserByLogin(login);
             if (userByLogin == null){
@@ -37,7 +37,7 @@ public class EditUserServlet extends HttpServlet {
             if (userByLogin != null) {
                 req.setAttribute("user", userByLogin);
             }
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         }
     }
 
@@ -48,10 +48,10 @@ public class EditUserServlet extends HttpServlet {
         String id = req.getParameter("id");
 
         if (id == null) {
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         } else if (id.isEmpty()) {
             req.setAttribute("error", errorIdMessage());
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         } else {
 
             String firstName = req.getParameter("firstName");

@@ -43,7 +43,7 @@ public class CarPanel extends HttpServlet {
         if (carsList.isEmpty()) {
             req.setAttribute("error", errorNoSearchResults());
         }
-        req.getRequestDispatcher("/admin/carpanel.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/carPanel.jsp").forward(req, resp);
     }
 
     @Override
@@ -76,6 +76,6 @@ public class CarPanel extends HttpServlet {
                 req.setAttribute("error", errorUpdateHasFailed());
             }
         }
-        req.getRequestDispatcher("/admin/carpanel.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/carPanel.jsp").forward(req, resp);
     }
 }

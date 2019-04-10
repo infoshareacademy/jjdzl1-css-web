@@ -36,7 +36,7 @@ public class ListExampleCar extends HttpServlet {
             }
             req.setAttribute("carExampleList", carExampleList);
         }
-        req.getRequestDispatcher("/examplecarlist.jsp").forward(req, resp);
+        req.getRequestDispatcher("/exampleCarList.jsp").forward(req, resp);
     }
 
 

@@ -21,7 +21,7 @@
     <main class="flex-fill col-md-10 ml-sm-auto py-3">
         <div class="container">
 
-            <jsp:include page="include/deletereservation.jsp"></jsp:include>
+            <jsp:include page="include/deleteReservation.jsp"></jsp:include>
 
         </div>
         <!-- /.container -->

@@ -38,7 +38,7 @@
         <c:when test="${sessionScope.username != null}">
             <main class="flex-fill col-md-10 ml-sm-auto py-3">
                 <div class="container">
-                    <jsp:include page="include/deletereservationbyuser.jsp"></jsp:include>
+                    <jsp:include page="include/listAvailableCar.jsp"></jsp:include>
                 </div>
                 <!-- /.container -->
             </main>
@@ -53,6 +53,7 @@
         </c:otherwise>
     </c:choose>
 
+    <jsp:include page="pagination.jsp"></jsp:include>
     <!-- Footer -->
     <jsp:include page="include/footer.jsp"></jsp:include>
 

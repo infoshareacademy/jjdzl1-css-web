@@ -42,7 +42,7 @@ public class ListReservationCurrentUser extends HttpServlet {
             req.setAttribute("noOfPages", noOfPages(getUserId(username)));
             req.setAttribute("currentPage", currentPage(page));
         }
-        req.getRequestDispatcher("/listreservationcurrentuser.jsp").forward(req, resp);
+        req.getRequestDispatcher("/listReservationCurrentUser.jsp").forward(req, resp);
     }
 
     public Integer getUserId(String username) {

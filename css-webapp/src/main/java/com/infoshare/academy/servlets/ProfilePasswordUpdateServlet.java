@@ -34,7 +34,7 @@ public class ProfilePasswordUpdateServlet extends HttpServlet {
         if (getUser != null) {
             User currentUser = getUser(getUser);
             req.setAttribute("currentUser", currentUser);
-            req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
+            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
         } else {
             req.setAttribute("error", anonymousUser());
             req.getRequestDispatcher("login.jsp").forward(req,resp);
@@ -62,16 +62,16 @@ public class ProfilePasswordUpdateServlet extends HttpServlet {
             String hashedPassword = UserPasswordUtils.hash(newPassword, PasswordHashAlgorithm.PBKDF2);
             usersDao.updateUserPassword(id, hashedPassword);
             resp.sendRedirect("logout");
-            req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
+            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
         } else if (!checkPassword) {
             req.setAttribute("error", currentPasswordIncorrect());
-            req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
+            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
         } else if (!isPasswordCorrect) {
             req.setAttribute("error", passwordIncorrectMessage());
-            req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
+            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
         } else if (!password1.equals(password2)) {
             req.setAttribute("error", passwordNotMatchMessage());
-            req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
+            req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
         }
     }
 

@@ -70,7 +70,7 @@ public class AddReservation extends HttpServlet {
                 }
             }
         }
-        req.getRequestDispatcher("addreservation.jsp").forward(req, resp);
+        req.getRequestDispatcher("addReservation.jsp").forward(req, resp);
     }
 
     public LocalDate now = LocalDate.now();
