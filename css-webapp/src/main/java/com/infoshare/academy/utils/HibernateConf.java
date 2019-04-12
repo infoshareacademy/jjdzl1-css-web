@@ -8,19 +8,24 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateConf {
 
-    private static SessionFactory sessionFactory = sessionFactory();
+    private static final SessionFactory sessionFactory = buildSessionFactory();
 
-    public static SessionFactory sessionFactory() {
-        Configuration conf = new Configuration();
-        conf.configure("hibernate.cfg.xml");
-        conf.addAnnotatedClass(User.class);
-        conf.addAnnotatedClass(Car.class);
-        conf.addAnnotatedClass(Reservation.class);
-        SessionFactory sessionFactory = conf.buildSessionFactory();
-        return sessionFactory;
+    public static SessionFactory buildSessionFactory() {
+        try {
+            Configuration conf = new Configuration();
+            conf.configure("hibernate.cfg.xml");
+            conf.addAnnotatedClass(User.class);
+            conf.addAnnotatedClass(Car.class);
+            conf.addAnnotatedClass(Reservation.class);
+            SessionFactory sessionFactory = conf.buildSessionFactory();
+            return sessionFactory;
+        } catch (Throwable e){
+            System.err.println("[Hibernate] Initial SessionFactory creation failed" + e);
+            throw new ExceptionInInitializerError(e);
+        }
     }
 
-    public static synchronized SessionFactory getSessionFactory() {
+    public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 }
