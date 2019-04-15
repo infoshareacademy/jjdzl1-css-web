@@ -44,7 +44,9 @@ public class AddCar extends HttpServlet {
         String seats = req.getParameter("seats");
         Part image=req.getPart("image");
 
-        String imagePath="/img/" + fileUploadProcessor.uploadImageFile(image);
+        String imagePath="img/" + image.getSubmittedFileName();
+
+        fileUploadProcessor.uploadImageFile(image);
 
 
         Car car = new Car(Integer.parseInt(carType),make,model,Integer.parseInt(year),Integer.parseInt(mileage),
