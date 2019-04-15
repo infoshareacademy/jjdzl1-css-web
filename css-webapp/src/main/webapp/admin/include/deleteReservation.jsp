@@ -44,7 +44,7 @@
                 <tbody>
                 <c:forEach var="reservation" items="${reservations}">
                     <tr>
-                        <td style="vertical-align: middle;"><img src="../${reservation.car.photoLink}" height="100"
+                        <td style="vertical-align: middle;"><img src="../${reservation.car.imagePath}" height="100"
                                                                  width="150"></td>
                         <td style="vertical-align: middle;">${reservation.reservation_id}</td>
                         <td style="vertical-align: middle;">${reservation.user.id}</td>

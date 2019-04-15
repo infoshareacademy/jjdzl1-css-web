@@ -4,7 +4,7 @@
     <h4 class="card-header">Add new car</h4>
     <div class="card-body">
 
-        <form class="needs-validation" action="addCar" method="post" id="newcar">
+        <form class="needs-validation" action="addCar" method="post" id="newcar" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="col-form-label mb-2">Car type</label>
                 <div class="btn-group btn-outline-toggle" data-toggle="buttons">
@@ -124,6 +124,13 @@
                         <option value="OTHER">Other</option>
                     </select>
                 </div>
+                <div class="col-md-6 input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Image</div>
+                    </div>
+                    <input type="file" class="form-control" name="image" id="image" placeholder="Image" required>
+                </div>
+
             </div>
             <div class="mb-3">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Add car</button>
