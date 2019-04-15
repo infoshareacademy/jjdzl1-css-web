@@ -93,7 +93,6 @@ public class ReservationServlet extends HttpServlet {
             }
         }
         req.setAttribute("errorReservation", errorIncorrectIdCar());
-        req.getRequestDispatcher("/reservation.jsp").forward(req, resp);
 
     }
     public LocalDate now=LocalDate.now();

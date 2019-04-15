@@ -52,8 +52,8 @@ public class Car implements Serializable {
     @Column(name = "seats")
     private Integer seats;
 
-    @Column(name = "photo_link")
-    private String photoLink;
+    @Column(name = "image_path")
+    private String imagePath;
 
     //CarTruck
     @Column(name = "capacity")
@@ -70,7 +70,7 @@ public class Car implements Serializable {
 
     public Car(Integer carType, String make, String model, Integer year, Integer mileage, Integer enginePower,
                FuelSourceEnum fuelSource, TransmissionEnum transmission, BodyTypeEnum bodyType,
-               ColorEnum color, Integer seats, String photoLink) {
+               ColorEnum color, Integer seats, String imagePath) {
         this.carType = carType;
         this.make = make;
         this.model = model;
@@ -82,7 +82,7 @@ public class Car implements Serializable {
         this.bodyType = bodyType;
         this.color = color;
         this.seats = seats;
-        this.photoLink = photoLink;
+        this.imagePath = imagePath;
     }
 
     public Integer getId() {
@@ -197,9 +197,9 @@ public class Car implements Serializable {
         this.cargoSpace = cargoSpace;
     }
 
-    public String getPhotoLink() { return photoLink;}
+    public String getImagePath() { return imagePath;}
 
-    public void setPhotoLink(String photoLink) { this.photoLink = photoLink; }
+    public void setImagePath(String imagePath) { this.imagePath = imagePath; }
 
     public List<Reservation> getReservations() {
         return reservations;
@@ -232,6 +232,7 @@ public class Car implements Serializable {
                 ", bodyType=" + bodyType +
                 ", color=" + color +
                 ", seats=" + seats +
+                ", imagePath=" + imagePath +
                 '}';
     }
 }
