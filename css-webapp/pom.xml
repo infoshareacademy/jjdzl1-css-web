@@ -57,5 +57,11 @@
             <artifactId>mail</artifactId>
             <version>1.4.7</version>
         </dependency>
+        <dependency>
+            <groupId>com.infoshare.academy</groupId>
+            <artifactId>css-logic</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

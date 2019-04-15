@@ -44,7 +44,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="../${car.photoLink}" class="rounded" height="133" width="200">
+                        <img src="../${car.imagePath}" class="rounded" height="133" width="200">
                     </div>
                     <div class="col-md-4">
                         <div class="input-group mb-2">
