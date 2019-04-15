@@ -14,10 +14,17 @@
     <name>css-restapi</name>
 
     <dependencies>
+        <!--Module dependencies-->
+        <dependency>
+            <groupId>com.infoshare.academy</groupId>
+            <artifactId>css-logic</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--Package dependencies-->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>8.0</version>
         </dependency>
     </dependencies>
 </project>

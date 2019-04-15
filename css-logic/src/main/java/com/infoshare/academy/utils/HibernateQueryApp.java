@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Stateless
-public class HibernatQuery {
+public class HibernateQueryApp {
 
 
     public static List<Car> listAvailableCar(LocalDate startDate,LocalDate endDate) {

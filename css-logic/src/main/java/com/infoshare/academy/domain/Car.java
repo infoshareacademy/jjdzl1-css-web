@@ -5,6 +5,7 @@ import com.infoshare.academy.enums.ColorEnum;
 import com.infoshare.academy.enums.FuelSourceEnum;
 import com.infoshare.academy.enums.TransmissionEnum;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ public class Car implements Serializable {
 
 
     @OneToMany(mappedBy = "car")
+    @JsonbTransient
     private List<Reservation> reservations;
 
     public Car() {
