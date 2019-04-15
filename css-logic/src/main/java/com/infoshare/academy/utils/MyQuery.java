@@ -1,4 +1,4 @@
-package com.infoshare.academy;
+package com.infoshare.academy.utils;
 
 import java.time.LocalDate;
 

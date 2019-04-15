@@ -1,8 +1,8 @@
 package com.infoshare.academy.dao;
 
-import com.infoshare.academy.MyQuery;
 import com.infoshare.academy.domain.User;
 import com.infoshare.academy.utils.MailSend;
+import com.infoshare.academy.utils.MyQuery;
 import org.hibernate.Session;
 
 import javax.ejb.Stateless;
