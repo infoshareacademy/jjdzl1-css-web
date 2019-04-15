@@ -11,6 +11,7 @@ import com.infoshare.academy.enums.TransmissionEnum;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 
+@MultipartConfig
 @WebServlet("/admin/addCar")
 public class AddCar extends HttpServlet {
 
