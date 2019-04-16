@@ -1,6 +1,7 @@
  <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  ${IncorrectEmail}
+ ${MailWithTokenSend}
  <div class="row my-4">
     <div class="col-md-6 offset-3 text-center">
         <form class="form-signin" action="forget-password" method="post">

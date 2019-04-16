@@ -39,6 +39,8 @@ public class ForgetPasswordServlet extends HttpServlet {
             setExpireTimeAndUIDDTokenForUserInForgotPasswordProcess(user);
             System.out.println(user);
             dao.updateChangePasswordTokenData(user.getId(), user.getPasswordTokenUUID(),user.getPasswordTokenDateTime());
+            //wysyłanie maila
+            RequestResponse(request, response, "MailWithTokenSend", ForgotPasswordMessages.emailWithTockenInfoSend());
         }
 
     }
