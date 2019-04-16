@@ -30,18 +30,18 @@ public class ReservationService {
 
 
     @GET
-    @Path("/reservation/{id}")
+    @Path("/reservation")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getReservationById(@PathParam("id") Integer id) {
+    public Response getReservationById(@QueryParam("id") Integer id) {
         return Response.ok(reservationDao.getReservationById(id)).build();
     }
 
     @GET
-    @Path("/availableCar/{startDate}&{endDate}")
+    @Path("/availableAllCar")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAvailableCar(
-            @PathParam("startDate") String startDate,
-            @PathParam("endDate") String endDate) {
+            @QueryParam("startDate") String startDate,
+            @QueryParam("endDate") String endDate) {
 
         LocalDate start = LocalDate.parse(startDate);
         LocalDate end = LocalDate.parse(endDate);
@@ -52,6 +52,31 @@ public class ReservationService {
             return Response.ok(cars).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+    @GET
+    @Path("/availableCar")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAvailableCar(
+            @QueryParam("startDate") String startDate,
+            @QueryParam("endDate") String endDate,
+            @QueryParam("currentPage") Integer currentPage,
+            @QueryParam("pageSize") Integer pageSize) {
+
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+
+        List<Car> cars = reservationDao.getCarListAvailableCarLimit(start, end,currentPage,pageSize);
+
+            return Response.ok(cars).build();
+    }
+    @GET
+    @Path("/reservationUser")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getReservationForUser(
+            @QueryParam("id") Integer id,
+            @QueryParam("currentPage") Integer currentPage,
+            @QueryParam("pageSize") Integer pageSize){
+        return Response.ok(reservationDao.reservationListByUserIdLimit(id,currentPage,pageSize)).build();
     }
 }
 
