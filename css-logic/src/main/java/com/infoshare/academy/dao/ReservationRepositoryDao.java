@@ -12,6 +12,8 @@ public interface ReservationRepositoryDao {
 
     Reservation addReservation(Reservation reservation);
 
+    List<Reservation> list();
+
     Integer listCount(String login,String name);
 
     List<Reservation> listLimit(String login,String name,int currentPage);

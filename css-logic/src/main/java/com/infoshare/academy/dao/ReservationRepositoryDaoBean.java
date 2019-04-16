@@ -30,6 +30,14 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     }
 
     @Override
+    public List<Reservation> list() {
+        Session session=getSession();
+        List<Reservation> list=session.createQuery("SELECT r FROM Reservation r").getResultList();
+        commitTransaction(session);
+        return list;
+    }
+
+    @Override
     public Integer listCount(String login, String name) {
         Session session = getSession();
         List<Reservation> reservationList = session.createQuery(myQuery.getReservationList(login, name))
