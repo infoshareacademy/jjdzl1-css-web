@@ -13,11 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.logging.Logger;
 
-import static com.infoshare.academy.utils.RegistrationMessages.*;
+import static com.infoshare.academy.utils.RegistrationMessages.activationErrorMessage;
+import static com.infoshare.academy.utils.RegistrationMessages.errorMessageLoginIncorrect;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+
+    private static final Logger LOGGER = Logger.getLogger(LoginServlet.class.getName());
 
     @EJB
     private UsersRepositoryDao usersDao;
@@ -29,20 +33,29 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String remoteAddr = req.getRemoteAddr();
+        resp.setContentType("text/html;charset=UTF-8");
 
-        resp.setContentType("text/html");
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        User tempUser = createUserBasedOnFormLogin(username);
-        Integer usertype = getUserType(tempUser);
-        boolean checkPassword = checkPassword(tempUser, password);
+        User tempUser = getUserBasedOnLogin(username);
+        if (tempUser == null){
+            LOGGER.info("[LOGIN] Requested login to non existing user: " + username + ", from IP: " + remoteAddr);
+            req.setAttribute("error", errorMessageLoginIncorrect());
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
+            return;
+        }
 
-        if (tempUser != null && checkPassword) {
+        boolean isPasswordCorrect = checkPassword(tempUser, password);
+
+        if (isPasswordCorrect) {
             if (tempUser.getAccountActive()) {
                 HttpSession session = req.getSession();
+                Integer usertype = tempUser.getUserType();
                 session.setAttribute("username", username);
                 session.setAttribute("usertype", usertype);
+                LOGGER.info("[LOGIN] Successful login to user: " + username + ", usertype=" + usertype + ", from IP: " + remoteAddr);
                 req.getRequestDispatcher("listAvailableCar.jsp").forward(req, resp);
             } else {
                 req.setAttribute("activationError", activationErrorMessage());
@@ -54,27 +67,11 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    private User createUserBasedOnFormLogin(String username) {
+    private User getUserBasedOnLogin(String username) {
         return usersDao.getUserByLogin(username);
     }
 
-    private Integer getUserType(User tempUser) {
-        Integer usertype = null;
-        try {
-            usertype = tempUser.getUserType();
-        } catch (NullPointerException e) {
-            System.out.println("Login error (usertype): " + e);
-        }
-        return usertype;
-    }
-
     private boolean checkPassword(User tempUser, String password) {
-        boolean checkPassword = false;
-        try {
-            checkPassword = UserPasswordUtils.check(password, tempUser.getPassword(), PasswordHashAlgorithm.PBKDF2);
-        } catch (NullPointerException e) {
-            System.out.println("Login error (password): " + e);
-        }
-        return checkPassword;
+        return UserPasswordUtils.check(password, tempUser.getPassword(), PasswordHashAlgorithm.PBKDF2);
     }
 }
