@@ -5,7 +5,7 @@ public class RegistrationMessages {
     public static String anonymousUser() {
         String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
         String html2 = "</div>";
-        String errorData = "Anonymous users can't access profile!";
+        String errorData = "Anonymous users can't access this site!";
         return html1 + errorData + html2;
     }
 
