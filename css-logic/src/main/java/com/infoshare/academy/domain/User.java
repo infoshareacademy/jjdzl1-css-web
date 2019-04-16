@@ -1,5 +1,6 @@
 package com.infoshare.academy.domain;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class User implements Serializable {
     @Column(name = "login")
     private String login;
     @Column(name = "password")
+    @JsonbTransient
     private String password;
     @Column(name = "email")
     private String email;
@@ -37,13 +39,14 @@ public class User implements Serializable {
     @Column(name = "city")
     private String city;
     @Column(name = "authorization_number")
+    @JsonbTransient
     private String authorizationNumber;
     @Column(name = "is_account_active")
     private Boolean isAccountActive;
 
     @OneToMany(mappedBy = "user")
+    @JsonbTransient
     private List<Reservation> reservations;
-
 
     public User() {
     }
@@ -208,14 +211,6 @@ public class User implements Serializable {
         }
         reservations.add(reservation);
         reservation.setUser(this);
-    }
-
-    public boolean userAuth() {
-        if (getLogin().equals(login) && getPassword().equals(password)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public void setAuthorizationNumber(String authorizationNumber) {
