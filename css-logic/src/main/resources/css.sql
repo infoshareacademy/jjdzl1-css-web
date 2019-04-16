@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: asgard-mysql
--- Czas generowania: 15 Kwi 2019, 14:33
--- Wersja serwera: 8.0.14
--- Wersja PHP: 7.2.14
+-- Host: kamil-mysql
+-- Czas generowania: 16 Kwi 2019, 09:52
+-- Wersja serwera: 8.0.13
+-- Wersja PHP: 7.2.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -132,21 +132,23 @@ CREATE TABLE `users` (
   `postal_code` varchar(6) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `city` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `authorization_number` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
-  `is_account_active` tinyint(4) NOT NULL DEFAULT '0'
+  `is_account_active` tinyint(4) NOT NULL DEFAULT '0',
+  `password_token_UUID` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password_token_dateTime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Zrzut danych tabeli `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_type`, `login`, `password`, `email`, `phone_number`, `first_name`, `last_name`, `birth_date`, `street_address`, `postal_code`, `city`, `authorization_number`, `is_account_active`) VALUES
-(1, 1, 'admin', '$31$16$S2AdQ1Iotlgr3ozsDMR-3OY0Fyql8_uermIXQsG-eRM', 'admin@example.com', '601001003', 'Admin', 'Adminowski', '1990-05-18', 'Chopina 5', '20-150', 'Lublin', '', 1),
-(2, 0, 'marek', '$31$16$uSIi1BcynFCxhSLZgNHmONddmL0FfTy0sZsGcTOnR4Q', 'marek@example.com', '691029123', 'Marek', 'Kowalski', '1985-10-11', 'Koncertowa 4', '20-155', 'Lublin', '', 1),
-(3, 0, 'Ewa', '$31$16$PCyovEJEPnqCNvyHRyOzoKt-4Tma0pPJyQbl7JkjKt8', 'ewa@example.com', '691029123', 'Ewa', 'Konieczna', '2004-07-23', 'Nadbystrzycka 48A', '20-123', 'Lublin', '', 1),
-(4, 0, 'darek', '$31$16$esmoxUes48YBzDF6YMmwonlz4T-ICNFGjFqHyweoWWY', 'darek_giza@op.pl', '772123124', 'Darek', 'Giza', '1981-01-15', 'Al. Królewska 41', '20-121', 'Lublin', '', 1),
-(5, 0, 'lulek', '$31$16$D24IUZGD8y2oF6eR85YflS_HSmgT7A5r4xMRdQL0Ppg', 'lulek@gmail.com', '578510123', 'Marcin', 'Turlaj', '1995-03-05', 'Północna 11', '20-150', 'LU', '', 1),
-(6, 0, 'Kamil', '$31$16$v0fxEwt8kXa_xJY_4suVp8HDvFE2JRpPY3KZfli_6qM', 'kamil@kamil.com', '123123123', 'asd', 'asd', '1996-03-26', '', '', '', 'be2d91e8-7739-4835-ae68-09eb53cda7d7', 0),
-(12, 0, 'Mareczek', '$31$16$oZOmkKsVZiKLaE1S65Gy8BtSvEkJfwSzT-_rHIVVWIk', 'carsharingsystem.help@gmail.com', '123123123', '123', '123', '1993-03-26', '', '', '', '786f968c-a40b-46a2-bce8-f431d23935e8', 1);
+INSERT INTO `users` (`user_id`, `user_type`, `login`, `password`, `email`, `phone_number`, `first_name`, `last_name`, `birth_date`, `street_address`, `postal_code`, `city`, `authorization_number`, `is_account_active`, `password_token_UUID`, `password_token_dateTime`) VALUES
+(1, 1, 'admin', '$31$16$S2AdQ1Iotlgr3ozsDMR-3OY0Fyql8_uermIXQsG-eRM', 'admin@example.com', '601001003', 'Admin', 'Adminowski', '1990-05-18', 'Chopina 5', '20-150', 'Lublin', '', 1, NULL, NULL),
+(2, 0, 'marek', '$31$16$uSIi1BcynFCxhSLZgNHmONddmL0FfTy0sZsGcTOnR4Q', 'marek@example.com', '691029123', 'Marek', 'Kowalski', '1985-10-11', 'Koncertowa 4', '20-155', 'Lublin', '', 1, NULL, NULL),
+(3, 0, 'Ewa', '$31$16$PCyovEJEPnqCNvyHRyOzoKt-4Tma0pPJyQbl7JkjKt8', 'ewa@example.com', '691029123', 'Ewa', 'Konieczna', '2004-07-23', 'Nadbystrzycka 48A', '20-123', 'Lublin', '', 1, NULL, NULL),
+(4, 0, 'darek', '$31$16$esmoxUes48YBzDF6YMmwonlz4T-ICNFGjFqHyweoWWY', 'darek_giza@op.pl', '772123124', 'Darek', 'Giza', '1981-01-15', 'Al. Królewska 41', '20-121', 'Lublin', '', 1, NULL, NULL),
+(5, 0, 'lulek', '$31$16$D24IUZGD8y2oF6eR85YflS_HSmgT7A5r4xMRdQL0Ppg', 'lulek@gmail.com', '578510123', 'Marcin', 'Turlaj', '1995-03-05', 'Północna 11', '20-150', 'LU', '', 1, NULL, NULL),
+(6, 0, 'Kamil', '$31$16$v0fxEwt8kXa_xJY_4suVp8HDvFE2JRpPY3KZfli_6qM', 'kamil@kamil.com', '123123123', 'asd', 'asd', '1996-03-26', '', '', '', 'be2d91e8-7739-4835-ae68-09eb53cda7d7', 0, NULL, NULL),
+(12, 0, 'Mareczek', '$31$16$oZOmkKsVZiKLaE1S65Gy8BtSvEkJfwSzT-_rHIVVWIk', 'carsharingsystem.help@gmail.com', '123123123', '123', '123', '1993-03-26', '', '', '', '786f968c-a40b-46a2-bce8-f431d23935e8', 1, NULL, NULL);
 
 --
 -- Indeksy dla zrzutów tabel
