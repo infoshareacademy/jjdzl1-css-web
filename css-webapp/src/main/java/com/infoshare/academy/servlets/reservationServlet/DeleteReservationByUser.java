@@ -29,12 +29,13 @@ public class DeleteReservationByUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        Integer pageSize=3;
         HttpSession session = req.getSession(false);
         String username = (String) session.getAttribute("username");
 
         String page = req.getParameter("currentPage");
 
-        List<Reservation> reservationByUserId = dao.reservationListByUserIdLimit(getUserId(username), currentPage(page));
+        List<Reservation> reservationByUserId = dao.reservationListByUserIdLimit(getUserId(username), currentPage(page),pageSize);
 
         if (reservationByUserId == null || reservationByUserId.isEmpty()) {
             req.setAttribute("error", errorEmptyReservationList());
