@@ -21,7 +21,17 @@ public class MailSend {
         MailSend javaEmail = new MailSend();
 
         javaEmail.setMailServerProperties();
-        javaEmail.createEmailMessageForRegistrationProcess(mailAddress, CreateBodyContentForRegistrationEmail(login,UUID));
+        javaEmail.createEmailMessageForRegistrationProcess("Registration_process", mailAddress, CreateBodyContentForRegistrationEmail(login, UUID));
+        javaEmail.sentEmailForRegistrationProcess();
+    }
+
+    public void sentEmailForForgotPasswordProcess(String mailAddress, String UUID) throws AddressException,
+            MessagingException {
+
+        MailSend javaEmail = new MailSend();
+
+        javaEmail.setMailServerProperties();
+        javaEmail.createEmailMessageForRegistrationProcess("Forgot_password_process", mailAddress, createBodyContentWithTokenInformationEmail(UUID));
         javaEmail.sentEmailForRegistrationProcess();
     }
 
@@ -36,9 +46,8 @@ public class MailSend {
 
     }
 
-    private void createEmailMessageForRegistrationProcess(String destinationAddres, String emailBodyContent) throws AddressException, MessagingException {
-        String[] toEmails = {destinationAddres};
-        String emailSubject = "Registration process in CAR SHARING SYSTEM";
+    private void createEmailMessageForRegistrationProcess(String subjectOfEmail, String destinationAddress, String emailBodyContent) throws AddressException, MessagingException {
+        String[] toEmails = {destinationAddress};
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
 
@@ -46,7 +55,7 @@ public class MailSend {
             emailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
         }
 
-        emailMessage.setSubject(emailSubject);
+        emailMessage.setSubject(subjectOfEmail);
         emailMessage.setContent(emailBodyContent, "text/html");
     }
 
@@ -64,9 +73,14 @@ public class MailSend {
         System.out.println("Email sent successfully.");
     }
 
-    private String CreateBodyContentForRegistrationEmail(String Login, String UUID){
+    private String CreateBodyContentForRegistrationEmail(String Login, String UUID) {
         return "Hello <b>" + Login + "</b> <br>\n Click this link to activate your account in " +
                 "CAR SHARING SYSTEM: \n" + "http://localhost:8080/jjdzl1-css/activationAccount?login=" + Login + "&UUID=" + UUID;
+    }
+
+    private String createBodyContentWithTokenInformationEmail(String UUID) {
+        return "Click this link to change your password " +
+                "CAR SHARING SYSTEM: \n" + "http://localhost:8080/jjdzl1-css/forgetPasswordValidator?tokenUUID=" + UUID;
     }
 
 }

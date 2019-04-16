@@ -145,6 +145,11 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     }
 
     @Override
+    public void sendEmailToUserWithForgotPasswordToken(String email, String UUID){
+
+    }
+
+    @Override
     public void updateIsUserAccountActive(Integer id, Boolean isAccountActive) {
         Session session = getSession();
         Query query = session.createQuery(myQuery.updateIsUserAccountActive())

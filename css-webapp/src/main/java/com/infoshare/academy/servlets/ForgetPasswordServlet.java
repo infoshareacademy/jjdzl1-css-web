@@ -3,9 +3,11 @@ package com.infoshare.academy.servlets;
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
 import com.infoshare.academy.utils.ForgotPasswordMessages;
+import com.infoshare.academy.utils.MailSend;
 import com.infoshare.academy.utils.UUIDGeneratorForUser;
 
 import javax.ejb.EJB;
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,11 +40,17 @@ public class ForgetPasswordServlet extends HttpServlet {
         } else {
             setExpireTimeAndUIDDTokenForUserInForgotPasswordProcess(user);
             System.out.println(user);
-            dao.updateChangePasswordTokenData(user.getId(), user.getPasswordTokenUUID(),user.getPasswordTokenDateTime());
-            //wysyłanie maila
+            dao.updateChangePasswordTokenData(user.getId(), user.getPasswordTokenUUID(), user.getPasswordTokenDateTime());
+            MailSend mail = new MailSend();
+            new Thread(() -> {
+                try {
+                    mail.sentEmailForForgotPasswordProcess(user.getEmail(), user.getPasswordTokenUUID());
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            }).start();
             RequestResponse(request, response, "MailWithTokenSend", ForgotPasswordMessages.emailWithTockenInfoSend());
         }
-
     }
 
     private void RequestResponse(HttpServletRequest request, HttpServletResponse response, String errorMessage, String jspError) throws ServletException, IOException {

@@ -33,6 +33,8 @@ public interface UsersRepositoryDao {
 
     void sendEmailToNewUser(String login, String email, String UUID) throws MessagingException;
 
+    void sendEmailToUserWithForgotPasswordToken(String email, String UUID);
+
     void updateIsUserAccountActive(Integer id, Boolean isActive);
 
     void updateChangePasswordTokenData(Integer id, String passwordTokenUIDD, LocalDateTime expireDateTimeToken);
