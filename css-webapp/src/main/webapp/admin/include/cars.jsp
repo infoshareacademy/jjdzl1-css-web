@@ -25,7 +25,7 @@
             <tbody>
             <c:forEach var="car" items="${carList}">
                 <tr>
-                    <td style="vertical-align: middle;"><img src="../${car.photoLink}" height="100" width="150"></td>
+                    <td style="vertical-align: middle;"><img src="../${car.imagePath}" height="100" width="150"></td>
                     <td style="vertical-align: middle;">${car.id}</td>
                     <td style="vertical-align: middle;">
                         <c:choose>

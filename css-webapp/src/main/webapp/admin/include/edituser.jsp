@@ -88,6 +88,18 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="col-form-label mb-2">Status</label>
+                <div class="btn-group btn-outline-toggle" data-toggle="buttons">
+                    <label class="btn btn-outline-secondary">
+                        <input type="radio" name="isAccountActive" value="true" id="isActive1" <c:if test="${user.isAccountActive == true}">checked</c:if>> Active
+                    </label>
+                    <label class="btn btn-outline-secondary">
+                        <input type="radio" name="isAccountActive" value="false" id="isActive2" <c:if test="${user.isAccountActive == false}">checked</c:if>> Disabled
+                    </label>
+                </div>
+            </div>
+
             <div class="form-group px-3 text-center">
                 <button type="submit" class="btn btn-primary">Edit user</button>
             </div>

@@ -29,9 +29,9 @@ public class CarPanel extends HttpServlet {
         Integer currentPage = Integer.valueOf(req.getParameter("currentPage"));
 
         int pageSize = 1;
-        int noOfPage = dao.searchCount(make, model, fuel);
+        int noOfPage = dao.searchCarCount(make, model, fuel);
 
-        List<Car> carsList = dao.search(make, model, fuel, currentPage, pageSize);
+        List<Car> carsList = dao.searchCar(make, model, fuel, currentPage, pageSize);
 
         req.setAttribute("make", make);
         req.setAttribute("model", model);

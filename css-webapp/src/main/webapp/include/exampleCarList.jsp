@@ -22,7 +22,7 @@
             <tbody>
             <c:forEach var="car" items="${carExampleList}">
             <tr>
-                <td style="text-align: center; vertical-align: middle;"><img src="${car.photoLink}" height=75 width=110></td>
+                <td style="text-align: center; vertical-align: middle;"><img src="${car.imagePath}" height=75 width=110></td>
                 <td style="text-align: center; vertical-align: middle;">${car.make}</td>
                 <td style="text-align: center; vertical-align: middle;">${car.model}</td>
                 <td style="text-align: center; vertical-align: middle;">${car.year}</td>
