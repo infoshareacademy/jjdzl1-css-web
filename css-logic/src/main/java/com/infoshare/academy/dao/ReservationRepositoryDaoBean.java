@@ -126,10 +126,10 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     }
 
     @Override
-    public List<Car> getCarListAvailableCarLimit(LocalDate startDate, LocalDate endDate, int i) {
+    public List<Car> getCarListAvailableCarLimit(LocalDate startDate, LocalDate endDate, int currentPage) {
         Session session = getSession();
         Query carList = session.createQuery(myQuery.getAvailableCar(startDate, endDate));
-        carList.setFirstResult(pageSize * (i - 1));
+        carList.setFirstResult(pageSize * (currentPage - 1));
         carList.setMaxResults(pageSize);
         List<Car> carListAvailableCarLimit = carList.getResultList();
         commitTransaction(session);
