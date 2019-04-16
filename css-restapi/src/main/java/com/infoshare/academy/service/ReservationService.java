@@ -1,8 +1,12 @@
 package com.infoshare.academy.service;
 
 
+import com.infoshare.academy.dao.CarsRepositoryDao;
 import com.infoshare.academy.dao.ReservationRepositoryDao;
+import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.Car;
+import com.infoshare.academy.domain.Reservation;
+import com.infoshare.academy.domain.User;
 import org.jboss.logging.Logger;
 
 import javax.ejb.EJB;
@@ -18,7 +22,13 @@ public class ReservationService {
     @EJB
     private ReservationRepositoryDao reservationDao;
 
-    public static Logger LOGGER=Logger.getLogger(ReservationService.class.getName());
+    @EJB
+    private CarsRepositoryDao carDao;
+
+    @EJB
+    private UsersRepositoryDao userDao;
+
+    public static Logger LOGGER = Logger.getLogger(ReservationService.class.getName());
 
     @GET
     @Path("/reservations")
@@ -53,6 +63,7 @@ public class ReservationService {
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
+
     @GET
     @Path("/availableCar")
     @Produces(MediaType.APPLICATION_JSON)
@@ -65,18 +76,61 @@ public class ReservationService {
         LocalDate start = LocalDate.parse(startDate);
         LocalDate end = LocalDate.parse(endDate);
 
-        List<Car> cars = reservationDao.getCarListAvailableCarLimit(start, end,currentPage,pageSize);
+        List<Car> cars = reservationDao.getCarListAvailableCarLimit(start, end, currentPage, pageSize);
 
-            return Response.ok(cars).build();
+        return Response.ok(cars).build();
     }
+
     @GET
     @Path("/reservationUser")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getReservationForUser(
             @QueryParam("id") Integer id,
             @QueryParam("currentPage") Integer currentPage,
-            @QueryParam("pageSize") Integer pageSize){
-        return Response.ok(reservationDao.reservationListByUserIdLimit(id,currentPage,pageSize)).build();
+            @QueryParam("pageSize") Integer pageSize) {
+        return Response.ok(reservationDao.reservationListByUserIdLimit(id, currentPage, pageSize)).build();
+    }
+
+    @POST
+    @Path("/reservation")
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addReservation(
+            @FormParam("userId") Integer userId,
+            @FormParam("carId") Integer carId,
+            @FormParam("startDate") String startDate,
+            @FormParam("endDate") String endDate) {
+
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+        Car car = carDao.getCar(carId);
+        User user = userDao.getUserById(userId);
+
+        if (car != null && user != null) {
+            Reservation reservation = new Reservation(user, car, start, end);
+
+            return Response.ok(reservationDao.addReservation(reservation)).build();
+        }
+
+        return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+
+    @DELETE
+    @Path("/reservation")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteReservation(
+            @QueryParam("id") Integer id) {
+
+        Reservation reservation = reservationDao.getReservationById(id);
+
+        if (reservation != null) {
+
+            reservationDao.deleteReservation(id);
+            return Response.ok().build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 }
+
+
 
