@@ -2,9 +2,13 @@ package com.infoshare.academy.utils;
 
 import java.util.UUID;
 
-public class UUIDGeneratorForNewUser {
+public class UUIDGeneratorForUser {
 
     public String getGeneratedNewUUIDForNewUser() {
+        return generateNewUUIDForNewUser();
+    }
+
+    public String getGeneratedNewUUIDForForgotPasswordProcess() {
         return generateNewUUIDForNewUser();
     }
 

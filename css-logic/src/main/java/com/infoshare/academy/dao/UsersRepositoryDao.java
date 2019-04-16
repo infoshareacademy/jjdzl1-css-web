@@ -4,6 +4,7 @@ import com.infoshare.academy.domain.User;
 
 import javax.mail.MessagingException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface UsersRepositoryDao {
@@ -33,4 +34,6 @@ public interface UsersRepositoryDao {
     void sendEmailToNewUser(String login, String email, String UUID) throws MessagingException;
 
     void updateIsUserAccountActive(Integer id, Boolean isActive);
+
+    void updateChangePasswordTokenData(Integer id, String passwordTokenUIDD, LocalDateTime expireDateTimeToken);
 }

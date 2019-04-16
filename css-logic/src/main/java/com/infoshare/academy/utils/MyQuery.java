@@ -62,4 +62,8 @@ public class MyQuery {
     public String updateIsUserAccountActive(){
         return "UPDATE User u SET u.isAccountActive=:isAccountActive WHERE u.id=:id";
     }
+
+    public String updateTokenData(){
+        return "UPDATE User u SET u.passwordTokenUUID=:passwordTokenUUID, u.passwordTokenDateTime=:passwordTokenDateTime WHERE u.id=:id";
+    }
 }

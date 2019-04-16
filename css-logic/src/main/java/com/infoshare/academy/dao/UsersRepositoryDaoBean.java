@@ -10,6 +10,7 @@ import javax.mail.MessagingException;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
@@ -149,6 +150,17 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         Query query = session.createQuery(myQuery.updateIsUserAccountActive())
                 .setParameter("id", id)
                 .setParameter("isAccountActive", isAccountActive);
+        query.executeUpdate();
+        commitTransaction(session);
+    }
+
+    @Override
+    public void updateChangePasswordTokenData(Integer id, String passwordTokenUIDD, LocalDateTime passwordTokenDateTime) {
+        Session session = getSession();
+        Query query = session.createQuery(myQuery.updateTokenData())
+                .setParameter("id", id)
+                .setParameter("passwordTokenUUID", passwordTokenUIDD)
+                .setParameter("passwordTokenDateTime", passwordTokenDateTime);
         query.executeUpdate();
         commitTransaction(session);
     }
