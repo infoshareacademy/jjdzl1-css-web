@@ -33,7 +33,7 @@ public class ProfilePersonalUpdateServlet extends HttpServlet {
         if (getUser != null) {
             User currentUser = getUser(getUser);
             req.setAttribute("currentUser", currentUser);
-            req.getRequestDispatcher("editInfo.jsp").forward(req, resp);
+            req.getRequestDispatcher("editinfo.jsp").forward(req, resp);
         } else {
             req.setAttribute("error", anonymousUser());
             req.getRequestDispatcher("login.jsp").forward(req,resp);
@@ -56,7 +56,7 @@ public class ProfilePersonalUpdateServlet extends HttpServlet {
         usersDao.updateUserInfo(id, firstName, lastName, Long.parseLong(phoneNumber), LocalDate.parse(birthDate));
 
         resp.setHeader("Refresh", "1");
-        req.getRequestDispatcher("editInfo.jsp").forward(req, resp);
+        req.getRequestDispatcher("editinfo.jsp").forward(req, resp);
     }
 
     private void setEncoding(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
