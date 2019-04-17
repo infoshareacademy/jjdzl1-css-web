@@ -35,6 +35,7 @@
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script>feather.replace()</script>
+    <script>$(function () {$('[data-toggle="tooltip"]').tooltip()})</script>
 
 </wrapper>
 </body>

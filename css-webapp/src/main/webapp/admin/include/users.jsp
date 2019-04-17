@@ -29,7 +29,7 @@
                 <th scope="col">Last name</th>
                 <th scope="col">Phone number</th>
                 <th scope="col">Birth date</th>
-                <th scope="col">Address</th>
+                <th scope="col">Status</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
@@ -53,11 +53,20 @@
                     <td>${user.lastName}</td>
                     <td>${user.phoneNumber}</td>
                     <td>${user.birthDate}</td>
-                    <td>${user.postalCode} ${user.city}, ${user.streetAddress}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${user.isAccountActive eq true}">
+                                <span data-feather="check-circle" title="Active" data-toggle="tooltip" data-placement="top" title="Active"></span>
+                            </c:when>
+                            <c:otherwise>
+                                <span data-feather="x-circle" title="Disabled" data-toggle="tooltip" data-placement="top" title="Disabled"></span>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td>
                         <form method="get" action="edituser">
                             <input type="hidden" name="login" value="${user.login}">
-                            <button class="btn btn-primary" type="submit">Edit</button>
+                            <button class="btn btn-primary btn-sm" type="submit">Edit</button>
                         </form>
                     </td>
                 </tr>
