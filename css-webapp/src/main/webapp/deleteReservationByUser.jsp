@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -38,7 +38,7 @@
         <c:when test="${sessionScope.username != null}">
             <main class="flex-fill col-md-10 ml-sm-auto py-3">
                 <div class="container">
-                    <jsp:include page="include/deletereservationbyuser.jsp"></jsp:include>
+                    <jsp:include page="include/deleteReservationByUser.jsp"></jsp:include>
                 </div>
                 <!-- /.container -->
             </main>

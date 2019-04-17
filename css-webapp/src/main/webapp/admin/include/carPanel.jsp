@@ -99,19 +99,21 @@
 
             <div class="text-center">
                 <input type="hidden" name="id" value="${car.id}">
-                <button type="submit" class="btn btn-primary">Update car</button></form>
+                <button type="submit" class="btn btn-primary">Update car</button>
+    </form>
 
 
     <form method="post" action="deleteCar">
         <input type="hidden" name="id" value="${car.id}">
-        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')" style="float: right;" >Delete car</button>
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')" style="float: right;">
+            Delete car
+        </button>
     </form>
     </div>
 </c:forEach>
 
 </div>
 </div>
-
 
 
 <div align="center">

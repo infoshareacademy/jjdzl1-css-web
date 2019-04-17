@@ -23,9 +23,9 @@
 </div>
 
 <c:if test="${reservations != null}">
-<div class="card border-primary my-3">
-    <h4 class="card-header">Reservation list</h4>
-    <div class="card-body" align="center">
+    <div class="card border-primary my-3">
+        <h4 class="card-header">Reservation list</h4>
+        <div class="card-body" align="center">
             <table class="table table-responsive table-sm table-striped">
                 <thead>
                 <tr>
@@ -72,15 +72,16 @@
                 </c:forEach>
                 </tbody>
             </table>
+        </div>
     </div>
-</div>
 
-<input type="hidden" name="currentPage" value="1">
-<div class="my-3" align="center">
+    <input type="hidden" name="currentPage" value="1">
+    <div class="my-3" align="center">
         <nav>
             <ul class="pagination">
                 <c:if test="${currentPage > 1}">
-                    <li class="page-item"><a class="page-link" href="deleteReservation?login=${login}&name=${name}&currentPage=${currentPage-1}">Previous</a>
+                    <li class="page-item"><a class="page-link"
+                                             href="deleteReservation?login=${login}&name=${name}&currentPage=${currentPage-1}">Previous</a>
                     </li>
                 </c:if>
 
@@ -92,7 +93,8 @@
                             </li>
                         </c:when>
                         <c:otherwise>
-                            <li class="page-item"><a class="page-link" href="deleteReservation?login=${login}&name=${name}&currentPage=${i}">${i}</a>
+                            <li class="page-item"><a class="page-link"
+                                                     href="deleteReservation?login=${login}&name=${name}&currentPage=${i}">${i}</a>
                             </li>
                         </c:otherwise>
                     </c:choose>
@@ -106,5 +108,5 @@
             </ul>
         </nav>
     </div>
-</div>
+    </div>
 </c:if>
