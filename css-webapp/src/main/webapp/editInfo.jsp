@@ -38,7 +38,7 @@
               <c:when test="${sessionScope.username != null}">
                     <main class="flex-fill col-md-10 ml-sm-auto py-3">
                         <div class="container">
-                        <jsp:include page="include/editInfo.jsp"></jsp:include>
+                        <jsp:include page="include/editinfo.jsp"></jsp:include>
                         </div>
                     <!-- /.container -->
                     </main>
