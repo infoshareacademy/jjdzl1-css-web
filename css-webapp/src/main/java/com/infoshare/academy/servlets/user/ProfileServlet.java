@@ -22,19 +22,17 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        resp.setContentType("text/html");
-
+        resp.setContentType("text/html; charset=UTF-8");
         HttpSession session = req.getSession(false);
         String getUser = (String) session.getAttribute("username");
 
         if (getUser != null) {
             User currentUser = getUser(getUser);
-            req.setAttribute("currentUser",currentUser);
+            req.setAttribute("currentUser", currentUser);
             req.getRequestDispatcher("profile.jsp").forward(req, resp);
         } else {
             req.setAttribute("error", anonymousUser());
-            req.getRequestDispatcher("login.jsp").forward(req,resp);
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
     }
 

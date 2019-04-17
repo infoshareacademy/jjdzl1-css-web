@@ -2,6 +2,7 @@ package com.infoshare.academy.servlets.user;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
+import com.infoshare.academy.utils.UserValidator;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -24,9 +25,7 @@ public class ProfilePersonalUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        resp.setContentType("text/html");
-
+        setEncoding(req, resp);
         HttpSession session = req.getSession(false);
         String getUser = (String) session.getAttribute("username");
 
@@ -36,7 +35,7 @@ public class ProfilePersonalUpdateServlet extends HttpServlet {
             req.getRequestDispatcher("editinfo.jsp").forward(req, resp);
         } else {
             req.setAttribute("error", anonymousUser());
-            req.getRequestDispatcher("login.jsp").forward(req,resp);
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
     }
 
@@ -52,6 +51,16 @@ public class ProfilePersonalUpdateServlet extends HttpServlet {
         String lastName = req.getParameter("lastName");
         String phoneNumber = req.getParameter("phoneNumber");
         String birthDate = req.getParameter("birthDate");
+
+        boolean isAdult = new UserValidator().isAdult(birthDate);
+        boolean isBeforePresentDay = new UserValidator().isBeforePresentDate(birthDate);
+
+        if (isAdult || !isBeforePresentDay) {
+            resp.setHeader("Refresh", "2");
+            req.setAttribute("error", tooYoungEdit());
+            req.getRequestDispatcher("editinfo.jsp").forward(req, resp);
+            return;
+        }
 
         usersDao.updateUserInfo(id, firstName, lastName, Long.parseLong(phoneNumber), LocalDate.parse(birthDate));
 

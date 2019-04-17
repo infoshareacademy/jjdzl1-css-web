@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import static com.infoshare.academy.utils.RegistrationMessages.*;
 
@@ -25,9 +26,7 @@ public class ProfilePasswordUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        resp.setContentType("text/html");
-
+        setEncoding(req, resp);
         HttpSession session = req.getSession(false);
         String getUser = (String) session.getAttribute("username");
 
@@ -37,25 +36,24 @@ public class ProfilePasswordUpdateServlet extends HttpServlet {
             req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
         } else {
             req.setAttribute("error", anonymousUser());
-            req.getRequestDispatcher("login.jsp").forward(req,resp);
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
+        setEncoding(req, resp);
         HttpSession session = req.getSession(false);
         String getUser = (String) session.getAttribute("username");
         User currentUser = getUser(getUser);
         Integer id = currentUser.getId();
-
 
         String password = req.getParameter("password");
         String password1 = req.getParameter("password1");
         String password2 = req.getParameter("password2");
 
         boolean checkPassword = UserPasswordUtils.check(password, currentUser.getPassword(), PasswordHashAlgorithm.PBKDF2);
-        Boolean isPasswordCorrect = new UserValidator().isPasswordCorrect(password1);
+        boolean isPasswordCorrect = new UserValidator().isPasswordCorrect(password1);
 
         if (checkPassword && password1.equals(password2) && isPasswordCorrect) {
             String newPassword = password1;
@@ -73,6 +71,12 @@ public class ProfilePasswordUpdateServlet extends HttpServlet {
             req.setAttribute("error", passwordNotMatchMessage());
             req.getRequestDispatcher("changepassword.jsp").forward(req, resp);
         }
+    }
+
+    private void setEncoding(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
+        resp.setContentType("text/html; charset=UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
     }
 
     public User getUser(String username) {
