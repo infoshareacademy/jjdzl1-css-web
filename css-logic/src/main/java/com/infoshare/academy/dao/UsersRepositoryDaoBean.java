@@ -153,6 +153,24 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         commitTransaction(session);
     }
 
+    @Override
+    public int countUsers() {
+        Session session = getSession();
+        Long countCars = (Long) session.createQuery(myQuery.countUsers()).getSingleResult();
+        commitTransaction(session);
+        return Math.toIntExact(countCars);
+    }
+
+    @Override
+    public List<User> getUsersListPaged(int currentPage, int pageSize) {
+        Session session = getSession();
+        Query list = session.createQuery(myQuery.getUserList())
+                .setFirstResult(pageSize * (currentPage - 1))
+                .setMaxResults(pageSize);
+        List<User> userList = list.getResultList();
+        commitTransaction(session);
+        return userList;
+    }
 
     private Session getSession() {
         Session session = getSessionFactory().openSession();

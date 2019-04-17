@@ -6,7 +6,6 @@ public class MyQuery {
 
 
     public String getSearchCar(String make, String model, String fuel) {
-
         return "SELECT c FROM Car c WHERE c.make='" + make + "' OR c.model='" + model + "' OR c.fuelSource='" + fuel + "'";
     }
 
@@ -65,5 +64,9 @@ public class MyQuery {
 
     public String updateIsUserAccountActive() {
         return "UPDATE User u SET u.isAccountActive=:isAccountActive WHERE u.id=:id";
+    }
+
+    public String countUsers() {
+        return "SELECT COUNT(u) FROM User u";
     }
 }
