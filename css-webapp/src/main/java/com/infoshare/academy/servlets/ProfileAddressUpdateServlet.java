@@ -32,7 +32,7 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
 
         if (userName != null) {
             request.setAttribute("currentUser", getUser(userName));
-            request.getRequestDispatcher("editaddress.jsp").forward(request, response);
+            request.getRequestDispatcher("editAddress.jsp").forward(request, response);
         } else {
             request.setAttribute("error", anonymousUser());
             RequestDispatcher req = request.getRequestDispatcher("login.jsp");
@@ -54,7 +54,7 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
         usersDao.updateUserAddress(getUser(userName).getId(), postalCode, city, streetAddress);
 
         resp.setHeader("Refresh", "1");
-        req.getRequestDispatcher("editaddress.jsp").forward(req, resp);
+        req.getRequestDispatcher("editAddress.jsp").forward(req, resp);
     }
 
     private void setEncoding(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
