@@ -23,7 +23,8 @@
                 <tbody>
                 <c:forEach var="reservation" items="${reservationByUserId}">
                     <tr>
-                        <td style="vertical-align: middle;"><img src="${reservation.car.imagePath}" height="150" width="225"></td>
+                        <td style="vertical-align: middle;"><img src="${reservation.car.imagePath}" height="150"
+                                                                 width="225"></td>
                         <td style="vertical-align: middle;">${reservation.car.make}</td>
                         <td style="vertical-align: middle;">${reservation.car.model}</td>
                         <td style="vertical-align: middle;">${reservation.car.fuelSource}</td>
@@ -34,7 +35,9 @@
                         <td style="vertical-align: middle;">
                             <form method="post" action="delete">
                                 <input type="hidden" name="id" value="${reservation.reservation_id}">
-                                <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure ???')" style="float: right;">Delete</button>
+                                <button class="btn btn-danger" type="submit"
+                                        onclick="return confirm('Are you sure ???')" style="float: right;">Delete
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -42,35 +45,35 @@
                 </tbody>
             </table>
         </c:if>
-            <nav>
-                <ul class="pagination">
-                    <c:if test="${currentPage >1}">
-                        <li class="page-item"><a class="page-link"
-                                                 href="delete?currentPage=${currentPage-1}">Previous</a>
-                        </li>
-                    </c:if>
+        <nav>
+            <ul class="pagination">
+                <c:if test="${currentPage >1}">
+                    <li class="page-item"><a class="page-link"
+                                             href="delete?currentPage=${currentPage-1}">Previous</a>
+                    </li>
+                </c:if>
 
-                    <c:forEach begin="1" end="${noOfPages}" var="i">
-                        <c:choose>
-                            <c:when test="${currentPage eq i}">
-                                <li class="page-item active"><a class="page-link">
-                                        ${i} <span class="sr-only">(current)</span></a>
-                                </li>
-                            </c:when>
-                            <c:otherwise>
-                                <li class="page-item"><a class="page-link"
-                                                         href="delete?currentPage=${i}">${i}</a>
-                                </li>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
+                <c:forEach begin="1" end="${noOfPages}" var="i">
+                    <c:choose>
+                        <c:when test="${currentPage eq i}">
+                            <li class="page-item active"><a class="page-link">
+                                    ${i} <span class="sr-only">(current)</span></a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link"
+                                                     href="delete?currentPage=${i}">${i}</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
 
-                    <c:if test="${currentPage lt noOfPages}">
-                        <li class="page-item"><a class="page-link"
-                                                 href="delete?currentPage=${currentPage+1}">Next</a>
-                        </li>
-                    </c:if>
-                </ul>
-            </nav>
+                <c:if test="${currentPage lt noOfPages}">
+                    <li class="page-item"><a class="page-link"
+                                             href="delete?currentPage=${currentPage+1}">Next</a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
     </div>
 </div>

@@ -42,7 +42,7 @@ public class SearchCarServlet extends HttpServlet {
             req.setAttribute("error", errorNoSearchResults());
         }
 
-        req.getRequestDispatcher("searchcar.jsp").forward(req, resp);
+        req.getRequestDispatcher("searchCar.jsp").forward(req, resp);
     }
 
     public int pageSize() {
