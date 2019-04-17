@@ -14,6 +14,10 @@ public class MyQuery {
         return "SELECT c FROM Car c";
     }
 
+    public String countCars() {
+        return "SELECT COUNT(c) FROM Car c";
+    }
+
     public String getAvailableCar(LocalDate startDate, LocalDate endDate) {
         return "SELECT  c FROM Car c  where id  IN " +
                 "(SELECT car FROM Reservation WHERE (startDate>'" + startDate + "' and startDate>'" + endDate + "')" +
@@ -55,11 +59,11 @@ public class MyQuery {
         return "UPDATE User u SET u.password=:password WHERE u.id=:id";
     }
 
-    public String updateUserInfo(){
+    public String updateUserInfo() {
         return "UPDATE User u SET u.firstName=:firstName, u.lastName=:lastName, u.phoneNumber=:phoneNumber, u.birthDate=:birthDate WHERE u.id=:id";
     }
 
-    public String updateIsUserAccountActive(){
+    public String updateIsUserAccountActive() {
         return "UPDATE User u SET u.isAccountActive=:isAccountActive WHERE u.id=:id";
     }
 }
