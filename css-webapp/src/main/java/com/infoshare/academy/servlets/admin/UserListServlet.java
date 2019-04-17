@@ -1,4 +1,4 @@
-package com.infoshare.academy.servlets.user;
+package com.infoshare.academy.servlets.admin;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
@@ -24,15 +24,38 @@ public class UserListServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
 
         String name = req.getParameter("name");
+        String page = req.getParameter("currentPage");
 
         if (name == null) {
-            List<User> usersList = usersDao.getUsersList();
+            List<User> usersList = usersDao.getUsersListPaged(currentPage(page), pageSize());
             req.setAttribute("usersList", usersList);
+            req.setAttribute("currentPage", currentPage(page));
+            req.setAttribute("noOfPages", noOfPages());
             req.getRequestDispatcher("/admin/users.jsp").forward(req, resp);
         } else {
             List<User> usersList = usersDao.searchUserByLoginOrEmail(name);
             req.setAttribute("usersList", usersList);
             req.getRequestDispatcher("/admin/users.jsp").forward(req, resp);
         }
+    }
+
+    public int pageSize() {
+        return 5;
+    }
+
+    public Integer noOfPages() {
+        int rows = usersDao.countUsers();
+        int noOfPages = rows / pageSize();
+        if (rows % pageSize() > 0) {
+            noOfPages++;
+        }
+        return noOfPages;
+    }
+
+    public Integer currentPage(String page) {
+        if (page == null) {
+            page = "1";
+        }
+        return Integer.parseInt(page);
     }
 }

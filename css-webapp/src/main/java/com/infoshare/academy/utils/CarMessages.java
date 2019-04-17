@@ -2,65 +2,52 @@ package com.infoshare.academy.utils;
 
 public class CarMessages {
 
+    private static final String startDangerDiv = "<div class=\"alert alert-danger\" role=\"alert\">";
+    private static final String startSuccessDiv = "<div class=\"alert alert-success\" role=\"alert\">";
+    private static final String endDiv = "</div>";
+
     public static String errorEmptyList() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "List of cars is empty!";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "Car id is incorrect! Please try again.";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
-    public static String errorNoSearchResults(){
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
+
+    public static String errorNoSearchResults() {
         String errorData = "No search results! Please try again.";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String successMessageCarRm() {
-        String html1 = "<div class=\"alert alert-success\" role=\"alert\">";
-        String html2 = "</div>";
         String successDate = "Success, car removed from the list";
-        return html1 + successDate + html2;
-
+        return startSuccessDiv + successDate + endDiv;
     }
 
     public static String errorCarIdIncorrect() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = " Id car incorrect! Please try again.";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorCarMileageIncorrect() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = " Car mileage incorrect! Please try again.";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorUpdateHasFailed() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "The update has failed, please try again.";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String successUpdateDone() {
-        String html1 = "<div class=\"alert alert-success\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "Car successfully updated!";
-        return html1 + errorData + html2;
+        return startSuccessDiv + errorData + endDiv;
     }
+
     public static String errorIncorectData() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "Incorrect data entered, please try again.";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 }

@@ -1,4 +1,4 @@
-package com.infoshare.academy.servlets;
+package com.infoshare.academy.servlets.user;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
@@ -24,9 +24,7 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        response.setContentType("text/html");
-
+        setEncoding(request, response);
         HttpSession session = request.getSession(false);
         String userName = (String) session.getAttribute("username");
 
@@ -46,7 +44,6 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
         String userName = (String) session.getAttribute("username");
 
-
         String postalCode = req.getParameter("postalCode");
         String city = req.getParameter("city");
         String streetAddress = req.getParameter("streetAddress");
@@ -64,8 +61,6 @@ public class ProfileAddressUpdateServlet extends HttpServlet {
     }
 
     public User getUser(String userName) {
-        User currentUser = usersDao.getUserByLogin(userName);
-        return currentUser;
-
+        return usersDao.getUserByLogin(userName);
     }
 }

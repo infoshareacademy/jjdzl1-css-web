@@ -16,7 +16,7 @@
             </div>
             <div class="form-group px-3">
                 <label for="phoneNumber">Phone number</label>
-                <input class="form-control form-control-sm" type="number" name="phoneNumber" id="phoneNumber" min="1000000" value="${currentUser.phoneNumber}" required/>
+                <input class="form-control form-control-sm" type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone number" min="1000000" value="${currentUser.phoneNumber}" required/>
             </div>
             <div class="form-group px-3">
                 <label for="birthDate">Birth date</label>
