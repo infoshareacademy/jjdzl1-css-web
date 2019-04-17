@@ -39,5 +39,19 @@ public class UserService {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    @DELETE
+    @Path("/user")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteUserById(@QueryParam("id") Integer id) {
+        User user = userDao.getUserById(id);
+        if
+
+        (user != null){
+            userDao.deleteUserById(id);
+            return Response.ok().build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
 
 }
