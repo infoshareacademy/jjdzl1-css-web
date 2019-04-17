@@ -101,13 +101,14 @@ public class ReservationService {
             @FormParam("startDate") String startDate,
             @FormParam("endDate") String endDate) {
 
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
+        if (userId == null || carId == null || startDate == null || endDate == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         Car car = carDao.getCar(carId);
         User user = userDao.getUserById(userId);
 
         if (car != null && user != null) {
-            Reservation reservation = new Reservation(user, car, start, end);
+            Reservation reservation = new Reservation(user, car, start(startDate), end(endDate));
 
             return Response.ok(reservationDao.addReservation(reservation)).build();
         }
@@ -129,6 +130,15 @@ public class ReservationService {
             return Response.ok().build();
         }
         return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
+
+    public LocalDate start(String startDate) {
+        return LocalDate.parse(startDate);
+    }
+
+    public LocalDate end(String endDate) {
+        return LocalDate.parse(endDate);
     }
 }
 

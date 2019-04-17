@@ -1,5 +1,6 @@
 package com.infoshare.academy.domain;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -42,6 +43,7 @@ public class User implements Serializable {
     private Boolean isAccountActive;
 
     @OneToMany(mappedBy = "user")
+    @JsonbTransient
     private List<Reservation> reservations;
 
 
