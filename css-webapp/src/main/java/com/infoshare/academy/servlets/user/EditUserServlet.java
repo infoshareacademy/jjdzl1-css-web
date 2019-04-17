@@ -58,6 +58,7 @@ public class EditUserServlet extends HttpServlet {
             String lastName = req.getParameter("lastName");
             String phoneNumber = req.getParameter("phoneNumber");
             String birthDate = req.getParameter("birthDate");
+            String isAccountActive = req.getParameter("isAccountActive");
 
             String postalCode = req.getParameter("postalCode");
             String city = req.getParameter("city");
@@ -65,6 +66,7 @@ public class EditUserServlet extends HttpServlet {
 
             usersDao.updateUserInfo(Integer.parseInt(id), firstName, lastName, Long.parseLong(phoneNumber), LocalDate.parse(birthDate));
             usersDao.updateUserAddress(Integer.parseInt(id), postalCode, city, streetAddress);
+            usersDao.updateIsUserAccountActive(Integer.parseInt(id), Boolean.parseBoolean(isAccountActive));
 
             resp.sendRedirect("users");
         }

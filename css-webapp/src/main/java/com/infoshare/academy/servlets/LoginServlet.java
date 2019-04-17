@@ -46,11 +46,12 @@ public class LoginServlet extends HttpServlet {
                 req.getRequestDispatcher("listAvailableCar.jsp").forward(req, resp);
             } else {
                 req.setAttribute("activationError", activationErrorMessage());
+                req.getRequestDispatcher("login.jsp").forward(req, resp);
             }
         } else {
             req.setAttribute("error", errorMessageLoginIncorrect());
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
     }
 
     private User createUserBasedOnFormLogin(String username) {

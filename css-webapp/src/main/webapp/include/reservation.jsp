@@ -27,7 +27,7 @@
 
             <c:forEach var="car" items="${carListAvailableCarLimit}">
             <tr>
-                <td style="text-align: center; vertical-align: middle;"><img src="${car.photoLink}" height=150 width=225></td>
+                <td style="text-align: center; vertical-align: middle;"><img src="${car.imagePath}" height=150 width=225></td>
                 <td style="text-align: center; vertical-align: middle;">${car.make}</td>
                 <td style="text-align: center; vertical-align: middle;">${car.model}</td>
                 <td style="text-align: center; vertical-align: middle;">${car.year}</td>

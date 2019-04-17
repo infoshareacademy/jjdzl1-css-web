@@ -2,6 +2,7 @@ package com.infoshare.academy.dao;
 
 import com.infoshare.academy.domain.User;
 import com.infoshare.academy.utils.MailSend;
+import com.infoshare.academy.utils.MyQuery;
 import org.hibernate.Session;
 
 import javax.ejb.Stateless;
@@ -15,6 +16,8 @@ import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 
 @Stateless
 public class UsersRepositoryDaoBean implements UsersRepositoryDao {
+
+    MyQuery myQuery = new MyQuery();
 
     @Override
     public User addUser(User user) {
@@ -41,9 +44,8 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         User user;
         try {
             Session session = getSession();
-            String select = "SELECT u from User u WHERE login=:login";
-            Query query = session.createQuery(select);
-            query.setParameter("login", login);
+            Query query = session.createQuery(myQuery.getUserByLogin())
+                    .setParameter("login", login);
             user = (User) query.getSingleResult();
             commitTransaction(session);
             return user;
@@ -57,9 +59,8 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         User user;
         try {
             Session session = getSession();
-            String select = "SELECT u from User u WHERE email=:email";
-            Query query = session.createQuery(select);
-            query.setParameter("email", email);
+            Query query = session.createQuery(myQuery.getUserByEmail())
+                    .setParameter("email", email);
             user = (User) query.getSingleResult();
             commitTransaction(session);
             return user;
@@ -71,7 +72,7 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public List<User> getUsersList() {
         Session session = getSession();
-        List<User> usersList = session.createQuery("Select u FROM User u ").getResultList();
+        List<User> usersList = session.createQuery(myQuery.getUserList()).getResultList();
         commitTransaction(session);
         return usersList;
     }
@@ -79,7 +80,7 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public List<User> searchUserByLoginOrEmail(String name) {
         Session session = getSession();
-        org.hibernate.query.Query<User> query = session.createQuery("Select u From User u Where u.login LIKE '%" + name + "%' OR u.email LIKE '%" + name + "%'", User.class);
+        org.hibernate.query.Query<User> query = session.createQuery(myQuery.searchUser(name), User.class);
         List<User> userList = query.getResultList();
         commitTransaction(session);
         return userList;
@@ -104,12 +105,11 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public void updateUserAddress(Integer id, String postalCode, String city, String streetAddress) {
         Session session = getSession();
-        String update = "UPDATE User u SET u.postalCode=:postalCode, u.city=:city, u.streetAddress=:streetAddress WHERE u.id=:id";
-        Query query = session.createQuery(update);
-        query.setParameter("id", id);
-        query.setParameter("postalCode", postalCode);
-        query.setParameter("city", city);
-        query.setParameter("streetAddress", streetAddress);
+        Query query = session.createQuery(myQuery.updateUserAdress())
+                .setParameter("id", id)
+                .setParameter("postalCode", postalCode)
+                .setParameter("city", city)
+                .setParameter("streetAddress", streetAddress);
         query.executeUpdate();
         commitTransaction(session);
     }
@@ -117,10 +117,9 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public void updateUserPassword(Integer id, String password) {
         Session session = getSession();
-        String update = "UPDATE User u SET u.password=:password WHERE u.id=:id";
-        Query query = session.createQuery(update);
-        query.setParameter("id", id);
-        query.setParameter("password", password);
+        Query query = session.createQuery(myQuery.updateUserPassword())
+                .setParameter("id", id)
+                .setParameter("password", password);
         query.executeUpdate();
         commitTransaction(session);
     }
@@ -128,13 +127,12 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public void updateUserInfo(Integer id, String firstName, String lastName, Long phoneNumber, LocalDate birthDate) {
         Session session = getSession();
-        String update = "UPDATE User u SET u.firstName=:firstName, u.lastName=:lastName, u.phoneNumber=:phoneNumber, u.birthDate=:birthDate WHERE u.id=:id";
-        Query query = session.createQuery(update);
-        query.setParameter("id", id);
-        query.setParameter("firstName", firstName);
-        query.setParameter("lastName", lastName);
-        query.setParameter("phoneNumber", phoneNumber);
-        query.setParameter("birthDate", birthDate);
+        Query query = session.createQuery(myQuery.updateUserInfo())
+                .setParameter("id", id)
+                .setParameter("firstName", firstName)
+                .setParameter("lastName", lastName)
+                .setParameter("phoneNumber", phoneNumber)
+                .setParameter("birthDate", birthDate);
         query.executeUpdate();
         commitTransaction(session);
     }
@@ -142,16 +140,15 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public void sendEmailToNewUser(String login, String email, String UUID) throws MessagingException {
         MailSend mail = new MailSend();
-        mail.sentEmail(login,email,UUID);
+        mail.sentEmail(login, email, UUID);
     }
 
     @Override
     public void updateIsUserAccountActive(Integer id, Boolean isAccountActive) {
         Session session = getSession();
-        String update = "UPDATE User u SET u.isAccountActive=:isAccountActive WHERE u.id=:id";
-        Query query = session.createQuery(update);
-        query.setParameter("id", id);
-        query.setParameter("isAccountActive", isAccountActive);
+        Query query = session.createQuery(myQuery.updateIsUserAccountActive())
+                .setParameter("id", id)
+                .setParameter("isAccountActive", isAccountActive);
         query.executeUpdate();
         commitTransaction(session);
     }

@@ -2,6 +2,7 @@ package com.infoshare.academy.dao;
 
 import com.infoshare.academy.domain.Car;
 import com.infoshare.academy.domain.Reservation;
+import com.infoshare.academy.utils.MyQuery;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -17,14 +18,8 @@ import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
 
     private int pageSize = 3;
-    public LocalDate startDate;
-    public LocalDate endDate;
 
-    private String availableCar = "SELECT  c FROM Car c  where id  IN " +
-            "(SELECT car FROM Reservation WHERE (startDate>'" + startDate + "' and startDate>'" + endDate + "')" +
-            " or (endDate<'" + startDate + "' and startDate>'" + endDate + "')" +
-            " or (endDate<'" + startDate + "'))or id IN (SELECT c from Car c)" +
-            "ORDER BY c.id ASC";
+    MyQuery myQuery = new MyQuery();
 
     @Override
     public Reservation addReservation(Reservation reservation) {
@@ -35,11 +30,18 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     }
 
     @Override
+    public List<Reservation> list() {
+        Session session=getSession();
+        List<Reservation> list=session.createQuery("SELECT r FROM Reservation r").getResultList();
+        commitTransaction(session);
+        return list;
+    }
+
+    @Override
     public Integer listCount(String login, String name) {
         Session session = getSession();
-        List<Reservation> reservationList = session.createQuery("SELECT r FROM Reservation r WHERE " +
-                "user.login LIKE '%" + login + "%' AND " +
-                "(car.make LIKE '%" + name + "%'OR car.model LIKE '%" + name + "%')").getResultList();
+        List<Reservation> reservationList = session.createQuery(myQuery.getReservationList(login, name))
+                .getResultList();
         int reservationCount = reservationList.size();
         commitTransaction(session);
         return reservationCount;
@@ -48,9 +50,7 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     @Override
     public List<Reservation> listLimit(String login, String name, int currentPage) {
         Session session = getSession();
-        Query reservationList = session.createQuery("SELECT r FROM Reservation r WHERE" +
-                " user.login LIKE '%" + login + "%' AND" +
-                " (car.make LIKE '%" + name + "%'OR car.model LIKE '%" + name + "%')");
+        Query reservationList = session.createQuery(myQuery.getReservationList(login, name));
         reservationList.setFirstResult(pageSize * (currentPage - 1));
         reservationList.setMaxResults(pageSize);
         List<Reservation> reservations = reservationList.getResultList();
@@ -70,7 +70,7 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     @Override
     public Integer reservationCount(Integer id) {
         Session session = getSession();
-        List<Reservation> list = session.createQuery("select r from Reservation r where user='" + id + "'").getResultList();
+        List<Reservation> list = session.createQuery(myQuery.getReservation(id)).getResultList();
         int listCount = list.size();
         commitTransaction(session);
         return listCount;
@@ -78,9 +78,9 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     }
 
     @Override
-    public List<Reservation> reservationListByUserIdLimit(Integer id, int currentPage) {
+    public List<Reservation> reservationListByUserIdLimit(Integer id, int currentPage,int pageSize) {
         Session session = getSession();
-        Query listReservation = session.createQuery("select r from Reservation r where user='" + id + "'");
+        Query listReservation = session.createQuery(myQuery.getReservation(id));
         listReservation.setFirstResult(pageSize * (currentPage - 1));
         listReservation.setMaxResults(pageSize);
         List<Reservation> reservationsLimit = listReservation.getResultList();
@@ -110,7 +110,8 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     @Override
     public List<Car> getCarListAvailableCar(LocalDate startDate, LocalDate endDate) {
         Session session = getSession();
-        List<Car> carListAvailableCar = session.createQuery(availableCar).getResultList();
+        List<Car> carListAvailableCar = session.createQuery(myQuery.getAvailableCar(startDate, endDate))
+                .getResultList();
         commitTransaction(session);
         return carListAvailableCar;
     }
@@ -118,17 +119,17 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     @Override
     public Integer getCountCarListAvailableCar(LocalDate startDate, LocalDate endDate) {
         Session session = getSession();
-        List<Car> carList = session.createQuery(availableCar).getResultList();
+        List<Car> carList = session.createQuery(myQuery.getAvailableCar(startDate, endDate)).getResultList();
         int carCount = carList.size();
         commitTransaction(session);
         return carCount;
     }
 
     @Override
-    public List<Car> getCarListAvailableCarLimit(LocalDate startDate, LocalDate endDate, int i) {
+    public List<Car> getCarListAvailableCarLimit(LocalDate startDate, LocalDate endDate, int currentPage,int pageSize) {
         Session session = getSession();
-        Query carList = session.createQuery(availableCar);
-        carList.setFirstResult(pageSize * (i - 1));
+        Query carList = session.createQuery(myQuery.getAvailableCar(startDate, endDate));
+        carList.setFirstResult(pageSize * (currentPage - 1));
         carList.setMaxResults(pageSize);
         List<Car> carListAvailableCarLimit = carList.getResultList();
         commitTransaction(session);

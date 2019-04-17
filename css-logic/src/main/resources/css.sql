@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: kamil-mysql
--- Czas generowania: 27 Mar 2019, 15:32
--- Wersja serwera: 8.0.13
--- Wersja PHP: 7.2.13
+-- Host: asgard-mysql
+-- Czas generowania: 15 Kwi 2019, 14:33
+-- Wersja serwera: 8.0.14
+-- Wersja PHP: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -43,14 +43,14 @@ CREATE TABLE `cars` (
   `seats` int(2) DEFAULT NULL,
   `capacity` int(15) DEFAULT NULL,
   `cargo_space` int(15) DEFAULT NULL,
-  `photo_link` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+  `image_path` text CHARACTER SET utf8 COLLATE utf8_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Zrzut danych tabeli `cars`
 --
 
-INSERT INTO `cars` (`car_id`, `car_type`, `make`, `model`, `year`, `mileage`, `engine_power`, `fuel_source`, `transmission`, `body_type`, `color`, `seats`, `capacity`, `cargo_space`, `photo_link`) VALUES
+INSERT INTO `cars` (`car_id`, `car_type`, `make`, `model`, `year`, `mileage`, `engine_power`, `fuel_source`, `transmission`, `body_type`, `color`, `seats`, `capacity`, `cargo_space`, `image_path`) VALUES
 (1, 1, 'BMW', 'M5', 2015, 65000, 350, 'PETROL', 'MANUAL', 'SEDAN', 'WHITE', 5, NULL, NULL, 'img/1.jpeg'),
 (2, 1, 'Audi', 'R8', 2015, 35000, 435, 'PETROL', 'AUTOMATIC', 'COUPE', 'RED', 5, NULL, NULL, 'img/2.jpeg'),
 (3, 1, 'BMW', 'E90', 2011, 65000, 220, 'DIESEL', 'MANUAL', 'SEDAN', 'WHITE', 5, NULL, NULL, 'img/3.jpeg'),

@@ -93,12 +93,14 @@ public class RegistrationServlet extends HttpServlet {
     private void createUser(HttpServletRequest request, HttpServletResponse response, User user) throws ServletException, IOException {
         setUUIDAndActivationStatusForNewUser(user);
         usersRepositoryDao.addUser(user);
-        try {
-            usersRepositoryDao.sendEmailToNewUser(user.getLogin(), user.getEmail(), user.getAuthorizationNumber());
+            new Thread(() -> {
+                try {
+                    usersRepositoryDao.sendEmailToNewUser(user.getLogin(), user.getEmail(), user.getAuthorizationNumber());
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            }).start();
             response.sendRedirect("afterRegistration.jsp");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
     }
 
     private void RequestResponse(HttpServletRequest request, HttpServletResponse response, String errorMessage, String jspError) throws ServletException, IOException {

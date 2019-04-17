@@ -151,6 +151,10 @@ public class User implements Serializable {
         return isAccountActive;
     }
 
+    public Boolean getIsAccountActive() {
+        return isAccountActive;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

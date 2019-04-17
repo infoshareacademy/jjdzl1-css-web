@@ -36,6 +36,7 @@ public class ReservationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        Integer pageSize=3;
         String page = req.getParameter("currentPage");
         String start = req.getParameter("startDate");
         String end = req.getParameter("endDate");
@@ -50,7 +51,7 @@ public class ReservationServlet extends HttpServlet {
                 req.setAttribute("error", errorEndGreaterThanStart());
             } else {
 
-                List<Car> carListAvailableCarLimit = daoReservation.getCarListAvailableCarLimit(start(start), end(end), currentPage(page));
+                List<Car> carListAvailableCarLimit = daoReservation.getCarListAvailableCarLimit(start(start), end(end), currentPage(page),pageSize);
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 req.setAttribute("noOfPages", noOfPages(start(start), end(end)));
@@ -93,7 +94,6 @@ public class ReservationServlet extends HttpServlet {
             }
         }
         req.setAttribute("errorReservation", errorIncorrectIdCar());
-        req.getRequestDispatcher("/reservation.jsp").forward(req, resp);
 
     }
     public LocalDate now=LocalDate.now();
