@@ -55,12 +55,10 @@ public class RegistrationServlet extends HttpServlet {
 
         if (!isBeforePresentDay) {
             RequestResponse(request, response, "IncorrectDateOfBirth", incorrectDateOfBirth());
+        } else if (!isPasswordCorrect && isAdult) {
+            RequestResponse(request, response, "error", passwordIncorrectAndTooYoungMessage());
         } else if (!isPasswordCorrect) {
-            if (isAdult) {
-                RequestResponse(request, response, "error", passwordIncorrectAndTooYoungMessage());
-            } else {
-                RequestResponse(request, response, "passwordError", passwordIncorrectMessage());
-            }
+            RequestResponse(request, response, "passwordError", passwordIncorrectMessage());
         } else if (!isPasswordMatch) {
             RequestResponse(request, response, "passwordNotMatchError", passwordNotMatchMessage());
         } else if (!isEmailCorrect) {

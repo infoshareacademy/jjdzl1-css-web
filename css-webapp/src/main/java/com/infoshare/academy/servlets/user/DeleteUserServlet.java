@@ -23,10 +23,10 @@ public class DeleteUserServlet extends HttpServlet {
         String id = req.getParameter("id");
 
         if (id == null) {
-            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
         } else if (id.isEmpty()) {
             req.setAttribute("error", errorMessage());
-            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
         } else {
             User userById = usersDao.getUserById(Integer.valueOf(id));
             if (userById != null) {
@@ -42,16 +42,16 @@ public class DeleteUserServlet extends HttpServlet {
         String id = req.getParameter("id");
 
         if (id == null) {
-            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
         } else if (id.isEmpty()) {
             req.setAttribute("error", errorMessage());
-            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
         } else {
             User userById = usersDao.getUserById(Integer.valueOf(id));
             if (userById != null) {
                 usersDao.deleteUserById(Integer.valueOf(id));
             }
-            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
         }
     }
 
