@@ -20,12 +20,10 @@ public class Reservation implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonbTransient
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "car_id")
-    @JsonbTransient
     private Car car;
     @FutureOrPresent
     @Column(name = "start_date")
