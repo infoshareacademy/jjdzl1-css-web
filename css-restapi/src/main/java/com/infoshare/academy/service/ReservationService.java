@@ -53,10 +53,12 @@ public class ReservationService {
             @QueryParam("startDate") String startDate,
             @QueryParam("endDate") String endDate) {
 
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
+        if (isPast(start(startDate)) || isAfter(start(startDate), end(endDate))) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+        LOGGER.info("Get available car form:" + startDate + " to " + endDate);
 
-        List<Car> cars = reservationDao.getCarListAvailableCar(start, end);
+        List<Car> cars = reservationDao.getCarListAvailableCar(start(startDate), end(endDate));
 
         if (cars != null) {
             return Response.ok(cars).build();
@@ -73,10 +75,13 @@ public class ReservationService {
             @QueryParam("currentPage") Integer currentPage,
             @QueryParam("pageSize") Integer pageSize) {
 
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
+        if (isPast(start(startDate)) || isAfter(start(startDate), end(endDate))) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
 
-        List<Car> cars = reservationDao.getCarListAvailableCarLimit(start, end, currentPage, pageSize);
+        LOGGER.info("Get available car form:" + startDate + " to " + endDate);
+
+        List<Car> cars = reservationDao.getCarListAvailableCarLimit(start(startDate), end(endDate), currentPage, pageSize);
 
         return Response.ok(cars).build();
     }
@@ -88,7 +93,14 @@ public class ReservationService {
             @QueryParam("id") Integer id,
             @QueryParam("currentPage") Integer currentPage,
             @QueryParam("pageSize") Integer pageSize) {
-        return Response.ok(reservationDao.reservationListByUserIdLimit(id, currentPage, pageSize)).build();
+
+        LOGGER.info("Get list reservations for user id: " + id);
+
+        if (id != null && currentPage > 0 && pageSize > 0) {
+            return Response.ok(reservationDao.reservationListByUserIdLimit(id, currentPage, pageSize)).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
+
     }
 
     @POST
@@ -96,23 +108,28 @@ public class ReservationService {
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED, MediaType.APPLICATION_JSON})
     @Produces(MediaType.APPLICATION_JSON)
     public Response addReservation(
-            @FormParam("userId") Integer userId,
-            @FormParam("carId") Integer carId,
+            @FormParam("userId") String userId,
+            @FormParam("carId") String carId,
             @FormParam("startDate") String startDate,
             @FormParam("endDate") String endDate) {
 
-        if (userId == null || carId == null || startDate == null || endDate == null) {
+        if (userId.isEmpty() || carId.isEmpty() || startDate.isEmpty() || endDate.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        Car car = carDao.getCar(carId);
-        User user = userDao.getUserById(userId);
+        Integer idUser = Integer.parseInt(userId);
+        Integer idCar = Integer.parseInt(carId);
+        LOGGER.info("Get car by id: " + idCar);
+        Car car = carDao.getCar(idCar);
 
+        LOGGER.info("Get user by id: " + userId);
+        User user = userDao.getUserById(idUser);
+
+        LOGGER.info("Add reservation for user id: " + idUser + " car id: " + idCar);
         if (car != null && user != null) {
             Reservation reservation = new Reservation(user, car, start(startDate), end(endDate));
 
             return Response.ok(reservationDao.addReservation(reservation)).build();
         }
-
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
@@ -120,14 +137,19 @@ public class ReservationService {
     @Path("/reservation")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteReservation(
-            @QueryParam("id") Integer id) {
+            @QueryParam("id") String idString) {
 
-        Reservation reservation = reservationDao.getReservationById(id);
+        if (idString.isEmpty()) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } else {
+            Integer id = Integer.parseInt(idString);
+            Reservation reservation = reservationDao.getReservationById(id);
 
-        if (reservation != null) {
-
-            reservationDao.deleteReservation(id);
-            return Response.ok().build();
+            if (reservation != null) {
+                LOGGER.info("Delete reservation by id: " + id);
+                reservationDao.deleteReservation(id);
+                return Response.ok().build();
+            }
         }
         return Response.status(Response.Status.NOT_FOUND).build();
     }
@@ -140,7 +162,14 @@ public class ReservationService {
     public LocalDate end(String endDate) {
         return LocalDate.parse(endDate);
     }
+
+    public boolean isAfter(LocalDate startDate, LocalDate endDate) {
+        return startDate.isAfter(endDate);
+    }
+
+    private final LocalDate now = LocalDate.now();
+
+    public boolean isPast(LocalDate startDate) {
+        return now.isAfter(startDate);
+    }
 }
-
-
-
