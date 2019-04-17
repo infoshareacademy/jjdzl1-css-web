@@ -44,10 +44,20 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteUserById(@QueryParam("id") Integer id) {
         User user = userDao.getUserById(id);
-        if
-
-        (user != null){
+        if (user != null) {
             userDao.deleteUserById(id);
+            return Response.ok().build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
+    @DELETE
+    @Path("/userByLogin")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteUserByLogin(@QueryParam("login") String login) {
+        User user = userDao.getUserByLogin(login);
+        if (user != null) {
+            userDao.deleteUserByLogin(login);
             return Response.ok().build();
         }
         return Response.status(Response.Status.NOT_FOUND).build();
