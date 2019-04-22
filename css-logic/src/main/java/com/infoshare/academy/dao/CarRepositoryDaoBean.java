@@ -11,7 +11,7 @@ import java.util.List;
 import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 
 @Stateless
-public class CarsRepositoryDaoBean implements CarsRepositoryDao {
+public class CarRepositoryDaoBean implements CarsRepositoryDao {
 
     private MyQuery myQuery = new MyQuery();
 
