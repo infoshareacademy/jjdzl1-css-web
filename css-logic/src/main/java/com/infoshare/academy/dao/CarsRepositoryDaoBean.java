@@ -11,7 +11,7 @@ import java.util.List;
 import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 
 @Stateless
-public class CarRepositoryDaoBean implements CarsRepositoryDao {
+public class CarsRepositoryDaoBean implements CarsRepositoryDao {
 
     MyQuery myQuery = new MyQuery();
 
@@ -80,7 +80,6 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
         updateCar.setSeats(car.getSeats());
         commitTransaction(session);
         return updateCar;
-
     }
 
     @Override
@@ -98,7 +97,6 @@ public class CarRepositoryDaoBean implements CarsRepositoryDao {
         int carCount = carList.size();
         commitTransaction(session);
         return carCount;
-
     }
 
     @Override
