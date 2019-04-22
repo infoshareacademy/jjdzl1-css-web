@@ -29,7 +29,7 @@
                 <th scope="col">Last name</th>
                 <th scope="col">Phone number</th>
                 <th scope="col">Birth date</th>
-                <th scope="col">Address</th>
+                <th scope="col">Status</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
@@ -53,11 +53,20 @@
                     <td>${user.lastName}</td>
                     <td>${user.phoneNumber}</td>
                     <td>${user.birthDate}</td>
-                    <td>${user.postalCode} ${user.city}, ${user.streetAddress}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${user.isAccountActive eq true}">
+                                <span data-feather="check-circle" title="Active" data-toggle="tooltip" data-placement="top" title="Active"></span>
+                            </c:when>
+                            <c:otherwise>
+                                <span data-feather="x-circle" title="Disabled" data-toggle="tooltip" data-placement="top" title="Disabled"></span>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td>
                         <form method="get" action="edituser">
                             <input type="hidden" name="login" value="${user.login}">
-                            <button class="btn btn-primary" type="submit">Edit</button>
+                            <button class="btn btn-primary btn-sm" type="submit">Edit</button>
                         </form>
                     </td>
                 </tr>
@@ -65,4 +74,34 @@
             </tbody>
         </table>
     </div>
+</div>
+
+<div class="my-3" align="center">
+    <nav>
+        <ul class="pagination">
+            <c:if test="${currentPage > 1}">
+                <li class="page-item"><a class="page-link" href="users?currentPage=${currentPage-1}">Previous</a>
+                </li>
+            </c:if>
+
+            <c:forEach begin="1" end="${noOfPages}" var="i">
+                <c:choose>
+                    <c:when test="${currentPage eq i}">
+                        <li class="page-item active"><a class="page-link">
+                                ${i} <span class="sr-only">(current)</span></a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="users?currentPage=${i}">${i}</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+
+            <c:if test="${currentPage lt noOfPages}">
+                <li class="page-item"><a class="page-link" href="users?currentPage=${currentPage+1}">Next</a>
+                </li>
+            </c:if>
+        </ul>
+    </nav>
 </div>

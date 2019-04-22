@@ -13,15 +13,13 @@ import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
 @Stateless
 public class CarsRepositoryDaoBean implements CarsRepositoryDao {
 
-    MyQuery myQuery = new MyQuery();
-
+    private MyQuery myQuery = new MyQuery();
 
     private Session getSession() {
         Session session = getSessionFactory().getCurrentSession();
         session.beginTransaction();
         return session;
     }
-
 
     @Override
     public Car addCar(Car car) {
@@ -34,11 +32,9 @@ public class CarsRepositoryDaoBean implements CarsRepositoryDao {
     @Override
     public Integer listCount() {
         Session session = getSession();
-        List<Car> carList = session.createQuery(myQuery.getCar())
-                .getResultList();
-        int carCount = carList.size();
+        Long countCars = (Long) session.createQuery(myQuery.countCars()).getSingleResult();
         commitTransaction(session);
-        return carCount;
+        return Math.toIntExact(countCars);
     }
 
     @Override

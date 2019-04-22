@@ -14,12 +14,11 @@ public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         response.setContentType("text/html");
 
         RequestDispatcher req = request.getRequestDispatcher("logout.jsp");
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         session.invalidate();
 
         response.setHeader("Refresh", "2;url=index.jsp");

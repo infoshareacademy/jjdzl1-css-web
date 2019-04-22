@@ -19,7 +19,7 @@
                         <a class="nav-link" href="${pageContext.request.contextPath}/profile">Profile</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/admin/admin.jsp">Admin Page</a>
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/admin/admin.jsp">Admin</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/listReservationCurrentUser">Reservations</a>

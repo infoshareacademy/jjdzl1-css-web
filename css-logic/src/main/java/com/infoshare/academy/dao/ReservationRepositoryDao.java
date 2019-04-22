@@ -12,6 +12,8 @@ public interface ReservationRepositoryDao {
 
     Reservation addReservation(Reservation reservation);
 
+    List<Reservation> list();
+
     Integer listCount(String login,String name);
 
     List<Reservation> listLimit(String login,String name,int currentPage);
@@ -20,7 +22,7 @@ public interface ReservationRepositoryDao {
 
     Integer reservationCount(Integer id);
 
-    List<Reservation> reservationListByUserIdLimit(Integer id, int currentPage);
+    List<Reservation> reservationListByUserIdLimit(Integer id, int currentPage,int pageSize);
 
     Reservation updateReservation(Integer id, Car car, LocalDate startDate, LocalDate endDate);
 
@@ -30,7 +32,7 @@ public interface ReservationRepositoryDao {
 
     Integer getCountCarListAvailableCar(LocalDate startDate, LocalDate endDate);
 
-    List<Car> getCarListAvailableCarLimit(LocalDate startDate, LocalDate endDate, int i);
+    List<Car> getCarListAvailableCarLimit(LocalDate startDate, LocalDate endDate, int currentPage,int pageSize);
 
     Stream<Reservation> searchReservation(Filter filter);
 

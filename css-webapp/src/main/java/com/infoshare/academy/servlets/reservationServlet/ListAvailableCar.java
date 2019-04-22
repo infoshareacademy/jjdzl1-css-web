@@ -25,6 +25,7 @@ public class ListAvailableCar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        Integer pageSize=3;
         String start = req.getParameter("startDate");
         String end = req.getParameter("endDate");
         String page = req.getParameter("currentPage");
@@ -40,7 +41,7 @@ public class ListAvailableCar extends HttpServlet {
             } else {
 
                 List<Car> carListAvailableCarLimit = daoReservation
-                        .getCarListAvailableCarLimit(start(start), end(end), currentPage(page));
+                        .getCarListAvailableCarLimit(start(start), end(end), currentPage(page),pageSize);
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 req.setAttribute("noOfPages", noOfPages(start(start), end(end)));

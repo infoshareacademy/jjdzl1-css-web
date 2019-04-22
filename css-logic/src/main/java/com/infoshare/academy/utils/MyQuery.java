@@ -6,12 +6,15 @@ public class MyQuery {
 
 
     public String getSearchCar(String make, String model, String fuel) {
-
         return "SELECT c FROM Car c WHERE c.make='" + make + "' OR c.model='" + model + "' OR c.fuelSource='" + fuel + "'";
     }
 
     public String getCar() {
         return "SELECT c FROM Car c";
+    }
+
+    public String countCars() {
+        return "SELECT COUNT(c) FROM Car c";
     }
 
     public String getAvailableCar(LocalDate startDate, LocalDate endDate) {
@@ -59,11 +62,15 @@ public class MyQuery {
         return "UPDATE User u SET u.password=:password WHERE u.id=:id";
     }
 
-    public String updateUserInfo(){
+    public String updateUserInfo() {
         return "UPDATE User u SET u.firstName=:firstName, u.lastName=:lastName, u.phoneNumber=:phoneNumber, u.birthDate=:birthDate WHERE u.id=:id";
     }
 
-    public String updateIsUserAccountActive(){
+    public String updateIsUserAccountActive() {
         return "UPDATE User u SET u.isAccountActive=:isAccountActive WHERE u.id=:id";
+    }
+
+    public String countUsers() {
+        return "SELECT COUNT(u) FROM User u";
     }
 }

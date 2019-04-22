@@ -33,4 +33,8 @@ public interface UsersRepositoryDao {
     void sendEmailToNewUser(String login, String email, String UUID) throws MessagingException;
 
     void updateIsUserAccountActive(Integer id, Boolean isActive);
+
+    int countUsers();
+
+    List<User> getUsersListPaged(int currentPage, int pageSize);
 }
