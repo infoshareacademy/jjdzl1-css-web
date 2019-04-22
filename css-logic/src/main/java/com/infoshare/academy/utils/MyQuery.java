@@ -50,6 +50,10 @@ public class MyQuery {
         return "SELECT u FROM User u WHERE u.login LIKE '%" + name + "%' OR u.email LIKE '%" + name + "%'";
     }
 
+    public String deleteUserByLogin() {
+        return "DELETE FROM User u WHERE u.login=:login";
+    }
+
     public String updateUserAdress() {
         return "UPDATE User u SET u.postalCode=:postalCode, u.city=:city, u.streetAddress=:streetAddress WHERE u.id=:id";
     }

@@ -97,8 +97,9 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public void deleteUserByLogin(String login) {
         Session session = getSession();
-        User user = session.get(User.class, login);
-        session.delete(user);
+        Query query = session.createQuery(myQuery.deleteUserByLogin())
+                .setParameter("login", login);
+        query.executeUpdate();
         commitTransaction(session);
     }
 
