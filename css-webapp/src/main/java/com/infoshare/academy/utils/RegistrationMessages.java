@@ -86,4 +86,14 @@ public class RegistrationMessages {
         String errorData = "Please login first!";
         return startDangerDiv + errorData + endDiv;
     }
+
+    public static String errorLoginMessage() {
+        String errorData = "User login incorrect! Please try again.";
+        return startDangerDiv + errorData + endDiv;
+    }
+
+    public static String errorIdMessage() {
+        String errorData = "User id incorrect! Please try again.";
+        return startDangerDiv + errorData + endDiv;
+    }
 }

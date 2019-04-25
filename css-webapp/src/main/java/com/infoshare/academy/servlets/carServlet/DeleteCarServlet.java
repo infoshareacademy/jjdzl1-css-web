@@ -15,7 +15,7 @@ import static com.infoshare.academy.utils.CarMessages.errorMessage;
 import static com.infoshare.academy.utils.CarMessages.successMessageCarRm;
 
 @WebServlet("/admin/deleteCar")
-public class DeleteCar extends HttpServlet {
+public class DeleteCarServlet extends HttpServlet {
 
     @EJB
     CarsRepositoryDao dao;
@@ -39,4 +39,3 @@ public class DeleteCar extends HttpServlet {
         req.getRequestDispatcher("/admin/carPanel.jsp").forward(req, resp);
     }
 }
-

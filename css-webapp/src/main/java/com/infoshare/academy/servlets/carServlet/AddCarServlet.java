@@ -10,7 +10,6 @@ import com.infoshare.academy.enums.TransmissionEnum;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +24,7 @@ import static com.infoshare.academy.utils.CarMessages.successCarAdded;
 
 @MultipartConfig
 @WebServlet("/admin/addCar")
-public class AddCar extends HttpServlet {
+public class AddCarServlet extends HttpServlet {
 
     @EJB
     CarsRepositoryDao dao;
@@ -54,6 +53,7 @@ public class AddCar extends HttpServlet {
         if (uploadedImage == null) {
             req.setAttribute("error", errorNotImage());
             req.getRequestDispatcher("/admin/addCar.jsp").forward(req, resp);
+            return;
         }
 
         Car car = new Car(Integer.parseInt(carType), make, model, Integer.parseInt(year), Integer.parseInt(mileage),
@@ -64,7 +64,5 @@ public class AddCar extends HttpServlet {
         dao.addCar(car);
         req.setAttribute("error", successCarAdded());
         req.getRequestDispatcher("/admin/addCar.jsp").forward(req, resp);
-
     }
 }
-

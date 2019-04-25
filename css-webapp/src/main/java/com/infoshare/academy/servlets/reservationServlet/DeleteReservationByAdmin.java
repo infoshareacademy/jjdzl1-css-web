@@ -23,7 +23,6 @@ public class DeleteReservationByAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         String page = req.getParameter("currentPage");
         String login = req.getParameter("login");
         String name = req.getParameter("name");
@@ -32,7 +31,6 @@ public class DeleteReservationByAdmin extends HttpServlet {
 
         if (reservations == null || reservations.isEmpty()) {
             req.setAttribute("error", errorNoReservationToRm());
-
         } else {
             req.setAttribute("noOfPages", noOfPages(login, name));
             req.setAttribute("currentPage", currentPage(page));
@@ -63,6 +61,7 @@ public class DeleteReservationByAdmin extends HttpServlet {
         }
         req.getRequestDispatcher("/admin/deleteReservation.jsp").forward(req, resp);
     }
+
     public Integer noOfPages(String login, String name) {
         int rows = dao.listCount(login, name);
         int noOfPages = rows / 3;
@@ -76,4 +75,3 @@ public class DeleteReservationByAdmin extends HttpServlet {
         return Integer.valueOf(page);
     }
 }
-

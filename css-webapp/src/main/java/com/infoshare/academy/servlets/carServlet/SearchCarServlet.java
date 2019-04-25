@@ -23,7 +23,6 @@ public class SearchCarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         String make = req.getParameter("make");
         String model = req.getParameter("model");
         String fuel = req.getParameter("fuel");
@@ -35,13 +34,12 @@ public class SearchCarServlet extends HttpServlet {
         req.setAttribute("model", model);
         req.setAttribute("fuel", fuel);
         req.setAttribute("carsList", carsList);
-        req.setAttribute("noOfPages", noOfPages(make,model,fuel));
+        req.setAttribute("noOfPages", noOfPages(make, model, fuel));
         req.setAttribute("currentPage", currentPage);
 
         if (carsList.isEmpty()) {
             req.setAttribute("error", errorNoSearchResults());
         }
-
         req.getRequestDispatcher("searchCar.jsp").forward(req, resp);
     }
 
@@ -49,7 +47,8 @@ public class SearchCarServlet extends HttpServlet {
         int pageSize = 3;
         return pageSize;
     }
-    public Integer noOfPages(String make,String model, String fuel){
+
+    public Integer noOfPages(String make, String model, String fuel) {
         int rows = dao.searchCarCount(make, model, fuel);
         int noOfPage = rows / pageSize();
         if (rows % pageSize() > 0) {
@@ -58,4 +57,3 @@ public class SearchCarServlet extends HttpServlet {
         return noOfPage;
     }
 }
-

@@ -23,27 +23,19 @@ public class GetReservationByUserId extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-        Integer pageSize=3;
+        Integer pageSize = 3;
         String id = req.getParameter("id");
 
         if (id == null || id.isEmpty()) {
             req.setAttribute("error", errorUserHaveNoReservation());
         } else {
-
-            List<Reservation> reservationListByUserId = dao.reservationListByUserIdLimit(Integer.parseInt(id),1,pageSize);
-
-                                                    // TODO dorobić paginację
-
+            List<Reservation> reservationListByUserId = dao.reservationListByUserIdLimit(Integer.parseInt(id), 1, pageSize);
+            // TODO dorobić paginację
             if (reservationListByUserId == null || reservationListByUserId.isEmpty()) {
                 req.setAttribute("error", errorUserHaveNoReservation());
             } else
                 req.setAttribute("reservationListByUserId", reservationListByUserId);
-
         }
-        req.getRequestDispatcher("/admin/getReservationListByUserId.jsp").
-
-                forward(req, resp);
-
+        req.getRequestDispatcher("/admin/getReservationListByUserId.jsp").forward(req, resp);
     }
 }

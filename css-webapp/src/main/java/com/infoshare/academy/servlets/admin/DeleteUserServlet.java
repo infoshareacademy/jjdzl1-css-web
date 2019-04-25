@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.infoshare.academy.utils.RegistrationMessages.errorIdMessage;
+
 @WebServlet("/admin/deleteuser")
 public class DeleteUserServlet extends HttpServlet {
 
@@ -23,10 +25,10 @@ public class DeleteUserServlet extends HttpServlet {
         String id = req.getParameter("id");
 
         if (id == null) {
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         } else if (id.isEmpty()) {
-            req.setAttribute("error", errorMessage());
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.setAttribute("error", errorIdMessage());
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         } else {
             User userById = usersDao.getUserById(Integer.valueOf(id));
             if (userById != null) {
@@ -42,23 +44,16 @@ public class DeleteUserServlet extends HttpServlet {
         String id = req.getParameter("id");
 
         if (id == null) {
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         } else if (id.isEmpty()) {
-            req.setAttribute("error", errorMessage());
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.setAttribute("error", errorIdMessage());
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         } else {
             User userById = usersDao.getUserById(Integer.valueOf(id));
             if (userById != null) {
                 usersDao.deleteUserById(Integer.valueOf(id));
             }
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         }
-    }
-
-    public static String errorMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "User id incorrect! Please try again.";
-        return html1 + errorData + html2;
     }
 }
