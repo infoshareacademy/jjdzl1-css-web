@@ -3,6 +3,7 @@
 <div class="card border-primary">
     <h4 class="card-header">Add new car</h4>
     <div class="card-body">
+        ${error}
 
         <form class="needs-validation" action="addCar" method="post" id="newcar" enctype="multipart/form-data">
             <div class="form-group">

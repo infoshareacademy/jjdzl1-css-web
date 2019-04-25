@@ -10,6 +10,7 @@ import com.infoshare.academy.enums.TransmissionEnum;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
+
+import static com.infoshare.academy.utils.CarMessages.errorNotImage;
+import static com.infoshare.academy.utils.CarMessages.successCarAdded;
 
 @MultipartConfig
 @WebServlet("/admin/addCar")
@@ -42,20 +46,24 @@ public class AddCar extends HttpServlet {
         String bodyType = req.getParameter("bodyType");
         String color = req.getParameter("color");
         String seats = req.getParameter("seats");
-        Part image=req.getPart("image");
+        Part image = req.getPart("image");
 
-        String imagePath="img/" + image.getSubmittedFileName();
+        String imagePath = "img/" + image.getSubmittedFileName();
 
-        fileUploadProcessor.uploadImageFile(image);
+        String uploadedImage = fileUploadProcessor.uploadImageFile(image);
+        if (uploadedImage == null) {
+            req.setAttribute("error", errorNotImage());
+            req.getRequestDispatcher("/admin/addCar.jsp").forward(req, resp);
+        }
 
-
-        Car car = new Car(Integer.parseInt(carType),make,model,Integer.parseInt(year),Integer.parseInt(mileage),
+        Car car = new Car(Integer.parseInt(carType), make, model, Integer.parseInt(year), Integer.parseInt(mileage),
                 Integer.parseInt(enginePower), FuelSourceEnum.valueOf(fuelSource),
                 TransmissionEnum.valueOf(transmission), BodyTypeEnum.valueOf(bodyType), ColorEnum.valueOf(color),
-                Integer.parseInt(seats),imagePath);
+                Integer.parseInt(seats), imagePath);
 
         dao.addCar(car);
-        req.getRequestDispatcher("/admin/admin.jsp").forward(req,resp);
+        req.setAttribute("error", successCarAdded());
+        req.getRequestDispatcher("/admin/addCar.jsp").forward(req, resp);
 
     }
 }
