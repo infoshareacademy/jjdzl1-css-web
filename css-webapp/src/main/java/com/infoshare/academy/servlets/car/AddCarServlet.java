@@ -1,4 +1,4 @@
-package com.infoshare.academy.servlets.carServlet;
+package com.infoshare.academy.servlets.car;
 
 import com.infoshare.academy.cdi.FileUploadProcessor;
 import com.infoshare.academy.dao.CarsRepositoryDao;
