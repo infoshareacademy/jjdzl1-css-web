@@ -50,4 +50,14 @@ public class CarMessages {
         String errorData = "Incorrect data entered, please try again.";
         return startDangerDiv + errorData + endDiv;
     }
+
+    public static String errorNotImage() {
+        String errorData = "Uploaded file is not at image, please try again.";
+        return startDangerDiv + errorData + endDiv;
+    }
+
+    public static String successCarAdded() {
+        String errorData = "Car successfully added to database.";
+        return startDangerDiv + errorData + endDiv;
+    }
 }

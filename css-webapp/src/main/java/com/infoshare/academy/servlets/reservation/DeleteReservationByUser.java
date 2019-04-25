@@ -29,13 +29,13 @@ public class DeleteReservationByUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Integer pageSize=3;
+        Integer pageSize = 3;
         HttpSession session = req.getSession(false);
         String username = (String) session.getAttribute("username");
 
         String page = req.getParameter("currentPage");
 
-        List<Reservation> reservationByUserId = dao.reservationListByUserIdLimit(getUserId(username), currentPage(page),pageSize);
+        List<Reservation> reservationByUserId = dao.reservationListByUserIdLimit(getUserId(username), currentPage(page), pageSize);
 
         if (reservationByUserId == null || reservationByUserId.isEmpty()) {
             req.setAttribute("error", errorEmptyReservationList());
@@ -44,7 +44,7 @@ public class DeleteReservationByUser extends HttpServlet {
             req.setAttribute("currentPage", currentPage(page));
             req.setAttribute("reservationByUserId", reservationByUserId);
         }
-        req.getRequestDispatcher("/deletereservationbyuser.jsp").forward(req, resp);
+        req.getRequestDispatcher("/deleteReservationByUser.jsp").forward(req, resp);
     }
 
     @Override
@@ -74,17 +74,16 @@ public class DeleteReservationByUser extends HttpServlet {
                 }
             }
         }
-        req.getRequestDispatcher("/deletereservationbyuser.jsp").forward(req, resp);
-
+        req.getRequestDispatcher("/deleteReservationByUser.jsp").forward(req, resp);
     }
 
     public Integer getUserId(String username) {
-        User currentUser=daoUser.getUserByLogin(username);
-        Integer id=currentUser.getId();
+        User currentUser = daoUser.getUserByLogin(username);
+        Integer id = currentUser.getId();
         return id;
     }
 
-    public int noOfPages(Integer id){
+    public int noOfPages(Integer id) {
         int rows = dao.reservationCount(id);
 
         int noOfPages = rows / 3;
@@ -94,11 +93,10 @@ public class DeleteReservationByUser extends HttpServlet {
         return noOfPages;
     }
 
-    public int currentPage(String page){
+    public int currentPage(String page) {
         if (page == null) {
             page = "1";
         }
         return Integer.valueOf(page);
     }
-
 }

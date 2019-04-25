@@ -1,5 +1,4 @@
-package com.infoshare.academy.servlets.carServlet;
-
+package com.infoshare.academy.servlets.car;
 
 import com.infoshare.academy.dao.CarsRepositoryDao;
 import com.infoshare.academy.domain.Car;
@@ -17,7 +16,7 @@ import java.util.List;
 import static com.infoshare.academy.utils.CarMessages.errorEmptyList;
 
 @WebServlet("/carlist")
-public class ListExampleCar extends HttpServlet {
+public class ExampleCarListServlet extends HttpServlet {
 
     @EJB
     CarsRepositoryDao dao;
@@ -38,7 +37,5 @@ public class ListExampleCar extends HttpServlet {
         }
         req.getRequestDispatcher("/exampleCarList.jsp").forward(req, resp);
     }
-
-
 }
 

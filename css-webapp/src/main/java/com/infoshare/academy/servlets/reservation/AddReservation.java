@@ -1,4 +1,4 @@
-package com.infoshare.academy.servlets.reservationServlet;
+package com.infoshare.academy.servlets.reservation;
 
 import com.infoshare.academy.dao.CarsRepositoryDao;
 import com.infoshare.academy.dao.ReservationRepositoryDao;

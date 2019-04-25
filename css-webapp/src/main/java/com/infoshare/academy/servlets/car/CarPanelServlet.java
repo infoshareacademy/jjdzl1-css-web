@@ -1,4 +1,4 @@
-package com.infoshare.academy.servlets.carServlet;
+package com.infoshare.academy.servlets.car;
 
 import com.infoshare.academy.dao.CarsRepositoryDao;
 import com.infoshare.academy.domain.Car;
@@ -15,7 +15,7 @@ import java.util.List;
 import static com.infoshare.academy.utils.CarMessages.*;
 
 @WebServlet("/admin/carPanel")
-public class CarPanel extends HttpServlet {
+public class CarPanelServlet extends HttpServlet {
 
     @EJB
     CarsRepositoryDao dao;

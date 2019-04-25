@@ -1,4 +1,4 @@
-package com.infoshare.academy.servlets.carServlet;
+package com.infoshare.academy.servlets.car;
 
 
 import com.infoshare.academy.dao.CarsRepositoryDao;
@@ -16,11 +16,10 @@ import java.util.List;
 import static com.infoshare.academy.utils.CarMessages.errorEmptyList;
 
 @WebServlet("/admin/cars")
-public class Cars extends HttpServlet {
+public class CarListServlet extends HttpServlet {
 
     @EJB
     CarsRepositoryDao dao;
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -61,5 +60,3 @@ public class Cars extends HttpServlet {
         return currentPage;
     }
 }
-
-

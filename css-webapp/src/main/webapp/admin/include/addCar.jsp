@@ -3,6 +3,7 @@
 <div class="card border-primary">
     <h4 class="card-header">Add new car</h4>
     <div class="card-body">
+        ${error}
 
         <form class="needs-validation" action="addCar" method="post" id="newcar" enctype="multipart/form-data">
             <div class="form-group">
@@ -128,13 +129,10 @@
                         <option value="OTHER">Other</option>
                     </select>
                 </div>
-                <div class="col-md-6 input-group mb-2">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">Image</div>
-                    </div>
-                    <input type="file" class="form-control" name="image" id="image" placeholder="Image">
+                <div class="col-md-5 mb-2 mx-3">
+                    <input type="file" class="custom-file-input" name="image" id="image" accept="image/*">
+                    <label class="custom-file-label" for="image">Choose image file...</label>
                 </div>
-
             </div>
             <div class="mb-3">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Add car</button>

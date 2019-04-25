@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 
+import static com.infoshare.academy.utils.RegistrationMessages.errorIdMessage;
+import static com.infoshare.academy.utils.RegistrationMessages.errorLoginMessage;
+
 @WebServlet("/admin/edituser")
 public class EditUserServlet extends HttpServlet {
 
@@ -25,19 +28,19 @@ public class EditUserServlet extends HttpServlet {
         String login = req.getParameter("login");
 
         if (login == null) {
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         } else if (login.isEmpty()) {
             req.setAttribute("error", errorLoginMessage());
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         } else {
             User userByLogin = usersDao.getUserByLogin(login);
-            if (userByLogin == null){
+            if (userByLogin == null) {
                 req.setAttribute("error", errorLoginMessage());
             }
             if (userByLogin != null) {
                 req.setAttribute("user", userByLogin);
             }
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         }
     }
 
@@ -48,12 +51,11 @@ public class EditUserServlet extends HttpServlet {
         String id = req.getParameter("id");
 
         if (id == null) {
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         } else if (id.isEmpty()) {
             req.setAttribute("error", errorIdMessage());
-            req.getRequestDispatcher("/admin/edituser.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/editUser.jsp").forward(req, resp);
         } else {
-
             String firstName = req.getParameter("firstName");
             String lastName = req.getParameter("lastName");
             String phoneNumber = req.getParameter("phoneNumber");
@@ -76,19 +78,5 @@ public class EditUserServlet extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
-    }
-
-    public static String errorIdMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "User id incorrect! Please try again.";
-        return html1 + errorData + html2;
-    }
-
-    public static String errorLoginMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "User login incorrect! Please try again.";
-        return html1 + errorData + html2;
     }
 }
