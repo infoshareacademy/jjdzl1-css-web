@@ -71,6 +71,21 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     }
 
     @Override
+    public User getUserByToken(String passwordTokenUUID) {
+        User user;
+        try {
+            Session session = getSession();
+            Query query = session.createQuery(myQuery.getUserByToken())
+                    .setParameter("passwordTokenUUID", passwordTokenUUID);
+            user = (User) query.getSingleResult();
+            commitTransaction(session);
+            return user;
+        } catch (NoResultException e) {
+        }
+        return null;
+    }
+
+    @Override
     public List<User> getUsersList() {
         Session session = getSession();
         List<User> usersList = session.createQuery(myQuery.getUserList()).getResultList();

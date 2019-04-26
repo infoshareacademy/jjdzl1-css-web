@@ -17,6 +17,8 @@ public interface UsersRepositoryDao {
 
     User getUserByEmail(String email);
 
+    User getUserByToken(String passwordTokenUUID);
+
     List getUsersList();
 
     List<User> searchUserByLoginOrEmail(String name);

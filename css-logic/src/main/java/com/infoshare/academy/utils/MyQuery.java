@@ -39,6 +39,10 @@ public class MyQuery {
         return "SELECT u FROM User u WHERE email=:email";
     }
 
+    public String getUserByToken() {
+        return "SELECT u FROM User u WHERE passwordTokenUUID=:passwordTokenUUID";
+    }
+
     public String getUserList() {
         return "SELECT u FROM User u ";
     }
