@@ -22,7 +22,7 @@
             Don't have an account? <a href="register" class="alert-link">Sign up here</a>
         </div>
             <div class="alert alert-primary" role="alert">
-                 <a href="forgetPasswordForm.jsp" class="alert-link"> Don't remember your password?</a>
+                 <a href="forgetPasswordForEmailForm.jsp" class="alert-link"> Don't remember your password?</a>
             </div>
     </div>
 </div>

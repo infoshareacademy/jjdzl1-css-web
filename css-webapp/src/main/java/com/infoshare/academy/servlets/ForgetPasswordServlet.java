@@ -55,7 +55,7 @@ public class ForgetPasswordServlet extends HttpServlet {
 
     private void RequestResponse(HttpServletRequest request, HttpServletResponse response, String errorMessage, String jspError) throws ServletException, IOException {
         request.setAttribute(errorMessage, jspError);
-        RequestDispatcher req = request.getRequestDispatcher("forgetPasswordForm.jsp");
+        RequestDispatcher req = request.getRequestDispatcher("forgetPasswordForEmailForm.jsp");
         req.forward(request, response);
     }
 

@@ -33,7 +33,7 @@
                     <jsp:include page="include/logged.jsp"></jsp:include>
                 </c:when>
                 <c:otherwise>
-                    <jsp:include page="include/forgetPasswordForm.jsp"></jsp:include>
+                    <jsp:include page="include/forgetPasswordForNewPasswordForm.jsp"></jsp:include>
                 </c:otherwise>
             </c:choose>
 

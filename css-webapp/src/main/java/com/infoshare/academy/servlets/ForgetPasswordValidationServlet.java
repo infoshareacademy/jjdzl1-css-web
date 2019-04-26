@@ -2,11 +2,8 @@ package com.infoshare.academy.servlets;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
-import javafx.animation.Animation;
-import jdk.net.SocketFlow;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.logging.Logger;
 
 @WebServlet("/forgetPasswordValidator")
@@ -40,6 +36,7 @@ public class ForgetPasswordValidationServlet extends HttpServlet {
             boolean isAfter = now.isAfter(dateTimeFromBase);
             if (!isAfter) {
                 LOGGER.info("Wpuść dalej");
+                req.getRequestDispatcher("forgetPasswordForNewPasswordForm.jsp").forward(req, resp);
             } else {
                 LOGGER.info("Odrzuć");
             }
