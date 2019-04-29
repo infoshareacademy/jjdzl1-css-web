@@ -15,7 +15,7 @@
                 <div class="form-group col-md-4">
                     <input type="text" name="model" class="form-control" placeholder="--MODEL--">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="input-group col-md-4">
                     <select id="inputState" class="form-control" name="fuel">
                         <option selected value="">--FUEL--</option>
                         <option value="PETROL">Petrol</option>
@@ -25,11 +25,11 @@
                         <option value="HYBRID">Hybrid</option>
                         <option value="ELECTRIC">Electric</option>
                     </select>
+                    <span class="input-group-btn mx-2">
+					    <button class="btn btn-primary" type="submit">Search</button>
+                        <input type="hidden" name="currentPage" value="1">
+                    </span>
                 </div>
-            </div>
-            <div class="text-center">
-                <button class="btn btn-primary" type="submit">Search</button>
-                <input type="hidden" name="currentPage" value="1">
             </div>
         </form>
     </div>
