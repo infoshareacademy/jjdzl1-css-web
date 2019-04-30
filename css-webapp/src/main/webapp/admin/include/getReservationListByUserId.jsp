@@ -15,7 +15,8 @@
             </div>
         </form>
         ${error}
-        <table class="table table-responsive table-sm table-striped">
+        <div class="table-responsive">
+        <table class="table table-sm table-striped">
             <thead>
             <tr>
                 <th scope="col">Photo</th>
@@ -32,19 +33,19 @@
             <tbody>
             <c:forEach var="reservation" items="${reservationListByUserId}">
                 <tr>
-                    <td style="vertical-align: middle;"><img src="../${reservation.car.imagePath}" height="100"
-                                                             width="150"></td>
-                    <td style="vertical-align: middle;">${reservation.reservation_id}</td>
-                    <td style="vertical-align: middle;">${reservation.user.id}</td>
-                    <td style="vertical-align: middle;">${reservation.user.login}</td>
-                    <td style="vertical-align: middle;">${reservation.car.id}</td>
-                    <td style="vertical-align: middle;">${reservation.car.make}</td>
-                    <td style="vertical-align: middle;">${reservation.car.model}</td>
-                    <td style="vertical-align: middle;">${reservation.startDate}</td>
-                    <td style="vertical-align: middle;">${reservation.endDate}</td>
+                    <td><img src="../${reservation.car.imagePath}" height="100" width="150"></td>
+                    <td>${reservation.reservation_id}</td>
+                    <td>${reservation.user.id}</td>
+                    <td>${reservation.user.login}</td>
+                    <td>${reservation.car.id}</td>
+                    <td>${reservation.car.make}</td>
+                    <td>${reservation.car.model}</td>
+                    <td>${reservation.startDate}</td>
+                    <td>${reservation.endDate}</td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
+        </div>
     </div>
 </div>

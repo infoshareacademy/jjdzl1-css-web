@@ -6,7 +6,7 @@ ${error}
 
 <c:if test="${reservations != null}">
     <div class="card border-primary my-3">
-        <h4 class="card-header">Edit reservation - ${reservations.reservation_id}</h4>
+        <h4 class="card-header">Reservation details - ${reservations.reservation_id}</h4>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6 input-group mb-2">

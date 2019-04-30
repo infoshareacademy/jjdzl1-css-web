@@ -17,8 +17,8 @@
 <div class="card border-primary my-3">
     <h4 class="card-header">User list</h4>
     <div class="card-body" align="center">
-
-        <table class="table table-responsive table-sm table-striped">
+        <div class="table-responsive">
+        <table class="table table-sm table-striped">
             <thead>
             <tr>
                 <th scope="col">Id</th>
@@ -73,6 +73,7 @@
             </c:forEach>
             </tbody>
         </table>
+        </div>
     </div>
 </div>
 

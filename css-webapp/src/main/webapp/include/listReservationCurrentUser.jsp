@@ -6,7 +6,8 @@
         <input type="hidden" name="currentPage" value="1">
         ${error}
         <c:if test="${reservationByUserId !=null}">
-            <table class="table table-responsive table-sm table-striped">
+            <div class="table-responsive">
+            <table class="table table-sm table-striped">
                 <thead>
                 <tr>
                     <th scope="col">Photo</th>
@@ -22,18 +23,19 @@
                 <tbody>
                 <c:forEach var="reservation" items="${reservationByUserId}">
                     <tr>
-                        <td style="vertical-align: middle;"><img src="${reservation.car.imagePath}" height="150" width="225"></td>
-                        <td style="vertical-align: middle;">${reservation.car.make}</td>
-                        <td style="vertical-align: middle;">${reservation.car.model}</td>
-                        <td style="vertical-align: middle;">${reservation.car.fuelSource}</td>
-                        <td style="vertical-align: middle;">${reservation.car.enginePower}</td>
-                        <td style="vertical-align: middle;">${reservation.car.transmission}</td>
-                        <td style="vertical-align: middle;">${reservation.startDate}</td>
-                        <td style="vertical-align: middle;">${reservation.endDate}</td>
+                        <td><img src="${reservation.car.imagePath}" height="150" width="225"></td>
+                        <td>${reservation.car.make}</td>
+                        <td>${reservation.car.model}</td>
+                        <td>${reservation.car.fuelSource}</td>
+                        <td>${reservation.car.enginePower}</td>
+                        <td>${reservation.car.transmission}</td>
+                        <td>${reservation.startDate}</td>
+                        <td>${reservation.endDate}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
+            </div>
         </c:if>
             <nav>
                 <ul class="pagination">
