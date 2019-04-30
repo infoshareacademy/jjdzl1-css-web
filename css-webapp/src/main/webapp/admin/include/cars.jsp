@@ -4,7 +4,8 @@
     <h4 class="card-header">Car list</h4>
     <div class="card-body" align="center">
         ${error}
-        <table class="table table-responsive table-sm table-striped">
+            <div class="table-responsive">
+        <table class="table table-sm table-striped">
             <thead>
             <tr>
                 <th scope="col">Photo</th>
@@ -25,9 +26,9 @@
             <tbody>
             <c:forEach var="car" items="${carList}">
                 <tr>
-                    <td style="vertical-align: middle;"><img src="../${car.imagePath}" height="100" width="150"></td>
-                    <td style="vertical-align: middle;">${car.id}</td>
-                    <td style="vertical-align: middle;">
+                    <td><img src="../${car.imagePath}" height="100" width="150"></td>
+                    <td>${car.id}</td>
+                    <td>
                         <c:choose>
                             <c:when test="${car.carType == 1}">
                                 Passenger
@@ -40,20 +41,21 @@
                             </c:otherwise>
                         </c:choose>
                     </td>
-                    <td style="vertical-align: middle;">${car.make}</td>
-                    <td style="vertical-align: middle;">${car.model}</td>
-                    <td style="vertical-align: middle;">${car.year}</td>
-                    <td style="vertical-align: middle;">${car.mileage}</td>
-                    <td style="vertical-align: middle;">${car.enginePower}</td>
-                    <td style="vertical-align: middle;">${car.fuelSource}</td>
-                    <td style="vertical-align: middle;">${car.transmission}</td>
-                    <td style="vertical-align: middle;">${car.bodyType}</td>
-                    <td style="vertical-align: middle;">${car.color}</td>
-                    <td style="vertical-align: middle;">${car.seats}</td>
+                    <td>${car.make}</td>
+                    <td>${car.model}</td>
+                    <td>${car.year}</td>
+                    <td>${car.mileage}</td>
+                    <td>${car.enginePower}</td>
+                    <td>${car.fuelSource}</td>
+                    <td>${car.transmission}</td>
+                    <td>${car.bodyType}</td>
+                    <td>${car.color}</td>
+                    <td>${car.seats}</td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
+            </div>
     </div>
 </div>
 

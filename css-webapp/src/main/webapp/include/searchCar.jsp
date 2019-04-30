@@ -38,7 +38,8 @@
     <div class="card border-primary my-3">
         <h4 class="card-header">Car list</h4>
         <div class="card-body" align="center">
-            <table class="table table-responsive table-sm table-striped">
+            <div class="table-responsive">
+            <table class="table table-sm table-striped">
                 <thead>
                 <tr>
                     <th scope="col">Photo</th>
@@ -53,16 +54,17 @@
                 <tbody>
                 <c:forEach var="car" items="${carsList}">
                 <tr>
-                    <td style="vertical-align: middle;"><img src="${car.imagePath}" height="150" width="225"></td>
-                    <td style="vertical-align: middle;">${car.make}</td>
-                    <td style="vertical-align: middle;">${car.model}</td>
-                    <td style="vertical-align: middle;">${car.year}</td>
-                    <td style="vertical-align: middle;">${car.enginePower}</td>
-                    <td style="vertical-align: middle;">${car.fuelSource}</td>
-                    <td style="vertical-align: middle;">${car.transmission}</td>
+                    <td><img src="${car.imagePath}" height="150" width="225"></td>
+                    <td>${car.make}</td>
+                    <td>${car.model}</td>
+                    <td>${car.year}</td>
+                    <td>${car.enginePower}</td>
+                    <td>${car.fuelSource}</td>
+                    <td>${car.transmission}</td>
                 </tr>
                 </c:forEach>
             </table>
+            </div>
         </div>
     </div>
 </c:if>

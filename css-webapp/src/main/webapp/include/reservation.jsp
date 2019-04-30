@@ -31,6 +31,7 @@
     <div class="card border-primary my-3">
         <h4 class="card-header">Available cars</h4>
         <div class="card-body" align="center">
+            <div class="table-responsive">
             <table class="table table-responsive table-sm table-striped">
                 <thead>
                 <tr>
@@ -47,14 +48,14 @@
                 <tbody>
                 <c:forEach var="car" items="${carListAvailableCarLimit}">
                 <tr>
-                    <td class="text-center align-middle"><img src="${car.imagePath}" height="150" width="225"></td>
-                    <td class="text-center align-middle">${car.make}</td>
-                    <td class="text-center align-middle">${car.model}</td>
-                    <td class="text-center align-middle">${car.year}</td>
-                    <td class="text-center align-middle">${car.fuelSource}</td>
-                    <td class="text-center align-middle">${car.enginePower}</td>
-                    <td class="text-center align-middle">${car.transmission}</td>
-                    <td class="text-center align-middle">
+                    <td><img src="${car.imagePath}" height="150" width="225"></td>
+                    <td>${car.make}</td>
+                    <td>${car.model}</td>
+                    <td>${car.year}</td>
+                    <td>${car.fuelSource}</td>
+                    <td>${car.enginePower}</td>
+                    <td>${car.transmission}</td>
+                    <td>
                         <form method="post" action="reservation">
                             <button class="btn btn-success" type="submit">Add reservation</button>
                             <input type="hidden" name="startDate" value="${start}"/>
@@ -65,6 +66,7 @@
                 </tr>
                 </c:forEach>
             </table>
+            </div>
         </div>
     </div>
 </c:if>
