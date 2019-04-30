@@ -4,8 +4,9 @@
 <div class="card border-primary">
     <h4 class="card-header">Change your password</h4>
     <div class="card-body">
-        ${error}
-        <form method="post" action="changepassword">
+        ${incorrectTypeOfPassword}
+        ${notTheSamePassword}
+        <form method="post" action="resetPassword">
             <div class="form-group px-3">
                 <label for="inputpassword">New password</label>
                 <p class="card-text"><small class="text-muted">Password requires at least 8 characters with one digit, big letter and special character</small></p>

@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @WebServlet("/forget-password")
-
 public class ForgetPasswordServlet extends HttpServlet {
 
     @EJB
@@ -63,6 +62,6 @@ public class ForgetPasswordServlet extends HttpServlet {
         UUIDGeneratorForUser generator = new UUIDGeneratorForUser();
         user.setPasswordTokenUUID(generator.getGeneratedNewUUIDForForgotPasswordProcess());
         LocalDateTime now = LocalDateTime.now();
-        user.setPasswordTokenDateTime(now.plus(1, ChronoUnit.MINUTES));
+        user.setPasswordTokenDateTime(now.plus(20, ChronoUnit.MINUTES));
     }
 }

@@ -5,6 +5,8 @@
         ${error}
         ${emptyData}
         ${activationError}
+        ${expired}
+        ${changePassword}
         <form class="form-signin" action="login" method="post">
             <h1 class="h3 mb-3 font-weight-normal">Please log in here</h1>
             <div class="form-group">
