@@ -2,24 +2,21 @@ package com.infoshare.academy.utils;
 
 public class ForgotPasswordMessages {
 
+    private static final String startDangerDiv = "<div class=\"alert alert-danger\" role=\"alert\">";
+    private static final String endDiv = "</div>";
+
     public static String emailIncorrectMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "User with this email doesn't exist! Try again!";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 
-    public static String emailWithTockenInfoSend() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
+    public static String emailWithTokenInfoSend() {
         String errorData = "We send you an email with link to change your password! Link is valid for 20 minutes since now.";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String changedPassword() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "Your password has been sucessfully changed!";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 }

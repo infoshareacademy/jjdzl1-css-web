@@ -38,7 +38,7 @@ public class ForgetPasswordServlet extends HttpServlet {
             setExpireTimeAndUIDDTokenForUserInForgotPasswordProcess(user);
             changePasswordTokenContent(user);
             sendMail(user);
-            RequestResponse(request, response, "MailWithTokenSend", ForgotPasswordMessages.emailWithTockenInfoSend());
+            RequestResponse(request, response, "MailWithTokenSend", ForgotPasswordMessages.emailWithTokenInfoSend());
         }
     }
 
