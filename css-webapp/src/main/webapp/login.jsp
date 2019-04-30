@@ -5,8 +5,9 @@
 
 <!-- Head -->
 <jsp:include page="include/head.jsp">
-    <jsp:param name="title" value="Log in"></jsp:param>
+    <jsp:param name="title" value="Sign in"></jsp:param>
 </jsp:include>
+<link href="css/signin.css" rel="stylesheet">
 
 <body>
 <wrapper class="d-flex flex-column">
