@@ -18,9 +18,7 @@ import java.util.logging.Logger;
 
 
 @WebServlet("/resetPassword")
-public class ResetPassword extends HttpServlet {
-
-    private Logger LOGGER = Logger.getLogger(ResetPassword.class.getName());
+public class ResetPasswordServlet extends HttpServlet {
 
     @EJB
     private UsersRepositoryDao usersDao;
@@ -29,24 +27,20 @@ public class ResetPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        resp.setContentType("text/html");
+        resp.setStatus(HttpServletResponse.SC_ACCEPTED);
+
         String newPassword = req.getParameter("password1");
         String confirmPassword = req.getParameter("password2");
 
-        User user = (User) req.getSession().getAttribute("USER");
-        LOGGER.info("User: " + user);
+        User user = getUserFromAttribute(req);
         Integer id = user.getId();
-        LOGGER.info("ID: " + id);
 
-        LOGGER.info("Pierwsze hasło: " + newPassword);
-        LOGGER.info("Drugie hasło: " + confirmPassword);
         Boolean isPasswordCorrect = new UserValidator().isPasswordCorrect(newPassword);
         Boolean isTheSame = newPassword.equals(confirmPassword);
-        LOGGER.info("Czy sa takie same? : " + isTheSame);
-        LOGGER.info("czy hasała są prawidłowe? : " + isPasswordCorrect);
+
         if(isTheSame && isPasswordCorrect){
-            LOGGER.info("Ten user: " + user);
-            String hashedPassword = UserPasswordUtils.hash(newPassword, PasswordHashAlgorithm.PBKDF2);
-            usersDao.updateUserPassword(id,hashedPassword);
+            hashAndUpdatePassword(newPassword, id);
             RequestResponseLogin(req,resp,"changePassword", ForgotPasswordMessages.changedPassword());
 
         }
@@ -56,6 +50,15 @@ public class ResetPassword extends HttpServlet {
         }else{
             RequestResponse(req, resp, "notTheSamePassword", RegistrationMessages.passwordNotMatchMessage());
         }
+    }
+
+    private void hashAndUpdatePassword(String newPassword, Integer id) {
+        String hashedPassword = UserPasswordUtils.hash(newPassword, PasswordHashAlgorithm.PBKDF2);
+        usersDao.updateUserPassword(id,hashedPassword);
+    }
+
+    private User getUserFromAttribute(HttpServletRequest req) {
+        return (User) req.getSession().getAttribute("USER");
     }
 
     private void RequestResponse(HttpServletRequest request, HttpServletResponse response, String errorMessage, String jspError) throws ServletException, IOException {

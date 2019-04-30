@@ -31,25 +31,30 @@ public class ForgetPasswordServlet extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_ACCEPTED);
 
         String email = request.getParameter("email");
-        System.out.println(email);
         User user = dao.getUserByEmail(email);
-        System.out.println(user);
         if (user == null) {
             RequestResponse(request, response, "IncorrectEmail", ForgotPasswordMessages.emailIncorrectMessage());
         } else {
             setExpireTimeAndUIDDTokenForUserInForgotPasswordProcess(user);
-            System.out.println(user);
-            dao.updateChangePasswordTokenData(user.getId(), user.getPasswordTokenUUID(), user.getPasswordTokenDateTime());
-            MailSend mail = new MailSend();
-            new Thread(() -> {
-                try {
-                    mail.sentEmailForForgotPasswordProcess(user.getEmail(), user.getPasswordTokenUUID());
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
-            }).start();
+            changePasswordTokenContent(user);
+            sendMail(user);
             RequestResponse(request, response, "MailWithTokenSend", ForgotPasswordMessages.emailWithTockenInfoSend());
         }
+    }
+
+    private void changePasswordTokenContent(User user) {
+        dao.updateChangePasswordTokenData(user.getId(), user.getPasswordTokenUUID(), user.getPasswordTokenDateTime());
+    }
+
+    private void sendMail(User user) {
+        MailSend mail = new MailSend();
+        new Thread(() -> {
+            try {
+                mail.sentEmailForForgotPasswordProcess(user.getEmail(), user.getPasswordTokenUUID());
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     private void RequestResponse(HttpServletRequest request, HttpServletResponse response, String errorMessage, String jspError) throws ServletException, IOException {

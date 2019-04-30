@@ -31,10 +31,7 @@ public class ForgetPasswordValidationServlet extends HttpServlet {
         String tokenFromRequest = req.getParameter("tokenUUID");
 
         LocalDateTime now = LocalDateTime.now();
-        User userFromDatabaseDeliveredByToken = dao.getUserByToken(tokenFromRequest);
-        LOGGER.info("User: " + userFromDatabaseDeliveredByToken);
-        req.getSession().setAttribute("USER",dao.getUserByToken(tokenFromRequest));
-        LOGGER.info("Czy null? : " + userFromDatabaseDeliveredByToken);
+        User userFromDatabaseDeliveredByToken = getUserAndCreateAttribute(req, tokenFromRequest);
         if (userFromDatabaseDeliveredByToken == null) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         } else {
@@ -47,6 +44,13 @@ public class ForgetPasswordValidationServlet extends HttpServlet {
                 RequestResponse(req,resp,"expired",UserPasswordUtils.expiredToken());
             }
         }
+    }
+
+    private User getUserAndCreateAttribute(HttpServletRequest req, String tokenFromRequest) {
+        User userFromDatabaseDeliveredByToken = dao.getUserByToken(tokenFromRequest);
+        LOGGER.info("User: " + userFromDatabaseDeliveredByToken);
+        req.getSession().setAttribute("USER",dao.getUserByToken(tokenFromRequest));
+        return userFromDatabaseDeliveredByToken;
     }
 
     private void RequestResponse(HttpServletRequest request, HttpServletResponse response, String errorMessage, String jspError) throws ServletException, IOException {
