@@ -23,10 +23,11 @@
 </div>
 
 <c:if test="${reservations != null}">
-<div class="card border-primary my-3">
-    <h4 class="card-header">Reservation list</h4>
-    <div class="card-body" align="center">
-            <table class="table table-responsive table-sm table-striped">
+    <div class="card border-primary my-3">
+        <h4 class="card-header">Reservation list</h4>
+        <div class="card-body" align="center">
+            <div class="table-responsive">
+            <table class="table table-sm table-striped">
                 <thead>
                 <tr>
                     <th scope="col">Photo</th>
@@ -44,17 +45,16 @@
                 <tbody>
                 <c:forEach var="reservation" items="${reservations}">
                     <tr>
-                        <td style="vertical-align: middle;"><img src="../${reservation.car.imagePath}" height="100"
-                                                                 width="150"></td>
-                        <td style="vertical-align: middle;">${reservation.reservation_id}</td>
-                        <td style="vertical-align: middle;">${reservation.user.id}</td>
-                        <td style="vertical-align: middle;">${reservation.user.login}</td>
-                        <td style="vertical-align: middle;">${reservation.car.id}</td>
-                        <td style="vertical-align: middle;">${reservation.car.make}</td>
-                        <td style="vertical-align: middle;">${reservation.car.model}</td>
-                        <td style="vertical-align: middle;">${reservation.startDate}</td>
-                        <td style="vertical-align: middle;">${reservation.endDate}</td>
-                        <td style="vertical-align: middle;">
+                        <td><img src="../${reservation.car.imagePath}" height="100" width="150"></td>
+                        <td>${reservation.reservation_id}</td>
+                        <td>${reservation.user.id}</td>
+                        <td>${reservation.user.login}</td>
+                        <td>${reservation.car.id}</td>
+                        <td>${reservation.car.make}</td>
+                        <td>${reservation.car.model}</td>
+                        <td>${reservation.startDate}</td>
+                        <td>${reservation.endDate}</td>
+                        <td>
                             <form method="post" action="deleteReservation">
                                 <div class="row">
                                     <div class="col-md-12 input-group mb-2">
@@ -72,15 +72,17 @@
                 </c:forEach>
                 </tbody>
             </table>
+            </div>
+        </div>
     </div>
-</div>
 
-<input type="hidden" name="currentPage" value="1">
-<div class="my-3" align="center">
+    <input type="hidden" name="currentPage" value="1">
+    <div class="my-3" align="center">
         <nav>
             <ul class="pagination">
                 <c:if test="${currentPage > 1}">
-                    <li class="page-item"><a class="page-link" href="deleteReservation?login=${login}&name=${name}&currentPage=${currentPage-1}">Previous</a>
+                    <li class="page-item"><a class="page-link"
+                                             href="deleteReservation?login=${login}&name=${name}&currentPage=${currentPage-1}">Previous</a>
                     </li>
                 </c:if>
 
@@ -92,7 +94,8 @@
                             </li>
                         </c:when>
                         <c:otherwise>
-                            <li class="page-item"><a class="page-link" href="deleteReservation?login=${login}&name=${name}&currentPage=${i}">${i}</a>
+                            <li class="page-item"><a class="page-link"
+                                                     href="deleteReservation?login=${login}&name=${name}&currentPage=${i}">${i}</a>
                             </li>
                         </c:otherwise>
                     </c:choose>
@@ -106,5 +109,5 @@
             </ul>
         </nav>
     </div>
-</div>
+    </div>
 </c:if>

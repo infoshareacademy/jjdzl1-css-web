@@ -1,6 +1,9 @@
 package com.infoshare.academy.domain;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -22,8 +25,10 @@ public class Reservation implements Serializable {
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
+    @FutureOrPresent
     @Column(name = "start_date")
     private LocalDate startDate;
+    @Future
     @Column(name = "end_date")
     private LocalDate endDate;
 

@@ -36,6 +36,12 @@
     <script src="../vendor/scripts/remcar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script>feather.replace()</script>
+    <script>
+        $('#image').on('change',function(){
+            var fileName = $(this).val();
+            $(this).next('.custom-file-label').html(fileName);
+        })
+    </script>
 
 </wrapper>
 </body>

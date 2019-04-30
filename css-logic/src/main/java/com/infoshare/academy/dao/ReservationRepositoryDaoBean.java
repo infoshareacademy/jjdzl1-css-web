@@ -30,6 +30,14 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     }
 
     @Override
+    public List<Reservation> list() {
+        Session session=getSession();
+        List<Reservation> list=session.createQuery("SELECT r FROM Reservation r").getResultList();
+        commitTransaction(session);
+        return list;
+    }
+
+    @Override
     public Integer listCount(String login, String name) {
         Session session = getSession();
         List<Reservation> reservationList = session.createQuery(myQuery.getReservationList(login, name))
@@ -70,7 +78,7 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     }
 
     @Override
-    public List<Reservation> reservationListByUserIdLimit(Integer id, int currentPage) {
+    public List<Reservation> reservationListByUserIdLimit(Integer id, int currentPage,int pageSize) {
         Session session = getSession();
         Query listReservation = session.createQuery(myQuery.getReservation(id));
         listReservation.setFirstResult(pageSize * (currentPage - 1));
@@ -118,10 +126,10 @@ public class ReservationRepositoryDaoBean implements ReservationRepositoryDao {
     }
 
     @Override
-    public List<Car> getCarListAvailableCarLimit(LocalDate startDate, LocalDate endDate, int i) {
+    public List<Car> getCarListAvailableCarLimit(LocalDate startDate, LocalDate endDate, int currentPage,int pageSize) {
         Session session = getSession();
         Query carList = session.createQuery(myQuery.getAvailableCar(startDate, endDate));
-        carList.setFirstResult(pageSize * (i - 1));
+        carList.setFirstResult(pageSize * (currentPage - 1));
         carList.setMaxResults(pageSize);
         List<Car> carListAvailableCarLimit = carList.getResultList();
         commitTransaction(session);

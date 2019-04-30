@@ -3,8 +3,9 @@
 <div class="card border-primary">
     <h4 class="card-header">Add new car</h4>
     <div class="card-body">
+        ${error}
 
-        <form class="needs-validation"  action="addCar" method="post" id="newcar" enctype="multipart/form-data">
+        <form class="needs-validation" action="addCar" method="post" id="newcar" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="col-form-label mb-2">Car type</label>
                 <div class="btn-group btn-outline-toggle" data-toggle="buttons">
@@ -37,13 +38,15 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Year</div>
                     </div>
-                    <input type="number" class="form-control" name="year" id="year" placeholder="Year" min="1950" max="2100" required>
+                    <input type="number" class="form-control" name="year" id="year" placeholder="Year" min="1950"
+                           max="2100" required>
                 </div>
                 <div class="col-md-6 input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Mileage (km)</div>
                     </div>
-                    <input type="number" class="form-control" name="mileage" id="mileage" placeholder="Mileage" min="0" max="999999" required>
+                    <input type="number" class="form-control" name="mileage" id="mileage" placeholder="Mileage" min="0"
+                           max="999999" required>
                 </div>
             </div>
 
@@ -52,13 +55,15 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Engine power (hp)</div>
                     </div>
-                    <input type="number" class="form-control" name="enginePower" id="enginePower" placeholder="Engine power" min="0" max="2000" required>
+                    <input type="number" class="form-control" name="enginePower" id="enginePower"
+                           placeholder="Engine power" min="0" max="2000" required>
                 </div>
                 <div class="col-md-6 input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Seats number</div>
                     </div>
-                    <input type="number" class="form-control" name="seats" id="seats" placeholder="Seats number" min="0" max="100" required>
+                    <input type="number" class="form-control" name="seats" id="seats" placeholder="Seats number" min="0"
+                           max="100" required>
                 </div>
             </div>
 
@@ -124,19 +129,17 @@
                         <option value="OTHER">Other</option>
                     </select>
                 </div>
-                <div class="col-md-6 input-group mb-2">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">Image</div>
-                    </div>
-                    <input type="file" class="form-control" name="image" id="image" placeholder="Image">
+                <div class="col-md-5 mb-2 mx-3">
+                    <input type="file" class="custom-file-input" name="image" id="image" accept="image/*">
+                    <label class="custom-file-label" for="image">Choose image file...</label>
                 </div>
-
             </div>
             <div class="mb-3">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Add car</button>
             </div>
             <div class="text-center">
-                <button class="btn btn-outline-primary" type="reset" onclick="window.localStorage.clear();">Clear form</button>
+                <button class="btn btn-outline-primary" type="reset" onclick="window.localStorage.clear();">Clear form
+                </button>
             </div>
         </form>
 

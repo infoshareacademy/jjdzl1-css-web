@@ -2,117 +2,87 @@ package com.infoshare.academy.utils;
 
 public class ReservationMessages {
 
+    private static final String startDangerDiv = "<div class=\"alert alert-danger\" role=\"alert\">";
+    private static final String startSuccessDiv = "<div class=\"alert alert-success\" role=\"alert\">";
+    private static final String endDiv = "</div>";
+
     public static String errorEmptyListReservation() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = " List of reservations is empty.";
-        return html1 + errorData + html2;
+        String errorData = "List of reservations is empty.";
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorUserHaveNoReservation() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = " User have no reservation.";
-        return html1 + errorData + html2;
+        String errorData = "User have no reservation.";
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorNoReservationToRm() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "No reservation to delete !!! Please try again.";
-        return html1 + errorData + html2;
+        String errorData = "No reservation to delete! Please try again.";
+        return startDangerDiv + errorData + endDiv;
     }
 
-
     public static String errorMessage() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "User or reservation id is incorrect! Please try again.";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorEmptyReservationList() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "User has no reservation.";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorIncorectIdReservation() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "You want to delete someone's reservation.";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorUserDoesNotHaveReser() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "User does't have such a reservation.";
-        return html1 + errorData + html2;
+        String errorData = "User doesn't have such reservation.";
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorEndGreaterThanStart() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "The ending date must be greater than or equal to the starting date.";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorStartGreaterNow() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "The start date can not be passed.";
-        return html1 + errorData + html2;
+        String errorData = "The start date can't be passed.";
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorIncorrectIdCar() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "You have selected an unavailable car, select an id from the list.";
-        return html1 + errorData + html2;
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String successReservationRm() {
-        String html1 = "<div class=\"alert alert-success\" role=\"alert\">";
-        String html2 = "</div>";
         String errorData = "Success, reservation removed from the list.";
-        return html1 + errorData + html2;
+        return startSuccessDiv + errorData + endDiv;
     }
 
     public static String successReservationAdd() {
-        String html1 = "<div class=\"alert alert-success\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "Success, reservation add to the list.";
-        return html1 + errorData + html2;
-
-
+        String errorData = "Success, reservation added to the list.";
+        return startSuccessDiv + errorData + endDiv;
     }
 
     public static String errorUserDoesntExist() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = " The user doesn't exist.";
-        return html1 + errorData + html2;
+        String errorData = "The user doesn't exist.";
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorCarDoesntExist() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = " The car doesn't exist.";
-        return html1 + errorData + html2;
+        String errorData = "The car doesn't exist.";
+        return startDangerDiv + errorData + endDiv;
     }
 
     public static String errorIncorrectDate() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = "The entered date is incorrect ! Please try again.";
-        return html1 + errorData + html2;
+        String errorData = "The entered date is incorrect! Please try again.";
+        return startDangerDiv + errorData + endDiv;
     }
+
     public static String errorReservationDoesntExist() {
-        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
-        String html2 = "</div>";
-        String errorData = " The reservation doesn't exist.";
-        return html1 + errorData + html2;
+        String errorData = "The reservation doesn't exist.";
+        return startDangerDiv + errorData + endDiv;
     }
 }

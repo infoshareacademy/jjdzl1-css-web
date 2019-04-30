@@ -39,5 +39,9 @@ public interface UsersRepositoryDao {
 
     void updateIsUserAccountActive(Integer id, Boolean isActive);
 
+    int countUsers();
+
+    List<User> getUsersListPaged(int currentPage, int pageSize);
+
     void updateChangePasswordTokenData(Integer id, String passwordTokenUIDD, LocalDateTime expireDateTimeToken);
 }

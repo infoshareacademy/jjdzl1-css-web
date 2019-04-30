@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="row my-4">
-    <div class="col-md-6 offset-3 text-center">
+<div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         ${error}
         ${emptyData}
         ${activationError}

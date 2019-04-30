@@ -7,7 +7,8 @@
         ${error}
         ${emptyData}
 
-        <table class="table table-responsive table-sm table-striped">
+        <div class="table-responsive">
+        <table class="table table-sm table-striped">
             <thead>
             <tr>
                 <th scope="col">Photo</th>
@@ -22,21 +23,21 @@
             <tbody>
             <c:forEach var="car" items="${carExampleList}">
             <tr>
-                <td style="text-align: center; vertical-align: middle;"><img src="${car.imagePath}" height=75 width=110></td>
-                <td style="text-align: center; vertical-align: middle;">${car.make}</td>
-                <td style="text-align: center; vertical-align: middle;">${car.model}</td>
-                <td style="text-align: center; vertical-align: middle;">${car.year}</td>
-                <td style="text-align: center; vertical-align: middle;">${car.fuelSource}</td>
-                <td style="text-align: center; vertical-align: middle;">${car.enginePower}</td>
-                <td style="text-align: center; vertical-align: middle;">${car.transmission}</td>
+                <td><img src="${car.imagePath}" height="75" width="110"></td>
+                <td>${car.make}</td>
+                <td>${car.model}</td>
+                <td>${car.year}</td>
+                <td>${car.fuelSource}</td>
+                <td>${car.enginePower}</td>
+                <td>${car.transmission}</td>
             </tr>
             </c:forEach>
             </tbody>
         </table>
+        <div>
         <br>
         <div class="alert alert-primary" role="alert">
             Do you want to reserve one of those cars? <a href="login" class="alert-link">Log in here</a>
         </div>
-
     </div>
 </div>

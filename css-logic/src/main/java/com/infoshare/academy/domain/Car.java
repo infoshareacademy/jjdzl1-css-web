@@ -32,8 +32,6 @@ public class Car implements Serializable {
     @Column(name = "engine_power")
     private Integer enginePower;
 
-
-
     @Enumerated(EnumType.STRING)
     @Column(name = "fuel_source")
     private FuelSourceEnum fuelSource;
@@ -61,7 +59,6 @@ public class Car implements Serializable {
     private Integer capacity;
     @Column(name = "cargo_space")
     private Integer cargoSpace;
-
 
     @OneToMany(mappedBy = "car")
     @JsonbTransient
