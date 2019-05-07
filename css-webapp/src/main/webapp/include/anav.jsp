@@ -28,7 +28,7 @@
                         <a class="nav-link" href="${pageContext.request.contextPath}/pricing.jsp">Pricing</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/contact.jsp">Contact</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link text-warning" href="${pageContext.request.contextPath}/logout">Sign out</a>
