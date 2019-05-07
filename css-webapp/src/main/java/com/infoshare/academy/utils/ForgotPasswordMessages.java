@@ -16,7 +16,7 @@ public class ForgotPasswordMessages {
     }
 
     public static String changedPassword() {
-        String errorData = "Your password has been sucessfully changed!";
+        String errorData = "Your password has been successfully changed!";
         return startDangerDiv + errorData + endDiv;
     }
 }
