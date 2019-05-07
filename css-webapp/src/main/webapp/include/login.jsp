@@ -5,6 +5,8 @@
         ${error}
         ${emptyData}
         ${activationError}
+        ${expired}
+        ${changePassword}
         <div class="card card-signin my-3">
             <div class="card-body">
                 <h5 class="card-title text-center">Sign In</h5>
@@ -22,6 +24,9 @@
             </div>
             <div class="alert alert-info mx-3" role="alert">
                 Don't have an account? <a href="register" class="alert-link">Sign up here</a>
+            </div>
+            <div class="alert alert-info mx-3" role="alert">
+                <a href="forgetPasswordForEmailForm.jsp" class="alert-link"> Don't remember your password?</a>
             </div>
         </div>
     </div>

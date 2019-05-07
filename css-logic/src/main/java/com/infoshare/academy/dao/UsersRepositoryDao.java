@@ -4,6 +4,7 @@ import com.infoshare.academy.domain.User;
 
 import javax.mail.MessagingException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface UsersRepositoryDao {
@@ -15,6 +16,8 @@ public interface UsersRepositoryDao {
     User getUserByLogin(String login);
 
     User getUserByEmail(String email);
+
+    User getUserByToken(String passwordTokenUUID);
 
     List getUsersList();
 
@@ -32,9 +35,13 @@ public interface UsersRepositoryDao {
 
     void sendEmailToNewUser(String login, String email, String UUID) throws MessagingException;
 
+    void sendEmailToUserWithForgotPasswordToken(String email, String UUID);
+
     void updateIsUserAccountActive(Integer id, Boolean isActive);
 
     int countUsers();
 
     List<User> getUsersListPaged(int currentPage, int pageSize);
+
+    void updateChangePasswordTokenData(Integer id, String passwordTokenUIDD, LocalDateTime expireDateTimeToken);
 }

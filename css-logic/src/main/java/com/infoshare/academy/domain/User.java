@@ -4,6 +4,7 @@ import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,10 @@ public class User implements Serializable {
     private String authorizationNumber;
     @Column(name = "is_account_active")
     private Boolean isAccountActive;
+    @Column(name = "password_token_UUID")
+    private String passwordTokenUUID;
+    @Column(name = "password_token_dateTime")
+    private LocalDateTime passwordTokenDateTime;
 
     @OneToMany(mappedBy = "user")
     @JsonbTransient
@@ -88,6 +93,25 @@ public class User implements Serializable {
         this.city = city;
         this.authorizationNumber = authorizationNumber;
         this.isAccountActive = isAccountActive;
+    }
+
+    public User(Integer userType, String login, String password, String email, Long phoneNumber, String firstName, String lastName, LocalDate birthDate, String streetAddress, String postalCode, String city, String authorizationNumber, Boolean isAccountActive, String passwordTokenUUID, LocalDateTime passwordTokenDateTime, List<Reservation> reservations) {
+        this.userType = userType;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.streetAddress = streetAddress;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.authorizationNumber = authorizationNumber;
+        this.isAccountActive = isAccountActive;
+        this.passwordTokenUUID = passwordTokenUUID;
+        this.passwordTokenDateTime = passwordTokenDateTime;
+        this.reservations = reservations;
     }
 
     public Integer getId() {
@@ -158,9 +182,18 @@ public class User implements Serializable {
         return isAccountActive;
     }
 
+    public String getPasswordTokenUUID() {
+        return passwordTokenUUID;
+    }
+
+    public LocalDateTime getPasswordTokenDateTime() {
+        return passwordTokenDateTime;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
+
     public void setLogin(String login) {
         this.login = login;
     }
@@ -219,6 +252,14 @@ public class User implements Serializable {
 
     public void setAccountActive(Boolean accountActive) {
         this.isAccountActive = accountActive;
+    }
+
+    public void setPasswordTokenUUID(String passwordTokenUUID) {
+        this.passwordTokenUUID = passwordTokenUUID;
+    }
+
+    public void setPasswordTokenDateTime(LocalDateTime passwordTokenDateTime) {
+        this.passwordTokenDateTime = passwordTokenDateTime;
     }
 
     @Override

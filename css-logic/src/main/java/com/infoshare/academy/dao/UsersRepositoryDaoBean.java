@@ -10,6 +10,7 @@ import javax.mail.MessagingException;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.infoshare.academy.utils.HibernateConf.getSessionFactory;
@@ -61,6 +62,21 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
             Session session = getSession();
             Query query = session.createQuery(myQuery.getUserByEmail())
                     .setParameter("email", email);
+            user = (User) query.getSingleResult();
+            commitTransaction(session);
+            return user;
+        } catch (NoResultException e) {
+        }
+        return null;
+    }
+
+    @Override
+    public User getUserByToken(String passwordTokenUUID) {
+        User user;
+        try {
+            Session session = getSession();
+            Query query = session.createQuery(myQuery.getUserByToken())
+                    .setParameter("passwordTokenUUID", passwordTokenUUID);
             user = (User) query.getSingleResult();
             commitTransaction(session);
             return user;
@@ -141,7 +157,12 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public void sendEmailToNewUser(String login, String email, String UUID) throws MessagingException {
         MailSend mail = new MailSend();
-        mail.sentEmail(login, email, UUID);
+        mail.sentEmailForRegistrationProcess(login, email, UUID);
+    }
+
+    @Override
+    public void sendEmailToUserWithForgotPasswordToken(String email, String UUID){
+
     }
 
     @Override
@@ -150,6 +171,17 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
         Query query = session.createQuery(myQuery.updateIsUserAccountActive())
                 .setParameter("id", id)
                 .setParameter("isAccountActive", isAccountActive);
+        query.executeUpdate();
+        commitTransaction(session);
+    }
+
+    @Override
+    public void updateChangePasswordTokenData(Integer id, String passwordTokenUIDD, LocalDateTime passwordTokenDateTime) {
+        Session session = getSession();
+        Query query = session.createQuery(myQuery.updateTokenData())
+                .setParameter("id", id)
+                .setParameter("passwordTokenUUID", passwordTokenUIDD)
+                .setParameter("passwordTokenDateTime", passwordTokenDateTime);
         query.executeUpdate();
         commitTransaction(session);
     }

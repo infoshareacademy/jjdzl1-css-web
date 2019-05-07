@@ -31,4 +31,13 @@ public class UserPasswordUtils {
 
         }
     }
+
+    public static String expiredToken() {
+        String html1 = "<div class=\"alert alert-danger\" role=\"alert\">";
+        String html2 = "</div>";
+        String errorData = "Validation token has expired!";//TODO napisać prawidłowy komunikat
+        return html1 + errorData + html2;
+    }
+
+
 }

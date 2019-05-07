@@ -42,6 +42,10 @@ public class MyQuery {
         return "SELECT u FROM User u WHERE email=:email";
     }
 
+    public String getUserByToken() {
+        return "SELECT u FROM User u WHERE passwordTokenUUID=:passwordTokenUUID";
+    }
+
     public String getUserList() {
         return "SELECT u FROM User u ";
     }
@@ -72,5 +76,9 @@ public class MyQuery {
 
     public String countUsers() {
         return "SELECT COUNT(u) FROM User u";
+    }
+
+    public String updateTokenData(){
+        return "UPDATE User u SET u.passwordTokenUUID=:passwordTokenUUID, u.passwordTokenDateTime=:passwordTokenDateTime WHERE u.id=:id";
     }
 }

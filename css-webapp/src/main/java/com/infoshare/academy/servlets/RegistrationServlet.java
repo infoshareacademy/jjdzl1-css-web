@@ -108,7 +108,7 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     private void setUUIDAndActivationStatusForNewUser(User user) {
-        UUIDGeneratorForNewUser generator = new UUIDGeneratorForNewUser();
+        UUIDGeneratorForUser generator = new UUIDGeneratorForUser();
         user.setAuthorizationNumber(generator.getGeneratedNewUUIDForNewUser());
         user.setAccountActive(false);
     }
