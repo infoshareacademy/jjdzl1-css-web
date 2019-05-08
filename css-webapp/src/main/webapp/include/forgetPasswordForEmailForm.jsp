@@ -8,14 +8,17 @@
             ${MailWithTokenSend}
                 <form class="needs-validation" action="forget-password" method="post">
                     <h5 class="text-center">Confirm your identity to reset password</h5>
-                    <div class="form-group px-3">
+                    <div class="form-group">
                         <label for="inputemail">Email</label>
                         <input type="email" name="email" class="form-control" id="inputemail" placeholder="you@example.com" required>
                     </div>
-                    <div class="form-group px-3 text-center">
+                    <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary">Continue</button>
                     </div>
                 </form>
+                <div class="text-center">
+                    <button class="btn btn-outline-primary" type="button" onclick="history.back();">Previous page</button>
+                </div>
         </div>
     </div>
 </div>

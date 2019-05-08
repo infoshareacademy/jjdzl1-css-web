@@ -3,6 +3,7 @@ package com.infoshare.academy.utils;
 public class RegistrationMessages {
 
     private static final String startDangerDiv = "<div class=\"alert alert-danger\" role=\"alert\">";
+    private static final String startSuccessDiv = "<div class=\"alert alert-success\" role=\"alert\">";
     private static final String endDiv = "</div>";
 
     public static String anonymousUser() {
@@ -67,7 +68,7 @@ public class RegistrationMessages {
         return startDangerDiv + errorData + endDiv;
     }
 
-    public static String ActivatedMessage() {
+    public static String activatedMessage() {
         String errorData = "Activated!";
         return startDangerDiv + errorData + endDiv;
     }
@@ -95,5 +96,10 @@ public class RegistrationMessages {
     public static String errorIdMessage() {
         String errorData = "User id incorrect! Please try again.";
         return startDangerDiv + errorData + endDiv;
+    }
+
+    public static String messageSent() {
+        String errorData = "Message has been successfully sent!";
+        return startSuccessDiv + errorData + endDiv;
     }
 }

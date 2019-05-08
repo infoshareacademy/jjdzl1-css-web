@@ -4,10 +4,13 @@
     <div class="container">
         <h1 class="jumbotron-heading text-center">CarSharingSystem</h1>
         <h4>Contact us</h4>
+        ${messageSent}
         <form class="needs-validation" action="contact" method="post" id="contact">
             <div class="form-group">
                 <label for="inputemail">Your email</label>
-                <input type="email" class="form-control" name="from" id="inputemail" placeholder="you@example.com" required>
+                <input type="email" class="form-control" name="from" id="inputemail"
+                <c:if test="${sessionScope.username != null}"> value="${currentUser.email}"</c:if>
+                placeholder="you@example.com" required>
             </div>
             <div class="form-group">
                 <label for="inputsubject">Subject</label>
