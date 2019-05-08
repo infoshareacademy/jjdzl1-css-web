@@ -25,7 +25,7 @@
                 <p class="card-text">Choose the car that suits your needs. Don't wait, just check available time and start using one of our vehicles!</p>
             </div>
             <div class="card-footer">
-                <a href="listAvailableCar.jsp" class="btn btn-primary">Begin now »</a>
+                <a href="listAvailableCar" class="btn btn-primary">Begin now »</a>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
         <div class="card bg-dark text-white h-100">
             <div class="card-body">
                 <h4 class="card-title">Pricing</h4>
-                <p class="card-text">Every vehicle class has it's own price level per day. If you make reservation for longer period you will get discounts and even can ask our staff for individual offers.  </p>
+                <p class="card-text">Every vehicle class has it's own price level per day. If you make reservation for longer period you will get discounts and even can ask our staff for individual offers.</p>
             </div>
             <div class="card-footer">
                 <a href="pricing.jsp" class="btn btn-primary">Details »</a>
@@ -49,7 +49,7 @@
                 <p class="card-text">If you have any questions, want to talk about our service, insurance or special offers please contact one of our team member.</p>
             </div>
             <div class="card-footer">
-                <a href="contact.jsp" class="btn btn-primary">More »</a>
+                <a href="contact" class="btn btn-primary">More »</a>
             </div>
         </div>
     </div>

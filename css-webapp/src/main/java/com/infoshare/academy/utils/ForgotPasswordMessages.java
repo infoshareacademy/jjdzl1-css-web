@@ -11,12 +11,12 @@ public class ForgotPasswordMessages {
     }
 
     public static String emailWithTokenInfoSend() {
-        String errorData = "We send you an email with link to change your password! Link is valid for 20 minutes since now.";
+        String errorData = "We sent you an email with link to change your password! Link is valid for 20 minutes since now.";
         return startDangerDiv + errorData + endDiv;
     }
 
     public static String changedPassword() {
-        String errorData = "Your password has been sucessfully changed!";
+        String errorData = "Your password has been successfully changed!";
         return startDangerDiv + errorData + endDiv;
     }
 }

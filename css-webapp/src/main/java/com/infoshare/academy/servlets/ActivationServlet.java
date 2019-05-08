@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.infoshare.academy.utils.RegistrationMessages.ActivatedMessage;
+import static com.infoshare.academy.utils.RegistrationMessages.activatedMessage;
 
 @WebServlet("/activationAccount")
 public class ActivationServlet extends HttpServlet {
@@ -32,7 +32,7 @@ public class ActivationServlet extends HttpServlet {
 
         if(UUIDParam.equals(UUIDFromBase)){
             dao.updateIsUserAccountActive(user.getId(),true);
-            RequestResponse(req,resp,"Activated!",ActivatedMessage());
+            RequestResponse(req,resp,"Activated!", activatedMessage());
         }else{
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }

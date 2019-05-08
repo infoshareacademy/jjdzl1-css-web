@@ -1,14 +1,36 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<section class="jumbotron text-center">
-  <div class="container">
-    <h1 class="jumbotron-heading">CarSharingSystem</h1>
-    <p class="lead text-muted"></p>
-		  If you have any questions, suggestions or comments, please leave them on our repository or contact our team member
-		<p>
-    <a href="https://github.com/infoshareacademy/jjdzl1-css-web" target="_blank" class="btn btn-outline-primary my-2">Repository access</a>
-    </p>
-  </div>
+<section class="jumbotron">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center">CarSharingSystem</h1>
+        <h4>Contact us</h4>
+        ${messageSent}
+        <form class="needs-validation" action="contact" method="post" id="contact">
+            <div class="form-group">
+                <label for="inputemail">Your email</label>
+                <input type="email" class="form-control" name="from" id="inputemail"
+                <c:if test="${sessionScope.username != null}"> value="${currentUser.email}"</c:if>
+                placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="inputsubject">Subject</label>
+                <input type="text" class="form-control" name="subject" id="inputsubject" placeholder="Subject" required>
+            </div>
+            <div class="form-group">
+                <label for="inputmessage">Message</label>
+                <textarea class="form-control" name="message" id="inputmessage" placeholder="Message..." rows="3" required ></textarea>
+            </div>
+            <div class="mb-3 text-center">
+                <button class="btn btn-primary" type="submit">Send message</button>
+            </div>
+        </form>
+        <div class="text-center">
+            <hr class="my-4">
+            <p class="lead text-muted"></p>For any suggestions or issues with our project you can comment our code directly on GitHub repository<p>
+            <a href="https://github.com/infoshareacademy/jjdzl1-css-web" target="_blank" class="btn btn-primary my-2">Access repository</a>
+        </div>
+        </p>
+    </div>
 </section>
 	  
     <div class="my-3 p-3 bg-light rounded box-shadow">
