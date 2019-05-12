@@ -10,28 +10,28 @@
                           
                   <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                      <li class="nav-item active">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/index.jsp">Start
+                      <li class="nav-item">
+                        <a class="nav-link active" id="nav-home" href="${pageContext.request.contextPath}/index.jsp">Start
                           <span class="sr-only">(current)</span>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/profile">Profile</a>
+                        <a class="nav-link" id="nav-profile" href="${pageContext.request.contextPath}/profile">Profile</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/admin/admin.jsp">Admin</a>
+                        <a class="nav-link text-dark" id="nav-admin" href="${pageContext.request.contextPath}/admin/admin.jsp">Admin</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/listReservationCurrentUser">Reservations</a>
+                        <a class="nav-link" id="nav-rsv" href="${pageContext.request.contextPath}/listReservationCurrentUser">Reservations</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/pricing.jsp">Pricing</a>
+                        <a class="nav-link" id="nav-pricing" href="${pageContext.request.contextPath}/pricing.jsp">Pricing</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact</a>
+                        <a class="nav-link" id="nav-contact" href="${pageContext.request.contextPath}/contact">Contact</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-warning" href="${pageContext.request.contextPath}/logout">Sign out</a>
+                        <a class="nav-link text-warning" id="nav-logout" href="${pageContext.request.contextPath}/logout">Sign out</a>
                       </li>
                     </ul>
                   </div>

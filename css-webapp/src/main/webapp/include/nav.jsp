@@ -10,19 +10,19 @@
                           
                   <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                      <li class="nav-item active">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/index.jsp">Start
+                      <li class="nav-item">
+                        <a class="nav-link active" id="nav-home" href="${pageContext.request.contextPath}/index.jsp">Start
                           <span class="sr-only">(current)</span>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/login">Log in</a>
+                        <a class="nav-link" id="nav-login" href="${pageContext.request.contextPath}/login">Log in</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/pricing.jsp">Pricing</a>
+                        <a class="nav-link" id="nav-pricing" href="${pageContext.request.contextPath}/pricing.jsp">Pricing</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact</a>
+                        <a class="nav-link" id="nav-contact" href="${pageContext.request.contextPath}/contact">Contact</a>
                       </li>
                     </ul>
                   </div>
