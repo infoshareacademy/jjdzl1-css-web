@@ -2,7 +2,10 @@ package com.infoshare.academy.servlets;
 
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
-import com.infoshare.academy.utils.*;
+import com.infoshare.academy.utils.PasswordHashAlgorithm;
+import com.infoshare.academy.utils.UUIDGeneratorForUser;
+import com.infoshare.academy.utils.UserPasswordUtils;
+import com.infoshare.academy.utils.UserValidator;
 
 import javax.ejb.EJB;
 import javax.mail.MessagingException;
@@ -102,7 +105,8 @@ public class RegistrationServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }).start();
-        response.sendRedirect("afterRegistration.jsp");
+        request.setAttribute("success", successfulRegistration());
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     private void RequestResponse(HttpServletRequest request, HttpServletResponse response, String errorMessage, String jspError) throws ServletException, IOException {

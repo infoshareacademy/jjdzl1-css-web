@@ -88,7 +88,7 @@
                     </div>
                 </div>
                     <div class="custom-control custom-checkbox mb-3">
-                        <input type="checkbox" class="custom-control-input" name="termsCheckbox" value="termsCheckbox" id="termsCheckbox">
+                        <input type="checkbox" class="custom-control-input" name="termsCheckbox" value="termsCheckbox" id="termsCheckbox" required>
                         <label class="custom-control-label" for="termsCheckbox">I agree to CarSharingSystem </label>
                         <u data-toggle="popover" data-html="true" title="Terms of Use"
                            data-content="<h5>Introduction</h5>

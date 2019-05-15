@@ -107,4 +107,9 @@ public class RegistrationMessages {
         String errorData = "Please accept terms of use to create account.";
         return startDangerDiv + errorData + endDiv;
     }
+
+    public static String successfulRegistration() {
+        String errorData = "Your login has been successfully registered, check your email and complete the registration process by clicking the link.";
+        return startSuccessDiv + errorData + endDiv;
+    }
 }
