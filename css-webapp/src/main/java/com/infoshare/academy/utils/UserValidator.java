@@ -45,6 +45,10 @@ public class UserValidator {
         return dateOfBirthLocalDate.isBefore(LocalDate.now());
     }
 
+    public Boolean isTermsOfUseCheckboxChecked(String terms){
+        return terms == null;
+    }
+
     private LocalDate formatLocalDate(String date) {
         DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(date, FORMATTER);

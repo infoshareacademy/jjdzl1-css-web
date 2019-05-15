@@ -50,7 +50,7 @@ public class ForgetPasswordServlet extends HttpServlet {
         MailSend mail = new MailSend();
         new Thread(() -> {
             try {
-                mail.sentEmailForForgotPasswordProcess(user.getEmail(), user.getPasswordTokenUUID());
+                mail.sendEmailForForgotPasswordProcess(user.getEmail(), user.getPasswordTokenUUID());
             } catch (MessagingException e) {
                 e.printStackTrace();
             }

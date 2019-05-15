@@ -11,42 +11,55 @@ import java.util.Properties;
 
 public class MailSend {
 
+    private static final String CONTACT_EMAIL = "carsharingsystem.help@gmail.com";
+
     private Properties emailProperties;
     private Session mailSession;
     private MimeMessage emailMessage;
 
-    public void sentEmailForRegistrationProcess(String login, String mailAddress, String UUID) throws AddressException,
+    public void sendEmailForRegistrationProcess(String login, String mailAddress, String UUID) throws AddressException,
             MessagingException {
 
         MailSend javaEmail = new MailSend();
 
         javaEmail.setMailServerProperties();
-        javaEmail.createEmailMessageForRegistrationProcess("Registration_process", mailAddress, CreateBodyContentForRegistrationEmail(login, UUID));
-        javaEmail.sentEmailForRegistrationProcess();
+        javaEmail.createEmail("Registration_process", mailAddress, createBodyContentForRegistrationEmail(login, UUID));
+        javaEmail.sendEmail();
     }
 
-    public void sentEmailForForgotPasswordProcess(String mailAddress, String UUID) throws AddressException,
+    public void sendEmailForForgotPasswordProcess(String mailAddress, String UUID) throws AddressException,
             MessagingException {
 
         MailSend javaEmail = new MailSend();
 
         javaEmail.setMailServerProperties();
-        javaEmail.createEmailMessageForRegistrationProcess("Forgot_password_process", mailAddress, createBodyContentWithTokenInformationEmail(UUID));
-        javaEmail.sentEmailForRegistrationProcess();
+        javaEmail.createEmail("Forgot_password_process", mailAddress, createBodyContentWithTokenInformationEmail(UUID));
+        javaEmail.sendEmail();
+    }
+
+    public void sendEmailFromContactForm(String subject, String mailAddress, String content) throws AddressException,
+            MessagingException {
+
+        MailSend javaEmail = new MailSend();
+
+        String mails = mailAddress + "," + CONTACT_EMAIL;
+
+        String fullContent = "Message from: " + mailAddress + "<br/><br/>" + content + "<br/><br/>CarSharingSystem contact form";
+
+        javaEmail.setMailServerProperties();
+        javaEmail.createMultipleEmail(subject, mails, fullContent);
+        javaEmail.sendEmail();
     }
 
     private void setMailServerProperties() {
-
-        String emailPort = "587";//gmail's smtp port
-
+        String emailPort = "587"; //gmail's smtp port
         emailProperties = System.getProperties();
         emailProperties.put("mail.smtp.port", emailPort);
         emailProperties.put("mail.smtp.auth", "true");
         emailProperties.put("mail.smtp.starttls.enable", "true");
-
     }
 
-    private void createEmailMessageForRegistrationProcess(String subjectOfEmail, String destinationAddress, String emailBodyContent) throws AddressException, MessagingException {
+    private void createEmail(String subjectOfEmail, String destinationAddress, String emailBodyContent) throws AddressException, MessagingException {
         String[] toEmails = {destinationAddress};
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
@@ -59,10 +72,19 @@ public class MailSend {
         emailMessage.setContent(emailBodyContent, "text/html");
     }
 
-    private void sentEmailForRegistrationProcess() throws AddressException, MessagingException {
+    private void createMultipleEmail(String subjectOfEmail, String destinationAddresses, String emailBodyContent) throws AddressException, MessagingException {
+        mailSession = Session.getDefaultInstance(emailProperties, null);
+        emailMessage = new MimeMessage(mailSession);
 
+        emailMessage.addRecipients(Message.RecipientType.TO, InternetAddress.parse(destinationAddresses));
+
+        emailMessage.setSubject(subjectOfEmail);
+        emailMessage.setContent(emailBodyContent, "text/html");
+    }
+
+    private void sendEmail() throws AddressException, MessagingException {
         String emailHost = "smtp.gmail.com";
-        String fromUser = "CarSharingSystem.help";//just the id alone without @gmail.com
+        String fromUser = "CarSharingSystem.help"; //just the id alone without @gmail.com
         String fromUserEmailPassword = "CSS12345";
 
         Transport transport = mailSession.getTransport("smtp");
@@ -73,7 +95,7 @@ public class MailSend {
         System.out.println("Email sent successfully.");
     }
 
-    private String CreateBodyContentForRegistrationEmail(String Login, String UUID) {
+    private String createBodyContentForRegistrationEmail(String Login, String UUID) {
         return "Hello <b>" + Login + "</b> <br>\n Click this link to activate your account in " +
                 "CAR SHARING SYSTEM: \n" + "http://localhost:8080/jjdzl1-css/activationAccount?login=" + Login + "&UUID=" + UUID;
     }
@@ -82,5 +104,4 @@ public class MailSend {
         return "Click this link to change your password " +
                 "CAR SHARING SYSTEM: \n" + "http://localhost:8080/jjdzl1-css/forgetPasswordValidator?tokenUUID=" + UUID;
     }
-
 }

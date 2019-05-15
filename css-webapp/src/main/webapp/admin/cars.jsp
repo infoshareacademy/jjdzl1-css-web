@@ -30,12 +30,6 @@
     <!-- Footer -->
     <jsp:include page="include/footer.jsp"></jsp:include>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script>feather.replace()</script>
-
 </wrapper>
 </body>
 

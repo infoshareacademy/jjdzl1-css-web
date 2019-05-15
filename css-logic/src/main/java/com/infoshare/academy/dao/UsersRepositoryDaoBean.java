@@ -157,7 +157,7 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public void sendEmailToNewUser(String login, String email, String UUID) throws MessagingException {
         MailSend mail = new MailSend();
-        mail.sentEmailForRegistrationProcess(login, email, UUID);
+        mail.sendEmailForRegistrationProcess(login, email, UUID);
     }
 
     @Override
@@ -189,9 +189,9 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public int countUsers() {
         Session session = getSession();
-        Long countCars = (Long) session.createQuery(myQuery.countUsers()).getSingleResult();
+        Long countUsers = (Long) session.createQuery(myQuery.countUsers()).getSingleResult();
         commitTransaction(session);
-        return Math.toIntExact(countCars);
+        return Math.toIntExact(countUsers);
     }
 
     @Override

@@ -11,3 +11,10 @@
         </div>
         <!-- /.container -->
 </footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/feather/feather.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/scripts/sidebartoggler.js"></script>
+<script>feather.replace()</script>

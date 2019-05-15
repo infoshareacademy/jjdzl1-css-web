@@ -5,7 +5,7 @@
 
 <!-- Head -->
 <jsp:include page="include/head.jsp">
-    <jsp:param name="title" value="Log in"></jsp:param>
+    <jsp:param name="title" value="Forgot password"></jsp:param>
 </jsp:include>
 
 <body>
@@ -44,9 +44,8 @@
     <!-- Footer -->
     <jsp:include page="include/footer.jsp"></jsp:include>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Scripts -->
+    <script src="vendor/scripts/passval.js"></script>
 
 </wrapper>
 </body>
