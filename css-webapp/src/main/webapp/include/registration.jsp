@@ -13,6 +13,7 @@
             ${unavailableEmailError}
             ${loginAndEmailIsUnavailableError}
             ${IncorrectDateOfBirth}
+            ${termsOfUse}
             <form class="needs-validation" action="register" method="post" id="register">
 
                 <div class="form-group">
@@ -87,8 +88,8 @@
                     </div>
                 </div>
                     <div class="custom-control custom-checkbox mb-3">
-                        <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
-                        <label class="custom-control-label" for="customControlValidation1">I agree to CarSharingSystem </label>
+                        <input type="checkbox" class="custom-control-input" name="termsCheckbox" value="termsCheckbox" id="termsCheckbox">
+                        <label class="custom-control-label" for="termsCheckbox">I agree to CarSharingSystem </label>
                         <u data-toggle="popover" data-html="true" title="Terms of Use"
                            data-content="<h5>Introduction</h5>
 			1. The following Terms of Use (ToS) specify the conditions for providing the rental car service of CarSharingSystem (CSS).

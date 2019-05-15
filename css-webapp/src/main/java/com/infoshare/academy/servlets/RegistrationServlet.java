@@ -46,12 +46,14 @@ public class RegistrationServlet extends HttpServlet {
         String city = request.getParameter("city");
         String streetAddress = request.getParameter("streetAddress");
         String postalCode = request.getParameter("postalCode");
+        String terms = request.getParameter("termsCheckbox");
 
         Boolean isPasswordCorrect = new UserValidator().isPasswordCorrect(password);
         Boolean isPasswordMatch = password.equals(password2);
         Boolean isEmailCorrect = new UserValidator().isEmailCorrect(email);
         Boolean isAdult = new UserValidator().isAdult(birthOfDate);
         Boolean isBeforePresentDay = new UserValidator().isBeforePresentDate(birthOfDate);
+        Boolean isTermsChecked = new UserValidator().isTermsOfUseCheckboxChecked(terms);
 
         if (!isBeforePresentDay) {
             RequestResponse(request, response, "IncorrectDateOfBirth", incorrectDateOfBirth());
@@ -65,6 +67,8 @@ public class RegistrationServlet extends HttpServlet {
             RequestResponse(request, response, "emailError", incorrectEmail());
         } else if (isAdult) {
             RequestResponse(request, response, "tooYoungError", tooYoungMessage());
+        } else if (isTermsChecked) {
+            RequestResponse(request, response, "termsOfUse", termsOfUse());
         } else {
 
             String hashedPassword = UserPasswordUtils.hash(password, PasswordHashAlgorithm.PBKDF2);
@@ -91,14 +95,14 @@ public class RegistrationServlet extends HttpServlet {
     private void createUser(HttpServletRequest request, HttpServletResponse response, User user) throws ServletException, IOException {
         setUUIDAndActivationStatusForNewUser(user);
         usersRepositoryDao.addUser(user);
-            new Thread(() -> {
-                try {
-                    usersRepositoryDao.sendEmailToNewUser(user.getLogin(), user.getEmail(), user.getAuthorizationNumber());
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
-            }).start();
-            response.sendRedirect("afterRegistration.jsp");
+        new Thread(() -> {
+            try {
+                usersRepositoryDao.sendEmailToNewUser(user.getLogin(), user.getEmail(), user.getAuthorizationNumber());
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        response.sendRedirect("afterRegistration.jsp");
     }
 
     private void RequestResponse(HttpServletRequest request, HttpServletResponse response, String errorMessage, String jspError) throws ServletException, IOException {

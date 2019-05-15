@@ -102,4 +102,9 @@ public class RegistrationMessages {
         String errorData = "Message has been successfully sent!";
         return startSuccessDiv + errorData + endDiv;
     }
+
+    public static String termsOfUse() {
+        String errorData = "Please accept terms of use to create account.";
+        return startDangerDiv + errorData + endDiv;
+    }
 }
