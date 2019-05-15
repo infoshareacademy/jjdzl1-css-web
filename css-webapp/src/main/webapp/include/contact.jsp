@@ -2,7 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <section class="jumbotron">
     <div class="container">
-        <h1 class="jumbotron-heading text-center">CarSharingSystem</h1>
+        <h1 class="jumbotron-heading text-center"><img src="img/css-logo.png" width="35" height="35" class="d-inline-block mr-1" alt="">CarSharingSystem</h1>
         <h4>Contact us</h4>
         ${messageSent}
         <form class="needs-validation" action="contact" method="post" id="contact">
