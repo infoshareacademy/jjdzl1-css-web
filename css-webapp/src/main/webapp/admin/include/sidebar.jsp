@@ -5,7 +5,7 @@
 
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="admin.jsp"><span data-feather="home"></span>Admin Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link active" href="admin.jsp"><span data-feather="home"></span>Admin <span class="sr-only">(current)</span></a>
             </li>
         </ul>
 
