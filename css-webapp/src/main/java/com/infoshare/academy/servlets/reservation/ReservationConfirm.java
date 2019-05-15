@@ -56,7 +56,9 @@ public class ReservationConfirm extends HttpServlet {
         req.setAttribute("end", end(end));
         req.setAttribute("startDate", start(start).format(formatter));
         req.setAttribute("endDate", end(end).format(formatter));
-        req.getSession().setAttribute("period", period(start(start), end(end)));
+        req.setAttribute("period", period(start(start), end(end)));
+        req.setAttribute("price",price(car));
+        req.setAttribute("cost",cost(car,start(start),end(end)));
 
 
         req.getRequestDispatcher("/reservationconfirm.jsp").forward(req, resp);
@@ -91,6 +93,21 @@ public class ReservationConfirm extends HttpServlet {
         }
         req.setAttribute("errorReservation", errorIncorrectIdCar());
 
+    }
+    public int price(Car car) {
+        int type = car.getCarType();
+        switch (type) {
+            case 1:
+                return 80;
+            case 2:
+                return 150;
+            case 3:
+                return 300;
+        }
+        return 100;
+    }
+    public int cost(Car car,LocalDate start,LocalDate end){
+        return price(car)*period(start,end);
     }
 
     public LocalDate start(String start) {
