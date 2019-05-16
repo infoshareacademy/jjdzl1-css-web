@@ -47,7 +47,6 @@
     <!-- Scripts -->
     <script src="vendor/scripts/remreg.js"></script>
     <script src="vendor/scripts/passval.js"></script>
-    <script>$(function () {$('[data-toggle="popover"]').popover()})</script>
 
 </wrapper>
 </body>

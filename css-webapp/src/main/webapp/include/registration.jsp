@@ -18,8 +18,7 @@
 
                 <div class="form-group">
                     <label for="inputlogin">Login</label>
-                    <input type="text" name="login" class="form-control" id="inputlogin" placeholder="Login" required
-                           autofocus>
+                    <input type="text" name="login" class="form-control" id="inputlogin" placeholder="Login" pattern=".{3,30}" maxlength="30" title="3 to 30 characters" data-toggle="tooltip" data-placement="top" required autofocus>
                 </div>
 
                 <div class="row">
@@ -35,15 +34,12 @@
                     </div>
                 </div>
                 <p class="card-text">
-                    <small class="text-muted">Password requires at least 8 characters with one digit, big letter and
-                        special character
-                    </small>
+                    <small class="text-muted">Password requires at least 8 characters with one digit, big letter and special character</small>
                 </p>
 
                 <div class="mb-3">
                     <label for="inputemail">Email</label>
-                    <input type="email" name="email" class="form-control" id="inputemail" placeholder="you@example.com"
-                           required>
+                    <input type="email" name="email" class="form-control" id="inputemail" placeholder="you@example.com" required>
                     <div class="invalid-feedback">
                         Please enter a valid email address
                     </div>
@@ -51,20 +47,17 @@
 
                 <div class="mb-3">
                     <label for="phoneNumber">Phone number</label>
-                    <input type="number" name="phoneNumber" class="form-control" id="phoneNumber"
-                           placeholder="600 123 999" min="1000000" step="1" data-bind="value:inputphonenumber" required>
+                    <input type="tel" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="600 123 999" pattern="[0-9]{1,11}" maxlength="11" data-bind="value:inputphonenumber" required>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">First name</label>
-                        <input type="text" name="firstName" class="form-control" id="firstName" placeholder="First name"
-                               required>
+                        <input type="text" name="firstName" class="form-control" id="firstName" placeholder="First name" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="lastName">Last name</label>
-                        <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Last name"
-                               required>
+                        <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Last name" required>
                     </div>
                 </div>
 
@@ -84,7 +77,7 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="postalCode">Postal code</label>
-                        <input type="text" name="postalCode" class="form-control" id="postalCode" placeholder="00-000">
+                        <input type="text" name="postalCode" class="form-control" id="postalCode" maxlength="6" placeholder="00-000">
                     </div>
                 </div>
                     <div class="custom-control custom-checkbox mb-3">
@@ -104,7 +97,7 @@
                         <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-outline-primary mr-3" type="button" onclick="history.back();">Previous page</button>
+                        <button class="btn btn-outline-primary mr-3" type="button" onclick="history.back();">Go back</button>
                         <button class="btn btn-outline-primary" type="reset" onclick="window.localStorage.clear();">Clear form</button>
                     </div>
             </form>

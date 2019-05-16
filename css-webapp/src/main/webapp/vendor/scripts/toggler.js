@@ -1,3 +1,6 @@
+$(function () {$('[data-toggle="popover"]').popover()})
+$(function () {$('[data-toggle="tooltip"]').tooltip()})
+
 $(document).ready(function () {
     if (!$('#sidebar').length) {
         $('#sidebarCollapse').hide();

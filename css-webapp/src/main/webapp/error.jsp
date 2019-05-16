@@ -36,7 +36,7 @@
                   <p class="text-danger">${type}</p>
                   <p class="text-danger">${message}</p>
                   <div class="text-center">
-                      <button class="btn btn-warning" type="button" onclick="history.back();">Return</button>
+                      <button class="btn btn-warning" type="button" onclick="history.back();">Go back</button>
                   </div>
               </div>
           </div>

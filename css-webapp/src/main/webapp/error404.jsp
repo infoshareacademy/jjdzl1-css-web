@@ -34,7 +34,7 @@
               <div class="card-body">
                   <h5 class="card-title">Sorry, page not found!</h5>
                   <div class="text-center">
-                      <button class="btn btn-warning" type="button" onclick="history.back();">Return</button>
+                      <button class="btn btn-warning" type="button" onclick="history.back();">Go back</button>
                   </div>
               </div>
           </div>
