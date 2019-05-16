@@ -45,6 +45,9 @@
     <!-- Footer -->
     <jsp:include page="include/footer.jsp"></jsp:include>
 
+    <!-- Scripts -->
+    <script src="vendor/scripts/showpass.js"></script>
+
 </wrapper>
 </body>
 
