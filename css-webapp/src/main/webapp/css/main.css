@@ -103,6 +103,22 @@ ul.pagination {
 	background-color: #729ee5;
 }
 
+.field-icon {
+	float: right;
+	margin-right: 20px;
+	margin-top: -26px;
+	position: relative;
+	z-index: 2;
+}
+
+.login-field-icon {
+	float: right;
+	margin-right: 25px;
+	margin-top: -32px;
+	position: relative;
+	z-index: 2;
+}
+
 /* Styles for docs */
 
 .sticky {

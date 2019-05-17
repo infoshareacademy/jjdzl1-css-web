@@ -24,13 +24,13 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="inputpassword">Password</label>
-                        <input type="password" name="password" class="form-control" id="inputpassword"
-                               placeholder="Password" required>
+                        <input type="password" name="password" class="form-control" id="inputpassword" placeholder="Password" required>
+                        <span toggle="#inputpassword" class="field-icon far fa-eye input-password"></span>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="inputpassword2">Repeat password</label>
-                        <input type="password" name="password2" class="form-control" id="inputpassword2"
-                               placeholder="Password" required>
+                        <input type="password" name="password2" class="form-control" id="inputpassword2" placeholder="Password" required>
+                        <span toggle="#inputpassword2" class="field-icon far fa-eye input-password"></span>
                     </div>
                 </div>
                 <p class="card-text">

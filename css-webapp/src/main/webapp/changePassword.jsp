@@ -58,6 +58,8 @@
 
     <!-- Scripts -->
     <script src="vendor/scripts/passval.js"></script>
+    <script src="vendor/scripts/showpass.js"></script>
+
 
   </wrapper>
   </body>

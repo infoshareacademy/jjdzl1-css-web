@@ -56,7 +56,7 @@
                     <td>${car.enginePower}</td>
                     <td>${car.transmission}</td>
                     <td>
-                        <form method="post" action="reservation">
+                        <form method="get" action="reservationconfirm">
                             <button class="btn btn-success" type="submit">Add reservation</button>
                             <input type="hidden" name="startDate" value="${start}"/>
                             <input type="hidden" name="endDate" value="${end}"/>
