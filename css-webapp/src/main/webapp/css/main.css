@@ -135,8 +135,7 @@ ul.pagination {
 }
 
 .doc-section {
-	padding-top: 15px;
-	padding-bottom: 15px;
+	padding: 15px 15px 15px 5px;
 }
 
 .doc-section .section-title {

@@ -51,11 +51,18 @@
                                   <h3 class="block-title">Step One</h3>
                                   <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis.
                                   </p>
-                                  <div class="code-block">
-                                      <h6>Default code example:</h6>
-                                      <p><code>bower install &lt;package&gt;</code></p>
-                                      <p><code>npm install &lt;package&gt;</code></p>
-                                  </div><!--//code-block-->
+                                  <div id="javascript" class="section-block">
+                                      <div class="code-block">
+                                          <h6>JavaScript Code Example</h6>
+                                          <pre><code class="language-javascript">&lt;script&gt;
+    function myFunction(a, b) {
+        return a * b;
+    }
+
+    document.getElementById(&quot;demo&quot;).innerHTML = myFunction(4, 3);
+&lt;/script&gt;</code></pre>
+                                      </div><!--//code-block-->
+                                  </div><!--//section-block-->
                               </div><!--//section-block-->
                           </section><!--//doc-section-->
 
@@ -98,6 +105,7 @@
     <!-- Scripts -->
     <script src="vendor/scripts/jquery.scrollTo.min.js"></script>
     <script src="vendor/scripts/stickyfill.min.js"></script>
+    <script src="vendor/scripts/prism-min.js"></script>
 
   </wrapper>
   </body>

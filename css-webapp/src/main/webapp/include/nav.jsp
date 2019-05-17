@@ -26,7 +26,7 @@
                         <a class="nav-link" id="nav-contact" href="${pageContext.request.contextPath}/contact">Contact</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" id="nav-api" href="${pageContext.request.contextPath}/api.jsp">API</a>
+                        <a class="nav-link" id="nav-api" href="${pageContext.request.contextPath}/api.jsp">API</a>
                       </li>
                     </ul>
                   </div>
