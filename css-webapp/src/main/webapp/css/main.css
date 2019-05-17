@@ -102,3 +102,136 @@ ul.pagination {
 .table tbody tr:hover td, .table tbody tr:hover th {
 	background-color: #729ee5;
 }
+
+/* Styles for docs */
+
+.sticky {
+	position: -webkit-sticky;
+	position: -moz-sticky;
+	position: -ms-sticky;
+	position: -o-sticky;
+	position: sticky;
+	top: 65px;
+}
+
+.doc-header {
+	margin-bottom: 30px;
+}
+
+.doc-section {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.doc-section .section-title {
+	font-size: 26px;
+	margin-top: 0;
+	margin-bottom: 0;
+	font-weight: bold;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #d7d6d6;
+}
+
+.doc-section h1 {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.doc-section h2 {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.doc-section h3 {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.doc-section h4 {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.doc-section h5 {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.doc-section h6 {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.section-block {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.section-block .block-title {
+	margin-top: 0;
+}
+
+.section-block .list > li {
+	margin-bottom: 10px;
+}
+
+.section-block .list ul > li {
+	margin-top: 5px;
+}
+
+.doc-menu {
+	list-style: none;
+}
+
+.doc-menu .nav-link {
+	margin-bottom: 5px;
+	display: block;
+	padding: 5px 15px;
+	color: #616670;
+}
+
+.doc-menu .nav-link:hover, .doc-menu .nav-link:focus {
+	color: #494d55;
+	text-decoration: none;
+	background: none;
+}
+
+.doc-menu .nav-link.active {
+	background: none;
+	color: #40babd;
+	font-weight: 600;
+}
+
+.doc-sub-menu {
+	list-style: none;
+	padding-left: 0;
+}
+
+.doc-sub-menu .nav-link {
+	margin-bottom: 10px;
+	font-size: 12px;
+	display: block;
+	color: #616670;
+	padding: 0;
+	padding-left: 34px;
+	background: none;
+}
+
+.doc-sub-menu .nav-link:first-child {
+	padding-top: 5px;
+}
+
+.doc-sub-menu .nav-link:hover {
+	color: #494d55;
+	text-decoration: none;
+	background: none;
+}
+
+.doc-sub-menu .nav-link:focus {
+	background: none;
+}
+
+.doc-sub-menu .nav-link.active {
+	background: none;
+	color: #40babd;
+}
