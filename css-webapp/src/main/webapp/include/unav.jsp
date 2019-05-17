@@ -33,6 +33,9 @@
                         <a class="nav-link" id="nav-contact" href="${pageContext.request.contextPath}/contact">Contact</a>
                       </li>
                       <li class="nav-item">
+                        <a class="nav-link text-dark" id="nav-api" href="${pageContext.request.contextPath}/api.jsp">API</a>
+                      </li>
+                      <li class="nav-item">
                         <a class="nav-link text-warning" id="nav-logout" href="${pageContext.request.contextPath}/logout">Sign out</a>
                       </li>
                     </ul>
