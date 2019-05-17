@@ -95,6 +95,10 @@
     <!-- Footer -->
     <jsp:include page="include/footer.jsp"></jsp:include>
 
+    <!-- Scripts -->
+    <script src="vendor/scripts/jquery.scrollTo.min.js"></script>
+    <script src="vendor/scripts/stickyfill.min.js"></script>
+
   </wrapper>
   </body>
 
