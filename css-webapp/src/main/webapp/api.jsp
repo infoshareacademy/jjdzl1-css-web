@@ -32,7 +32,7 @@
 
               <div id="doc-header" class="doc-header text-center">
                   <h1 class="doc-title"><i class="icon fa fa-car"></i> CarSharingSystem API</h1>
-                  <div class="meta"><i class="far fa-clock"></i> Last updated: May 17th, 2019</div>
+                  <div class="meta"><i class="far fa-clock"></i> Last updated: May 1th, 2019</div>
               </div><!--//doc-header-->
 
               <div class="doc-body row">
@@ -41,28 +41,34 @@
                           <section id="introduction-section" class="doc-section">
                               <h2 class="section-title">Introduction</h2>
                               <div class="section-block">
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec imperdiet turpis. Curabitur aliquet pulvinar ultrices. Etiam at posuere leo. Proin ultrices ex et dapibus feugiat <a href="#">link example</a> aenean purus leo, faucibus at elit vel, aliquet scelerisque dui. Etiam quis elit euismod, imperdiet augue sit amet, imperdiet odio. Aenean sem erat, hendrerit  eu gravida id, dignissim ut ante. Nam consequat porttitor libero euismod congue.
+                                  <p>The CarSharingSystem API is a RESTful web service to obtain information about our cars and make reservations by clients. Also there is possibility to add, update and delete cars in database. Check out all functions.
                                   </p>
                               </div>
                           </section><!--//doc-section-->
-                          <section id="http-section" class="doc-section">
-                              <h2 class="section-title">Allowed HTTP requests</h2>
-                              <div id="step1"  class="section-block">
-                                  <h3 class="block-title">Step One</h3>
-                                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis.
-                                  </p>
-                                  <div id="javascript" class="section-block">
-                                      <div class="code-block">
-                                          <h6>JavaScript Code Example</h6>
-                                          <pre><code class="language-javascript">&lt;script&gt;
-    function myFunction(a, b) {
-        return a * b;
-    }
 
-    document.getElementById(&quot;demo&quot;).innerHTML = myFunction(4, 3);
-&lt;/script&gt;</code></pre>
-                                      </div><!--//code-block-->
-                                  </div><!--//section-block-->
+                          <section id="http-section" class="doc-section">
+                              <h2 class="section-title">HTTP</h2>
+                              <div id="http-methods" class="section-block">
+                                  <h3 class="block-title">Allowed HTTPs requests</h3>
+                                  <ul>
+                                      <li>GET - Get a resource or list of resources;</li>
+                                      <li>POST - To create resource;</li>
+                                      <li>PUT - Update resource;</li>
+                                      <li>DELETE - To delete resource.</li>
+                                  </ul>
+                              </div><!--//section-block-->
+                              <div id="http-responses"  class="section-block">
+                                  <h3 class="block-title">Usual server responses</h3>
+                                  <ul>
+                                      <li>200 <code>OK</code> - the request was successful;</li>
+                                      <li>201 <code>Created</code> - the request was successful and a resource was created;</li>
+                                      <li>204 <code>No content</code> - the request was successful but there is no representation to return;</li>
+                                      <li>400 <code>Bad Request</code> - the request could not be understood or missing required parameters;</li>
+                                      <li>401 <code>Unauthorized</code> - authentication failed;</li>
+                                      <li>403 <code>Forbidden</code> - access denied;</li>
+                                      <li>404 <code>Not Found</code> - resource was not found;</li>
+                                      <li>405 <code>Method Not Allowed</code> - requested method is not supported for resource.</li>
+                                  </ul>
                               </div><!--//section-block-->
                           </section><!--//doc-section-->
 
@@ -74,11 +80,10 @@
 
                           <nav id="doc-menu" class="nav doc-menu flex-column sticky">
                               <a class="nav-link scrollto" href="#introduction-section">Introduction</a>
-                              <a class="nav-link scrollto" href="#http-section">Allowed HTTP requests</a>
+                              <a class="nav-link scrollto" href="#http-section">HTTP</a>
                               <nav class="doc-sub-menu nav flex-column">
-                                  <a class="nav-link scrollto" href="#step1">Step One</a>
-                                  <a class="nav-link scrollto" href="#step2">Step Two</a>
-                                  <a class="nav-link scrollto" href="#step3">Step Three</a>
+                                  <a class="nav-link scrollto" href="#http-methods">Allowed HTTPs requests</a>
+                                  <a class="nav-link scrollto" href="#http-responses">Usual server responses</a>
                               </nav><!--//nav-->
                               <a class="nav-link scrollto" href="#cars-section">Cars</a>
                               <nav class="doc-sub-menu nav flex-column">
@@ -93,7 +98,7 @@
                       </div>
                   </div><!--//doc-sidebar-->
 
-              </div>
+              </div><!--//doc-card-->
 
       </div>
       <!-- /.container -->
