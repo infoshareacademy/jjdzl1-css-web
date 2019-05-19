@@ -76,3 +76,10 @@
           </div>
         </div>
     </div>
+
+<div class="my-3 p-3 bg-light rounded box-shadow">
+    <h4 class="pb-2 mb-2"><i class="fas fa-location-arrow"></i> Where to find us</h4>
+    <div class="responsive-map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11887.66878606692!2d22.62220996401687!3d51.21770292285432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4722568858a73987%3A0x92418d966e0add82!2sJ%C3%B3zefa+Franczaka+%22Lalka%22+43%2C+20-319+Lublin!5e0!3m2!1spl!2spl!4v1558290004993!5m2!1spl!2spl" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+</div>
