@@ -32,7 +32,7 @@
 
               <div id="doc-header" class="doc-header text-center">
                   <h1 class="doc-title"><i class="icon fa fa-car"></i> CarSharingSystem API</h1>
-                  <div class="meta"><i class="far fa-clock"></i> Last updated: May 1th, 2019</div>
+                  <div class="meta"><i class="far fa-clock"></i> Last updated: May 20th, 2019</div>
               </div><!--//doc-header-->
 
               <div class="doc-body row">
@@ -72,6 +72,83 @@
                               </div><!--//section-block-->
                           </section><!--//doc-section-->
 
+                          <section id="cars-section" class="doc-section">
+                              <h2 class="section-title">Cars</h2>
+                              <div id="car-list" class="section-block">
+                                  <h3 class="block-title">Car list</h3>
+                                  <p>To obtain all resources about cars use this link:
+                                      <div class="code-block language-html">
+                                  <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/cars</code></pre>
+                                      </div><!--//code-block-->
+                                  </p>
+                              </div><!--//section-block-->
+                              <div id="car-id" class="section-block">
+                                  <h3 class="block-title">Car by ID</h3>
+                                  <p>With given ID the rest service will return chosen car:
+                                  <div class="code-block language-html">
+                                      <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/cars/{id}</code></pre>
+                                  </div><!--//code-block-->
+                                  </p>
+                              </div><!--//section-block-->
+                              <div id="car-add" class="section-block">
+                                  <h3 class="block-title">Add car</h3>
+                                  <p>With the POST method you can add new car to database with this link:
+                                  <div class="code-block language-html">
+                                      <pre><code>POST <span class="uri"></span>${pageContext.request.contextPath}/api/cars</code></pre>
+                                  </div><!--//code-block-->
+                                  Example JSON with new car object:
+                                  <div class="code-block language-javascript">
+                                      <pre><code>{
+   "bodyType": "SEDAN",
+   "carType": 1,
+   "color": "SILVER",
+   "enginePower": 210,
+   "fuelSource": "DIESEL",
+   "make": "Audi",
+   "mileage": 60000,
+   "model": "A4",
+   "seats": 5,
+   "transmission": "AUTOMATIC",
+   "year": 2015
+}</code></pre>
+                                  </div><!--//code-block-->
+                                  </p>
+                              </div><!--//section-block-->
+                              <div id="car-update" class="section-block">
+                                  <h3 class="block-title">Update car</h3>
+                                  <p>With the PUT method you can update the car with proper ID in JSON data:
+                                  <div class="code-block language-html">
+                                      <pre><code>PUT <span class="uri"></span>${pageContext.request.contextPath}/api/cars</code></pre>
+                                  </div><!--//code-block-->
+                                  Example JSON for car update:
+                                  <div class="code-block language-javascript">
+                                      <pre><code>{
+   "bodyType": "SEDAN",
+   "carType": 1,
+   "color": "WHITE",
+   "enginePower": 220,
+   "fuelSource": "DIESEL",
+   "id": 3,
+   "make": "BMW",
+   "mileage": 70500,
+   "model": "E90",
+   "seats": 5,
+   "transmission": "MANUAL",
+   "year": 2011
+}</code></pre>
+                                  </div><!--//code-block-->
+                                  </p>
+                              </div><!--//section-block-->
+                              <div id="car-delete" class="section-block">
+                                  <h3 class="block-title">Delete car</h3>
+                                  <p>There is option to delete the car by ID:
+                                  <div class="code-block language-html">
+                                      <pre><code>DELETE <span class="uri"></span>${pageContext.request.contextPath}/api/cars/{id}</code></pre>
+                                  </div><!--//code-block-->
+                                  </p>
+                              </div><!--//section-block-->
+                          </section><!--//doc-section-->
+
                       </div><!--//content-inner-->
                   </div><!--//doc-content-->
 
@@ -98,7 +175,9 @@
                       </div>
                   </div><!--//doc-sidebar-->
 
-              </div><!--//doc-card-->
+              </div><!--//doc-card-body-->
+
+          </div><!--//doc-card-->
 
       </div>
       <!-- /.container -->
@@ -111,6 +190,12 @@
     <script src="vendor/scripts/jquery.scrollTo.min.js"></script>
     <script src="vendor/scripts/stickyfill.min.js"></script>
     <script src="vendor/scripts/prism-min.js"></script>
+    <script type="text/javascript">
+        var divs = document.querySelectorAll(".uri"), i;
+        for (i = 0; i < divs.length; ++i) {
+            divs[i].innerHTML = window.location.origin;
+        }
+    </script>
 
   </wrapper>
   </body>
