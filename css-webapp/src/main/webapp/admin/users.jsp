@@ -30,9 +30,6 @@
     <!-- Footer -->
     <jsp:include page="include/footer.jsp"></jsp:include>
 
-    <!-- Scripts -->
-    <script>$(function () {$('[data-toggle="tooltip"]').tooltip()})</script>
-
 </wrapper>
 </body>
 

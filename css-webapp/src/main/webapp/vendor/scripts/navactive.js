@@ -27,7 +27,8 @@ function highlightNew() {
     pathMatches(/admin/) ? "nav-admin" :
     pathMatches(/listAvailableCar|listReservationCurrentUser|searchCar|reservation|delete/) ? "nav-rsv" :
     pathMatches(/pricing/) ? "nav-pricing" :
-    pathMatches(/contact/) ? "nav-contact" : "";
+    pathMatches(/contact/) ? "nav-contact" :
+    pathMatches(/api/) ? "nav-api" : "";
 
     var element = document.getElementById(newActiveItemId);
     if (element != null) {

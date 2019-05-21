@@ -116,13 +116,12 @@
             <div class="form-group px-3 text-center">
                 <form method="post" action="deleteuser">
                     <input type="hidden" name="id" value="${user.id}">
-                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit">Delete user
-                    </button>
+                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit">Delete user</button>
                 </form>
             </div>
 
             <div class="text-center">
-                <button class="btn btn-outline-primary" type="button" onclick="history.back();">Previous page</button>
+                <button class="btn btn-outline-primary" type="button" onclick="history.back();">Go back</button>
             </div>
 
         </div>

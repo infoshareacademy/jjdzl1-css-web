@@ -28,11 +28,13 @@
     <main class="container-fluid py-3 flex-fill">
       <div class="container">
 
-          <div class="col-md-4 offset-4 text-center">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto text-center">
           <div class="card text-white bg-danger mb-3">
-              <h3 class="card-header">Error 404</h3>
+              <h3 class="card-header">Error ${code}</h3>
               <div class="card-body">
-                  <h5 class="card-title">Sorry, page not found!</h5>
+                  <h5 class="card-title">Oops, something went wrong!</h5>
+                  <p class="text-danger">${type}</p>
+                  <p class="text-danger">${message}</p>
                   <div class="text-center">
                       <button class="btn btn-warning" type="button" onclick="history.back();">Go back</button>
                   </div>

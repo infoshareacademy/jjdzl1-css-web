@@ -3,6 +3,7 @@ package com.infoshare.academy.service;
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -20,6 +21,7 @@ public class UserService {
     @EJB
     private UsersRepositoryDao userDao;
 
+    @RolesAllowed("1")
     @GET
     @Path("/hello")
     @Produces(MediaType.TEXT_PLAIN)
@@ -27,6 +29,7 @@ public class UserService {
         return Response.ok("Hello from CarSharingSystem!\n" + userAgent).build();
     }
 
+    @RolesAllowed("1")
     @GET
     @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
@@ -34,6 +37,7 @@ public class UserService {
         return Response.ok(userDao.getUsersList()).build();
     }
 
+    @RolesAllowed("1")
     @GET
     @Path("/users/{login}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -45,6 +49,7 @@ public class UserService {
         return Response.status(Response.Status.NOT_FOUND).entity("[ERROR] User login not found: " + login).build();
     }
 
+    @RolesAllowed("1")
     @GET
     @Path("/users/id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -56,6 +61,7 @@ public class UserService {
         return Response.status(Response.Status.NOT_FOUND).entity("[ERROR] User id not found: " + id).build();
     }
 
+    @RolesAllowed("1")
     @DELETE
     @Path("/users/{login}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -69,6 +75,7 @@ public class UserService {
         return Response.status(Response.Status.NOT_FOUND).entity("[ERROR] User login not found: " + login).build();
     }
 
+    @RolesAllowed("1")
     @DELETE
     @Path("/users/id/{id}")
     @Produces(MediaType.TEXT_PLAIN)
