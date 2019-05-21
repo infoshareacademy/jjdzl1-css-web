@@ -91,7 +91,7 @@
                                   </p>
                               </div><!--//section-block-->
                               <div id="car-add" class="section-block">
-                                  <h3 class="block-title">Add car</h3>
+                                  <h3 class="block-title">Add car<span class="small"> (only for admin users)</span></h3>
                                   <p>With the POST method you can add new car to database with this link:
                                   <div class="code-block language-html">
                                       <pre><code>POST <span class="uri"></span>${pageContext.request.contextPath}/api/cars</code></pre>
@@ -115,7 +115,7 @@
                                   </p>
                               </div><!--//section-block-->
                               <div id="car-update" class="section-block">
-                                  <h3 class="block-title">Update car</h3>
+                                  <h3 class="block-title">Update car<span class="small"> (only for admin users)</span></h3>
                                   <p>With the PUT method you can update the car with proper ID in JSON data:
                                   <div class="code-block language-html">
                                       <pre><code>PUT <span class="uri"></span>${pageContext.request.contextPath}/api/cars</code></pre>
@@ -140,7 +140,7 @@
                                   </p>
                               </div><!--//section-block-->
                               <div id="car-delete" class="section-block">
-                                  <h3 class="block-title">Delete car</h3>
+                                  <h3 class="block-title">Delete car<span class="small"> (only for admin users)</span></h3>
                                   <p>There is option to delete the car by ID:
                                   <div class="code-block language-html">
                                       <pre><code>DELETE <span class="uri"></span>${pageContext.request.contextPath}/api/cars/{id}</code></pre>

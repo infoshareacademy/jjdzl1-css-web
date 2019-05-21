@@ -3,6 +3,8 @@ package com.infoshare.academy.service;
 import com.infoshare.academy.dao.CarsRepositoryDao;
 import com.infoshare.academy.domain.Car;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -20,6 +22,7 @@ public class CarService {
     @EJB
     private CarsRepositoryDao carDao;
 
+    @PermitAll
     @GET
     @Path("/cars")
     @Produces(MediaType.APPLICATION_JSON)
@@ -27,6 +30,7 @@ public class CarService {
         return Response.ok(carDao.listCar()).build();
     }
 
+    @PermitAll
     @GET
     @Path("/cars/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -38,6 +42,7 @@ public class CarService {
         return Response.status(Response.Status.NOT_FOUND).entity("[ERROR] Car id not found: " + id).build();
     }
 
+    @RolesAllowed("1")
     @POST
     @Path("/cars")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -51,6 +56,7 @@ public class CarService {
         return Response.status(Response.Status.BAD_REQUEST).entity("[ERROR] Unable to create car object, try again").build();
     }
 
+    @RolesAllowed("1")
     @PUT
     @Path("/cars")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -65,6 +71,7 @@ public class CarService {
         return Response.status(Response.Status.NOT_FOUND).entity("[ERROR] Car id not found: " + car.getId()).build();
     }
 
+    @RolesAllowed("1")
     @DELETE
     @Path("/cars/{id}")
     @Produces(MediaType.TEXT_PLAIN)
