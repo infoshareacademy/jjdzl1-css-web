@@ -51,6 +51,19 @@ public class MailSend {
         javaEmail.sendEmail();
     }
 
+    public void sendEmailWithReservation(String subject, String mailAddress, String content) throws AddressException,
+            MessagingException {
+
+        MailSend javaEmail = new MailSend();
+
+        String fullContent = "Message from CarSharingSystem <br/><br/>" + content + "<br/><br/>CarSharingSystem reservation form.";
+
+        javaEmail.setMailServerProperties();
+        javaEmail.createMultipleEmail(subject, mailAddress, fullContent);
+        javaEmail.sendEmail();
+    }
+
+
     private void setMailServerProperties() {
         String emailPort = "587"; //gmail's smtp port
         emailProperties = System.getProperties();
