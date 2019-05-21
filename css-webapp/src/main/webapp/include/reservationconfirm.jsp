@@ -52,7 +52,7 @@ ${success}
     <br>
 </div>
 <form method="get" action="reservationPdf">
-    <button class="btn btn-success" type="submit" style="margin-left: 5%">Create PDF</button>
+    <button class="btn btn-success" type="submit" style="margin-left: 5%">Download PDF</button>
     <input type="hidden" name="startDate" value="${start}"/>
     <input type="hidden" name="endDate" value="${end}"/>
     <input type="hidden" name="carId" value="${car.id}">

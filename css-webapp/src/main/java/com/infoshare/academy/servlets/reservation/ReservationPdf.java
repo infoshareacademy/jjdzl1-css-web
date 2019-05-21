@@ -20,11 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
 import static com.lowagie.text.html.HtmlTags.HTML;
 
 @WebServlet("reservationPdf")
 public class ReservationPdf extends HttpServlet {
+
+    private static final Logger LOGGER = Logger.getLogger(ReservationPdf.class.getName());
 
 
     @EJB
@@ -51,6 +54,7 @@ public class ReservationPdf extends HttpServlet {
 
 
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setPrefix("/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(HTML);
         templateResolver.setCharacterEncoding(UTF_8);
@@ -68,15 +72,19 @@ public class ReservationPdf extends HttpServlet {
 
         try {
             ITextRenderer renderer = new ITextRenderer();
-            OutputStream outputStream = new FileOutputStream(OUTPUT_FILE);
             renderer.setDocumentFromString(xHtml);
             renderer.layout();
+            resp.setContentType("application/pdf");
+            resp.setHeader("Content-Disposition", "attachment;filename=reservation.pdf");
+            OutputStream outputStream = new FileOutputStream(OUTPUT_FILE);
             renderer.createPDF(resp.getOutputStream());
             outputStream.close();
+
+            LOGGER.info("Reservation pdf download.");
+
         } catch (DocumentException e) {
             e.printStackTrace();
         }
-        resp.setContentType("application/pdf");
     }
 
     public LocalDate start(String start) {
