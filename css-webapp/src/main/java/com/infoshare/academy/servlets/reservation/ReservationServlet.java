@@ -9,7 +9,6 @@ import com.infoshare.academy.domain.User;
 import com.infoshare.academy.utils.MailSend;
 
 import javax.ejb.EJB;
-import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -109,16 +108,12 @@ public class ReservationServlet extends HttpServlet {
             }
             MailSend mail = new MailSend();
             new Thread(() -> {
-                try {
-                    mail.sendEmailWithReservation("CSS reservation ", email, "Reservation car "
-                            + car(carId).getMake() + " "
-                            + car(carId).getModel() + " "
-                            + username + " "
-                            + start(start).format(formatter) + " "
-                            + end(end).format(formatter) + " ");
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
+                mail.sendEmailWithReservation(email
+                        , start(start).format(formatter)
+                        , end(end).format(formatter)
+                        , car(carId).getMake()
+                        , car(carId).getModel()
+                        , car(carId).getYear().toString());
             }).start();
         }
 
@@ -187,6 +182,7 @@ public class ReservationServlet extends HttpServlet {
     public int cost(Car car, LocalDate start, LocalDate end) {
         return price(car) * period(start, end);
     }
+
 
     public int period(LocalDate start, LocalDate end) {
         Period between = Period.between(start, end);
