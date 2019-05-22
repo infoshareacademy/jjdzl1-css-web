@@ -51,6 +51,31 @@ public class MailSend {
         javaEmail.sendEmail();
     }
 
+    public void sendEmailWithReservation(String... values) {
+
+        MailSend javaEmail = new MailSend();
+
+        String fullContent = " This message is automatically generated from CarSharingSystem ... <br/><br/> "
+                + "Details of your car reservation <br/><br/>"
+                + "Starting date: " + values[1] + "<br/>"
+                + "Ending date: " + values[2] + "<br/>"
+                + "Car make: " + values[3] + "<br/>"
+                + "Car model: " + values[4] + "<br/>"
+                + "Car year: " + values[5] + "<br/>"
+                + "<br/><br/> If you have any questions, please contact customer service.";
+
+        javaEmail.setMailServerProperties();
+        try {
+            javaEmail.createMultipleEmail("Confirmation of car reservation", values[0], fullContent);
+            javaEmail.sendEmail();
+        } catch (AddressException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     private void setMailServerProperties() {
         String emailPort = "587"; //gmail's smtp port
         emailProperties = System.getProperties();

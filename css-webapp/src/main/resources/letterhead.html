@@ -1,0 +1,28 @@
+<div th:fragment="letterhead" xmlns:th="http://java.sun.com/jsf/composite">
+    <table>
+        <tr class="address-block">
+            <td></td>
+            <td class="bottom right">
+                <strong>Car Sharing System </strong><br>
+                Warszawska Street 113<br>
+                20-803 LUBLIN<br>
+                <br>
+                <b>Phone:</b> 0048 81 977 09 97<br>
+                <b>E-Mail:</b> carsharingsystem.help@gmail.com<br>
+            </td>
+        </tr>
+        <tr class="address-block">
+            <td class="bottom">
+                <strong>[[${user.getFirstName()}]] [[${user.getLastName()}]]</strong><br>
+                [[${user.getPostalCode()}]] [[${user.getCity()}]]  <br>
+                [[${user.getStreetAddress()}]]<br>
+                <b>Phone:</b>[[${user.getPhoneNumber()}]]<br>
+                <b>E-Mail:</b>[[${user.getEmail()}]]<br>
+            </td>
+            <td class="bottom right">
+                Lubin, [[${now}]]
+            </td>
+        </tr>
+    </table>
+    <hr>
+</div>

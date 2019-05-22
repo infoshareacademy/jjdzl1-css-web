@@ -5,7 +5,7 @@
     <div class="card-body" align="center">
         ${error}
         ${errorReservation}
-        ${success}
+            ${success}
         <form method="get" action="reservation">
             <input type="hidden" name="currentPage" value="1">
             <div class="row">
@@ -56,7 +56,7 @@
                     <td>${car.enginePower}</td>
                     <td>${car.transmission}</td>
                     <td>
-                        <form method="get" action="reservationconfirm">
+                        <form method="post" action="reservation">
                             <button class="btn btn-success" type="submit">Add reservation</button>
                             <input type="hidden" name="startDate" value="${start}"/>
                             <input type="hidden" name="endDate" value="${end}"/>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" media="all" href="style.css"/>
+    </head>
+
+    <body>
+        <div class='header' th:include="header::header"></div>
+
+        <div th:include="letterhead::letterhead"></div>
+
+        <h1>This is the confirmation of your reservation</h1>
+
+        <p>Dear [[${user.getFirstName()}]], you have booked <h3 style="text-indent: 10%">[[${car.getMake()}]] [[${car.getModel()}]]</h3></br>
+        Car details:  Year:[[${car.getYear()}]]</br>
+        <p style="text-indent: 10%; ">  Fuel source:[[${car.getFuelSource()}]]</br></p>
+        <p style="text-indent: 10%; ">  Transmission: [[${car.getTransmission()}]]<br></p>
+
+        <p><b>Start date:</b> [[${start}]] </br>
+           <b>End date:</b>  [[${end}]]</p>
+
+        <br><b>Rental days:</b> [[${period}]] </br>
+        <b>Price per day:</b> [[${price}]] PLN/day</br></br>
+        <b>Total cost: [[${cost}]] PLN</b></p>
+
+
+        <p><b>Best regards, the Car Sharing System team</b></p>
+
+        <div class='footer' th:include="footer::footer"></div>
+
+    </body>
+
+</html>
