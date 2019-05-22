@@ -53,10 +53,15 @@ ${success}
 </div>
 <form method="get" action="reservationPdf">
     <button class="btn btn-success" type="submit" style="margin-left: 5%">Download PDF</button>
-    <input type="hidden" name="startDate" value="${start}"/>
-    <input type="hidden" name="endDate" value="${end}"/>
+    <input type="hidden" name="startDate" value="${startDate}"/>
+    <input type="hidden" name="endDate" value="${endDate}"/>
     <input type="hidden" name="carId" value="${car.id}">
     <input type="hidden" name="userId" value="${user.id}">
+    <input type="hidden" name="period" value="${period}">
+    <input type="hidden" name="price" value="${price}">
+    <input type="hidden" name="cost" value="${cost}">
+    <input type="hidden" name="reservationId" value="${reservationId}">
+
 </form>
 <br>
 </div>
