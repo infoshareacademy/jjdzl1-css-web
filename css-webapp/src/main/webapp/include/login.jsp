@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-label-group">
                         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                        <label for="inputPassword">Password</label>
+                        <label for="inputPassword">Password</label><span toggle="#inputPassword" class="login-field-icon far fa-eye input-password"></span>
                     </div>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 </form>

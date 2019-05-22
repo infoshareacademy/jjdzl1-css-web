@@ -57,12 +57,6 @@
             <artifactId>javax.mail-api</artifactId>
             <version>1.6.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.infoshare.academy</groupId>
-            <artifactId>css-logic</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.xhtmlrenderer/flying-saucer-pdf -->
         <dependency>
             <groupId>org.xhtmlrenderer</groupId>
@@ -96,5 +90,4 @@
 
 
     </dependencies>
-
 </project>

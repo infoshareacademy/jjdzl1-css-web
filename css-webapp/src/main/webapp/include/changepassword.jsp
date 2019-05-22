@@ -9,6 +9,7 @@
             <div class="form-group px-3">
                 <label for="password">Current password</label>
                 <input type="password" class="form-control" name="password" id="password" required>
+                <span toggle="#password" class="field-icon far fa-eye input-password"></span>
             </div>
             <div class="form-group px-3">
                 <label for="inputpassword">New password</label>
@@ -18,10 +19,12 @@
                     </small>
                 </p>
                 <input type="password" class="form-control" name="password1" id="inputpassword" required>
+                <span toggle="#inputpassword" class="field-icon far fa-eye input-password"></span>
             </div>
             <div class="form-group px-3">
                 <label for="inputpassword2">Confirm new password</label>
                 <input type="password" class="form-control" name="password2" id="inputpassword2" required>
+                <span toggle="#inputpassword2" class="field-icon far fa-eye input-password"></span>
             </div>
             <div class="form-group px-3">
                 <button type="submit" class="btn btn-primary">Change password</button>
