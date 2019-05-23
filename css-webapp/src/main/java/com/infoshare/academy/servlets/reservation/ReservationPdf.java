@@ -20,8 +20,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.MalformedURLException;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -98,28 +96,12 @@ public class ReservationPdf extends HttpServlet {
 
         String xHtml = convertToXhtml(html);
 
+        String baseUrl = "file:/home/dario/IdeaProjects/jjdzl1-css-web/css-webapp/src/main/resources/";
+
         try {
             ITextRenderer renderer = new ITextRenderer();
-
             renderer.getFontResolver().addFont("Code39.ttf", IDENTITY_H, EMBEDDED);
-
-            try {
-                String baseUrl = Paths
-                        .get("pdf/")
-                        .toAbsolutePath()
-                        .toUri()
-                        .toURL()
-                        .toString();
-   //TODO
-// absolutePath() powinno zwrócić "file:/home/dario/IdeaProjects/jjdzl1-css-web/css-webapp/src/main/resources/"
-//       stworzyłem folder pdf w bin  i tam skopiowałem pliki z resources do
-//       "file:/home/dario/wildfly-15.0.1.Final/bin/pdf/"
-
-                renderer.setDocumentFromString(xHtml, baseUrl);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-
+            renderer.setDocumentFromString(xHtml, baseUrl);
             renderer.layout();
             resp.setContentType("application/pdf");
             resp.setHeader("Content-Disposition", "attachment;filename=reservation.pdf");

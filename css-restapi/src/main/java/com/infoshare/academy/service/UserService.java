@@ -3,6 +3,7 @@ package com.infoshare.academy.service;
 import com.infoshare.academy.dao.UsersRepositoryDao;
 import com.infoshare.academy.domain.User;
 
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -21,7 +22,7 @@ public class UserService {
     @EJB
     private UsersRepositoryDao userDao;
 
-    @RolesAllowed("1")
+    @PermitAll
     @GET
     @Path("/hello")
     @Produces(MediaType.TEXT_PLAIN)
@@ -39,9 +40,9 @@ public class UserService {
 
     @RolesAllowed("1")
     @GET
-    @Path("/users/{login}")
+    @Path("/users/login")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserByLogin(@PathParam("login") String login) {
+    public Response getUserByLogin(@QueryParam("login") String login) {
         User user = userDao.getUserByLogin(login);
         if (user != null) {
             return Response.ok(userDao.getUserByLogin(login)).build();
@@ -51,9 +52,9 @@ public class UserService {
 
     @RolesAllowed("1")
     @GET
-    @Path("/users/id/{id}")
+    @Path("/users/id")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserById(@PathParam("id") int id) {
+    public Response getUserById(@QueryParam("id") int id) {
         User user = userDao.getUserById(id);
         if (user != null) {
             return Response.ok(userDao.getUserById(id)).build();
@@ -63,9 +64,9 @@ public class UserService {
 
     @RolesAllowed("1")
     @DELETE
-    @Path("/users/{login}")
+    @Path("/users/login")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response deleteUserByLogin(@PathParam("login") String login) {
+    public Response deleteUserByLogin(@QueryParam("login") String login) {
         User user = userDao.getUserByLogin(login);
         if (user != null) {
             userDao.deleteUserByLogin(login);
@@ -77,9 +78,9 @@ public class UserService {
 
     @RolesAllowed("1")
     @DELETE
-    @Path("/users/id/{id}")
+    @Path("/users/id")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response deleteUserById(@PathParam("id") int id) {
+    public Response deleteUserById(@QueryParam("id") int id) {
         User user = userDao.getUserById(id);
         if (user != null) {
             userDao.deleteUserById(id);

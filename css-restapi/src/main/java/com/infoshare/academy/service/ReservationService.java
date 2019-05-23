@@ -41,7 +41,7 @@ public class ReservationService {
 
     @RolesAllowed("1")
     @GET
-    @Path("/reservations")
+    @Path("/reservation")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getReservationById(@QueryParam("id") Integer id) {
         return Response.ok(reservationDao.getReservationById(id)).build();
@@ -86,7 +86,7 @@ public class ReservationService {
         return Response.ok(cars).build();
     }
 
-    @RolesAllowed("1")
+    @RolesAllowed({"1","0"})
     @GET
     @Path("/reservationUser")
     @Produces(MediaType.APPLICATION_JSON)
@@ -103,7 +103,7 @@ public class ReservationService {
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
-    @RolesAllowed("1")
+    @RolesAllowed({"1","0"})
     @POST
     @Path("/reservations")
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED, MediaType.APPLICATION_JSON})
