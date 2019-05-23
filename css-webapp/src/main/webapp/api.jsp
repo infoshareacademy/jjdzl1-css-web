@@ -149,6 +149,108 @@
                               </div><!--//section-block-->
                           </section><!--//doc-section-->
 
+                          <section id="reservations-section" class="doc-section">
+                              <h2 class="section-title">Reservations</h2>
+                              <div id="reservations-list" class="section-block">
+                                  <h3 class="block-title">Reservation list<span class="small"> (only for admin users)</span></h3>
+                                  <p>To obtain all resources about reservations use this link:
+                                  <div class="code-block language-html">
+                                      <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/reservations</code></pre>
+                                  </div><!--//code-block-->
+                                  </p>
+                              </div><!--//section-block-->
+                              <div id="reservations-id" class="section-block">
+                                  <h3 class="block-title">Reservation by ID<span class="small"> (only for admin users)</span></h3>
+                                  <p>With given ID in query param the rest service will return chosen reservation:
+                                  <div class="code-block language-html">
+                                      <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/reservation</code></pre>
+                                  </div><!--//code-block-->
+                                  Example JSON for get reservation by id :
+                                  <div class="code-block language-javascript">
+                                      <pre><code>{
+    "car": {
+        "bodyType": "SUV",
+        "carType": 1,
+        "color": "BLACK",
+        "enginePower": 280,
+        "fuelSource": "PETROL",
+        "id": 11,
+        "imagePath": "img/11.jpeg",
+        "make": "Mercedes",
+        "mileage": 115000,
+        "model": "ML350",
+        "seats": 7,
+        "transmission": "AUTOMATIC",
+        "year": 2016
+    },
+    "endDate": "2019-04-06",
+    "reservation_id": 4,
+    "startDate": "2019-04-05",
+    "user": {
+        "accountActive": true,
+        "birthDate": "1985-10-11",
+        "city": "Lublin",
+        "email": "marek@example.com",
+        "firstName": "Marek",
+        "id": 2,
+        "isAccountActive": true,
+        "lastName": "Kowalski",
+        "login": "marek",
+        "phoneNumber": 691029123,
+        "postalCode": "20-155",
+        "streetAddress": "Koncertowa 4",
+        "userType": 0
+    }
+}</code></pre>
+                              </div><!--//section-block-->
+                              <div id="available-list" class="section-block">
+                                  <h3 class="block-title">All available car list</h3>
+                                  <p>With given startDate and endDate in query param the rest service will return all available cars list:
+                                  <div class="code-block language-html">
+                                      <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/availableAllCar</code></pre>
+                                  </div><!--//code-block-->
+                                  </p>
+                              </div><!--//section-block-->
+
+                              <div id="available-list-paging" class="section-block">
+                                  <h3 class="block-title">Available car list paging</h3>
+                                  <p>With given startDate,endDate,currentPage,pageSize in query param the rest service will return available cars list:
+                                  <div class="code-block language-html">
+                                      <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/availableCar</code></pre>
+                                  </div><!--//code-block-->
+                                  </p>
+                              </div><!--//section-block-->
+                              <div id="reservations-user" class="section-block">
+                                  <h3 class="block-title">Reservation for user</h3>
+                                  <p>With given ID user, currentPage,pageSize in query param the rest service will return reservation list for user:
+                                  <div class="code-block language-html">
+                                      <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/reservationUser</code></pre>
+                                  </div><!--//code-block-->
+                                  </p>
+                              </div><!--//section-block-->
+                              <div id="reservation-add" class="section-block">
+                                  <h3 class="block-title">Add reservation</h3>
+                                  <p>With the POST method you can add new reservation with given in form param userId,carId,startDate,endDate to database with this link:
+                                  <div class="code-block language-html">
+                                      <pre><code>POST <span class="uri"></span>${pageContext.request.contextPath}/api/reservations</code></pre>
+                                  </div><!--//code-block-->
+                              </p>
+                              </div><!--//section-block-->
+                              <div id="reservation-delete" class="section-block">
+                                  <h3 class="block-title">Delete reservation<span class="small"> (only for admin users)</span></h3>
+                                  <p>There is option to delete the reservation by ID from query param:
+                                  <div class="code-block language-html">
+                                      <pre><code>DELETE <span class="uri"></span>${pageContext.request.contextPath}/api/reservations</code></pre>
+                                  </div><!--//code-block-->
+                                  </p>
+                              </div>
+                              </div><!--//section-block-->
+                          </section><!--//doc-section-->
+
+
+
+
+
                       </div><!--//content-inner-->
                   </div><!--//doc-content-->
 
@@ -170,10 +272,21 @@
                                   <a class="nav-link scrollto" href="#car-update">Update car</a>
                                   <a class="nav-link scrollto" href="#car-delete">Delete car</a>
                               </nav><!--//nav-->
+                              <a class="nav-link scrollto" href="#reservations-section">Reservations</a>
+                              <nav class="doc-sub-menu nav flex-column">
+                                  <a class="nav-link scrollto" href="#reservations-section">Reservations list</a>
+                                  <a class="nav-link scrollto" href="#reservations-id">Reservation by ID</a>
+                                  <a class="nav-link scrollto" href="#available-list">All available car list</a>
+                                  <a class="nav-link scrollto" href="#available-list-paging">Available car list paging</a>
+                                  <a class="nav-link scrollto" href="#reservations-user">Reservation for user</a>
+                                  <a class="nav-link scrollto" href="#reservation-add">Add reservation</a>
+                                  <a class="nav-link scrollto" href="#reservation-delete">Delete reservation</a>
+                              </nav><!--//nav-->
                           </nav><!--//doc-menu-->
 
                       </div>
-                  </div><!--//doc-sidebar-->
+                  </div>
+                  <!--//doc-sidebar-->
 
               </div><!--//doc-card-body-->
 
