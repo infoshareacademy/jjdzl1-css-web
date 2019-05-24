@@ -32,14 +32,15 @@
 
                 <div id="doc-header" class="doc-header text-center">
                     <h1 class="doc-title"><i class="icon fa fa-car"></i> CarSharingSystem API</h1>
-                    <div class="meta"><i class="far fa-clock"></i> Last updated: May 20th, 2019</div>
+                    <div class="meta"><i class="far fa-clock"></i> Last updated: May 24th, 2019</div>
                 </div><!--//doc-header-->
 
                 <div class="doc-body row">
                     <div class="doc-content col-md-9 col-12 order-1">
                         <div class="content-inner">
+                            <!-- Section: introduction -->
                             <section id="introduction-section" class="doc-section">
-                                <h2 class="section-title">Introduction</h2>
+                                <h2 class="section-title">INTRODUCTION</h2>
                                 <div class="section-block">
                                     <p>The CarSharingSystem API is a RESTful web service to obtain information about our
                                         cars and make reservations by clients. Also there is possibility to add, update
@@ -48,6 +49,7 @@
                                 </div>
                             </section><!--//doc-section-->
 
+                            <!-- Section: HTTP -->
                             <section id="http-section" class="doc-section">
                                 <h2 class="section-title">HTTP</h2>
                                 <div id="http-methods" class="section-block">
@@ -80,21 +82,17 @@
                                         </li>
                                     </ul>
                                 </div><!--//section-block-->
-                            </section><!--//doc-section-->
-
-                            <section id="hello-selection" class="doc-section">
-                                <h2 class="section-title">HELLO</h2>
                                 <div id="hello" class="section-block">
-                                    <h3 class="block-title">Hello</h3>
-                                    <p>Should return:"Hello from CarSharingSystem!"
+                                    <h3 class="block-title">Hello - test our API</h3>
+                                    <p>Should return message: "Hello from CarSharingSystem!"
                                     <div class="code-block language-html">
                                         <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/hello</code></pre>
                                     </div><!--//code-block-->
                                     </p>
                                 </div><!--//section-block-->
-                                <br>
-                            </section>
+                            </section><!--//doc-section-->
 
+                            <!-- Section: cars -->
                             <section id="cars-section" class="doc-section">
                                 <h2 class="section-title">CARS</h2>
                                 <div id="car-list" class="section-block">
@@ -174,7 +172,8 @@
                                     </p>
                                 </div><!--//section-block-->
                             </section><!--//doc-section-->
-                            <br>
+
+                            <!-- Section: reservations -->
                             <section id="reservations-section" class="doc-section">
                                 <h2 class="section-title">RESERVATIONS</h2>
                                 <div id="reservations-list" class="section-block">
@@ -189,11 +188,11 @@
                                 <div id="reservations-id" class="section-block">
                                     <h3 class="block-title">Reservation by ID<span
                                             class="small"> (only for admin users)</span></h3>
-                                    <p>With given ID in query param the rest service will return chosen reservation:
+                                    <p>With given ID in query param the REST service will return chosen reservation:
                                     <div class="code-block language-html">
-                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/reservation</code></pre>
+                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/reservation?id=X</code></pre>
                                     </div><!--//code-block-->
-                                    Example JSON for get reservation by id :
+                                    Example JSON data for getting reservation by ID:
                                     <div class="code-block language-javascript">
                                       <pre><code>{
     "car": {
@@ -233,84 +232,66 @@
                                     </div>
                                 </div><!--//section-block-->
                                 <div id="available-list" class="section-block">
-                                    <h3 class="block-title">All available car list</h3>
-                                    <p>With given startDate and endDate in query param the rest service will return all
-                                        available cars list:
+                                    <h3 class="block-title">Available cars</h3>
+                                    <p>With given "startDate" and "endDate" in query param the REST service will return list of all available cars:
                                     <div class="code-block language-html">
-                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/availableAllCar</code></pre>
+                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/availableAllCar?startDate=XXXX-XX-XX&endDate=XXXX-XX-XX</code></pre>
                                     </div><!--//code-block-->
                                     </p>
-                                </div><!--//section-block-->
-
-                                <div id="available-list-paging" class="section-block">
-                                    <h3 class="block-title">Available car list paging</h3>
-                                    <p>With given startDate,endDate,currentPage,pageSize in query param the rest service
-                                        will return available cars list:
+                                    <h5 class="block-title">Available cars with list paging</h5>
+                                    <p>With given "startDate", "endDate", "currentPage" and "pageSize" in query param the rest service will return the limited list of available cars:
                                     <div class="code-block language-html">
-                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/availableCar</code></pre>
+                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/availableCar?startDate=XXXX-XX-XX&endDate=XXXX-XX-XX&currentPage=X&pageSize=X</code></pre>
                                     </div><!--//code-block-->
                                     </p>
                                 </div><!--//section-block-->
                                 <div id="reservations-user" class="section-block">
-                                    <h3 class="block-title">Reservation for user</h3>
-                                    <p>With given ID user, currentPage,pageSize in query param the rest service will
-                                        return reservation list for user:
+                                    <h3 class="block-title">Reservations for user</h3>
+                                    <p>With given user "id", "currentPage", "pageSize" in query param the REST service will return reservation list for user:
                                     <div class="code-block language-html">
-                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/reservationUser</code></pre>
+                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/reservationUser?id=X&currentPage=X&pageSize=X</code></pre>
                                     </div><!--//code-block-->
                                     </p>
                                 </div><!--//section-block-->
                                 <div id="reservation-add" class="section-block">
                                     <h3 class="block-title">Add reservation</h3>
-                                    <p>With the POST method you can add new reservation with given in form param
-                                        userId,carId,startDate,endDate to database with this link:
+                                    <p>With the POST method you can add new reservation to the database with given in form param "userId", "carId", "startDate", "endDate" using this link:
                                     <div class="code-block language-html">
-                                        <pre><code>POST <span class="uri"></span>${pageContext.request.contextPath}/api/reservations</code></pre>
+                                        <pre><code>POST <span class="uri"></span>${pageContext.request.contextPath}/api/reservations?userId=X&carId=X&startDate=XXXX-XX-XX&endDate=XXXX-XX-XX</code></pre>
                                     </div><!--//code-block-->
                                     </p>
                                 </div><!--//section-block-->
                                 <div id="reservation-delete" class="section-block">
-                                    <h3 class="block-title">Delete reservation<span class="small"> (only for admin users)</span>
-                                    </h3>
-                                    <p>There is option to delete the reservation by ID from query param:
+                                    <h3 class="block-title">Delete reservation<span class="small"> (only for admin users)</span></h3>
+                                    <p>There is option to delete the reservation by given ID in the query param:
                                     <div class="code-block language-html">
-                                        <pre><code>DELETE <span class="uri"></span>${pageContext.request.contextPath}/api/reservations</code></pre>
+                                        <pre><code>DELETE <span class="uri"></span>${pageContext.request.contextPath}/api/reservations?id=X</code></pre>
                                     </div><!--//code-block-->
                                     </p>
                                 </div><!--//section-block-->
                             </section><!--//doc-section-->
-                            <br>
+
+                            <!-- Section: users -->
                             <section id="users-section" class="doc-section">
-                                <h2 class="section-title">USERS</h2>
+                                <h2 class="section-title">USERS<span class="small"> (only for admin users)</span></h2>
                                 <div id="users-list" class="section-block">
-                                    <h3 class="block-title">User list<span class="small"> (only for admin users)</span>
-                                    </h3>
+                                    <h3 class="block-title">User list</h3>
                                     <p>To obtain all resources about users use this link:
                                     <div class="code-block language-html">
                                         <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/users</code></pre>
                                     </div><!--//code-block-->
                                     </p>
                                 </div>
-                                <div id="users-login" class="section-block">
-                                    <h3 class="block-title">Get user by login<span
-                                            class="small"> (only for admin users)</span></h3>
-                                    <p>With given login the rest service will return chosen user:
+                                <div id="users-get" class="section-block">
+                                    <h3 class="block-title">Get user by login/ID</h3>
+                                    <p>With given login or ID the REST service will return chosen user:
                                     <div class="code-block language-html">
-                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/users/login</code></pre>
+                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/users/{login}
+GET <span class="uri"></span>${pageContext.request.contextPath}/api/users/id/{id}</code></pre>
                                     </div><!--//code-block-->
-                                    </p>
-                                </div>
-                                <div id="users-id" class="section-block">
-                                    <h3 class="block-title">Get user by id<span
-                                            class="small"> (only for admin users)</span></h3>
-                                    <p>With given login the rest service will return chosen user:
-                                    <div class="code-block language-html">
-                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/users/id</code></pre>
-                                    </div><!--//code-block-->
-                                    Example JSON for car update:
+                                    Example JSON with user data:
                                     <div class="code-block language-javascript">
-                                      <pre><code>
-   }
+                                      <pre><code>}
     "accountActive": true,
     "birthDate": "1981-01-15",
     "city": "Lublin",
@@ -328,35 +309,21 @@
                                     </div><!--//code-block-->
                                     </p>
                                 </div>
-                                <div id="users-delete-id" class="section-block">
-                                    <h3 class="block-title">Delete user by id<span
-                                            class="small"> (only for admin users)</span>
-                                    </h3>
-                                    <p>There is option to delete the user by ID:
+                                <div id="users-delete" class="section-block">
+                                    <h3 class="block-title">Delete user by login/ID</h3>
+                                    <p>There is option to delete the user with given login or ID:
                                     <div class="code-block language-html">
-                                            <pre><code>DELETE <span
-                                                    class="uri"></span>${pageContext.request.contextPath}/api/users/id</code></pre>
+                                            <pre><code>DELETE <span class="uri"></span>${pageContext.request.contextPath}/api/users/{login}
+DELETE <span class="uri"></span>${pageContext.request.contextPath}/api/users/id/{id}</code></pre>
                                     </div><!--//code-block-->
                                     </p>
-                                </div>
-                                <div id="users-delete-login" class="section-block">
-                                    <h3 class="block-title">Delete user by login<span class="small"> (only for admin users)</span>
-                                    </h3>
-                                    <p>There is option to delete the user by login:
-                                    <div class="code-block language-html">
-                                            <pre><code>DELETE <span
-                                                    class="uri"></span>${pageContext.request.contextPath}/api/users/login</code></pre>
-                                    </div><!--//code-block-->
-                                    </p>
-                                </div>
-
-
-                            </section>
-
+                                </div><!--//section-block-->
+                            </section><!--//doc-section-->
 
                         </div><!--//content-inner-->
                     </div><!--//doc-content-->
 
+                    <!-- Docs sidebar -->
                     <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
                         <div id="doc-nav" class="doc-nav">
 
@@ -366,9 +333,7 @@
                                 <nav class="doc-sub-menu nav flex-column">
                                     <a class="nav-link scrollto" href="#http-methods">Allowed HTTPs requests</a>
                                     <a class="nav-link scrollto" href="#http-responses">Usual server responses</a>
-                                </nav><!--//nav-->
-                                <nav class="doc-sub-menu nav flex-column">
-                                    <a class="nav-link scrollto" href="#hello">Hello</a>
+                                    <a class="nav-link scrollto" href="#hello">Hello - test our API</a>
                                 </nav><!--//nav-->
                                 <a class="nav-link scrollto" href="#cars-section">Cars</a>
                                 <nav class="doc-sub-menu nav flex-column">
@@ -380,21 +345,18 @@
                                 </nav><!--//nav-->
                                 <a class="nav-link scrollto" href="#reservations-section">Reservations</a>
                                 <nav class="doc-sub-menu nav flex-column">
-                                    <a class="nav-link scrollto" href="#reservations-section">Reservations list</a>
+                                    <a class="nav-link scrollto" href="#reservations-section">Reservation list</a>
                                     <a class="nav-link scrollto" href="#reservations-id">Reservation by ID</a>
-                                    <a class="nav-link scrollto" href="#available-list">All available car list</a>
-                                    <a class="nav-link scrollto" href="#available-list-paging">Available car list paging</a>
-                                    <a class="nav-link scrollto" href="#reservations-user">Reservation for user</a>
+                                    <a class="nav-link scrollto" href="#available-list">Available cars</a>
+                                    <a class="nav-link scrollto" href="#reservations-user">Reservations for user</a>
                                     <a class="nav-link scrollto" href="#reservation-add">Add reservation</a>
                                     <a class="nav-link scrollto" href="#reservation-delete">Delete reservation</a>
-                                    <a class="nav-link scrollto" href="#reservations-section">Reservations</a>
-                                    <nav class="doc-sub-menu nav flex-column">
-                                        <a class="nav-link scrollto" href="#users-section">Users list</a>
-                                        <a class="nav-link scrollto" href="#users-login">Get user by login</a>
-                                        <a class="nav-link scrollto" href="#users-id">Get user by id</a>
-                                        <a class="nav-link scrollto" href="#users-delete-id">Delete user by id</a>
-                                        <a class="nav-link scrollto" href="#users-delete-login">Delete user by login</a>
-                                    </nav><!--//nav-->
+                                </nav><!--//nav-->
+                                <a class="nav-link scrollto" href="#users-section">Users</a>
+                                <nav class="doc-sub-menu nav flex-column">
+                                    <a class="nav-link scrollto" href="#users-list">Users list</a>
+                                    <a class="nav-link scrollto" href="#users-get">Get user by login/ID</a>
+                                    <a class="nav-link scrollto" href="#users-delete">Delete user by login/ID</a>
                                 </nav><!--//nav-->
                             </nav><!--//doc-menu-->
 

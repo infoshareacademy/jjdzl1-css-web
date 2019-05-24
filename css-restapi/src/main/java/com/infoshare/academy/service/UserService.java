@@ -40,9 +40,9 @@ public class UserService {
 
     @RolesAllowed("1")
     @GET
-    @Path("/users/login")
+    @Path("/users/{login}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserByLogin(@QueryParam("login") String login) {
+    public Response getUserByLogin(@PathParam("login") String login) {
         User user = userDao.getUserByLogin(login);
         if (user != null) {
             return Response.ok(userDao.getUserByLogin(login)).build();
@@ -52,9 +52,9 @@ public class UserService {
 
     @RolesAllowed("1")
     @GET
-    @Path("/users/id")
+    @Path("/users/id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserById(@QueryParam("id") int id) {
+    public Response getUserById(@PathParam("id") int id) {
         User user = userDao.getUserById(id);
         if (user != null) {
             return Response.ok(userDao.getUserById(id)).build();
@@ -64,9 +64,9 @@ public class UserService {
 
     @RolesAllowed("1")
     @DELETE
-    @Path("/users/login")
+    @Path("/users/{login}")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response deleteUserByLogin(@QueryParam("login") String login) {
+    public Response deleteUserByLogin(@PathParam("login") String login) {
         User user = userDao.getUserByLogin(login);
         if (user != null) {
             userDao.deleteUserByLogin(login);
@@ -78,9 +78,9 @@ public class UserService {
 
     @RolesAllowed("1")
     @DELETE
-    @Path("/users/id")
+    @Path("/users/id/{id}")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response deleteUserById(@QueryParam("id") int id) {
+    public Response deleteUserById(@PathParam("id") int id) {
         User user = userDao.getUserById(id);
         if (user != null) {
             userDao.deleteUserById(id);
