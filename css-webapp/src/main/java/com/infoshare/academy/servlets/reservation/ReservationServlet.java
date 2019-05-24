@@ -85,7 +85,6 @@ public class ReservationServlet extends HttpServlet {
             String start = req.getParameter("startDate");
             String end = req.getParameter("endDate");
 
-
             List<Car> carListAvailableCar = daoReservation.getCarListAvailableCar(start(start), end(end));
             for (Car cars : carListAvailableCar) {
                 Integer idCar = cars.getId();
@@ -103,7 +102,6 @@ public class ReservationServlet extends HttpServlet {
                     req.setAttribute("endDate", end(end).format(formatter));
                     req.setAttribute("success", successReservationAdd());
                     req.getRequestDispatcher("/reservationconfirm.jsp").forward(req, resp);
-
                 }
             }
             MailSend mail = new MailSend();
@@ -116,7 +114,6 @@ public class ReservationServlet extends HttpServlet {
                         , car(carId).getYear().toString());
             }).start();
         }
-
 
         req.setAttribute("errorReservation", errorIncorrectIdCar());
     }
@@ -182,7 +179,6 @@ public class ReservationServlet extends HttpServlet {
     public int cost(Car car, LocalDate start, LocalDate end) {
         return price(car) * period(start, end);
     }
-
 
     public int period(LocalDate start, LocalDate end) {
         Period between = Period.between(start, end);

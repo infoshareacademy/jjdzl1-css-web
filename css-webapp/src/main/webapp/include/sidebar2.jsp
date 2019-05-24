@@ -5,7 +5,7 @@
 
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="listAvailableCar.jsp"><span data-feather="list"></span>Reservations <span class="sr-only">(current)</span></a>
+                <a class="nav-link active" href="listReservationCurrentUser"><span data-feather="list"></span>Reservations <span class="sr-only">(current)</span></a>
             </li>
         </ul>
 
@@ -14,11 +14,19 @@
         </h6>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="searchCar.jsp"><span data-feather="calendar"></span>Search cars</a>
-                <a class="nav-link" href="listAvailableCar.jsp"><span data-feather="calendar"></span>Check available cars</a>
                 <a class="nav-link" href="reservation.jsp"><span data-feather="plus-square"></span>Add reservation</a>
                 <a class="nav-link" href="listReservationCurrentUser"><span data-feather="calendar"></span>Your reservations</a>
                 <a class="nav-link" href="delete"><span data-feather="trash-2"></span>Delete reservation</a>
+            </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Cars panel</span>
+        </h6>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="searchCar.jsp"><span data-feather="calendar"></span>Search for cars</a>
+                <a class="nav-link" href="listAvailableCar.jsp"><span data-feather="calendar"></span>Check available cars</a>
             </li>
         </ul>
 

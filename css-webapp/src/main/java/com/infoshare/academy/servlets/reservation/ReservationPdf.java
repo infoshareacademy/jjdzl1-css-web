@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,13 +36,10 @@ public class ReservationPdf extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(ReservationPdf.class.getName());
 
-
     @EJB
     CarsRepositoryDao daoCar;
-
     @EJB
     UsersRepositoryDao daoUser;
-
     @EJB
     ReservationRepositoryDao daoReservation;
 
@@ -69,12 +67,17 @@ public class ReservationPdf extends HttpServlet {
         User user = daoUser.getUserById(Integer.parseInt(userId));
         Reservation reservation = daoReservation.getReservationById(Integer.parseInt(reservationId));
 
+        if (period.equals("function")){
+            period = period(LocalDate.parse(startDate), LocalDate.parse(endDate));
+            price = String.valueOf(price(car));
+            cost = String.valueOf(cost(car, period));
+        }
+
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setPrefix("/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(HTML);
         templateResolver.setCharacterEncoding(UTF_8);
-
 
         TemplateEngine templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
@@ -97,6 +100,7 @@ public class ReservationPdf extends HttpServlet {
         String xHtml = convertToXhtml(html);
 
         String baseUrl = "file:/home/dario/IdeaProjects/jjdzl1-css-web/css-webapp/src/main/resources/";
+        //String baseUrl = "file:/D:/Informatyka/GitHub/jjdzl1-css-web/css-webapp/src/main/resources/";
 
         try {
             ITextRenderer renderer = new ITextRenderer();
@@ -133,5 +137,27 @@ public class ReservationPdf extends HttpServlet {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         tidy.parseDOM(inputStream, outputStream);
         return outputStream.toString(UTF_8);
+    }
+
+    private String period(LocalDate start, LocalDate end) {
+        Period between = Period.between(start, end);
+        return String.valueOf(between.getDays() + 1);
+    }
+
+    private int price(Car car) {
+        int type = car.getCarType();
+        switch (type) {
+            case 1:
+                return 80;
+            case 2:
+                return 150;
+            case 3:
+                return 300;
+        }
+        return 100;
+    }
+
+    private int cost(Car car, String period) {
+        return price(car) * Integer.parseInt(period);
     }
 }
