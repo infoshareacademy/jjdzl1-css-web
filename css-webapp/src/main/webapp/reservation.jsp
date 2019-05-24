@@ -36,7 +36,7 @@
     <!-- Page Content -->
     <c:choose>
         <c:when test="${sessionScope.username != null}">
-            <main class="flex-fill col-md-10 ml-sm-auto py-3">
+            <main class="flex-fill col-md-10 ml-sm-auto py-3 centered">
                 <div class="container">
                     <jsp:include page="include/reservation.jsp"></jsp:include>
                 </div>
