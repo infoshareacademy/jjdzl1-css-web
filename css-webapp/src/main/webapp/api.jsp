@@ -241,7 +241,7 @@
                                     <h5 class="block-title">Available cars with list paging</h5>
                                     <p>With given "startDate", "endDate", "currentPage" and "pageSize" in query param the rest service will return the limited list of available cars:
                                     <div class="code-block language-html">
-                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/availableCar?startDate=XXXX-XX-XX&endDate=XXXX-XX-XX&currentPage=X&pageSize=X</code></pre>
+                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/availableCar?startDate=XXXX-XX-XX&endDate=XXXX-XX-XX&amp;currentPage=X&pageSize=X</code></pre>
                                     </div><!--//code-block-->
                                     </p>
                                 </div><!--//section-block-->
@@ -249,7 +249,7 @@
                                     <h3 class="block-title">Reservations for user</h3>
                                     <p>With given user "id", "currentPage", "pageSize" in query param the REST service will return reservation list for user:
                                     <div class="code-block language-html">
-                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/reservationUser?id=X&currentPage=X&pageSize=X</code></pre>
+                                        <pre><code>GET <span class="uri"></span>${pageContext.request.contextPath}/api/reservationUser?id=X&amp;currentPage=X&pageSize=X</code></pre>
                                     </div><!--//code-block-->
                                     </p>
                                 </div><!--//section-block-->

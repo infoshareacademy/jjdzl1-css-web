@@ -18,6 +18,7 @@
                     <th scope="col">Transmission</th>
                     <th scope="col">Start date</th>
                     <th scope="col">End date</th>
+                    <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,19 @@
                         <td>${reservation.car.transmission}</td>
                         <td>${reservation.startDate}</td>
                         <td>${reservation.endDate}</td>
+                        <td>
+                            <form method="get" action="reservationPdf">
+                                <button class="btn btn-success" type="submit">Download PDF</button>
+                                <input type="hidden" name="startDate" value="${reservation.startDate}"/>
+                                <input type="hidden" name="endDate" value="${reservation.endDate}"/>
+                                <input type="hidden" name="carId" value="${reservation.car.id}">
+                                <input type="hidden" name="userId" value="${reservation.user.id}">
+                                <input type="hidden" name="period" value="function">
+                                <input type="hidden" name="price" value="function">
+                                <input type="hidden" name="cost" value="function">
+                                <input type="hidden" name="reservationId" value="${reservation.reservation_id}">
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

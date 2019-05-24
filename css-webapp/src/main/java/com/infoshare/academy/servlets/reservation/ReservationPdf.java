@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,6 +66,12 @@ public class ReservationPdf extends HttpServlet {
         Car car = daoCar.getCar(Integer.parseInt(carId));
         User user = daoUser.getUserById(Integer.parseInt(userId));
         Reservation reservation = daoReservation.getReservationById(Integer.parseInt(reservationId));
+
+        if (period.equals("function")){
+            period = period(LocalDate.parse(startDate), LocalDate.parse(endDate));
+            price = String.valueOf(price(car));
+            cost = String.valueOf(cost(car, period));
+        }
 
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setPrefix("/");
@@ -130,5 +137,27 @@ public class ReservationPdf extends HttpServlet {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         tidy.parseDOM(inputStream, outputStream);
         return outputStream.toString(UTF_8);
+    }
+
+    private String period(LocalDate start, LocalDate end) {
+        Period between = Period.between(start, end);
+        return String.valueOf(between.getDays() + 1);
+    }
+
+    private int price(Car car) {
+        int type = car.getCarType();
+        switch (type) {
+            case 1:
+                return 80;
+            case 2:
+                return 150;
+            case 3:
+                return 300;
+        }
+        return 100;
+    }
+
+    private int cost(Car car, String period) {
+        return price(car) * Integer.parseInt(period);
     }
 }
