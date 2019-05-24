@@ -24,7 +24,7 @@
                         <a class="nav-link" id="nav-profile" href="${pageContext.request.contextPath}/profile">Profile</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" id="nav-admin" href="${pageContext.request.contextPath}/admin/admin.jsp">Admin</a>
+                        <a class="nav-link text-dark" id="nav-admin" href="${pageContext.request.contextPath}/admin/users">Admin</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" id="nav-rsv" href="${pageContext.request.contextPath}/listReservationCurrentUser">Reservations</a>

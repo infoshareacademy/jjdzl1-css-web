@@ -35,13 +35,10 @@ public class ReservationPdf extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(ReservationPdf.class.getName());
 
-
     @EJB
     CarsRepositoryDao daoCar;
-
     @EJB
     UsersRepositoryDao daoUser;
-
     @EJB
     ReservationRepositoryDao daoReservation;
 
@@ -75,7 +72,6 @@ public class ReservationPdf extends HttpServlet {
         templateResolver.setTemplateMode(HTML);
         templateResolver.setCharacterEncoding(UTF_8);
 
-
         TemplateEngine templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
 
@@ -97,6 +93,7 @@ public class ReservationPdf extends HttpServlet {
         String xHtml = convertToXhtml(html);
 
         String baseUrl = "file:/home/dario/IdeaProjects/jjdzl1-css-web/css-webapp/src/main/resources/";
+        //String baseUrl = "file:/D:/Informatyka/GitHub/jjdzl1-css-web/css-webapp/src/main/resources/";
 
         try {
             ITextRenderer renderer = new ITextRenderer();

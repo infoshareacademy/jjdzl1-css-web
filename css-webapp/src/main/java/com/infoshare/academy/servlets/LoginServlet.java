@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("username", username);
                 session.setAttribute("usertype", usertype);
                 LOGGER.info("[LOGIN] Successful login to user: " + username + ", usertype=" + usertype + ", from IP: " + remoteAddr);
-                req.getRequestDispatcher("listAvailableCar.jsp").forward(req, resp);
+                req.getRequestDispatcher("reservation.jsp").forward(req, resp);
             } else {
                 req.setAttribute("activationError", activationErrorMessage());
                 req.getRequestDispatcher("login.jsp").forward(req, resp);

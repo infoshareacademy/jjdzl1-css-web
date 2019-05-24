@@ -32,7 +32,7 @@
         <h4 class="card-header">Available cars</h4>
         <div class="card-body" align="center">
             <div class="table-responsive">
-            <table class="table table-responsive table-sm table-striped">
+            <table class="table table-sm table-striped">
                 <thead>
                 <tr>
                     <th scope="col">Photo</th>
