@@ -1,5 +1,6 @@
 package com.infoshare.academy.servlets.reservation;
 
+import com.infoshare.academy.cdi.FileUploadProcessor;
 import com.infoshare.academy.dao.CarsRepositoryDao;
 import com.infoshare.academy.dao.ReservationRepositoryDao;
 import com.infoshare.academy.dao.UsersRepositoryDao;
@@ -14,6 +15,7 @@ import org.w3c.tidy.Tidy;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +44,9 @@ public class ReservationPdf extends HttpServlet {
     UsersRepositoryDao daoUser;
     @EJB
     ReservationRepositoryDao daoReservation;
+
+    @Inject
+    FileUploadProcessor fileUploadProcessor;
 
     private static final String UTF_8 = "UTF-8";
     private static final String OUTPUT_FILE = "test.pdf";
@@ -74,7 +79,7 @@ public class ReservationPdf extends HttpServlet {
         }
 
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setPrefix("/");
+        templateResolver.setPrefix("/pdf/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(HTML);
         templateResolver.setCharacterEncoding(UTF_8);
@@ -99,12 +104,11 @@ public class ReservationPdf extends HttpServlet {
 
         String xHtml = convertToXhtml(html);
 
-        String baseUrl = "file:/home/dario/IdeaProjects/jjdzl1-css-web/css-webapp/src/main/resources/";
-        //String baseUrl = "file:/D:/Informatyka/GitHub/jjdzl1-css-web/css-webapp/src/main/resources/";
+        String baseUrl=fileUploadProcessor.readImagesPath("template-path");
 
         try {
             ITextRenderer renderer = new ITextRenderer();
-            renderer.getFontResolver().addFont("Code39.ttf", IDENTITY_H, EMBEDDED);
+            renderer.getFontResolver().addFont("pdf/Code39.ttf", IDENTITY_H, EMBEDDED);
             renderer.setDocumentFromString(xHtml, baseUrl);
             renderer.layout();
             resp.setContentType("application/pdf");
