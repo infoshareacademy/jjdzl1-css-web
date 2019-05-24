@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public interface FileUploadProcessor {
 
-    String readImagesPath() throws IOException;
+    String readImagesPath(String path) throws IOException;
 
-    String uploadImageFile(Part image) throws IOException;
+    String uploadImageFile(Part image,String path) throws IOException;
 }

@@ -58,6 +58,6 @@ public class CarMessages {
 
     public static String successCarAdded() {
         String errorData = "Car successfully added to database.";
-        return startDangerDiv + errorData + endDiv;
+        return startSuccessDiv + errorData + endDiv;
     }
 }

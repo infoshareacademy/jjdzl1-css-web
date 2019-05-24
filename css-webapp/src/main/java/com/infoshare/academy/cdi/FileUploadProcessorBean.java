@@ -1,7 +1,6 @@
 package com.infoshare.academy.cdi;
 
 import javax.enterprise.context.RequestScoped;
-import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
 import java.io.*;
 import java.nio.file.Files;
@@ -12,7 +11,7 @@ import java.util.Properties;
 public class FileUploadProcessorBean implements FileUploadProcessor {
 
     @Override
-    public String readImagesPath() throws IOException {
+    public String readImagesPath(String path) throws IOException {
         try {
             Properties properties = new Properties();
             FileInputStream inputStream = (FileInputStream) Thread.currentThread()
@@ -20,17 +19,17 @@ public class FileUploadProcessorBean implements FileUploadProcessor {
                     .getResource("settings.properties")
                     .openStream();
             properties.load(inputStream);
-            return properties.getProperty("image-path");
+            return properties.getProperty(path);
         } catch (IOException e) {
             throw new FileNotFoundException();
         }
     }
 
     @Override
-    public String uploadImageFile(Part image) throws IOException {
+    public String uploadImageFile(Part image,String path) throws IOException {
         String fileName = image.getSubmittedFileName();
         try {
-            String uploadPath = readImagesPath() + File.separator + fileName;
+            String uploadPath = readImagesPath(path) + File.separator + fileName;
             File targetFile = new File(uploadPath);
             InputStream inputStream = image.getInputStream();
             String mimetype = Files.probeContentType(targetFile.toPath());

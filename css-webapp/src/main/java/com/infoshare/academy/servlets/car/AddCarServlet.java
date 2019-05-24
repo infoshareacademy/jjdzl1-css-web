@@ -49,7 +49,7 @@ public class AddCarServlet extends HttpServlet {
 
         String imagePath = "img/" + image.getSubmittedFileName();
 
-        String uploadedImage = fileUploadProcessor.uploadImageFile(image);
+        String uploadedImage = fileUploadProcessor.uploadImageFile(image,"image-path");
         if (uploadedImage == null) {
             req.setAttribute("error", errorNotImage());
             req.getRequestDispatcher("/admin/addCar.jsp").forward(req, resp);
