@@ -1,5 +1,6 @@
 package com.infoshare.academy.servlets.reservation;
 
+import com.infoshare.academy.cdi.ConvertToXhtmlBeen;
 import com.infoshare.academy.cdi.FileUploadProcessor;
 import com.infoshare.academy.dao.CarsRepositoryDao;
 import com.infoshare.academy.dao.ReservationRepositoryDao;
@@ -11,7 +12,6 @@ import com.lowagie.text.DocumentException;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.w3c.tidy.Tidy;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import javax.ejb.EJB;
@@ -21,7 +21,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -47,6 +49,9 @@ public class ReservationPdf extends HttpServlet {
 
     @Inject
     FileUploadProcessor fileUploadProcessor;
+
+    @Inject
+    ConvertToXhtmlBeen converter;
 
     private static final String UTF_8 = "UTF-8";
     private static final String OUTPUT_FILE = "test.pdf";
@@ -102,7 +107,7 @@ public class ReservationPdf extends HttpServlet {
 
         String html = templateEngine.process("template", context);
 
-        String xHtml = convertToXhtml(html);
+        String xHtml = converter.convertToXhtml(html);
 
         String baseUrl=fileUploadProcessor.readImagesPath("template-path");
 
@@ -130,17 +135,6 @@ public class ReservationPdf extends HttpServlet {
 
     public LocalDate end(String end) {
         return LocalDate.parse(end);
-    }
-
-    private String convertToXhtml(String html) throws UnsupportedEncodingException {
-        Tidy tidy = new Tidy();
-        tidy.setInputEncoding(UTF_8);
-        tidy.setOutputEncoding(UTF_8);
-        tidy.setXHTML(true);
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(html.getBytes(UTF_8));
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        tidy.parseDOM(inputStream, outputStream);
-        return outputStream.toString(UTF_8);
     }
 
     private String period(LocalDate start, LocalDate end) {
