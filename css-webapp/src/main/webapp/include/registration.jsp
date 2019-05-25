@@ -47,23 +47,23 @@
 
                 <div class="mb-3">
                     <label for="phoneNumber">Phone number</label>
-                    <input type="tel" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="600 123 999" pattern="[0-9]{1,11}" maxlength="11" data-bind="value:inputphonenumber" required>
+                    <input type="tel" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="Phone number" pattern="[0-9]{1,11}" maxlength="11" data-bind="value:inputphonenumber" title="For example: 600700800" data-toggle="tooltip" data-placement="top" required>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">First name</label>
-                        <input type="text" name="firstName" class="form-control" id="firstName" placeholder="First name" required>
+                        <input type="text" name="firstName" class="form-control" id="firstName" placeholder="First name" pattern=".{1,30}" maxlength="30" title="1 to 30 characters" data-toggle="tooltip" data-placement="top" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="lastName">Last name</label>
-                        <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Last name" required>
+                        <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Last name" pattern=".{1,30}" maxlength="30" title="1 to 30 characters" data-toggle="tooltip" data-placement="top" required>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="birthOfDate">Birth date</label>
-                    <input type="date" name="birthOfDate" class="form-control" id="birthOfDate" required>
+                    <input type="date" name="birthOfDate" class="form-control" id="birthOfDate" title="You must be over 18 years old to register account" data-toggle="tooltip" data-placement="top" required>
                 </div>
 
                 <div class="row">

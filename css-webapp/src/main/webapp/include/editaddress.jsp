@@ -17,7 +17,7 @@
             <h5>Input new address:</h5>
             <div class="form-group px-3">
                 <label for="postalcode">Postal code</label>
-                <input type="text" class="form-control" name="postalCode" id="postalcode" placeholder="Postal code" value="${currentUser.postalCode}">
+                <input type="text" class="form-control" name="postalCode" id="postalcode" placeholder="Postal code" maxlength="6" value="${currentUser.postalCode}">
             </div>
             <div class="form-group px-3">
                 <label for="city">City</label>
