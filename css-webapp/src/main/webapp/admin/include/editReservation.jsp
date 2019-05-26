@@ -84,7 +84,7 @@ ${error}
             </div>
 
             <div class="text-center">
-                <button class="btn btn-outline-primary" type="button" onclick="history.back();">Previous page</button>
+                <button class="btn btn-outline-primary" type="button" onclick="history.back();">Go back</button>
             </div>
 
         </div>

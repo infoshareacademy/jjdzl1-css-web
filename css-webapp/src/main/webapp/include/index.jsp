@@ -25,7 +25,15 @@
                 <p class="card-text">Choose the car that suits your needs. Don't wait, just check available time and start using one of our vehicles!</p>
             </div>
             <div class="card-footer">
-                <a href="listAvailableCar" class="btn btn-primary">Begin now »</a>
+                <c:choose>
+                    <c:when test="${sessionScope.username != null}">
+                        <a href="reservation.jsp" class="btn btn-primary">Begin now »</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="login" class="btn btn-primary">Begin now »</a>
+                    </c:otherwise>
+                </c:choose>
+
             </div>
         </div>
     </div>

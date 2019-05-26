@@ -51,7 +51,7 @@
                 <td>${car.model}</td>
                 <td>${car.year}</td>
                 <td>${car.fuelSource}</td>
-                <td>${car.enginePower}</td>
+                <td>${car.enginePower} hp</td>
                 <td>${car.transmission}</td>
             </tr>
             </c:forEach>

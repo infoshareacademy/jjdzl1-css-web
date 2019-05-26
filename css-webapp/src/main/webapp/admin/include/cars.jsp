@@ -44,8 +44,8 @@
                     <td>${car.make}</td>
                     <td>${car.model}</td>
                     <td>${car.year}</td>
-                    <td>${car.mileage}</td>
-                    <td>${car.enginePower}</td>
+                    <td>${car.mileage} km</td>
+                    <td>${car.enginePower} hp</td>
                     <td>${car.fuelSource}</td>
                     <td>${car.transmission}</td>
                     <td>${car.bodyType}</td>
