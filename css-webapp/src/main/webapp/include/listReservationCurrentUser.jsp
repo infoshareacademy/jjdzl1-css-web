@@ -28,7 +28,7 @@
                         <td>${reservation.car.make}</td>
                         <td>${reservation.car.model}</td>
                         <td>${reservation.car.fuelSource}</td>
-                        <td>${reservation.car.enginePower}</td>
+                        <td>${reservation.car.enginePower} hp</td>
                         <td>${reservation.car.transmission}</td>
                         <td>${reservation.startDate}</td>
                         <td>${reservation.endDate}</td>

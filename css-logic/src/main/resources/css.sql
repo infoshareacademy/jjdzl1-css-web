@@ -121,7 +121,7 @@ INSERT INTO `reservations` (`reservation_id`, `car_id`, `user_id`, `start_date`,
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `user_type` int(1) NOT NULL,
-  `login` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `login` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `phone_number` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -142,13 +142,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_type`, `login`, `password`, `email`, `phone_number`, `first_name`, `last_name`, `birth_date`, `street_address`, `postal_code`, `city`, `authorization_number`, `is_account_active`, `password_token_UUID`, `password_token_dateTime`) VALUES
-(1, 1, 'admin', '$31$16$S2AdQ1Iotlgr3ozsDMR-3OY0Fyql8_uermIXQsG-eRM', 'admin@example.com', '601001003', 'Admin', 'Adminowski', '1990-05-18', 'Chopina 5', '20-150', 'Lublin', '', 1, NULL, NULL),
+(1, 1, 'admin', '$31$16$S2AdQ1Iotlgr3ozsDMR-3OY0Fyql8_uermIXQsG-eRM', 'carsharingsystem.help@gmail.com', '601001003', 'Admin', 'Adminowski', '1990-05-18', 'Chopina 5', '20-150', 'Lublin', '', 1, NULL, NULL),
 (2, 0, 'marek', '$31$16$uSIi1BcynFCxhSLZgNHmONddmL0FfTy0sZsGcTOnR4Q', 'marek@example.com', '691029123', 'Marek', 'Kowalski', '1985-10-11', 'Koncertowa 4', '20-155', 'Lublin', '', 1, NULL, NULL),
-(3, 0, 'Ewa', '$31$16$PCyovEJEPnqCNvyHRyOzoKt-4Tma0pPJyQbl7JkjKt8', 'ewa@example.com', '691029123', 'Ewa', 'Konieczna', '2004-07-23', 'Nadbystrzycka 48A', '20-123', 'Lublin', '', 1, NULL, NULL),
+(3, 0, 'Ewa', '$31$16$PCyovEJEPnqCNvyHRyOzoKt-4Tma0pPJyQbl7JkjKt8', 'ewa@example.com', '691029123', 'Ewa', 'Konieczna', '2000-07-23', 'Nadbystrzycka 48A', '20-123', 'Lublin', '', 1, NULL, NULL),
 (4, 0, 'darek', '$31$16$esmoxUes48YBzDF6YMmwonlz4T-ICNFGjFqHyweoWWY', 'darek_giza@op.pl', '772123124', 'Darek', 'Giza', '1981-01-15', 'Al. Królewska 41', '20-121', 'Lublin', '', 1, NULL, NULL),
-(5, 0, 'lulek', '$31$16$D24IUZGD8y2oF6eR85YflS_HSmgT7A5r4xMRdQL0Ppg', 'lulek@gmail.com', '578510123', 'Marcin', 'Turlaj', '1995-03-05', 'Północna 11', '20-150', 'LU', '', 1, NULL, NULL),
-(6, 0, 'Kamil', '$31$16$v0fxEwt8kXa_xJY_4suVp8HDvFE2JRpPY3KZfli_6qM', 'kamil@kamil.com', '123123123', 'asd', 'asd', '1996-03-26', '', '', '', 'be2d91e8-7739-4835-ae68-09eb53cda7d7', 0, NULL, NULL),
-(12, 0, 'Mareczek', '$31$16$oZOmkKsVZiKLaE1S65Gy8BtSvEkJfwSzT-_rHIVVWIk', 'carsharingsystem.help@gmail.com', '123123123', '123', '123', '1993-03-26', '', '', '', '786f968c-a40b-46a2-bce8-f431d23935e8', 1, NULL, NULL);
+(5, 0, 'lulek', '$31$16$S2AdQ1Iotlgr3ozsDMR-3OY0Fyql8_uermIXQsG-eRM', 'lulek@gmail.com', '578510123', 'Marcin', 'Turlaj', '1995-03-05', 'Północna 11', '20-150', 'LU', '', 1, NULL, NULL),
+(6, 1, 'tester1', '$31$16$S2AdQ1Iotlgr3ozsDMR-3OY0Fyql8_uermIXQsG-eRM', 'tester1@gmail.com', '578510102', 'Tester', 'Testowy', '1995-03-05', 'Poligonowa 7', '20-150', 'LU', '', 1, NULL, NULL),
+(7, 0, 'tester2', '$31$16$S2AdQ1Iotlgr3ozsDMR-3OY0Fyql8_uermIXQsG-eRM', 'tester2@gmail.com', '688510561', 'Testerek', 'Przykładowy', '1996-05-22', 'Koncertowa 54', '20-150', 'LU', '', 1, NULL, NULL),
+(8, 0, 'tester3', '$31$16$S2AdQ1Iotlgr3ozsDMR-3OY0Fyql8_uermIXQsG-eRM', 'tester3@gmail.com', '718510154', 'Testujemy', 'Razem', '1997-10-11', 'Witosa 5', '20-150', 'LU', '', 0, NULL, NULL),
+(9, 0, 'Kamil', '$31$16$v0fxEwt8kXa_xJY_4suVp8HDvFE2JRpPY3KZfli_6qM', 'kamil@kamil.com', '123123123', 'Kamil', 'Rola', '1996-03-26', '', '', '', 'be2d91e8-7739-4835-ae68-09eb53cda7d7', 0, NULL, NULL),
+(10, 0, 'Mareczek', '$31$16$oZOmkKsVZiKLaE1S65Gy8BtSvEkJfwSzT-_rHIVVWIk', 'mareczek@example.com', '123123123', 'Marek', 'Markowski', '1993-03-26', '', '', '', '786f968c-a40b-46a2-bce8-f431d23935e8', 1, NULL, NULL);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -194,7 +197,7 @@ ALTER TABLE `reservations`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Ograniczenia dla zrzutów tabel

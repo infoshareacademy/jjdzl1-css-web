@@ -55,18 +55,19 @@
                         <td>${reservation.startDate}</td>
                         <td>${reservation.endDate}</td>
                         <td>
-                            <form method="post" action="deleteReservation">
                                 <div class="row">
                                     <div class="col-md-12 input-group mb-2">
                                         <div class="input-group-prepend">
+                                            <form method="post" action="deleteReservation">
                                             <input type="hidden" name="id" value="${reservation.reservation_id}">
                                             <button class="btn btn-danger mx-2"
                                                     onclick="return confirm('Are you sure?')"
                                                     style="float: right;">Delete
                                             </button>
+                                            </form>
                                         </div>
                                     </div>
-                            </form>
+                                </div>
                         </td>
                     </tr>
                 </c:forEach>
