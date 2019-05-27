@@ -9,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 
 import javax.ejb.Stateless;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -26,16 +27,34 @@ public class HibernateQueryApp {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
-        List<Car> carListAvailableCar=session.createQuery("SELECT c FROM Car c " +
-                "where id IN (SELECT car FROM Reservation WHERE"  +
-                "(startDate>'"+startDate+"' and startDate>'"+endDate+"')"+
-                "or (endDate<'"+startDate+"' and startDate>'"+endDate+"')"+
-                "or (endDate<'"+startDate+"')) or id IN (SELECT c from Car c)").getResultList();
+        List<Car> dostepne=session.createQuery(
+                        " SELECT r.car.id FROM Reservation r WHERE "  +
+                        "((startDate>'"+endDate+"')"+
+                        "or (endDate<'"+startDate+"')) order by r.car.id ASC").getResultList();
+
+        List<Car> NIEdostepne=session.createQuery(
+                " SELECT r.car.id FROM Reservation r WHERE NOT "  +
+                        "((startDate>'"+endDate+"')"+
+                        "or (endDate<'"+startDate+"')) order by r.car.id ASC").getResultList();
+
+
+        List<Car> listCar=session.createQuery(
+                "SELECT c.id FROM Car c " +
+                        "where id NOT IN" +
+                        " (SELECT r.car.id FROM Reservation r WHERE NOT "  +
+                        "((startDate>'"+endDate+"')"+
+                        "or (endDate<'"+startDate+"'))) order by c.id ASC").getResultList();
+
+        System.out.println("************************************");
+        System.out.println("r.car.id -- termin dostępny " + dostepne);
+        System.out.println("r.car.id -- termin niedostpne " + NIEdostepne);
+        System.out.println("car.id dostępne do rezerwacji "+listCar);
+
         session.getTransaction().commit();
         session.close();
 
-        System.out.println(carListAvailableCar);
 
-        return carListAvailableCar;
+
+        return listCar;
     }
 }

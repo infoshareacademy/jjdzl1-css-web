@@ -18,11 +18,11 @@ public class MyQuery {
     }
 
     public String getAvailableCar(LocalDate startDate, LocalDate endDate) {
-        return "SELECT  c FROM Car c  where id  IN " +
-                "(SELECT car FROM Reservation WHERE (startDate>'" + startDate + "' and startDate>'" + endDate + "')" +
-                " or (endDate<'" + startDate + "' and startDate>'" + endDate + "')" +
-                " or (endDate<'" + startDate + "'))or id IN (SELECT c from Car c)" +
-                "ORDER BY c.id ASC";
+        return "SELECT c FROM Car c " +
+                "where id NOT IN" +
+                " (SELECT r.car.id FROM Reservation r WHERE NOT "  +
+                "((startDate>'"+endDate+"')"+
+                "or (endDate<'"+startDate+"'))) order by c.id ASC";
     }
 
     public String getReservation(Integer id) {

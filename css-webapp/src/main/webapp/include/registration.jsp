@@ -91,6 +91,7 @@
 			1. You must register as a member on the CSS in order to rent a car, to use some services and to enjoy special promotions and activities.
 			<br/>2. In accordance with Customs regulations customers must provide valid and accurate data. All consignee names, address and payers name should be valid.
 			<br/>3. For safety and security, each customer is allowed to create only one registered account.
+			<br/>4. User is allowed to delete account by contacting website admin.
 			">terms of use</u>
                     </div>
                     <div class="mb-3">
